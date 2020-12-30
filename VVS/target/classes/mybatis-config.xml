@@ -10,5 +10,6 @@
 	<typeAliases>
 		<!-- type별칭 VO이름을 간략히 사용 -->
 		<typeAlias type="com.vvs.shop.TestVO" alias="TestVO" />
+		<typeAlias type="com.vvs.shop.member.MemberVO" alias="MemberVO" />
 	</typeAliases>
 </configuration>

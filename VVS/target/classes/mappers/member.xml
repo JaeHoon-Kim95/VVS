@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vvs.shop.member">
+
+	<insert id="doInsert" parameterType="MemberVO">
+		INSERT INTO MEMBER (
+		    MEMBER_ID,
+		    MEMBER_PW,
+		    NAME,
+		    EMAIL,
+		    PHONE,		   
+		    ADDRESS
+		) VALUES (
+		    #{memberId},
+		    #{memberPw},
+		    #{name},
+		    #{email},
+		    #{phone},
+		    #{address}
+		)
+	</insert>
+
+	<select id="doSelectList" parameterType="MemberVO">   <!-- //전체 조회를 따로 만들고 등급별 회원조회 생각중 -->
+		SELECT MEMBER_ID,
+			   NAME,
+			   EMAIL,
+			   PHONE,
+			   ADDRESS,
+			   AUTH
+		FROM   MEMBER
+		WHERE  AUTH = #{auth}
+	</select> 
+
+	
+	<select id="doSelectOne" parameterType="MemberVO">
+		SELECT MEMBER_ID,
+			   NAME,
+			   EMAIL,
+			   PHONE,
+			   ADDRESS,
+			   AUTH
+		FROM   MEMBER
+		WHERE  MEMBER_ID = #{memberId} 
+	</select>
+	
+	<update id="doUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET MEMBER_PW = #{memberPw},
+						  NAME = #{name},
+						  EAMIL = #{email},
+						  PHONE = #{phone},
+						  ADDRESS = #{address}
+			   WHERE MEMBER_ID = #{memberId}		  
+	</update>
+	
+	<delete id="doDelete" parameterType="MemberVO">
+		DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</delete>
+	
+</mapper>	
