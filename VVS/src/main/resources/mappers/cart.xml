@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vvs.shop.cart">
+	<insert id="doInsert" parameterType="CartVO">
+	INSERT INTO cart (
+	    seq,
+	    member_id,
+	    product_num,
+	    qty
+	) VALUES (
+	    #{seq},
+	    #{memberId},
+	    #{productNum},
+	    #{qty}
+	)
+	</insert>
+	
+	<delete id="doDelete" parameterType="CartVO">
+	DELETE FROM cart
+	WHERE
+        seq = #{seq}
+	</delete>
+	
+	<update id="doUpdate" parameterType="CartVO">
+	UPDATE cart
+	SET
+	    qty = #{qty}
+	WHERE
+        seq = #{seq}
+	</update>
+	
+	<select id="doSelectOne" parameterType="CartVO" resultType="CartVO">
+	SELECT
+	    seq,
+	    member_id,
+	    product_num,
+	    qty
+	FROM
+	    cart
+	WHERE
+		seq = #{seq}
+	</select>
+	
+	<select id="doSelectList" parameterType="CartVO" resultType="CartVO">
+	SELECT
+	    seq,
+	    member_id,
+	    product_num,
+	    qty
+	FROM
+	    cart
+	</select>
+</mapper>
