@@ -1,6 +1,8 @@
 package com.vvs.shop.ship;
 
-public class ShipVO {
+import com.vvs.shop.cmn.DTO;
+
+public class ShipVO extends DTO {
 	
 	/** 주문번호 */
 	private int orderNum;
