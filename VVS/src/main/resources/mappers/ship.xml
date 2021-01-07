@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vvs.shop.ship">
+
+	
+	<!-- com.vvs.shop.ship.doInsert -->
+	<insert id="doInsert" parameterType="ShipVO">
+		INSERT INTO ship (
+		    order_num,
+		    ship_cost,
+		    ship_num,
+		    ship_dt,
+		    product_num,
+		    member_id
+		) VALUES (
+		    #{orderNum},
+		    #{shipCost},
+		    #{shipNum},
+		    SYSDATE,
+		    #{productNum},
+		    #{memberId}
+		)
+	</insert>
+	
+	<!-- 삭제 -->
+	<!-- com.vvs.shop.ship.doDelete -->
+	<delete id="doDelete" parameterType="ShipVO">
+		<![CDATA[
+		DELETE FROM ship
+		WHERE order_num = #{orderNum}  
+		]]>  		
+	</delete>
+	
+	<!-- 수정 -->
+	<!-- com.vvs.shop.ship.doUpdate -->
+	<update id="doUpdate" parameterType="ShipVO">
+		UPDATE orders
+		SET ship_dt = SYSDATE
+		WHERE
+		    order_num = #{orderNum}		  
+	</update>
+	
+	<!-- 단건조회 -->
+	<!-- com.vvs.shop.ship.doSelectOne -->
+	<select id="doSelectOne" parameterType="ShipVO" resultType="ShipVO">
+		SELECT
+		    order_num AS orderNum,
+		    ship_cost AS shipCost,
+		    ship_num AS shipNum,
+		    ship_dt,
+		    product_num AS productNum,
+		    member_id AS memberId
+		FROM ship
+		WHERE order_num = #{orderNum}
+	</select>
+	
+	<!-- 목록조회 -->
+	<!-- com.vvs.shop.ship.doSelectList -->
+	<select id="doSelectList" parameterType="ShipVO" resultType="ShipVO">
+		SELECT
+		    order_num AS orderNum,
+		    ship_cost AS shipCost,
+		    ship_num AS shipNum,
+		    ship_dt,
+		    product_num AS productNum,
+		    member_id AS memberId
+		FROM ship
+		WHERE member_id = #{memberId}
+	</select>
+
+</mapper>
