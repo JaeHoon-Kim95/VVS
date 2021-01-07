@@ -21,31 +21,41 @@ public class OrdersController {
 	@RequestMapping(value="orders/doInsert.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int doInsert(OrdersVO ordersVO) {
-		return 0;
+		int flag = ordersService.doInsert(ordersVO);
+		
+		return flag;
 	}
 	
 	
 	@RequestMapping(value="orders/doDelete.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int doDelete(OrdersVO ordersVO) {
-		return 0;
+		int flag = ordersService.doDelete(ordersVO);
+		
+		return flag;
 	}
 	
 	@RequestMapping(value="orders/doUpdate.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int doUpdate(OrdersVO ordersVO) {
-		return 0;
+		int flag = ordersService.doUpdate(ordersVO);
+		
+		return flag;
 	}
 	
 	@RequestMapping(value="orders/doSelectOne.do", method = RequestMethod.GET)
 	@ResponseBody
 	public OrdersVO doSelectOne(OrdersVO ordersVO) {
-		return null;
+		OrdersVO outVO = ordersService.doSelectOne(ordersVO);
+		
+		return outVO;
 	}
 	
 	@RequestMapping(value="orders/doSelectList.do", method = RequestMethod.GET)
 	@ResponseBody
 	public List<OrdersVO> doSelectList(OrdersVO ordersVO) {
-		return null;
+		List<OrdersVO> outVO = ordersService.doSelectList(ordersVO);
+		
+		return outVO;
 	}
 }
