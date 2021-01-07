@@ -37,13 +37,13 @@ public class OrdersController {
 		return 0;
 	}
 	
-	@RequestMapping(value="orders/doSelectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value="orders/doSelectOne.do", method = RequestMethod.GET)
 	@ResponseBody
 	public OrdersVO doSelectOne(OrdersVO ordersVO) {
 		return null;
 	}
 	
-	@RequestMapping(value="orders/doSelectList.do", method = RequestMethod.POST)
+	@RequestMapping(value="orders/doSelectList.do", method = RequestMethod.GET)
 	@ResponseBody
 	public List<OrdersVO> doSelectList(OrdersVO ordersVO) {
 		return null;

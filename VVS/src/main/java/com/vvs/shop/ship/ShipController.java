@@ -37,13 +37,13 @@ public class ShipController {
 		return 0;
 	}
 	
-	@RequestMapping(value="ship/doSelectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value="ship/doSelectOne.do", method = RequestMethod.GET)
 	@ResponseBody
 	public OrdersVO doSelectOne(ShipVO shipVO) {
 		return null;
 	}
 	
-	@RequestMapping(value="ship/doSelectList.do", method = RequestMethod.POST)
+	@RequestMapping(value="ship/doSelectList.do", method = RequestMethod.GET)
 	@ResponseBody
 	public List<OrdersVO> doSelectList(ShipVO shipVO) {
 		return null;
