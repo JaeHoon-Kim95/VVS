@@ -61,6 +61,7 @@
 		left: -300px;
 		z-index: 1;
 		transition:all .35s;
+		background-color: white;
 	}
 	input[id="menuicon"]:checked + label + div {
 		left:0;
@@ -76,7 +77,7 @@
 
 <div class="sidebar">
 <ul class="sidebar-ul">
-	<li><a href="#">아우터</a>
+	<li class="nav-item active"><a href="#">아우터</a>
 		<ul>
 			<li><a href="#">01-01</a></li>
 			<li><a href="#">01-02</a></li>
@@ -85,6 +86,10 @@
 			<li><a href="#">01-05</a></li>
 		</ul>
 	</li>
+	 
+	 <!-- Divider -->
+     <hr class="sidebar-divider">
+     
 	<li><a href="#">상의</a>
 		<ul>
 			<li><a href="#">02-01</a></li>
@@ -94,6 +99,10 @@
 			<li><a href="#">02-05</a></li>
 		</ul>
 	</li>
+	 
+	 <!-- Divider -->
+     <hr class="sidebar-divider">
+     
 	<li><a href="#">하의</a>
 		<ul>
 			<li><a href="#">03-01</a></li>
@@ -103,6 +112,10 @@
 			<li><a href="#">03-05</a></li>
 		</ul>
 	</li>
+	
+	<!-- Divider -->
+     <hr class="sidebar-divider my-0">
+	
 	<li><a href="#">악세서리</a>
 		<ul>
 			<li><a href="#">04-01</a></li>
@@ -112,6 +125,10 @@
 			<li><a href="#">04-05</a></li>
 		</ul>
 	</li>
+	
+	<!-- Divider -->
+     <hr class="sidebar-divider">
+	
 	<li><a href="#">신발</a>
 		<ul>
 			<li><a href="#">05-01</a></li>
