@@ -18,7 +18,7 @@
 	}
 	input[id="menuicon"]:checked + label {
 		z-index: 2;
-		left: 300px;
+		left: 200px;
 	}
 	input[id="menuicon"] + label span {
 		display:block;
@@ -53,12 +53,12 @@
 	}
 	
 	div[class = "sidebar"] {
-		width: 300px;
+		width: 200px;
 		height: 100%;
 		background: #222;
 		position: fixed;
 		top: 0;
-		left: -300px;
+		left: -200px;
 		z-index: 1;
 		transition:all .35s;
 		background-color: white;
@@ -76,6 +76,7 @@
 </label>
 
 <div class="sidebar">
+
 <ul class="sidebar-ul">
 	<li class="nav-item active"><a href="#">아우터</a>
 		
@@ -108,7 +109,7 @@
 	</li>
 	
 	<!-- Divider -->
-     <hr class="sidebar-divider my-0">
+     <hr class="sidebar-divider">
 	
 	<li><a href="#">악세서리</a>
 		<ul>
