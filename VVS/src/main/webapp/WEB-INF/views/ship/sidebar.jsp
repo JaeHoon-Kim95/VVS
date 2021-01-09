@@ -8,11 +8,11 @@
 	}
 	input[id="menuicon"] + label {
 		display:block;
-		width:60px;
-		height: 40px;
+		width:30px;
+		height: 10px;
 		position: fixed;
 		left:0;
-		top:calc(50% - 25px);
+		top:calc(50% - 5px);
 		transition:all .35s;
 		cursor: pointer;
 	}
@@ -24,7 +24,7 @@
 		display:block;
 		position: absolute;
 		width: 100%;
-		height: 5px;
+		height: 2px;
 		border-radius: 30px;
 		background: #000;
 		transition: all .35s;
@@ -78,13 +78,7 @@
 <div class="sidebar">
 <ul class="sidebar-ul">
 	<li class="nav-item active"><a href="#">아우터</a>
-		<ul>
-			<li><a href="#">01-01</a></li>
-			<li><a href="#">01-02</a></li>
-			<li><a href="#">01-03</a></li>
-			<li><a href="#">01-04</a></li>
-			<li><a href="#">01-05</a></li>
-		</ul>
+		
 	</li>
 	 
 	 <!-- Divider -->
