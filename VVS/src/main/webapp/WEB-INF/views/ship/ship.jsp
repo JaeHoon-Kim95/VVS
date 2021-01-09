@@ -24,7 +24,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/ship/sidebar.jsp" %>
-	
+	<%@ include file="/WEB-INF/views/topbar.jsp" %>
 	<!-- Navigation -->
 	  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	    <div class="container">
