@@ -27,7 +27,6 @@
 <body>
 	<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
 	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
-	
 	  
 	  <!-- Page Content -->
   	<div class="container">
@@ -64,7 +63,7 @@
       					<td>2021-01-09</td>
       					<td>1</td>
       					<td>12000(1)</td>
-      					<td>배송준비중</td>
+      					<td>배송준비중1</td>
       				</tr>
       			</tbody>
       		</table>
@@ -77,14 +76,8 @@
   </div>
   <!-- /.container -->
       
-      <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
+      
+<%@ include file="/WEB-INF/views/main/footer.jsp" %>
   <!-- Bootstrap core JavaScript -->
   <script src="/resources/vendor/jquery/jquery.min.js"></script>
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -100,6 +93,7 @@
     </script>   
 </body>
 </html>
+
 
 
 
