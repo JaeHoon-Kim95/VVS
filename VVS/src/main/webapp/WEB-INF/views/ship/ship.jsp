@@ -19,39 +19,15 @@
 
   	<!-- Custom styles for this template -->
   	<link href="${hContext}/resources/css" rel="stylesheet">
-	
+	<style>
+	body{ padding-top:70px;}
+	</style>
 </head>
 
 <body>
-	<%@ include file="/WEB-INF/views/ship/sidebar.jsp" %>
-	<%@ include file="/WEB-INF/views/topbar.jsp" %>
-	<!-- Navigation -->
-	  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	    <div class="container">
-	      <a class="navbar-brand" href="#">Start Bootstrap</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="navbar-toggler-icon"></span>
-	      </button>
-	      <div class="collapse navbar-collapse" id="navbarResponsive">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active">
-	            <a class="nav-link" href="#">Home
-	              <span class="sr-only">(current)</span>
-	            </a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#">About</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#">Services</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#">Contact</a>
-	          </li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav> -->
+	<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+	
 	  
 	  <!-- Page Content -->
   	<div class="container">
