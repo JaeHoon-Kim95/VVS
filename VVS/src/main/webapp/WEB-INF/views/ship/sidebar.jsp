@@ -62,6 +62,7 @@
 		z-index: 1;
 		transition:all .35s;
 		background-color: white;
+		padding-top: 70px;
 	}
 	input[id="menuicon"]:checked + label + div {
 		left:0;
@@ -75,8 +76,9 @@
 	<span></span>
 </label>
 
-<div class="sidebar">
 
+<div class="sidebar">
+<aside>
 <ul class="sidebar-ul">
 	<li class="nav-item active"><a href="#">아우터</a>
 		
@@ -134,4 +136,5 @@
 		</ul>
 	</li>
 </ul>
+</aside>
 </div>

@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<header>
 	<!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -22,7 +18,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">로그인</a>
+            <a class="nav-link" href="#">로그인1</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">회원가입</a>
@@ -34,5 +30,5 @@
       </div>
     </div>
   </nav>
-</body>
+</header>
 </html>
