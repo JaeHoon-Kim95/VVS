@@ -89,4 +89,75 @@ public class TestOrdersController {
 		LOG.debug("=orders doInsert message=" + message);
 	}
 
+	@Test
+	@Ignore
+	//성공
+	public void doDelete() throws Exception {
+		OrdersVO ordersVO = orders.get(0);
+		MockHttpServletRequestBuilder createMessage = 
+				 MockMvcRequestBuilders.post("/orders/doDelete.do")
+				 .param("orderNum", ordersVO.getOrderNum()+"");
+		ResultActions resultActions = mockMvc.perform(createMessage)
+				.andExpect(status().is2xxSuccessful());	
+	
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+		Gson gson=new Gson();
+		
+		Message message = gson.fromJson(result, Message.class);
+		LOG.debug("=orders doDelete message=" + message);
+	}
+	
+	@Test
+	@Ignore
+	//성공
+	public void doUpdate() throws Exception {
+		OrdersVO ordersVO = orders.get(0);
+		MockHttpServletRequestBuilder createMessage = 
+				 MockMvcRequestBuilders.post("/orders/doUpdate.do")
+				 .param("orderNum", ordersVO.getOrderNum()+"")
+				 .param("memberId", ordersVO.getMemberId())
+				 .param("productNum", ordersVO.getProductNum()+"")
+				 .param("qty", ordersVO.getQty()+"");
+		ResultActions resultActions = mockMvc.perform(createMessage)
+				.andExpect(status().is2xxSuccessful());	
+	
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+		Gson gson=new Gson();
+		
+		Message message = gson.fromJson(result, Message.class);
+		LOG.debug("=orders doDelete message=" + message);
+	}
+	
+	@Test
+	@Ignore
+	//성공
+	public void doSelectOne() throws Exception {
+		OrdersVO ordersVO = orders.get(0);
+		MockHttpServletRequestBuilder createMessage = 
+				 MockMvcRequestBuilders.get("/orders/doSelectOne.do")
+				 .param("orderNum", ordersVO.getOrderNum()+"");
+		ResultActions resultActions = mockMvc.perform(createMessage)
+				.andExpect(status().is2xxSuccessful());	
+	
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+		Gson gson=new Gson();
+		
+		Message message = gson.fromJson(result, Message.class);
+		LOG.debug("=orders doDelete message=" + message);
+	}
+	
+	@Test
+	//성공
+	public void doSelectList() throws Exception {
+		OrdersVO ordersVO = orders.get(0);
+		MockHttpServletRequestBuilder createMessage = 
+				 MockMvcRequestBuilders.get("/orders/doSelectList.do")
+				 .param("memberId", ordersVO.getMemberId());
+		ResultActions resultActions = mockMvc.perform(createMessage)
+				.andExpect(status().is2xxSuccessful());	
+	
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+		
+		LOG.debug("=orders doSelectList message=" + result);
+	}
 }

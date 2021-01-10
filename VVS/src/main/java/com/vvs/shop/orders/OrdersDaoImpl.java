@@ -96,7 +96,7 @@ public class OrdersDaoImpl {
 	public OrdersVO doSelectOne(OrdersVO ordersVO) {
 		LOG.debug("=Orders doSelectOne=");
 		
-		//�ܰ���ȸ : namespace+id = com.vvs.shop.orders.doSelectOne		
+		//단건조회 : namespace+id = com.vvs.shop.orders.doSelectOne		
 		String statement = NAMESPACE +".doSelectOne";
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("=Orders param=="+ordersVO);

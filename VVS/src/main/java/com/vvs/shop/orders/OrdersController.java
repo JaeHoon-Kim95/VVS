@@ -67,25 +67,46 @@ public class OrdersController {
 	
 	@RequestMapping(value="orders/doUpdate.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int doUpdate(OrdersVO ordersVO) {
+	public String doUpdate(OrdersVO ordersVO) {
 		int flag = ordersService.doUpdate(ordersVO);
 		
-		return flag;
+		Message message = new Message();
+		message.setRegId(flag + "");
+		if (flag == 1) {
+			message.setMsgContents("수정완료");
+		} else {
+			message.setMsgContents("수정 실패");
+		}
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(message);
+		LOG.debug("=orders doUpdate json=" + json);
+		return json;
 	}
 	
 	@RequestMapping(value="orders/doSelectOne.do", method = RequestMethod.GET)
 	@ResponseBody
-	public OrdersVO doSelectOne(OrdersVO ordersVO) {
+	public String doSelectOne(OrdersVO ordersVO) {
 		OrdersVO outVO = ordersService.doSelectOne(ordersVO);
 		
-		return outVO;
+		Gson gson = new Gson();
+		String json = gson.toJson(outVO);
+		
+		return json;
 	}
 	
 	@RequestMapping(value="orders/doSelectList.do", method = RequestMethod.GET)
 	@ResponseBody
-	public List<OrdersVO> doSelectList(OrdersVO ordersVO) {
+	public String doSelectList(OrdersVO ordersVO) {
 		List<OrdersVO> outVO = ordersService.doSelectList(ordersVO);
 		
-		return outVO;
+		Gson gson = new Gson();
+		String json = gson.toJson(outVO);
+		
+		LOG.debug("-------------------------");
+		LOG.debug("-json-"+json);
+		LOG.debug("-------------------------");
+		
+		return json;
 	}
 }
