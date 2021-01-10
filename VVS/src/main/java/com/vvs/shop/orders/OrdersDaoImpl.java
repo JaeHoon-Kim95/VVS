@@ -36,13 +36,13 @@ public class OrdersDaoImpl {
 	};
 	
 	/**
-	 * ¡÷πÆ«œ±‚
+	 * Ï£ºÎ¨∏ Îì±Î°ù
 	 * @param ordersVO
 	 * @return
 	 */
 	public int doInsert(OrdersVO ordersVO) {
 		LOG.debug("=Orders doInsert=");
-		//µÓ∑œ : namespace+id = com.vvs.shop.orders.doInsert
+		//ÔøΩÔøΩÔøΩ : namespace+id = com.vvs.shop.orders.doInsert
 		String statement = NAMESPACE +".doInsert";
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("=Orders param ==="+ordersVO);
@@ -54,13 +54,13 @@ public class OrdersDaoImpl {
 	}
 	
 	/**
-	 * ¡÷πÆªË¡¶
+	 * Ï£ºÎ¨∏ÏÇ≠Ï†ú
 	 * @param ordersVO
 	 * @return
 	 */
 	public int doDelete(OrdersVO ordersVO) {		
 		LOG.debug("=Orders doDelete=");
-		//ªË¡¶ : namespace+id = com.vvs.shop.orders.doDelete
+		//ÔøΩÔøΩÔøΩÔøΩ : namespace+id = com.vvs.shop.orders.doDelete
 		String statement = NAMESPACE +".doDelete";
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("=Orders param=="+ordersVO);
@@ -71,7 +71,7 @@ public class OrdersDaoImpl {
 	}
 	
 	/**
-	 * ¡÷πÆ ºˆ¡§
+	 * Ï£ºÎ¨∏ ÏàòÏ†ï
 	 * @param ordersVO
 	 * @return
 	 */
@@ -89,14 +89,14 @@ public class OrdersDaoImpl {
 	}
 	
 	/**
-	 * ¡÷πÆ ¥‹∞«¡∂»∏
+	 * Ï£ºÎ¨∏ Ï°∞Ìöå
 	 * @param orderNum
 	 * @return
 	 */
 	public OrdersVO doSelectOne(OrdersVO ordersVO) {
 		LOG.debug("=Orders doSelectOne=");
 		
-		//¥‹∞«¡∂»∏ : namespace+id = com.vvs.shop.orders.doSelectOne		
+		//ÔøΩ‹∞ÔøΩÔøΩÔøΩ»∏ : namespace+id = com.vvs.shop.orders.doSelectOne		
 		String statement = NAMESPACE +".doSelectOne";
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("=Orders param=="+ordersVO);
@@ -109,13 +109,13 @@ public class OrdersDaoImpl {
 	}
 	
 	/**
-	 * ¡÷πÆ ¿¸√º¡∂»∏
+	 * Ï£ºÎ¨∏ Î¶¨Ïä§Ìä∏
 	 * @param orderNum
 	 * @return
 	 */
 	public List<OrdersVO> doSelectList(OrdersVO ordersVO) {
 		LOG.debug("=OrdersVO doSelectList=");
-		//µÓ∑œ : namespace+id = com.vvs.shop.orders.doSelectList
+		//ÔøΩÔøΩÔøΩ : namespace+id = com.vvs.shop.orders.doSelectList
 		String statement = NAMESPACE +".doSelectList";		
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("-Orders param-\n" + ordersVO);

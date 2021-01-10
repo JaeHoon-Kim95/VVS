@@ -2,12 +2,12 @@ package com.vvs.shop.cmn;
 
 public class Message extends DTO {
 	/**
-	 * ¸Ş½ÃÁö ID : 10
+	 * ë©”ì‹œì§€ ID : 10
 	 */
 	private String regId;
 	
 	/**
-	 * ¸Ş½ÃÁö ³»¿ë: µî·ÏµÇ¾ú½À´Ï´Ù.
+	 * ë©”ì‹œì§€ ë‚´ìš©: ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.
 	 */
 	private String msgContents;
 	

@@ -32,9 +32,9 @@ public class OrdersController {
 		Message message = new Message();
 		message.setRegId(flag + "");
 		if (flag == 1) {
-			message.setMsgContents("µÓ∑œ");
+			message.setMsgContents("Îì±Î°ù");
 		} else {
-			message.setMsgContents("µÓ∑œ Ω«∆–");
+			message.setMsgContents("Îì±Î°ù Ïã§Ìå®");
 		}
 		
 		Gson gson = new Gson();
@@ -54,9 +54,9 @@ public class OrdersController {
 		Message message = new Message();
 		message.setRegId(flag + "");
 		if (flag > 0) {
-			message.setMsgContents("ªË¡¶");
+			message.setMsgContents("ÏÇ≠Ï†ú");
 		} else {
-			message.setMsgContents("ªË¡¶ Ω«∆–");
+			message.setMsgContents("ÏÇ≠Ï†ú Ïã§Ìå®");
 		}
 		
 		Gson gson = new Gson();

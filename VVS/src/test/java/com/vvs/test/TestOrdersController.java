@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -35,7 +36,7 @@ import com.vvs.shop.orders.OrdersVO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)//½ºÇÁ·© Å×½ºÆ® ÄÁÅØ½ºÆ® ÇÁ·¹ÀÓ¿öÅ©ÀÇ JUnit±â´É È®Àå
+@RunWith(SpringJUnit4ClassRunner.class)//ìŠ¤í”„ë­ í…ŒìŠ¤íŠ¸ ì»¨í…ìŠ¤íŠ¸ í”„ë ˆì„ì›Œí¬ì˜ JUnitê¸°ëŠ¥ í™•ì¥
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                                    "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"		
 })
@@ -50,13 +51,13 @@ public class TestOrdersController {
 	
 	List<OrdersVO> orders;
 	
-	// ºê¶ó¿ìÀú ´ë½Å Mock
+	//  Mock
 	MockMvc mockMvc;
 	
 	@Before
 	public void setUp() throws Exception {
 		orders=Arrays.asList(new OrdersVO(1,"jhs",2,1)
-							,new OrdersVO(2,"jhs",2,1)
+							,new OrdersVO(2,"jhs1",3,1)
 				);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		LOG.debug("=mockMvc=" + mockMvc);
@@ -68,6 +69,8 @@ public class TestOrdersController {
 	}
 
 	@Test
+	@Ignore
+	//ì„±ê³µ
 	public void doInsert() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
 		MockHttpServletRequestBuilder createMessage = 

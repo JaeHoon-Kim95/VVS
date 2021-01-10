@@ -4,16 +4,16 @@ import com.vvs.shop.cmn.DTO;
 
 public class OrdersVO extends DTO {
 
-	/** ÁÖ¹®¹øÈ£ */
+	/** ì£¼ë¬¸ë²ˆí˜¸ */
 	private int orderNum;
 
-	/** °èÁ¤ ¾ÆÀÌµğ */
+	/** ê³„ì • ì•„ì´ë”” */
 	private String memberId;
 
-	/** Á¦Ç°¹øÈ£ */
+	/** ì œí’ˆ ë²ˆí˜¸ */
 	private int productNum;
 
-	/** ¼ö·® */
+	/** ìˆ˜ëŸ‰ */
 	private int qty;
 
 	public OrdersVO() {
