@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.vvs.shop.cmn.Message;
+
 @Controller
 public class OrdersController {
 
@@ -20,19 +23,46 @@ public class OrdersController {
 	
 	@RequestMapping(value="orders/doInsert.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int doInsert(OrdersVO ordersVO) {
-		int flag = ordersService.doInsert(ordersVO);
+	public String doInsert(OrdersVO ordersVO) {
 		
-		return flag;
+		LOG.debug("orders doInsert param:"+ordersVO);
+		int flag = ordersService.doInsert(ordersVO);
+		LOG.debug("orders doInsert flag:"+flag);
+		
+		Message message = new Message();
+		message.setRegId(flag + "");
+		if (flag == 1) {
+			message.setMsgContents("등록");
+		} else {
+			message.setMsgContents("등록 실패");
+		}
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(message);
+		LOG.debug("=orders doInsert json=" + json);
+		return json;
 	}
 	
 	
 	@RequestMapping(value="orders/doDelete.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int doDelete(OrdersVO ordersVO) {
+	public String doDelete(OrdersVO ordersVO) {
+		LOG.debug("orders dodelete param:"+ordersVO);
 		int flag = ordersService.doDelete(ordersVO);
+		LOG.debug("orders dodelete flag:"+flag);
 		
-		return flag;
+		Message message = new Message();
+		message.setRegId(flag + "");
+		if (flag > 0) {
+			message.setMsgContents("삭제");
+		} else {
+			message.setMsgContents("삭제 실패");
+		}
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(message);
+		LOG.debug("=orders dodelete json=" + json);
+		return json;
 	}
 	
 	@RequestMapping(value="orders/doUpdate.do", method = RequestMethod.POST)
