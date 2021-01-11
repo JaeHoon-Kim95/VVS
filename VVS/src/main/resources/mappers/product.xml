@@ -14,7 +14,7 @@
 		    price,
 		    discount_price
 		) VALUES (
-		    #{productNum},
+		    PRODUCT_NUM_SEQ.nextVal,
 		    #{categoryNum},
 		    #{productName},
 		    #{discountRate},
