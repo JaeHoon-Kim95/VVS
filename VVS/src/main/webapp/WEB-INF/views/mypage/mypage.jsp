@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	
-	<title>HOON-SHOP</title>
+	<title>HOONSHOP</title>
 	
 	<!-- Bootstrap core CSS -->
     <link href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-	<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
+	<%@ include file="/WEB-INF/views/mypage/mypage_sidebar.jsp" %>
 	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 	  
 	  <!-- Page Content -->
@@ -35,12 +35,7 @@
 
       	<div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
-        </div>
+        <h1 class="my-4">My Page</h1>
 
       </div>
       

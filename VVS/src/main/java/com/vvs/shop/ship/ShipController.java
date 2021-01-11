@@ -23,7 +23,7 @@ public class ShipController {
 	
 	@RequestMapping(value="ship/shipView.do", method = RequestMethod.GET)
 	public String shipView(ShipVO shipVO) {
-		return "ship/ship";
+		return "mypage/mypage";
 	}
 	
 	@RequestMapping(value="ship/doInsert.do", method = RequestMethod.POST)
