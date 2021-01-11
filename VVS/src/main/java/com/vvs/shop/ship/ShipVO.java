@@ -4,22 +4,22 @@ import com.vvs.shop.cmn.DTO;
 
 public class ShipVO extends DTO {
 	
-	/** ÁÖ¹®¹øÈ£ */
+	/** ì£¼ë¬¸ë²ˆí˜¸*/
 	private int orderNum;
 	
-	/** ¹è¼Ûºñ */
+	/** ë°°ì†¡ë¹„*/
 	private int shipCost;
 	
-	/** ¼ÛÀå¹øÈ£ */
+	/** ì†¡ì¥ë²ˆí˜¸ */
 	private String shipNum;
 	
-	/** ÁÖ¹®ÀÏ */
+	/** ì£¼ë¬¸ì¼ */
 	private String shipDt;
 	
-	/** »óÇ°¹øÈ£ */
+	/** ì œí’ˆë²ˆí˜¸ */
 	private int productNum;
 	
-	/** À¯Àú ¾ÆÀÌµğ */
+	/** ë©¤ë²„ì•„ì´ë”” */
 	private String memberId;
 
 	public ShipVO() {
