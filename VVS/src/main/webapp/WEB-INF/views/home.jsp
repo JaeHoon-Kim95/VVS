@@ -14,7 +14,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Shop Homepage - Start Bootstrap Template</title>
+  <title>VVS SHOP</title>
 
   <!-- Bootstrap core CSS -->
   <link href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="navbar-brand" href="${hContext}/member/registerPage.do">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -221,6 +221,17 @@
   <!-- Bootstrap core JavaScript -->
   <script src="/resources/vendor/jquery/jquery.min.js"></script>
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+  
+  $("#moveRegister").on("click",function(){
+		window.location.href = "${hContext}/member/registerPage.do";
+	  });
+
+  
+  
+  </script>
+
+  
 
 </body>
 

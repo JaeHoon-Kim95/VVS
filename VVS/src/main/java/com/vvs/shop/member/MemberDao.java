@@ -16,16 +16,40 @@ public class MemberDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	final String NAMESPACE = "com.vvs.shop.member";
+	final String NAMESPACE = "com.vvs.shop.member.";
 	
 	public MemberDao() {
 		
 	}
 	
 	public int doInsert(MemberVO memberVO) {
-		int flag = 0;
-		
+		 LOG.debug("====================");
+		 LOG.debug("==doInsert==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doInsert";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==memberVO=="+memberVO);
+		 
+		 int flag = sqlSessionTemplate.insert(statement, memberVO);
+		 LOG.debug("flag"+flag);
 		return flag;
+	}
+	
+	public int doMemberIdChk(MemberVO memberVO) {
+		 LOG.debug("====================");
+		 LOG.debug("==doMemberIdChk==");
+		 LOG.debug("====================");
+		
+		 String statement = NAMESPACE + "doMemberIdChk";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==memberVO=="+memberVO);
+		 
+		 int result = sqlSessionTemplate.selectOne(statement, memberVO);
+		 
+		 return result;
 	}
 	
 	public List<MemberVO> doSelectList(MemberVO memberVO){
@@ -34,8 +58,17 @@ public class MemberDao {
 	}
 	
 	public MemberVO doSelectOne(MemberVO memberVO) {
+		LOG.debug("====================");
+		LOG.debug("==doSelectOne==");
+		LOG.debug("====================");
 		
-		return null;
+		String statement = NAMESPACE + "doSelectOne";
+		
+		MemberVO outVO = sqlSessionTemplate.selectOne(statement,memberVO);
+		LOG.debug("==outVO==" + outVO);
+        LOG.debug("==================================================");
+        
+		return outVO;
 	}
 	
 	public int doUpdate(MemberVO memberVO) {

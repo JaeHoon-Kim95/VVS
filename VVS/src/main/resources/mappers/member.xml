@@ -21,7 +21,13 @@
 		    #{address}
 		)
 	</insert>
-
+	
+	<select id="doMemberIdChk" parameterType="MemberVO" resultType="int">
+		SELECT COUNT(*)
+		FROM   MEMBER
+		WHERE  MEMBER_ID = #{memberId}
+	</select>
+	
 	<select id="doSelectList" parameterType="MemberVO">   <!-- //전체 조회를 따로 만들고 등급별 회원조회 생각중 -->
 		SELECT MEMBER_ID,
 			   NAME,
@@ -34,7 +40,7 @@
 	</select> 
 
 	
-	<select id="doSelectOne" parameterType="MemberVO">
+	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
 		SELECT MEMBER_ID,
 			   NAME,
 			   EMAIL,
