@@ -77,6 +77,7 @@ public class ProductDao {
 		return outVO;
 	}
 
+	// need to change SearchVO
 	public List<ProductVO> doSelectList(ProductVO productVO){
 		
 		LOG.debug("ProductDao - doSelectList");
@@ -87,7 +88,7 @@ public class ProductDao {
 		List<ProductVO> outList = sqlSessionTemplate.selectList(statement, productVO);
 		
 		for(ProductVO vo : outList) {
-			LOG.debug("resut - outVO : " + vo);
+			LOG.debug("result - outVO : " + vo);
 		}
 		
 		return outList;
