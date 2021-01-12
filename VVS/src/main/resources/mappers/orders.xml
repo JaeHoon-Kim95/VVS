@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vvs.shop.orders">
+
+	<!-- 주문 등록 -->
+	<!-- com.vvs.shop.orders.doInsert -->
+	<insert id="doInsert" parameterType="OrdersVO">
+		INSERT INTO orders (
+		    order_num,
+		    member_id,
+		    product_num,
+		    qty
+		) VALUES (
+		    #{orderNum},
+		    #{memberId},
+		    #{productNum},
+		    #{qty}
+		)
+	</insert>
+	
+	<!-- 삭제 -->
+	<!-- com.vvs.shop.orders.doDelete -->
+	<delete id="doDelete" parameterType="OrdersVO">
+		<![CDATA[
+		DELETE FROM orders
+		WHERE order_num = #{orderNum}  
+		]]>  		
+	</delete>
+	
+	<!-- 수정 -->
+	<!-- com.vvs.shop.orders.doUpdate -->
+	<update id="doUpdate" parameterType="OrdersVO">
+		UPDATE orders
+		SET order_num = #{orderNum},
+		    member_id = #{memberId},
+		    product_num = #{productNum},
+		    qty = #{qty}
+		WHERE
+		    order_num = #{orderNum}		  
+	</update>
+	
+	<!-- 단건조회 -->
+	<!-- com.vvs.shop.orders.doSelectOne -->
+	<select id="doSelectOne" parameterType="OrdersVO" resultType="OrdersVO">
+		SELECT
+		    order_num AS orderNum,
+		    member_id AS memberId,
+		    product_num AS productNum,
+		    qty
+		FROM orders
+		WHERE order_num = #{orderNum}
+	</select>
+	
+	<!-- 목록조회 -->
+	<!-- com.vvs.shop.orders.doSelectList -->
+	<select id="doSelectList" parameterType="OrdersVO" resultType="OrdersVO">
+		SELECT
+		    order_num AS orderNum,
+		    member_id AS memberId,
+		    product_num AS productNum,
+		    qty
+		FROM orders
+		WHERE member_id = #{memberId}
+	</select>
+	
+</mapper>
