@@ -17,9 +17,24 @@ public class ProductDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	@Autowired
 	ProductVO productVO;
+	@Autowired
+	ProductDetailVO productDetailVO;
 
 	private final String NAMESPACE = "com.vvs.shop.product.";
 
+	public int doInsertDetail(ProductDetailVO productDetailVO) {
+		
+		LOG.debug("ProductDao - doInsertDetail");
+		LOG.debug("param - productDetailVO : " + productDetailVO);
+		
+		String statement = NAMESPACE + "doInsertDetail";
+		int flag = sqlSessionTemplate.insert(statement, productDetailVO);
+		
+		LOG.debug("result - flag : " + flag);
+		
+		return flag;
+	}
+	
 	public int doInsert(ProductVO productVO) {
 
 		LOG.debug("ProductDao - doInsert");

@@ -3,6 +3,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.vvs.shop.product">
+	<insert id="doInsertDetail" parameterType="ProductDetailVO">
+		insert into product_detail (
+			product_num,
+			semi_info,
+			main_info
+		) values (
+			#{productNum},
+			#{semiInfo},
+			#{mainInfo}
+		)
+	</insert>
+
 	<insert id="doInsert" parameterType="ProductVO">
 		INSERT INTO product (
 		    product_num,
@@ -23,6 +35,9 @@
 		    #{price},
 		    #{discountPrice}
 		)
+		<selectKey keyProperty="productNum" resultType="Integer" order="AFTER">
+			SELECT PRODUCT_NUM_SEQ.currval FROM dual
+		</selectKey>
 	</insert>
 	
 	<delete id="doDelete" parameterType="ProductVO">
@@ -45,19 +60,10 @@
 	</update>
 	
 	<select id="doSelectOne" parameterType="ProductVO" resultType="ProductVO">
-	SELECT
-	    product_num,
-	    category_num,
-	    product_name,
-	    discount_rate,
-	    discount,
-	    reg_dt,
-	    price,
-	    discount_price
-	FROM
-	    product
-	WHERE
-	    product_num = #{productNum}
+	select *
+	from product p, product_detail d
+	where p.product_num = #{productNum} and
+	p.product_num = d.product_num
 	</select>
 	
 	<select id="doSelectList" parameterType="ProductVO" resultType="ProductVO">
@@ -73,4 +79,6 @@
 	FROM
 	    product
 	</select>
+	
+	
 </mapper>

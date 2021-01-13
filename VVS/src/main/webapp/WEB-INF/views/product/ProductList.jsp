@@ -30,8 +30,10 @@
 <body>
 	<!-- Page Content -->
 	<div class="container">
-
-
+<br><br><br><br>
+		<form name="searchData" id="searchData" action="/shop/product/doSearch.do" method="get">
+			
+		</form>
 
 
 		<div class="row">
@@ -43,7 +45,7 @@
 							src="http://placehold.it/700x400" alt=""></a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="#"><c:out value="${list.productName }"/></a>
+								<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
 							</h4>
 							<h5><c:out value="${list.price }"/></h5>
 							<p class="card-text"><c:out value="${list.categoryNum }"/></p>

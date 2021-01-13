@@ -10,6 +10,10 @@ public class ProductService {
 
 	@Autowired ProductDao productDao;
 	
+	public int doInsertDetail(ProductDetailVO productDetailVO) {
+		return productDao.doInsertDetail(productDetailVO);
+	}
+	
 	public int doInsert(ProductVO productVO) {
 		return productDao.doInsert(productVO);
 	}
