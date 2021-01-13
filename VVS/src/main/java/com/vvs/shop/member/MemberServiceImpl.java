@@ -45,4 +45,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.doDelete(memberVO);
 	}
 
+	@Override
+	public int doMemberIdChk(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		return memberDao.doMemberIdChk(memberVO);
+	}
+
 }
