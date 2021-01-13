@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="hContext" value="${pageContext.request.contextPath }" ></c:set> 
+<%@page import="com.vvs.shop.orders.OrdersVO" %>
     
 <!DOCTYPE html>
 <html>
@@ -43,33 +44,46 @@
       <h2>나의 주문처리 현황</h2>
       	<div class="row">
       		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-      			<thead>
-      				<tr>
-      					<th style="background-color: #eeeeee; text-align: center;">상품정보</th>
-      					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
-      					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
-      					<th style="background-color: #eeeeee; text-align: center;">주문금액(수량)</th>
-      					<th style="background-color: #eeeeee; text-align: center;">주문상태</th>
-      				</tr>
-      			</thead>
+      			<thead class="bg-primary">  
+					<th style="background-color: #eeeeee; text-align: center;">상품정보</th>
+					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
+					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
+					<th style="background-color: #eeeeee; text-align: center;">주문금액</th>
+					<th style="background-color: #eeeeee; text-align: center;">주문상태</th>
+					<!-- <th class="hidden-lg hidden-sm hidden-xs">BOARD_ID</th> -->
+				</thead>
       			<tbody>
-      				<tr>
-      					<td>니트</td>
-      					<td>2021-01-09</td>
-      					<td>1</td>
-      					<td>12000(1)</td>
-      					<td>배송준비중1</td>
-      				</tr>
+      			<!-- 문자: 왼쪽, 숫자: 오른쪽, 같은면: 가운데 -->
+			        <c:choose>
+			        	<c:when test="${list.size()>0 }">
+			        		<c:forEach var="vo" items="${list}">  
+						    	<tr>
+						    		<td class="text-center">상품정보</td>
+						    		<td class="text-left">주문일자</td>
+						    		<td class="text-left">${vo.orderNum}</td>
+						    		<td class="text-center">주문금액</td>
+						    		<td class="text-right">주문상태</td>
+						    		<%-- <td class="hidden-lg hidden-sm hidden-xs">${vo.seq}</td> --%>
+						    	</tr>			        			
+			        		</c:forEach>
+			        	</c:when>
+			        	<c:otherwise>
+			        		<tr>
+						    		<td class="text-center" colspan="99">주문현황이 없습니다.</td>
+						    </tr>  		
+			        	</c:otherwise>
+			        </c:choose>
+      				
       			</tbody>
       		</table>
       	</div>      
       </div>
       
       </div>
-    <!-- /.row -->
+    <!-- //.row -->
 
   </div>
-  <!-- /.container -->
+  <!-- //.container -->
       
       
 <%@ include file="/WEB-INF/views/main/footer.jsp" %>
