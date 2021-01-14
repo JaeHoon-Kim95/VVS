@@ -37,7 +37,6 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="member/doInsert.do", method = RequestMethod.POST)
-	@ResponseBody
 	public int doInsert(MemberVO memberVO) {
 		LOG.debug("===================");
 		LOG.debug("==doInsert.do==");
