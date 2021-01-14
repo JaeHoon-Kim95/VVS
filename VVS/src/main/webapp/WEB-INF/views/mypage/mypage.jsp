@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="hContext" value="${pageContext.request.contextPath }" ></c:set> 
 <%@page import="com.vvs.shop.orders.OrdersVO" %>
+<%@page import="java.util.List"%>
     
 <!DOCTYPE html>
 <html>
@@ -43,7 +44,7 @@
       <div class="container">
       <h2>나의 주문처리 현황</h2>
       	<div class="row">
-      		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+      		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd" id="ordersListTable">
       			<thead class="bg-primary">  
 					<th style="background-color: #eeeeee; text-align: center;">상품정보</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
@@ -58,7 +59,7 @@
 			        	<c:when test="${list.size()>0 }">
 			        		<c:forEach var="vo" items="${list}">  
 						    	<tr>
-						    		<td class="text-center">상품정보</td>
+						    		<td class="text-center">${vo.productName}</td>
 						    		<td class="text-left">주문일자</td>
 						    		<td class="text-left">${vo.orderNum}</td>
 						    		<td class="text-center">주문금액</td>
