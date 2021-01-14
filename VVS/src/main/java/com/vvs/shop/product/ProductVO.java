@@ -13,9 +13,27 @@ public class ProductVO {
 	private String regDt;
 	private int price;
 	private int discountPrice;
+	private String semiInfo;
+	private String mainInfo;
 
 	public ProductVO() {
 		super();
+	}
+
+	public String getSemiInfo() {
+		return semiInfo;
+	}
+
+	public void setSemiInfo(String semiInfo) {
+		this.semiInfo = semiInfo;
+	}
+
+	public String getMainInfo() {
+		return mainInfo;
+	}
+
+	public void setMainInfo(String mainInfo) {
+		this.mainInfo = mainInfo;
 	}
 
 	public ProductVO(int productNum, int categoryNum, String productName, int discountRate, int discount, String regDt,

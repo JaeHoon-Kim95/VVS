@@ -49,6 +49,12 @@
 
 				<label>할인 유무</label>
 				<input type="text" name="discount" id="discount">
+				
+				<label>간단 설명</label>
+				<input type="text" name="semiInfo" id="semiInfo">
+				
+				<label>상세 설명</label>
+				<input type="text" name="mainInfo" id="mainInfo">
 			</form>
 		</div>
 		<!-- row end -->

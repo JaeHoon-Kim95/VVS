@@ -11,18 +11,52 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vvs.shop.cmn.SearchVO;
+
 @Controller
 public class ProductController {
 
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired ProductService productService;
+	@Autowired SearchVO searchVO;
+	
+	@RequestMapping(value = "product/doSearch.do", method = RequestMethod.GET)
+	public ModelAndView doSearch() {
+		LOG.debug("product/doSearch.do");
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductList");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "product/moveToProductDetail.do", method = RequestMethod.GET)
+	public ModelAndView moveToProductDetail(@RequestParam("productNum") int productNum) {
+		LOG.debug("product/moveToProductDetail.do");
+		
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
+		
+		ProductVO outVO = new ProductVO();
+		outVO = productService.doSelectOne(productVO);
+				
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductDetail");
+		mav.addObject("outVO", outVO);
+		
+		return mav;
+	}
 	
 	@RequestMapping(value = "product/doRegist.do", method = RequestMethod.POST)
 	public String doRegist(@RequestParam("categoryNum") int categoryNum,
 						   @RequestParam("productName") String productName,
 						   @RequestParam("price") int price,
 						   @RequestParam("discountRate") int discountRate,
-						   @RequestParam("discount") int discount) {
+						   @RequestParam("discount") int discount,
+						   @RequestParam("semiInfo") String semiInfo,
+						   @RequestParam("mainInfo") String mainInfo) {
 		
 		ProductVO productVO = new ProductVO();
 		productVO.setCategoryNum(categoryNum);
@@ -35,6 +69,13 @@ public class ProductController {
 		LOG.debug("productName : " + productName);
 		
 		productService.doInsert(productVO);
+		
+		ProductDetailVO productDetailVO = new ProductDetailVO();
+		productDetailVO.setProductNum(productVO.getProductNum());
+		productDetailVO.setSemiInfo(semiInfo);
+		productDetailVO.setMainInfo(mainInfo);		
+		
+		productService.doInsertDetail(productDetailVO);
 		
 		return "product/ProductDetail";
 	}
