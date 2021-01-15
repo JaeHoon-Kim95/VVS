@@ -50,20 +50,20 @@
 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문금액</th>
-					<th style="background-color: #eeeeee; text-align: center;">주문상태</th>
+					<!-- <th style="background-color: #eeeeee; text-align: center;">주문상태</th> -->
 					<!-- <th class="hidden-lg hidden-sm hidden-xs">BOARD_ID</th> -->
 				</thead>
       			<tbody>
       			<!-- 문자: 왼쪽, 숫자: 오른쪽, 같은면: 가운데 -->
 			        <c:choose>
-			        	<c:when test="${list.size()>0 }">
-			        		<c:forEach var="vo" items="${list}">  
+			        	<c:when test="${orderList.size()>0 }">
+			        		<c:forEach var="OrdersVO" items="${orderList}">  
 						    	<tr>
-						    		<td class="text-center">${vo.productName}</td>
-						    		<td class="text-left">주문일자</td>
-						    		<td class="text-left">${vo.orderNum}</td>
-						    		<td class="text-center">주문금액</td>
-						    		<td class="text-right">주문상태</td>
+						    		<td class="text-center">${OrdersVO.productName}</td>
+						    		<td class="text-left">${OrdersVO.orderDt}</td>
+						    		<td class="text-left">${OrdersVO.productNum}</td>
+						    		<td class="text-center">${OrdersVO.price}</td>
+						    		<!-- <td class="text-right">주문상태</td> -->
 						    		<%-- <td class="hidden-lg hidden-sm hidden-xs">${vo.seq}</td> --%>
 						    	</tr>			        			
 			        		</c:forEach>

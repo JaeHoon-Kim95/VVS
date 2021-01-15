@@ -95,18 +95,18 @@ public class OrdersController {
 		return json;
 	}
 	
-	@RequestMapping(value="orders/doSelectList.do", method = RequestMethod.GET)
-	@ResponseBody
-	public String doSelectList(OrdersVO ordersVO) {
-		List<OrdersVO> outVO = ordersService.doSelectList(ordersVO);
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(outVO);
-		
-		LOG.debug("-------------------------");
-		LOG.debug("-json-"+json);
-		LOG.debug("-------------------------");
-		
-		return json;
+	
+	@RequestMapping(value="orders/doSelectList2.do", method = RequestMethod.GET)
+	
+	@ResponseBody public String doSelectList(OrdersVO ordersVO) { List<OrdersVO>
+	outVO = ordersService.doSelectList2(ordersVO);
+	
+	Gson gson = new Gson(); String json = gson.toJson(outVO);
+	
+	LOG.debug("-------------------------"); LOG.debug("-json-"+json);
+	LOG.debug("-------------------------");
+	
+	return json; 
 	}
+	 
 }

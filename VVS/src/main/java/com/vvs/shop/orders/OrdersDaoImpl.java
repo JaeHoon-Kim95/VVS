@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.vvs.shop.cmn.SearchVO;
+
 
 @Repository("OrdersDaoImpl")
 public class OrdersDaoImpl {
@@ -18,6 +20,9 @@ public class OrdersDaoImpl {
 		
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+	
+	@Autowired
+	OrdersDaoImpl ordersDao;
 	
 	private final String NAMESPACE = "com.vvs.shop.orders";
 	
@@ -113,18 +118,47 @@ public class OrdersDaoImpl {
 	 * @param orderNum
 	 * @return
 	 */
-	public List<OrdersVO> doSelectList(OrdersVO ordersVO) {
+	public List<OrdersProductVO> doSelectList(SearchVO search) {
 		LOG.debug("=OrdersVO doSelectList=");
+		
+		OrdersVO orders = new OrdersVO();
+		
+		orders.setMemberId(search.getSearchWord());
+		//orders = ordersDao.doSelectOne(orders.getMemberId());
 		//��� : namespace+id = com.vvs.shop.orders.doSelectList
 		String statement = NAMESPACE +".doSelectList";		
+		LOG.debug("=Orders statement="+statement);
+		LOG.debug("-Orders param-\n" + orders);
+		
+		List<OrdersProductVO> list = sqlSessionTemplate.selectList(statement,orders);
+		LOG.debug("-1234566list" +list );
+		/*
+		 * for(OrdersVO vo : list) { LOG.debug("=Orders doSelectList vo="+list); }
+		 */
+		return list;
+	}
+	
+	/**
+	 * 주문 리스트
+	 * @param orderNum
+	 * @return
+	 */
+	public List<OrdersVO> doSelectList2(OrdersVO ordersVO) {
+		LOG.debug("=OrdersVO doSelectList2=");
+		
+		//��� : namespace+id = com.vvs.shop.orders.doSelectList
+		String statement = NAMESPACE +".doSelectList2";		
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("-Orders param-\n" + ordersVO);
 		
 		List<OrdersVO> list = sqlSessionTemplate.selectList(statement,ordersVO);
+		LOG.debug("-1234566list" +list );
 		
-		for(OrdersVO vo : list) {
+		for(OrdersVO vo : list) { 
+			LOG.debug("=Orders doSelectList list="+list); 
 			LOG.debug("=Orders doSelectList vo="+vo);
 		}
+		
 		return list;
 	}
 }

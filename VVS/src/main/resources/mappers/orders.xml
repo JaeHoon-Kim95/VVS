@@ -9,12 +9,14 @@
 		    order_num,
 		    member_id,
 		    product_num,
-		    qty
+		    qty,
+		    order_dt
 		) VALUES (
 		    #{orderNum},
 		    #{memberId},
 		    #{productNum},
-		    #{qty}
+		    #{qty},
+		    #{orderDt}
 		)
 	</insert>
 	
@@ -34,7 +36,8 @@
 		SET order_num = #{orderNum},
 		    member_id = #{memberId},
 		    product_num = #{productNum},
-		    qty = #{qty}
+		    qty = #{qty},
+		    order_dt = #{orderDt}
 		WHERE
 		    order_num = #{orderNum}		  
 	</update>
@@ -46,21 +49,38 @@
 		    order_num AS orderNum,
 		    member_id AS memberId,
 		    product_num AS productNum,
-		    qty
+		    qty,
+		    order_dt AS orderDt
 		FROM orders
-		WHERE order_num = #{orderNum}
+		WHERE member_id = #{memberId}
 	</select>
 	
 	<!-- 목록조회 -->
 	<!-- com.vvs.shop.orders.doSelectList -->
-	<select id="doSelectList" parameterType="OrdersVO" resultType="OrdersVO">
+	<select id="doSelectList2" parameterType="OrdersVO" resultType="OrdersVO">
 		SELECT
 		    order_num AS orderNum,
 		    member_id AS memberId,
 		    product_num AS productNum,
-		    qty
+		    qty,
+		    order_dt AS orderDt
 		FROM orders
 		WHERE member_id = #{memberId}
+	</select>
+	
+	<!-- 목록조회 -->
+	<!-- com.vvs.shop.orders.doSelectList -->
+	<select id="doSelectList" parameterType="OrdersVO" resultType="OrdersProductVO">
+		SELECT
+		    p.product_name AS productName,
+		    o.order_dt AS orderDt,
+		    o.product_num AS productNum,
+		    p.price
+		FROM product p JOIN
+            (SELECT *
+            FROM orders
+            WHERE member_id = #{memberId}) o
+        on o.product_num = p.product_num
 	</select>
 	
 </mapper>

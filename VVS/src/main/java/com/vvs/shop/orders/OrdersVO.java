@@ -16,16 +16,20 @@ public class OrdersVO extends DTO {
 	/** 수량 */
 	private int qty;
 
+	/** 주문날짜 */
+	private String orderDt;
+	
 	public OrdersVO() {
 
 	}
 
-	public OrdersVO(int orderNum, String memberId, int productNum, int qty) {
+	public OrdersVO(int orderNum, String memberId, int productNum, int qty, String orderDt) {
 		super();
 		this.orderNum = orderNum;
 		this.memberId = memberId;
 		this.productNum = productNum;
 		this.qty = qty;
+		this.orderDt = orderDt;
 	}
 
 	public int getOrderNum() {
@@ -60,10 +64,20 @@ public class OrdersVO extends DTO {
 		this.qty = qty;
 	}
 
+	public String getOrderDt() {
+		return orderDt;
+	}
+
+	public void setOrderDt(String orderDt) {
+		this.orderDt = orderDt;
+	}
+
 	@Override
 	public String toString() {
 		return "OrdersVO [orderNum=" + orderNum + ", memberId=" + memberId + ", productNum=" + productNum + ", qty="
-				+ qty + ", toString()=" + super.toString() + "]";
+				+ qty + ", orderDt=" + orderDt + ", toString()=" + super.toString() + "]";
 	}
+
+	
 
 }
