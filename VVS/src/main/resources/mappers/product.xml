@@ -80,5 +80,30 @@
 	    product
 	</select>
 	
+	<select id="doSelectListWithPaging" parameterType="SearchVO" resultType="ProductVO">
+	Select B.*
+	From
+		(Select Rownum as RNUM, A.*
+		From
+			(Select p.product_num, p.category_num, p.product_name, p.discount_rate, p.price, p.reg_dt, d.semi_info
+			From product p , product_detail d
+			Where p.product_num = d.product_num(+)
+			<trim prefix="And (" suffix=")" prefixOverrides="And">
+				<trim prefix="And">
+					<if test="searchWord != null">
+							product_name like '%' || #{searchWord} || '%'
+					</if>
+					<if test="minPrice != 0">
+							And p.price >= #{minPrice}
+					</if>
+					<if test="maxPrice != 0">
+							And p.price <![CDATA[<=]]> #{maxPrice}
+					</if>
+				</trim>
+			</trim>
+			Order By reg_dt) A
+		Where Rownum <![CDATA[<=]]> (#{pageNum} * #{pageSize}))B
+	Where (1+(#{pageNum} - 1) * (#{pageSize}) ) <![CDATA[<=]]> RNUM
+	</select>
 	
 </mapper>
