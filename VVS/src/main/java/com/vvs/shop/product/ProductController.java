@@ -21,13 +21,27 @@ public class ProductController {
 	@Autowired SearchVO searchVO;
 	
 	@RequestMapping(value = "product/doSearch.do", method = RequestMethod.GET)
-	public ModelAndView doSearch() {
+	public ModelAndView doSearch(@RequestParam("pageSize") int pageSize,
+								 @RequestParam("pageNum") int pageNum,
+								 @RequestParam("searchWord") String searchWord,
+								 @RequestParam("minPrice") int minPrice,
+								 @RequestParam("maxPrice") int maxPrice) {
 		LOG.debug("product/doSearch.do");
 		
+		SearchVO searchVO = new SearchVO();
+		searchVO.setPageSize(pageSize);
+		searchVO.setPageNum(pageNum);
+		searchVO.setMinPrice(minPrice);
+		searchVO.setMaxPrice(maxPrice);
+		searchVO.setSearchWord(searchWord);
 		
+		LOG.debug("param - searchVO : " + searchVO);
+		
+		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductList");
+		mav.addObject("productList", outList);
 		
 		return mav;
 	}
@@ -50,13 +64,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "product/doRegist.do", method = RequestMethod.POST)
-	public String doRegist(@RequestParam("categoryNum") int categoryNum,
-						   @RequestParam("productName") String productName,
-						   @RequestParam("price") int price,
-						   @RequestParam("discountRate") int discountRate,
-						   @RequestParam("discount") int discount,
-						   @RequestParam("semiInfo") String semiInfo,
-						   @RequestParam("mainInfo") String mainInfo) {
+	public ModelAndView doRegist(@RequestParam("categoryNum") int categoryNum,
+							   @RequestParam("productName") String productName,
+							   @RequestParam("price") int price,
+							   @RequestParam("discountRate") int discountRate,
+							   @RequestParam("discount") int discount,
+							   @RequestParam("semiInfo") String semiInfo,
+							   @RequestParam("mainInfo") String mainInfo) {
 		
 		ProductVO productVO = new ProductVO();
 		productVO.setCategoryNum(categoryNum);
@@ -65,6 +79,8 @@ public class ProductController {
 		productVO.setPrice(price);
 		productVO.setProductName(productName);
 		productVO.setDiscountPrice(price*discountRate/100);
+		productVO.setSemiInfo(semiInfo);
+		productVO.setMainInfo(mainInfo);
 		
 		LOG.debug("productName : " + productName);
 		
@@ -77,7 +93,11 @@ public class ProductController {
 		
 		productService.doInsertDetail(productDetailVO);
 		
-		return "product/ProductDetail";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductDetail");
+		mav.addObject("outVO", productVO);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "product/moveToproductRegistPage.do", method = RequestMethod.GET)

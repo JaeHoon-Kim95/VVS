@@ -32,10 +32,15 @@
 	<div class="container">
 <br><br><br><br>
 		<form name="searchData" id="searchData" action="/shop/product/doSearch.do" method="get">
-			
+			<label>pageSize : </label><input type="text" id="pageSize" name="pageSize" value="3">
+			<label>pageNum : </label><input type="text" id="pageNum" name="pageNum" value="1">
+			<label>searchWord : </label><input type="text" id="searchWord" name="searchWord">
+			<label>minPrice : </label><input type="text" id="minPrice" name="minPrice" value="0">
+			<label>maxPrice : </label><input type="text" id="maxPrice" name="maxPrice" value="0">
+			<label>검색 버튼</label><input type="button" id="searchBtn" name="searchBtn" value="검색">
 		</form>
 
-
+		<hr>
 		<div class="row">
 
 			<c:forEach var="list" items="${productList }">
@@ -75,7 +80,10 @@
 				var goUrl = "/shop/product/moveToproductRegistPage.do";
 				window.location.href = goUrl;
 			})
-		
+		$("#searchBtn").on("click", function(){
+				var frm = document.searchData;
+				frm.submit();
+			})
 	</script>
 </body>
 
