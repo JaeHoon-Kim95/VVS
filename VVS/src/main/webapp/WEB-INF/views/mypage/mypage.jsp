@@ -50,7 +50,7 @@
 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문금액</th>
-					<!-- <th style="background-color: #eeeeee; text-align: center;">주문상태</th> -->
+					<th style="background-color: #eeeeee; text-align: center;">주문수량</th>
 					<!-- <th class="hidden-lg hidden-sm hidden-xs">BOARD_ID</th> -->
 				</thead>
       			<tbody>
@@ -60,10 +60,10 @@
 			        		<c:forEach var="OrdersVO" items="${orderList}">  
 						    	<tr>
 						    		<td class="text-center">${OrdersVO.productName}</td>
-						    		<td class="text-left">${OrdersVO.orderDt}</td>
-						    		<td class="text-left">${OrdersVO.productNum}</td>
-						    		<td class="text-center">${OrdersVO.price}</td>
-						    		<!-- <td class="text-right">주문상태</td> -->
+						    		<td class="text-center">${OrdersVO.orderDt}</td>
+						    		<td class="text-center">${OrdersVO.productNum}</td>
+						    		<td class="text-center">${OrdersVO.price}원</td>
+						    		<td class="text-center">${OrdersVO.qty}개</td>
 						    		<%-- <td class="hidden-lg hidden-sm hidden-xs">${vo.seq}</td> --%>
 						    	</tr>			        			
 			        		</c:forEach>

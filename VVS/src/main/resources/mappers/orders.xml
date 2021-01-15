@@ -75,7 +75,8 @@
 		    p.product_name AS productName,
 		    o.order_dt AS orderDt,
 		    o.product_num AS productNum,
-		    p.price
+		    p.price,
+		    o.qty
 		FROM product p JOIN
             (SELECT *
             FROM orders
