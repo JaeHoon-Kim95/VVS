@@ -19,6 +19,8 @@
   <link href="${hContext}/resources/css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/cmn/topBar.jsp" %>
+
 	<article class="container"> 
 		<div class="page-header"> 
 			<div class="col-md-6 col-md-offset-3"> 
@@ -76,7 +78,7 @@
 				</div>
 
 				
-					<input style="width:300px; margin:5px;" class="btn btn-primary btn-lg" type="button" value="회원가입" id="registerBtn"> 			
+					<input style="width:300px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="회원가입" id="registerBtn"> 			
 			</form> 
 		</div> 
 	</article>
