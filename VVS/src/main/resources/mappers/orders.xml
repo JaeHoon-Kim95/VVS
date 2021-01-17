@@ -10,13 +10,15 @@
 		    member_id,
 		    product_num,
 		    qty,
-		    order_dt
+		    order_dt,
+		    order_st
 		) VALUES (
 		    #{orderNum},
 		    #{memberId},
 		    #{productNum},
 		    #{qty},
-		    #{orderDt}
+		    SYSDATE,
+		    #{orderSt}
 		)
 	</insert>
 	
@@ -50,7 +52,8 @@
 		    member_id AS memberId,
 		    product_num AS productNum,
 		    qty,
-		    order_dt AS orderDt
+		    order_dt AS orderDt,
+		    order_st AS orderSt
 		FROM orders
 		WHERE member_id = #{memberId}
 	</select>
@@ -76,7 +79,8 @@
 		    o.order_dt AS orderDt,
 		    o.product_num AS productNum,
 		    p.price,
-		    o.qty
+		    o.qty,
+		    o.order_st AS orderSt
 		FROM product p JOIN
             (SELECT *
             FROM orders

@@ -59,7 +59,7 @@ public class TestOrdersController {
 
 	@Before
 	public void setUp() throws Exception {
-		orders = Arrays.asList(new OrdersVO(1, "jhs", 2, 1, ""), new OrdersVO(2, "jhs1", 3, 1, ""));
+		orders = Arrays.asList(new OrdersVO(4, "jhs", 2, 1, "",""), new OrdersVO(5, "jhs1", 3, 1, "",""));
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		LOG.debug("=mockMvc=" + mockMvc);
 		assertThat(mockMvc, is(notNullValue()));
@@ -70,12 +70,13 @@ public class TestOrdersController {
 	}
 
 	@Test
-	@Ignore // 성공
 	public void doInsert() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/orders/doInsert.do")
-				.param("orderNum", ordersVO.getOrderNum() + "").param("memberId", ordersVO.getMemberId())
-				.param("productNum", ordersVO.getProductNum() + "").param("qty", ordersVO.getQty() + "");
+				.param("orderNum", ordersVO.getOrderNum() + "")
+				.param("memberId", ordersVO.getMemberId())
+				.param("productNum", ordersVO.getProductNum() + "")
+				.param("qty", ordersVO.getQty() + "");
 		ResultActions resultActions = mockMvc.perform(createMessage).andExpect(status().is2xxSuccessful());
 
 		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
