@@ -66,10 +66,14 @@
 						    		<td class="text-center">${OrdersVO.price}원</td>
 						    		<td class="text-center">${OrdersVO.qty}개</td>
 						    		<td class="text-center">
-						    		${OrdersVO.orderSt}
+						    		${OrdersVO.orderSt}						    		
 						    			<c:if test="${OrdersVO.orderSt=='주문완료'}">
-						    			<input type="button" value="주문취소" id="orderDelete_btn" class="btn btn-dark" />
-						    			</c:if>
+						    				<a class="collapse-item" type="button" id="orderDelete_btn" >
+   						 						<c:out value="주문취소" />
+   						 						<div id="orderSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
+   						 					</a>
+						    			<!-- <input type="button" value="주문취소" id="orderDelete_btn" class="btn btn-dark" /> -->
+						    			</c:if>						    			
 						    		</td>
 						    	</tr>			        			
 			        		</c:forEach>
@@ -105,16 +109,16 @@
     <script type="text/javascript"> 
 
   	//완료시 이벤트
-	$("#order").click(function(event){
+	$("#orderDelete_btn").on("click",function(event){
 		alert("orderDelete_btn test111");
 
-		var test1 = $(event.target).children("#orderNum").text();
-		var test2 = JSON.stringify(test1);
-		console.log(test1);
-		console.log("test1123:"+test2);
-		var orderToDelete = $("#orders").val();
-		console.log("orderToDelete1:"+orderToDelete);	
-		 
+		 var orderNum = event.target.childNodes.item(1).textContent;
+		  var test5 = JSON.stringify(orderNum);
+		  console.log("orderNum:"+orderNum);
+		  console.log("test5:"+test5);	
+		  document.getElementById('orders').value=orderNum;
+		  var orderDelete = $("#orders").val();
+		  console.log("orderDelete:"+orderDelete);
 		/* $.ajax({
 		    type:"POST",
 		    url:"${hContext}/orders/doDelete.do",
@@ -141,7 +145,6 @@
 		
 
 	});
-    
     </script>   
 </body>
 </html>
