@@ -51,4 +51,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.doMemberIdChk(memberVO);
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/heads/HOON

@@ -17,4 +17,8 @@ public interface MemberService {
 	int doDelete(MemberVO memberVO);
 	
 	int doMemberIdChk(MemberVO memberVO);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/heads/HOON

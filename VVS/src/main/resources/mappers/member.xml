@@ -11,14 +11,18 @@
 		    NAME,
 		    EMAIL,
 		    PHONE,		   
-		    ADDRESS
+		    ADDR_NUM,
+		    ADDR_ROAD,
+		    ADDR_DETAIL
 		) VALUES (
 		    #{memberId},
 		    #{memberPw},
 		    #{name},
 		    #{email},
 		    #{phone},
-		    #{address}
+		    #{addrNum},
+		    #{addrRoad},
+		    #{addrDetail}
 		)
 	</insert>
 	
@@ -30,10 +34,13 @@
 	
 	<select id="doSelectList" parameterType="MemberVO">   <!-- //전체 조회를 따로 만들고 등급별 회원조회 생각중 -->
 		SELECT MEMBER_ID,
+			   MEMBER_PW,
 			   NAME,
 			   EMAIL,
 			   PHONE,
-			   ADDRESS,
+			   ADDR_NUM,
+			   ADDR_ROAD,
+			   ADDR_DETAIL,
 			   AUTH
 		FROM   MEMBER
 		WHERE  AUTH = #{auth}
@@ -42,11 +49,14 @@
 	
 	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
 		SELECT MEMBER_ID,
+			   MEMBER_PW,
 			   NAME,
 			   EMAIL,
 			   PHONE,
-			   ADDRESS,
-			   AUTH
+			   ADDR_NUM,
+			   ADDR_ROAD,
+			   ADDR_DETAIL,
+			   AUTH 
 		FROM   MEMBER
 		WHERE  MEMBER_ID = #{memberId} 
 	</select>
@@ -56,7 +66,9 @@
 						  NAME = #{name},
 						  EAMIL = #{email},
 						  PHONE = #{phone},
-						  ADDRESS = #{address}
+						  ADDR_NUM = #{addrNum},
+						  ADDR_ROAD = #{addrRoad},
+						  ADDR_DETAIL = #{addrDetail}
 			   WHERE MEMBER_ID = #{memberId}		  
 	</update>
 	
@@ -64,4 +76,4 @@
 		DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId}
 	</delete>
 	
-</mapper>	
+</mapper>

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,6 +28,7 @@ public class MemberController {
 		return "home";
 	}
 	
+<<<<<<< HEAD
 	
 	@RequestMapping(value="member/registerPage.do", method = RequestMethod.GET)	
 	public String register(HttpServletRequest req, HttpServletResponse res) {
@@ -35,6 +37,55 @@ public class MemberController {
 		return "member/register";
 	}
 	
+=======
+	@RequestMapping(value="member/loginPage.do", method = RequestMethod.GET)	
+	public String login(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "member/login";
+	}
+	
+	@RequestMapping(value="member/registerPage.do", method = RequestMethod.GET)	
+	public String register(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "member/register";
+	}
+	
+	@RequestMapping(value="member/doLogin.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int doLogin(@RequestParam("memberId") String memberId,
+						  @RequestParam("memberPw") String memberPw,
+						  HttpServletRequest req, HttpServletResponse res) {
+		LOG.debug("================");
+		LOG.debug("==doLogin.do==");
+		LOG.debug("================");
+		
+		int flag = 0;
+		HttpSession httpSession = req.getSession();
+
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberId(memberId);
+		memberVO.setMemberPw(memberPw);
+		
+		MemberVO outVO = memberServiceImpl.doSelectOne(memberVO);
+		
+		try {
+		if(!outVO.getMemberPw().equals(memberVO.getMemberPw())) {
+			LOG.debug("Pw 틀렸습니다.");
+			flag = 2;		
+		}else{LOG.debug("로그인 성공");
+			httpSession.setAttribute("memberId", outVO.getMemberId());
+			flag = 1;
+		}
+		}catch(NullPointerException e) {
+			LOG.debug("==존재하지 않는 아이디==");
+			flag = 3;		
+		}
+			LOG.debug(flag+"");
+		return flag;
+	}
+>>>>>>> refs/heads/HOON
 	
 	@RequestMapping(value="member/doInsert.do", method = RequestMethod.POST)
 	public int doInsert(MemberVO memberVO) {
