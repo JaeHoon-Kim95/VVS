@@ -40,8 +40,8 @@ public class ShipController {
 		search.setSearchWord("jhs");
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		
-		mav.setViewName("mypage/mypage");
-		mav.addObject("orderList", orderList);
+		mav.setViewName("main/main");
+		//mav.addObject("orderList", orderList);
 		return mav;
 	}
 	

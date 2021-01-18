@@ -68,7 +68,7 @@
 						    		<td class="text-center">
 						    		${OrdersVO.orderSt}						    		
 						    			<c:if test="${OrdersVO.orderSt=='주문완료'}">
-						    				<a class="collapse-item" type="button" id="orderDelete_btn" >
+						    				<a class="btn btn-dark" type="button" name="orderDelete_btn" >
    						 						<c:out value="주문취소" />
    						 						<div id="orderSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
    						 					</a>
@@ -109,21 +109,27 @@
     <script type="text/javascript"> 
 
   	//완료시 이벤트
-	$("#orderDelete_btn").on("click",function(event){
-		alert("orderDelete_btn test111");
+	$("a[name=orderDelete_btn]").on("click",function(event){
 
 		 var orderNum = event.target.childNodes.item(1).textContent;
-		  var test5 = JSON.stringify(orderNum);
+		  //var test5 = JSON.stringify(orderNum);
 		  console.log("orderNum:"+orderNum);
-		  console.log("test5:"+test5);	
-		  document.getElementById('orders').value=orderNum;
-		  var orderDelete = $("#orders").val();
-		  console.log("orderDelete:"+orderDelete);
-		/* $.ajax({
+		  //console.log("test5:"+test5);	
+		  //document.getElementById('orders').value=orderNum;
+		  //var orderDelete = $("#orders").val();
+		  //console.log("orderDelete:"+orderDelete);
+		  var result = confirm("주문을 취소하시겠습니까?");
+
+		  if(!result){
+		  return;
+			 
+		  }
+				
+		$.ajax({
 		    type:"POST",
 		    url:"${hContext}/orders/doDelete.do",
 		    dataType:"html", 
-		    data:{"orderNum" :$("#orders").val()
+		    data:{"orderNum" :orderNum
 		    },
 		    success:function(data){ //성공
 		    	alert("주문을 취소했습니다.");
@@ -141,7 +147,7 @@
 		    
 		    }   
 		  
-	});//--ajax */
+	});//--ajax 
 		
 
 	});
