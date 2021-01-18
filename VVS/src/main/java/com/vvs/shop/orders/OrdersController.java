@@ -35,10 +35,10 @@ public class OrdersController {
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
-		//memberVO = (memberVO) session.getAttribute("");		
+		memberVO = (MemberVO) session.getAttribute("memberId");		
 		
 		SearchVO search = new SearchVO();
-		search.setSearchWord("jhs");
+		search.setSearchWord(memberVO.getMemberId());
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 				
 		session.setAttribute("orderList", orderList);
@@ -57,8 +57,8 @@ public class OrdersController {
 
 	@RequestMapping(value = "orders/doInsert.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String doInsert(OrdersVO ordersVO) {
-
+	public String doInsert(OrdersVO ordersVO, HttpServletRequest req) {
+		
 		ordersVO.setOrderSt("주문완료");
 		LOG.debug("orders doInsert param:" + ordersVO);
 		int flag = ordersService.doInsert(ordersVO);
@@ -67,9 +67,9 @@ public class OrdersController {
 		Message message = new Message();
 		message.setRegId(flag + "");
 		if (flag == 1) {
-			message.setMsgContents("등록");
+			message.setMsgContents("주문 완료");
 		} else {
-			message.setMsgContents("등록 실패");
+			message.setMsgContents("주문 실패");
 		}
 
 		Gson gson = new Gson();
@@ -88,9 +88,9 @@ public class OrdersController {
 		Message message = new Message();
 		message.setRegId(flag + "");
 		if (flag > 0) {
-			message.setMsgContents("삭제");
+			message.setMsgContents("주문취소");
 		} else {
-			message.setMsgContents("삭제 실패");
+			message.setMsgContents("주문취소 실패");
 		}
 
 		Gson gson = new Gson();

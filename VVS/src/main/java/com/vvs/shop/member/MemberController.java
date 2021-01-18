@@ -28,16 +28,6 @@ public class MemberController {
 		return "home";
 	}
 	
-<<<<<<< HEAD
-	
-	@RequestMapping(value="member/registerPage.do", method = RequestMethod.GET)	
-	public String register(HttpServletRequest req, HttpServletResponse res) {
-		
-		
-		return "member/register";
-	}
-	
-=======
 	@RequestMapping(value="member/loginPage.do", method = RequestMethod.GET)	
 	public String login(HttpServletRequest req, HttpServletResponse res) {
 		
@@ -72,22 +62,22 @@ public class MemberController {
 		
 		try {
 		if(!outVO.getMemberPw().equals(memberVO.getMemberPw())) {
-			LOG.debug("Pw Æ²·È½À´Ï´Ù.");
+			LOG.debug("Pw í‹€ë ¸ìŠµë‹ˆë‹¤.");
 			flag = 2;		
-		}else{LOG.debug("·Î±×ÀÎ ¼º°ø");
+		}else{LOG.debug("ë¡œê·¸ì¸ ì„±ê³µ");
 			httpSession.setAttribute("memberId", outVO.getMemberId());
 			flag = 1;
 		}
 		}catch(NullPointerException e) {
-			LOG.debug("==Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµð==");
+			LOG.debug("==ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””==");
 			flag = 3;		
 		}
 			LOG.debug(flag+"");
 		return flag;
 	}
->>>>>>> refs/heads/HOON
 	
 	@RequestMapping(value="member/doInsert.do", method = RequestMethod.POST)
+	@ResponseBody
 	public int doInsert(MemberVO memberVO) {
 		LOG.debug("===================");
 		LOG.debug("==doInsert.do==");
