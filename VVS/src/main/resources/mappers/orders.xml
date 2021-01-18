@@ -38,8 +38,7 @@
 		SET order_num = #{orderNum},
 		    member_id = #{memberId},
 		    product_num = #{productNum},
-		    qty = #{qty},
-		    order_dt = #{orderDt}
+		    qty = #{qty}
 		WHERE
 		    order_num = #{orderNum}		  
 	</update>
