@@ -77,7 +77,7 @@
 		SELECT
 		    p.product_name AS productName,
 		    o.order_dt AS orderDt,
-		    o.product_num AS productNum,
+		    o.order_num AS orderNum,
 		    p.price,
 		    o.qty,
 		    o.order_st AS orderSt

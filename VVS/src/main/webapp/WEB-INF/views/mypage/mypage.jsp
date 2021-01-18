@@ -41,6 +41,7 @@
 
       </div>
       
+      <input type='hidden' id='orders'>
       <div class="container">
       <h2>나의 주문처리 현황</h2>
       	<div class="row">
@@ -51,9 +52,9 @@
 					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문금액</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문수량</th>
-					<!-- <th class="hidden-lg hidden-sm hidden-xs">BOARD_ID</th> -->
+					<th style="background-color: #eeeeee; text-align: center;">주문상태</th>
 				</thead>
-      			<tbody>
+      			<tbody id="order">
       			<!-- 문자: 왼쪽, 숫자: 오른쪽, 같은면: 가운데 -->
 			        <c:choose>
 			        	<c:when test="${orderList.size()>0 }">
@@ -61,10 +62,15 @@
 						    	<tr>
 						    		<td class="text-center">${OrdersVO.productName}</td>
 						    		<td class="text-center">${OrdersVO.orderDt}</td>
-						    		<td class="text-center">${OrdersVO.productNum}</td>
+						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}</td>
 						    		<td class="text-center">${OrdersVO.price}원</td>
 						    		<td class="text-center">${OrdersVO.qty}개</td>
-						    		<%-- <td class="hidden-lg hidden-sm hidden-xs">${vo.seq}</td> --%>
+						    		<td class="text-center">
+						    		${OrdersVO.orderSt}
+						    			<c:if test="${OrdersVO.orderSt=='주문완료'}">
+						    			<input type="button" value="주문취소" id="orderDelete_btn" class="btn btn-dark" />
+						    			</c:if>
+						    		</td>
 						    	</tr>			        			
 			        		</c:forEach>
 			        	</c:when>
@@ -98,7 +104,43 @@
     <script src="${hContext}/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript"> 
 
+  	//완료시 이벤트
+	$("#order").click(function(event){
+		alert("orderDelete_btn test111");
 
+		var test1 = $(event.target).children("#orderNum").text();
+		var test2 = JSON.stringify(test1);
+		console.log(test1);
+		console.log("test1123:"+test2);
+		var orderToDelete = $("#orders").val();
+		console.log("orderToDelete1:"+orderToDelete);	
+		 
+		/* $.ajax({
+		    type:"POST",
+		    url:"${hContext}/orders/doDelete.do",
+		    dataType:"html", 
+		    data:{"orderNum" :$("#orders").val()
+		    },
+		    success:function(data){ //성공
+		    	alert("주문을 취소했습니다.");
+		    	 //json 분리해서 변수
+			       var jsonObj = JSON.parse(data);
+			    
+			       if(null !=jsonObj && jsonObj.regId=="1"){
+			    	   location.reload();
+			       }
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+	});//--ajax */
+		
+
+	});
     
     </script>   
 </body>

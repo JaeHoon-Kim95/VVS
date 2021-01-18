@@ -4,6 +4,7 @@ import java.text.*;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.vvs.shop.cmn.Message;
 import com.vvs.shop.cmn.SearchVO;
+import com.vvs.shop.member.MemberVO;
 
 @Controller
 public class OrdersController {
@@ -29,11 +31,17 @@ public class OrdersController {
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
 	public ModelAndView shipView(HttpServletRequest req) throws ParseException {
 
+		HttpSession session = req.getSession();
+		
 		ModelAndView mav = new ModelAndView();
-
+		MemberVO memberVO = new MemberVO();
+		//memberVO = (memberVO) session.getAttribute("");		
+		
 		SearchVO search = new SearchVO();
 		search.setSearchWord("jhs");
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
+				
+		session.setAttribute("orderList", orderList);
 		
 		/*
 		 * for(int i=0; i<orderList.size(); i++) {
