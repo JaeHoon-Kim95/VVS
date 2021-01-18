@@ -71,11 +71,7 @@
 						    				<a class="btn btn-dark" type="button" name="orderDelete_btn" >
    						 						<c:out value="주문취소" />
    						 						<div id="orderSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
-   						 					</a>
-   						 					<a class="btn btn-dark" type="button" name="orderCh_btn" >
-   						 						<c:out value="교환" />
-   						 						<div id="orderSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
-   						 					</a>
+   						 					</a>   						 					
 						    			<!-- <input type="button" value="주문취소" id="orderDelete_btn" class="btn btn-dark" /> -->
 						    			</c:if>						    			
 						    		</td>
