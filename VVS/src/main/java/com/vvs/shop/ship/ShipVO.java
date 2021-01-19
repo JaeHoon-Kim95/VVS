@@ -13,7 +13,7 @@ public class ShipVO extends DTO {
 	/** 송장번호 */
 	private String shipNum;
 	
-	/** 주문일 */
+	/** 배송 시작일 */
 	private String shipDt;
 	
 	/** 제품번호 */

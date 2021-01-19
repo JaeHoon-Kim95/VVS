@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vvs.shop.cmn.SearchVO;
+
 @Service("OrdersServiceImpl")
 public class OrdersServiceImpl implements OrdersService {
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
@@ -35,8 +37,14 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<OrdersVO> doSelectList(OrdersVO ordersVO) {
-		return ordersDao.doSelectList(ordersVO);
+	public List<OrdersProductVO> doSelectList(SearchVO search) {
+		return ordersDao.doSelectList(search);
+	}
+
+	@Override
+	public List<OrdersVO> doSelectList2(OrdersVO ordersVO) {
+		
+		return ordersDao.doSelectList2(ordersVO);
 	}
 
 }

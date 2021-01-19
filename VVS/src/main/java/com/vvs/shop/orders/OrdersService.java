@@ -2,31 +2,35 @@ package com.vvs.shop.orders;
 
 import java.util.List;
 
+import com.vvs.shop.cmn.SearchVO;
+
 public interface OrdersService {
 
 	/**
-	 * ÁÖ¹®ÇÏ±â
+	 * ï¿½Ö¹ï¿½ï¿½Ï±ï¿½
 	 */
 	public int doInsert(OrdersVO ordersVO);
 	
 	/**
-	 * ÁÖ¹®»èÁ¦
+	 * ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int doDelete(OrdersVO ordersVO);
 	
 	/**
-	 * ÁÖ¹® ¼öÁ¤
+	 * ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int doUpdate(OrdersVO ordersVO);
 	
 	/**
-	 * ÁÖ¹® ´Ü°ÇÁ¶È¸
+	 * ï¿½Ö¹ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½È¸
 	 */
 	public OrdersVO doSelectOne(OrdersVO ordersVO);
 	
 	/**
-	 * ÁÖ¹® ÀüÃ¼Á¶È¸
+	 * ï¿½Ö¹ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½È¸
 	 */
-	public List<OrdersVO> doSelectList(OrdersVO ordersVO);
+	public List<OrdersProductVO> doSelectList(SearchVO search);
+	
+	public List<OrdersVO> doSelectList2(OrdersVO ordersVO);
 	
 }

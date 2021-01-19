@@ -19,7 +19,7 @@
   <link href="${hContext}/resources/css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="/WEB-INF/views/cmn/topBar.jsp" %>
+<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 
 	<div style="text-align: center;" class="container">
 		<h1>SIGN IN</h1>

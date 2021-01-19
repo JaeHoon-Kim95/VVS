@@ -223,7 +223,19 @@
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
   
+<<<<<<< HEAD
  
+=======
+<<<<<<< HEAD
+  $("#moveRegister").on("click",function(){
+		window.location.href = "${hContext}/member/registerPage.do";
+	  });
+
+  
+=======
+ 
+>>>>>>> refs/heads/HOON
+>>>>>>> refs/remotes/origin/JHS_workspace
   
   </script>
 
