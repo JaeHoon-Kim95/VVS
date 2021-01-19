@@ -38,7 +38,7 @@ public class OrdersController {
 		memberVO = (MemberVO) session.getAttribute("memberId");		
 		
 		SearchVO search = new SearchVO();
-		search.setSearchWord(memberVO.getMemberId());
+		search.setSearchWord("jhs");
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 				
 		session.setAttribute("orderList", orderList);
