@@ -57,7 +57,11 @@
 				${outVO.semiInfo }
 			</div>
 		
-		
+			<hr>
+			
+			<label>갯수</label><input type="text" value="1"><br>
+			<input type="button" value="주문하기"><br>
+			<input type="button" value="장바구니 추가">
 	</div>
 	<!-- container end -->
 
