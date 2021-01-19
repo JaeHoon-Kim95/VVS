@@ -49,6 +49,12 @@
 	}
 
 	$("#loginBtn").on("click",function(){
+		if($("#inputId").val()==''){
+			alert("ID를 입력하세요");
+		}else if($("#inputPw").val()==''){
+			alert("PW를 입력하세요");
+		}
+		
 		$.ajax({
 			type : "POST",
 			url : "${hContext}/member/doLogin.do",

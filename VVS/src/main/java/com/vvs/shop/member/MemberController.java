@@ -21,7 +21,7 @@ public class MemberController {
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	MemberService memberServiceImpl;
+	MemberServiceImpl memberServiceImpl;
 	
 	@RequestMapping(value="member/homeBack.do", method = RequestMethod.GET)
 	public String homeBack(HttpServletRequest req, HttpServletResponse res) {
@@ -62,14 +62,15 @@ public class MemberController {
 		
 		try {
 		if(!outVO.getMemberPw().equals(memberVO.getMemberPw())) {
-			LOG.debug("Pw Æ²·È½À´Ï´Ù.");
+			LOG.debug("Pw í™•ì¸í•˜ì„¸ìš”");
 			flag = 2;		
-		}else{LOG.debug("·Î±×ÀÎ ¼º°ø");
+		}else{
+			LOG.debug("ë¡œê·¸ì¸ ì„±ê³µ");
 			httpSession.setAttribute("memberId", outVO.getMemberId());
 			flag = 1;
 		}
 		}catch(NullPointerException e) {
-			LOG.debug("==Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ==");
+			LOG.debug("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ID");
 			flag = 3;		
 		}
 			LOG.debug(flag+"");
