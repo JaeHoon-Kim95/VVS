@@ -29,7 +29,7 @@ public class OrdersController {
 	OrdersServiceImpl ordersService;
 
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
-	public ModelAndView shipView(HttpServletRequest req) throws ParseException {
+	public ModelAndView orderView(HttpServletRequest req) throws ParseException {
 
 		HttpSession session = req.getSession();
 		
