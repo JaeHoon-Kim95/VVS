@@ -19,11 +19,7 @@
   <link href="${hContext}/resources/css" rel="stylesheet">
 </head>
 <body>
-<<<<<<< HEAD
-<%@ include file="/WEB-INF/views/cmn/topBar.jsp" %>
-=======
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
->>>>>>> refs/remotes/origin/JHS_workspace
 
 	<article class="container"> 
 		<div class="page-header"> 
