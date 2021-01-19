@@ -5,10 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vvs.shop.cmn.SearchVO;
+
 @Service
 public class ProductService {
 
 	@Autowired ProductDao productDao;
+	
+	public List<ProductVO> doSelectListWithPaging(SearchVO searchVO){
+		return productDao.doSelectListWithPaging(searchVO);
+	}
 	
 	public int doInsertDetail(ProductDetailVO productDetailVO) {
 		return productDao.doInsertDetail(productDetailVO);

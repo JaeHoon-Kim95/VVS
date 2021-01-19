@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.vvs.shop.cmn.SearchVO;
+
 @Repository
 public class ProductDao {
 
@@ -101,6 +103,22 @@ public class ProductDao {
 		String statement = NAMESPACE + "doSelectList";
 		
 		List<ProductVO> outList = sqlSessionTemplate.selectList(statement, productVO);
+		
+		for(ProductVO vo : outList) {
+			LOG.debug("result - outVO : " + vo);
+		}
+		
+		return outList;
+		
+	}
+	
+	public List<ProductVO> doSelectListWithPaging(SearchVO searchVO){
+		LOG.debug("ProductDao - doSelectListWithPaging");
+		LOG.debug("param - searchVO : " + searchVO);
+		
+		String statement = NAMESPACE + "doSelectListWithPaging";
+		
+		List<ProductVO> outList = sqlSessionTemplate.selectList(statement, searchVO);
 		
 		for(ProductVO vo : outList) {
 			LOG.debug("result - outVO : " + vo);

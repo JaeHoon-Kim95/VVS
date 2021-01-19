@@ -11,14 +11,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vvs.shop.cart.CartDao;
-import com.vvs.shop.cart.CartVO;
+import com.vvs.shop.cmn.SearchVO;
 import com.vvs.shop.product.ProductDao;
-import com.vvs.shop.product.ProductVO;
 
 @Transactional
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class) // ½ºÇÁ¸µ Å×½ºÆ® ÄÁÅØ½ºÆ® ÇÁ·¹ÀÓ¿öÅ©ÀÇ JUnit±â´É È®Àå
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 public class CartProductTest {
@@ -29,45 +28,14 @@ public class CartProductTest {
 	@Test
 	public void Test() {
 		
-		ProductVO productVO = new ProductVO();
+		SearchVO searchVO = new SearchVO();
+		searchVO.setPageNum(1);
+		searchVO.setPageSize(3);
+		searchVO.setSearchWord("í…ŒìŠ¤íŠ¸ìž„");
+		searchVO.setMinPrice(1);
+		searchVO.setMaxPrice(1250);
 		
-		productVO.setCategoryNum(1);
-		productVO.setDiscount(1);
-		productVO.setDiscountPrice(1);
-		productVO.setDiscountRate(12);
-		productVO.setPrice(1);
-		productVO.setProductName("Test");
-		productVO.setProductNum(1);
-		productVO.setRegDt("12/12");
-		
-		productDao.doInsert(productVO);
-		
-		productVO.setProductName("Test_Modify");
-		
-		productDao.doUpdate(productVO);
-		productDao.doSelectOne(productVO);
-		productDao.doSelectList(productVO);
-		productDao.doDelete(productVO);
-		productDao.doSelectList(productVO);
-		
-		productDao.doInsert(productVO);
-		
-		CartVO cartVO = new CartVO();
-		
-		cartVO.setMemberId("TestCart");
-		cartVO.setProductNum(1);
-		cartVO.setQty(1);
-		cartVO.setSeq(1);
-		
-		cartDao.doInsert(cartVO);
-		
-		cartVO.setQty(2);
-		
-		cartDao.doUpdate(cartVO);
-		cartDao.doSelectOne(cartVO);
-		cartDao.doSelectList(cartVO);
-		cartDao.doDelete(cartVO);
-		cartDao.doSelectList(cartVO);
+		productDao.doSelectListWithPaging(searchVO);
 		
 	}
 	
