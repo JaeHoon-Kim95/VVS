@@ -67,7 +67,7 @@
 					console.log(data);
 					if(data == 1){						
 						alert("로그인 성공");
-						window.location.href = "${hContext}/member/homeBack.do";
+						window.location.href = "${hContext}/main/index.do";
 					}else if(data == 2){
 						console.log(data);
 						alert("비밀번호를 확인하세요.");

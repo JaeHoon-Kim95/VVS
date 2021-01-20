@@ -1,15 +1,17 @@
 package com.vvs.shop.member;
 
-public class MemberVO {
+import com.vvs.shop.cmn.DTO;
 
-	private String memberId; //À¯Àú ¾ÆÀÌµð
-	private String memberPw; //À¯Àú ºñ¹ø
-	private String name; //À¯Àú ÀÌ¸§
-	private String email; // ÀÌ¸ÞÀÏ
-	private int phone; // ÇÚµå¹ø ¹øÈ£
-	private int auth; //À¯Àú ±ÇÈ¯
-	private String addrNum; //¿ìÆí¹øÈ£
-	private String addrRoad; //µµ·Î¸í
+public class MemberVO extends DTO{
+
+	private String memberId; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	private String memberPw; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private String name; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private String email; // ï¿½Ì¸ï¿½ï¿½ï¿½
+	private int phone; // ï¿½Úµï¿½ï¿½ ï¿½ï¿½È£
+	private int auth; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+	private String addrNum; //ï¿½ï¿½ï¿½ï¿½ï¿½È£
+	private String addrRoad; //ï¿½ï¿½ï¿½Î¸ï¿½
 	private String addrDetail;
 	
 	public MemberVO() {

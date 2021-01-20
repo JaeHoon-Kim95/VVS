@@ -29,18 +29,18 @@ public class OrdersController {
 	OrdersServiceImpl ordersService;
 
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
-	public ModelAndView orderView(HttpServletRequest req) throws ParseException {
+	public ModelAndView orderView(HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
 		memberVO = (MemberVO) session.getAttribute("memberId");		
-		
+		LOG.debug("memberVO===" + memberVO);
 		SearchVO search = new SearchVO();
 		search.setSearchWord(memberVO.getMemberId());
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
-				
+		LOG.debug("orderList===" + orderList);		
 		session.setAttribute("orderList", orderList);
 		
 		/*
