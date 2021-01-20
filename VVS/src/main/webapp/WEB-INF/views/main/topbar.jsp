@@ -16,12 +16,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">로그인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">회원가입</a>
-          </li>
-          <li class="nav-item">
           <c:url value="/orders/ordersView.do" var="orderViewUrl">
 		  </c:url>
 		  
@@ -34,10 +28,16 @@
 		        </li>
 		    </c:when>
 		    <c:otherwise>
-		  	<a class="nav-link" type="button" id="loginView">마이페이지</a>
+		  	<a class="nav-link" type="button" id="loginView">MyPage</a>
 		   </c:otherwise>				      
 		   </c:choose> 
           
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${hContext}/member/loginPage.do">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="navbar-brand" href="${hContext}/member/registerPage.do">Register</a>
           </li>
         </ul>
       </div>
