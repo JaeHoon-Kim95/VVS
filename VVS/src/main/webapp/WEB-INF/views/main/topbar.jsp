@@ -23,19 +23,26 @@
 		  	<c:when test='${null != sessionScope.memberId}'>
 		    	<li class="nav-item">
 		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link">
-		        		<span class="btn btn-secondary">마이페이지</span>
-		        	</a>
+		        		<span class="btn btn-secondary">MyPage</span>
+		        	</a>	        	
 		        </li>
+		        <li class="nav-item">
+		        	<a href="${hContext}/member/logout.do" class="nav-link">logout</a>
+		        </li>
+		        		        
 		    </c:when>
 		    <c:otherwise>
-		  	<a class="nav-link" type="button" id="loginView">MyPage</a>
+		  	<li class="nav-item">
+		  		<a class="nav-link" type="button" id="loginView">MyPage</a>
+		  	</li>			  	
+            <li class="nav-item">
+            	<a class="nav-link" href="${hContext}/member/loginPage.do">login</a>
+            </li>	
+         	
 		   </c:otherwise>				      
 		   </c:choose> 
           
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="${hContext}/member/loginPage.do">login</a>
-          </li>
+          </li>        
           <li class="nav-item">
             <a class="navbar-brand" href="${hContext}/member/registerPage.do">Register</a>
           </li>

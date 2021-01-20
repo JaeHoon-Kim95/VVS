@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -33,6 +34,13 @@ public class MemberController {
 		
 		
 		return "member/login";
+	}
+	@RequestMapping(value="member/logout.do", method = RequestMethod.GET)	
+	public ModelAndView logout(HttpSession session) {
+		session.invalidate();
+		ModelAndView mv = new ModelAndView("redirect:/");
+		
+		return mv;
 	}
 	
 	@RequestMapping(value="member/registerPage.do", method = RequestMethod.GET)	
