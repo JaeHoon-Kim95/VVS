@@ -11,7 +11,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">홈페이지
+            <a class="nav-link" href="${hContext}/main/index.do">홈페이지
               <span class="sr-only">(current)</span>
             </a>
           </li>
