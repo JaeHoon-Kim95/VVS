@@ -22,8 +22,8 @@
 		  <c:choose>
 		  	<c:when test='${null != sessionScope.memberId}'>
 		    	<li class="nav-item">
-		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link">
-		        		<span class="btn btn-secondary">MyPage</span>
+		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link" type="button">
+		        		MyPage
 		        	</a>	        	
 		        </li>
 		        <li class="nav-item">
@@ -44,7 +44,7 @@
           
           </li>        
           <li class="nav-item">
-            <a class="navbar-brand" href="${hContext}/member/registerPage.do">Register</a>
+            <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
           </li>
         </ul>
       </div>
