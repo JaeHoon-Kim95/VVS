@@ -1,3 +1,4 @@
+
 package com.vvs.test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -35,30 +36,30 @@ import com.vvs.shop.orders.OrdersService;
 import com.vvs.shop.orders.OrdersVO;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 @WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)//스프랭 테스트 컨텍스트 프레임워크의 JUnit기능 확장
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-                                   "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"		
-})
+
+@RunWith(SpringJUnit4ClassRunner.class) // 스프랭 테스트 컨텍스트 프레임워크의 JUnit기능 확장
+
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
+		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 public class TestOrdersController {
-	final Logger   LOG = LoggerFactory.getLogger(this.getClass());
-	
+	final Logger LOG = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	WebApplicationContext webApplicationContext;
-	
+
 	@Autowired
 	OrdersService ordersService;
-	
+
 	List<OrdersVO> orders;
-	
-	//  Mock
+
+	// Mock
 	MockMvc mockMvc;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		orders=Arrays.asList(new OrdersVO(1,"jhs",2,1)
-							,new OrdersVO(2,"jhs1",3,1)
-				);
+		orders = Arrays.asList(new OrdersVO(4, "jhs", 2, 1, "",""), new OrdersVO(5, "jhs1", 3, 1, "",""));
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		LOG.debug("=mockMvc=" + mockMvc);
 		assertThat(mockMvc, is(notNullValue()));
@@ -69,95 +70,80 @@ public class TestOrdersController {
 	}
 
 	@Test
-	@Ignore
-	//성공
 	public void doInsert() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
-		MockHttpServletRequestBuilder createMessage = 
-				 MockMvcRequestBuilders.post("/orders/doInsert.do")
-				 .param("orderNum", ordersVO.getOrderNum()+"")
-				 .param("memberId", ordersVO.getMemberId())
-				 .param("productNum", ordersVO.getProductNum()+"")
-				 .param("qty", ordersVO.getQty()+"");
-		ResultActions resultActions = mockMvc.perform(createMessage)
-				.andExpect(status().is2xxSuccessful());	
-	
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/orders/doInsert.do")
+				.param("orderNum", ordersVO.getOrderNum() + "")
+				.param("memberId", ordersVO.getMemberId())
+				.param("productNum", ordersVO.getProductNum() + "")
+				.param("qty", ordersVO.getQty() + "");
+		ResultActions resultActions = mockMvc.perform(createMessage).andExpect(status().is2xxSuccessful());
+
 		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-		Gson gson=new Gson();
-		
+		Gson gson = new Gson();
+
 		Message message = gson.fromJson(result, Message.class);
 		LOG.debug("=orders doInsert message=" + message);
 	}
 
 	@Test
-	@Ignore
-	//성공
+
+	@Ignore // 성공
 	public void doDelete() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
-		MockHttpServletRequestBuilder createMessage = 
-				 MockMvcRequestBuilders.post("/orders/doDelete.do")
-				 .param("orderNum", ordersVO.getOrderNum()+"");
-		ResultActions resultActions = mockMvc.perform(createMessage)
-				.andExpect(status().is2xxSuccessful());	
-	
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/orders/doDelete.do")
+				.param("orderNum", ordersVO.getOrderNum() + "");
+		ResultActions resultActions = mockMvc.perform(createMessage).andExpect(status().is2xxSuccessful());
+
 		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-		Gson gson=new Gson();
-		
+		Gson gson = new Gson();
+
 		Message message = gson.fromJson(result, Message.class);
 		LOG.debug("=orders doDelete message=" + message);
 	}
-	
+
 	@Test
-	@Ignore
-	//성공
+
+	@Ignore // 성공
 	public void doUpdate() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
-		MockHttpServletRequestBuilder createMessage = 
-				 MockMvcRequestBuilders.post("/orders/doUpdate.do")
-				 .param("orderNum", ordersVO.getOrderNum()+"")
-				 .param("memberId", ordersVO.getMemberId())
-				 .param("productNum", ordersVO.getProductNum()+"")
-				 .param("qty", ordersVO.getQty()+"");
-		ResultActions resultActions = mockMvc.perform(createMessage)
-				.andExpect(status().is2xxSuccessful());	
-	
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/orders/doUpdate.do")
+				.param("orderNum", ordersVO.getOrderNum() + "").param("memberId", ordersVO.getMemberId())
+				.param("productNum", ordersVO.getProductNum() + "").param("qty", ordersVO.getQty() + "");
+		ResultActions resultActions = mockMvc.perform(createMessage).andExpect(status().is2xxSuccessful());
+
 		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-		Gson gson=new Gson();
-		
+		Gson gson = new Gson();
+
 		Message message = gson.fromJson(result, Message.class);
 		LOG.debug("=orders doDelete message=" + message);
 	}
-	
+
 	@Test
 	@Ignore
-	//성공
+	// 성공
 	public void doSelectOne() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
-		MockHttpServletRequestBuilder createMessage = 
-				 MockMvcRequestBuilders.get("/orders/doSelectOne.do")
-				 .param("orderNum", ordersVO.getOrderNum()+"");
-		ResultActions resultActions = mockMvc.perform(createMessage)
-				.andExpect(status().is2xxSuccessful());	
-	
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/orders/doSelectOne.do")
+				.param("orderNum", ordersVO.getOrderNum() + "");
+		ResultActions resultActions = mockMvc.perform(createMessage).andExpect(status().is2xxSuccessful());
+
 		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-		Gson gson=new Gson();
-		
+		Gson gson = new Gson();
+
 		Message message = gson.fromJson(result, Message.class);
 		LOG.debug("=orders doDelete message=" + message);
 	}
-	
-	@Test
-	//성공
-	public void doSelectList() throws Exception {
+
+	@Test // 성공
+	public void doSelectList2() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
-		MockHttpServletRequestBuilder createMessage = 
-				 MockMvcRequestBuilders.get("/orders/doSelectList.do")
-				 .param("memberId", ordersVO.getMemberId());
-		ResultActions resultActions = mockMvc.perform(createMessage)
-				.andExpect(status().is2xxSuccessful());	
-	
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/orders/doSelectList2.do")
+				.param("memberId", ordersVO.getMemberId());
+		ResultActions resultActions = mockMvc.perform(createMessage).andExpect(status().is2xxSuccessful());
+
 		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-		
+
 		LOG.debug("=orders doSelectList message=" + result);
 	}
 }

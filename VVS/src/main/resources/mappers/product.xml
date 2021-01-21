@@ -46,6 +46,12 @@
 	        product_num = #{productNum}
 	</delete>
 	
+	<select id="doSelectListOptions" parameterType="OptionsVO" resultType="OptionsVO">
+	Select *
+	From Options
+	Where product_num = #{productNum} 
+	</select>
+	
 	<update id="doUpdate" parameterType="ProductVO">
 	UPDATE product
 	SET

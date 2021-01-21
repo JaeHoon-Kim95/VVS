@@ -2,6 +2,8 @@ package com.vvs.shop.ship;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.vvs.shop.cmn.Message;
+import com.vvs.shop.cmn.SearchVO;
+import com.vvs.shop.orders.OrdersProductVO;
+import com.vvs.shop.orders.OrdersServiceImpl;
+import com.vvs.shop.orders.OrdersVO;
 
 @Controller
 public class ShipController {
@@ -20,10 +27,22 @@ public class ShipController {
 	
 	@Autowired
 	ShipService shipService;
+	@Autowired
+	OrdersServiceImpl ordersService;
+	
 	
 	@RequestMapping(value="ship/shipView.do", method = RequestMethod.GET)
-	public String shipView(ShipVO shipVO) {
-		return "mypage/mypage";
+	public ModelAndView shipView(HttpServletRequest req) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		SearchVO search = new SearchVO();
+		search.setSearchWord("jhs");
+		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
+		
+		mav.setViewName("main/main");
+		//mav.addObject("orderList", orderList);
+		return mav;
 	}
 	
 	@RequestMapping(value="ship/doInsert.do", method = RequestMethod.POST)

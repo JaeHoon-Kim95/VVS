@@ -1,5 +1,6 @@
 package com.vvs.shop.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.vvs.shop.cmn.SearchVO;
 
 @Controller
@@ -19,6 +22,22 @@ public class ProductController {
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired ProductService productService;
 	@Autowired SearchVO searchVO;
+	
+	@RequestMapping(value = "product/doOptionsList.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doOptionsList(OptionsVO optionsVO) {
+		
+		LOG.debug("product/doOptionsList.do");
+		
+		List<OptionsVO> outList = productService.doSelectListOptions(optionsVO);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outList);
+		
+		return json;		
+		
+	}
+	
 	
 	@RequestMapping(value = "product/doSearch.do", method = RequestMethod.GET)
 	public ModelAndView doSearch(@RequestParam("pageSize") int pageSize,

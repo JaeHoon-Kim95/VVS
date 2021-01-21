@@ -1,21 +1,24 @@
 package com.vvs.shop.member;
 
-public class MemberVO {
+import com.vvs.shop.cmn.DTO;
 
-	private String memberId; //À¯Àú ¾ÆÀÌµð
-	private String memberPw; //À¯Àú ºñ¹ø
-	private String name; //À¯Àú ÀÌ¸§
-	private String email; // ÀÌ¸ÞÀÏ
-	private int phone; // ÇÚµå¹ø ¹øÈ£
-	private int auth; //À¯Àú ±ÇÈ¯
-	private String address; //ÁÖ¼Ò
+public class MemberVO extends DTO{
+
+	private String memberId; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	private String memberPw; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private String name; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private String email; // ï¿½Ì¸ï¿½ï¿½ï¿½
+	private int phone; // ï¿½Úµï¿½ï¿½ ï¿½ï¿½È£
+	private int auth; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+	private String addrNum; //ï¿½ï¿½ï¿½ï¿½ï¿½È£
+	private String addrRoad; //ï¿½ï¿½ï¿½Î¸ï¿½
+	private String addrDetail;
 	
 	public MemberVO() {
 	}
 	
-	
-	
-	public MemberVO(String memberId, String memberPw, String name, String email, int phone, int auth, String address) {
+	public MemberVO(String memberId, String memberPw, String name, String email, int phone, int auth, String addrNum,
+			String addrRoad, String addrDetail) {
 		super();
 		this.memberId = memberId;
 		this.memberPw = memberPw;
@@ -23,60 +26,92 @@ public class MemberVO {
 		this.email = email;
 		this.phone = phone;
 		this.auth = auth;
-		this.address = address;
+		this.addrNum = addrNum;
+		this.addrRoad = addrRoad;
+		this.addrDetail = addrDetail;
 	}
-
-
+	
 
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getMemberPw() {
 		return memberPw;
 	}
+
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public int getPhone() {
 		return phone;
 	}
+
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
+
 	public int getAuth() {
 		return auth;
 	}
+
 	public void setAuth(int auth) {
 		this.auth = auth;
 	}
-	public String getAddress() {
-		return address;
+
+	public String getAddrNum() {
+		return addrNum;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setAddrNum(String addrNum) {
+		this.addrNum = addrNum;
 	}
-	
+
+	public String getAddrRoad() {
+		return addrRoad;
+	}
+
+	public void setAddrRoad(String addrRoad) {
+		this.addrRoad = addrRoad;
+	}
+
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [memberId=" + memberId + ", memberPw=" + memberPw + ", name=" + name + ", email=" + email
-				+ ", phone=" + phone + ", auth=" + auth + ", address=" + address + ", toString()=" + super.toString()
-				+ "]";
+				+ ", phone=" + phone + ", auth=" + auth + ", addrNum=" + addrNum + ", addrRoad=" + addrRoad
+				+ ", addrDetail=" + addrDetail + ", toString()=" + super.toString() + "]";
 	}
+
+	
 	
 	
 }

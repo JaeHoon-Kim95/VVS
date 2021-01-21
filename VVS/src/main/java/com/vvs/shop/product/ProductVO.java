@@ -3,7 +3,7 @@ package com.vvs.shop.product;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductVO {
+public class ProductVO{
 
 	private int productNum;
 	private int categoryNum;
