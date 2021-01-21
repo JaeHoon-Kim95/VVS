@@ -59,9 +59,9 @@
 		
 			<hr>
 			
-			<label>갯수</label><input type="text" value="1"><br>
-			<input type="button" value="주문하기"><br>
-			<input type="button" value="장바구니 추가">
+			<label>媛��닔</label><input type="text" value="1"><br>
+			<input type="button" value="二쇰Ц�븯湲�"><br>
+			<input type="button" value="�옣諛붽뎄�땲 異붽�">
 	</div>
 	<!-- container end -->
 
