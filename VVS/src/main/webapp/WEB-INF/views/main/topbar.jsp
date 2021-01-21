@@ -11,16 +11,18 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="${hContext}/main/index.do">홈페이지
+            <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
+          </li>
+          <li class="nav-item">
           <c:url value="/orders/ordersView.do" var="orderViewUrl">
-		  </c:url>
-		  
+		  </c:url>		  
 		  <c:choose>
-		  	<c:when test='${null != sessionScope.memberId}'>
+		  	<c:when test='${null != sessionScope.MemberVO}'>
 		    	<li class="nav-item">
 		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link" type="button">
 		        		MyPage
@@ -29,6 +31,7 @@
 		        <li class="nav-item">
 		        	<a href="${hContext}/member/logout.do" class="nav-link">logout</a>
 		        </li>
+		        <p style="font-size:16px;color:white">${sessionScope.MemberVO.getName()}님 환영합니다.</p>
 		        		        
 		    </c:when>
 		    <c:otherwise>
@@ -42,10 +45,7 @@
 		   </c:otherwise>				      
 		   </c:choose> 
           
-          </li>        
-          <li class="nav-item">
-            <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
-          </li>
+          </li>                
         </ul>
       </div>
     </div>

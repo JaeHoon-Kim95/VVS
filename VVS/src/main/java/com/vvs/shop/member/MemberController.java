@@ -74,7 +74,7 @@ public class MemberController {
 			flag = 2;		
 		}else{
 			LOG.debug("로그인 성공");
-			httpSession.setAttribute("memberId", outVO.getMemberId());
+			httpSession.setAttribute("MemberVO", outVO);
 			flag = 1;
 		}
 		}catch(NullPointerException e) {
