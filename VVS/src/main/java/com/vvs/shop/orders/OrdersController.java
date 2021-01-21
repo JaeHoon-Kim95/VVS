@@ -29,26 +29,46 @@ public class OrdersController {
 	OrdersServiceImpl ordersService;
 
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
-	public ModelAndView orderView(HttpServletRequest req) {
+	public ModelAndView orderView(HttpServletRequest req) throws ParseException {
 
 		HttpSession session = req.getSession();
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
-		memberVO = (MemberVO) session.getAttribute("memberId");		
-		LOG.debug("memberVO===" + memberVO);
+		String memberId =  (String) session.getAttribute("memberId");		
+
 		SearchVO search = new SearchVO();
-		search.setSearchWord(memberVO.getMemberId());
+		search.setSearchWord(memberId);
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		LOG.debug("orderList===" + orderList);		
 		session.setAttribute("orderList", orderList);
 		
-		/*
-		 * for(int i=0; i<orderList.size(); i++) {
-		 * if(orderList.get(i).getOrderSt()=="주문완료") {
-		 * 
-		 * if() } }
-		 */
+		//현재시간 Date
+		Date curDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//현재시간을 요청시간의 형태로 format 후 time 가져오기
+		curDate = dateFormat.parse(dateFormat.format(curDate));
+		long curDateTime = curDate.getTime();
+		
+		for(int i=0; i<orderList.size(); i++) {
+			Date reqDate = new Date();
+			String reqDateStr = orderList.get(i).getOrderDt();
+			
+			//요청시간을 Date로 parsing 후 time가져오기
+			reqDate = dateFormat.parse(reqDateStr);
+			long reqDateTime = reqDate.getTime();
+			long hour = (curDateTime - reqDateTime) / (60 * 60 * 1000);
+			
+			 if(orderList.get(i).getOrderSt().equals("주문완료")) {
+				 if(hour>=3) {
+					orderList.get(i).setOrderSt("배송중");
+				 }
+				 if(hour>=23) {
+					orderList.get(i).setOrderSt("배송완료");
+				 }
+			 }
+		}
+		 //배송시간
 
 		mav.setViewName("mypage/mypage");
 		mav.addObject("orderList", orderList);
