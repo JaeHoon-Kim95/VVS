@@ -72,14 +72,33 @@ public class MemberDao {
 	}
 	
 	public int doUpdate(MemberVO memberVO) {
-		int flag = 0;
-		
-		return flag;		
+		 LOG.debug("====================");
+		 LOG.debug("==doUpdate==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doUpdate";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==memberVO=="+memberVO);
+		 
+		 int flag = sqlSessionTemplate.update(statement, memberVO);
+		 LOG.debug("flag"+flag);
+		return flag;	
 	}
 	
 	public int doDelete(MemberVO memberVO) {	
-		int flag = 0;
-	
+		LOG.debug("====================");
+		 LOG.debug("==doDelete==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doDelete";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==memberVO=="+memberVO);
+		 
+		 int flag = sqlSessionTemplate.delete(statement, memberVO);
+		 LOG.debug("flag"+flag);
+		 
 		return flag;
 	}
 }

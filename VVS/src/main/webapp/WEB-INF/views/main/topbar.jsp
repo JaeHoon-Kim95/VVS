@@ -18,6 +18,9 @@
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
+          </li>
           <li class="nav-item">
           <c:url value="/orders/ordersView.do" var="orderViewUrl">
 		  </c:url>		  
