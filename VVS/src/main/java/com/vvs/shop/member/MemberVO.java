@@ -8,7 +8,7 @@ public class MemberVO extends DTO{
 	private String memberPw; //���� ���
 	private String name; //���� �̸�
 	private String email; // �̸���
-	private int phone; // �ڵ�� ��ȣ
+	private String phone; // �ڵ�� ��ȣ
 	private int auth; //���� ��ȯ
 	private String addrNum; //�����ȣ
 	private String addrRoad; //���θ�
@@ -17,7 +17,7 @@ public class MemberVO extends DTO{
 	public MemberVO() {
 	}
 	
-	public MemberVO(String memberId, String memberPw, String name, String email, int phone, int auth, String addrNum,
+	public MemberVO(String memberId, String memberPw, String name, String email, String phone, int auth, String addrNum,
 			String addrRoad, String addrDetail) {
 		super();
 		this.memberId = memberId;
@@ -64,11 +64,11 @@ public class MemberVO extends DTO{
 		this.email = email;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

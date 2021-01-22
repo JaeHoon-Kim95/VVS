@@ -20,7 +20,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
-
+<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
 	<article class="container"> 
 		<div class="page-header"> 
 			<div class="col-md-6 col-md-offset-3"> 
