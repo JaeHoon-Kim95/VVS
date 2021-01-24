@@ -35,7 +35,7 @@ public class OrdersController {
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
-		memberVO =  (MemberVO) session.getAttribute("outvo");		
+		memberVO =  (MemberVO) session.getAttribute("MemberVO");		
 
 		SearchVO search = new SearchVO();
 		search.setSearchWord(memberVO.getMemberId());

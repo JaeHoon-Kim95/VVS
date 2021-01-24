@@ -28,6 +28,7 @@
 </head>
 
 <body>
+<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
 <br><br><br><br>
@@ -121,13 +122,13 @@
 	//order(주문하기)
 	$("#orderBtn").on("click",function(){
 		alert("성공");
-
+		var id = "jung123";
 		$.ajax({
 		    type:"POST",
 		    url:"${hContext}/orders/doInsert.do",
 		    dataType:"html", 
 		    data:{
-			    "memberId" : "${sessionScope.outVO.memberId }",
+			    "memberId" : "${sessionScope.MemberVO.memberId }",
 			    "productNum" : $("#productNum").val(),
 			    "qty" : $("#qty").val()
 		    },

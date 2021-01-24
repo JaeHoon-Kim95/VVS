@@ -13,7 +13,7 @@
 		    order_dt,
 		    order_st
 		) VALUES (
-		    (SELECT testSeq.NEXTVAL FROM DUAL),
+		    orderSeq.nextVal,
 		    #{memberId},
 		    #{productNum},
 		    #{qty},
