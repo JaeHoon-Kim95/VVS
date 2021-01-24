@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 import com.vvs.shop.cmn.Message;
 import com.vvs.shop.cmn.SearchVO;
 import com.vvs.shop.member.MemberVO;
+import com.vvs.shop.ship.ShipServiceImpl;
+import com.vvs.shop.ship.ShipVO;
 
 @Controller
 public class OrdersController {
@@ -27,6 +29,9 @@ public class OrdersController {
 
 	@Autowired
 	OrdersServiceImpl ordersService;
+	
+	@Autowired
+	ShipServiceImpl shipService; 
 
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
 	public ModelAndView orderView(HttpServletRequest req) throws ParseException {
@@ -83,6 +88,12 @@ public class OrdersController {
 		LOG.debug("orders doInsert param:" + ordersVO);
 		int flag = ordersService.doInsert(ordersVO);
 		LOG.debug("orders doInsert flag:" + flag);
+		
+		ShipVO shipVO = new ShipVO();
+		shipVO.setMemberId(ordersVO.getMemberId());
+		shipVO.setOrderNum(ordersVO.getOrderNum());
+		shipVO.setProductNum(ordersVO.getProductNum());
+		shipService.doInsert(shipVO);
 		
 		Message message = new Message();
 		message.setRegId(flag + "");
