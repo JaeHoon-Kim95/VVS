@@ -35,10 +35,10 @@ public class OrdersController {
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
-		String memberId =  (String) session.getAttribute("memberId");		
+		memberVO =  (MemberVO) session.getAttribute("outvo");		
 
 		SearchVO search = new SearchVO();
-		search.setSearchWord(memberId);
+		search.setSearchWord(memberVO.getMemberId());
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		LOG.debug("orderList===" + orderList);		
 		session.setAttribute("orderList", orderList);
