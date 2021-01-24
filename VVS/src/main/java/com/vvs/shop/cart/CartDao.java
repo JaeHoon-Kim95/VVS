@@ -79,7 +79,7 @@ public class CartDao {
 
 	public List<CartVO> doSelectList(CartVO cartVO) {
 
-		LOG.debug("ProductDao - doSelectList");
+		LOG.debug("CartDao - doSelectList");
 		LOG.debug("param - cartVO : " + cartVO);
 
 		String statement = NAMESPACE + "doSelectList";
@@ -87,7 +87,7 @@ public class CartDao {
 		List<CartVO> outList = sqlSessionTemplate.selectList(statement, cartVO);
 
 		for (CartVO vo : outList) {
-			LOG.debug("resut - outVO : " + vo);
+			LOG.debug("result - outVO : " + vo);
 		}
 
 		return outList;

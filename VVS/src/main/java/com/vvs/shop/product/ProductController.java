@@ -1,6 +1,5 @@
 package com.vvs.shop.product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -23,11 +22,13 @@ public class ProductController {
 	@Autowired ProductService productService;
 	@Autowired SearchVO searchVO;
 	
+	
+	// 옵션 리스트
 	@RequestMapping(value = "product/doOptionsList.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doOptionsList(OptionsVO optionsVO) {
 		
-		LOG.debug("product/doOptionsList.do");
+		LOG.debug("Current controller : product/doOptionsList.do");
 		
 		List<OptionsVO> outList = productService.doSelectListOptions(optionsVO);
 		
@@ -38,14 +39,14 @@ public class ProductController {
 		
 	}
 	
-	
+	// 검색
 	@RequestMapping(value = "product/doSearch.do", method = RequestMethod.GET)
 	public ModelAndView doSearch(@RequestParam("pageSize") int pageSize,
 								 @RequestParam("pageNum") int pageNum,
 								 @RequestParam("searchWord") String searchWord,
 								 @RequestParam("minPrice") int minPrice,
 								 @RequestParam("maxPrice") int maxPrice) {
-		LOG.debug("product/doSearch.do");
+		LOG.debug("Current controller : product/doSearch.do");
 		
 		SearchVO searchVO = new SearchVO();
 		searchVO.setPageSize(pageSize);
@@ -65,9 +66,10 @@ public class ProductController {
 		return mav;
 	}
 	
+	// 상품 상세 페이지로 이동
 	@RequestMapping(value = "product/moveToProductDetail.do", method = RequestMethod.GET)
 	public ModelAndView moveToProductDetail(@RequestParam("productNum") int productNum) {
-		LOG.debug("product/moveToProductDetail.do");
+		LOG.debug("Current controller : product/moveToProductDetail.do");
 		
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(productNum);
@@ -82,6 +84,7 @@ public class ProductController {
 		return mav;
 	}
 	
+	// 상품 등록
 	@RequestMapping(value = "product/doRegist.do", method = RequestMethod.POST)
 	public ModelAndView doRegist(@RequestParam("categoryNum") int categoryNum,
 							   @RequestParam("productName") String productName,
@@ -119,16 +122,18 @@ public class ProductController {
 		return mav;
 	}
 	
+	// 상품 등록 페이지로 이동
 	@RequestMapping(value = "product/moveToproductRegistPage.do", method = RequestMethod.GET)
 	public String moveToproductRegistPage() {
-		LOG.debug("product/moveToproductRegistPage.do");
+		LOG.debug("Current controller : product/moveToproductRegistPage.do");
 		
 		return "product/ProductRegist";
 	}
 	
+	// 시작
 	@RequestMapping(value = "product/doDev.do", method = RequestMethod.GET)
 	public ModelAndView doDev() {
-		LOG.debug("product/doDev.do");
+		LOG.debug("Current controller : product/doDev.do");
 		
 		// need to change SearchVO
 		ProductVO productVO = new ProductVO();

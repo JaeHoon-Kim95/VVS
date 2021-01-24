@@ -11,6 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vvs.shop.cart.CartDao;
+import com.vvs.shop.cart.CartVO;
 import com.vvs.shop.cmn.SearchVO;
 import com.vvs.shop.product.ProductDao;
 
@@ -37,6 +38,9 @@ public class CartProductTest {
 		
 		productDao.doSelectListWithPaging(searchVO);
 		
+		CartVO cartVO = new CartVO();
+		cartVO.setMemberId("1");
+		cartDao.doSelectList(cartVO);
 	}
 	
 }
