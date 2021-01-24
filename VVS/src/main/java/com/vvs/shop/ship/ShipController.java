@@ -40,7 +40,7 @@ public class ShipController {
 		search.setSearchWord("jhs");
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		
-		mav.setViewName("main/main");
+		mav.setViewName("ship/sweetTrackerAPI");
 		//mav.addObject("orderList", orderList);
 		return mav;
 	}
