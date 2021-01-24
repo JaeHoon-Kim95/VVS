@@ -83,7 +83,7 @@ public class OrdersController {
 		LOG.debug("orders doInsert param:" + ordersVO);
 		int flag = ordersService.doInsert(ordersVO);
 		LOG.debug("orders doInsert flag:" + flag);
-
+		
 		Message message = new Message();
 		message.setRegId(flag + "");
 		if (flag == 1) {

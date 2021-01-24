@@ -117,7 +117,41 @@
 		}
 
 	// --Load Options List
+	
+	//order(주문하기)
+	$("#orderBtn").on("click",function(){
+		alert("성공");
+
+		$.ajax({
+		    type:"POST",
+		    url:"${hContext}/orders/doInsert.do",
+		    dataType:"html", 
+		    data:{
+			    "orderNum" :orderNum,
+			    "memberId" : "${sessionScope.outVO.memberId }",
+			    "productNum" : $("#productNum").val(),
+			    "qty" : $("#qty").val()
+		    },
+		    success:function(data){ //성공
+		    	alert("주문을 완료했습니다.");
+		    	 //json 분리해서 변수
+			       var jsonObj = JSON.parse(data);
+			    
+			       if(null !=jsonObj && jsonObj.regId=="1"){
+			    	   location.reload();
+			       }
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+		});//--ajax 
+	});	
 		
+	//order(주문하기)	
 	</script>
 </body>
 
