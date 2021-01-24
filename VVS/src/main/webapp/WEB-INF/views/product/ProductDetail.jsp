@@ -127,7 +127,6 @@
 		    url:"${hContext}/orders/doInsert.do",
 		    dataType:"html", 
 		    data:{
-			    "orderNum" :orderNum,
 			    "memberId" : "${sessionScope.outVO.memberId }",
 			    "productNum" : $("#productNum").val(),
 			    "qty" : $("#qty").val()
