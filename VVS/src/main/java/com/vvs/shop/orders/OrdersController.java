@@ -72,7 +72,7 @@ public class OrdersController {
 				 if(hour>=3) {
 					orderList.get(i).setOrderSt("배송중");
 				 }
-				 if(hour>=23) {
+				 if(hour>=48) {
 					orderList.get(i).setOrderSt("배송완료");
 				 }
 			 }

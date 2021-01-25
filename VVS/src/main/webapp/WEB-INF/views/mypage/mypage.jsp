@@ -81,7 +81,7 @@
    						 					</a>
 						    			</c:if>	
 						    			<c:if test="${OrdersVO.orderSt=='배송중'}">
-						    				<a href="${hContext}/ship/shipView.do" target="_blank">배송조회</a>
+						    				<a class="btn btn-dark" href="${hContext}/ship/shipView.do" target="_blank">배송조회</a>
 						    			</c:if>	
 						    			<%-- <c:if test="${OrdersVO.orderSt=='배송완료'}">
 						    				<a class="btn btn-dark" type="button" name="orderDel_btn" >
