@@ -89,11 +89,19 @@ public class OrdersController {
 		int flag = ordersService.doInsert(ordersVO);
 		LOG.debug("orders doInsert flag:" + flag);
 		
-		ShipVO shipVO = new ShipVO();
-		shipVO.setMemberId(ordersVO.getMemberId());
-		shipVO.setOrderNum(ordersVO.getOrderNum());
-		shipVO.setProductNum(ordersVO.getProductNum());
-		shipService.doInsert(shipVO);
+		HttpSession session = req.getSession();	
+		
+		if(flag == 1) {
+			session.setAttribute("OrdersVO", ordersVO);
+			LOG.debug("ordersVO==="+session.getAttribute("OrdersVO"));
+			LOG.debug("ordersVO123ordersVO==="+ordersVO);
+		}
+		
+		//ShipVO shipVO = new ShipVO();
+		//shipVO.setMemberId(ordersVO.getMemberId());
+		//shipVO.setOrderNum(ordersVO.getOrderNum());
+		//shipVO.setProductNum(ordersVO.getProductNum());
+		//shipService.doInsert(shipVO);
 		
 		Message message = new Message();
 		message.setRegId(flag + "");
