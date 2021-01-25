@@ -40,6 +40,7 @@
 						<th class="text-center">가격</th>
 						<th class="text-center">갯수</th>
 						<th class="text-center">가격</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody class="text-center" id="cartTableBody">
@@ -65,24 +66,48 @@
 	<script src="${hContext}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
+
+	// doDelete Cart
+	function doDeleteCart(ths){
+			console.log("doDelete");
+			var cnfrm = confirm("항목을 삭제하시겠습니까?");
+			console.log("cnfrm : " + cnfrm);
+			if(cnfrm){
+					var cartSeq = $(ths).parent().find("input:eq(8)");
+					console.log("cartSeq : " + cartSeq.val());
+					$.ajax({
+						type:"GET",
+				           url:"${hContext}/cart/doDeleteCart.do",
+				           dataType:"json",
+				           async: false,
+				           data:{
+				           		"seq":cartSeq.val()
+				           },
+				           success: function(data){
+				                console.log("Delete Success!");
+				                
+				               }
+						});
+				} else {
+					return;
+					}
+			doSelectListCart();
+		}
+	// --doDelete Cart
 	
 	// 갯수 더하고 빼기
 	function fnCalCount(type, ths){
 		// qty before btn clicked
 	    var tmp = $(ths).parent("td").find("span"); 
-	    console.log("tmp : " + tmp.text());
 	    
 	    // qty after btn clicked(input box)
-		var inputBox = $(ths).parent().parent().find("input:eq(4)"); 
-		console.log("inputBox : " + inputBox.val());
+		var inputBox = $(ths).parent().parent().find("input:eq(5)"); 
 
 		// current total price
 		var priceBox = $(ths).parent().parent().find("td:eq(6)").find("span"); 
-		console.log("priceBox : " + priceBox.text());
 
 		// current price
 		var currentPrice = $(ths).parent().parent().find("td:eq(4)").find("span");
-		console.log("currentPrice : " + currentPrice.text()); 
 		
 	    if(type=='p'){
 				var tmp2 = tmp.text();
@@ -98,7 +123,6 @@
 				var totalPrice = $("#totalPrice").text();
 				totalPrice *= 1;
 				totalPrice = totalPrice - (tmp3 * crtP) + (tmp2 * crtP);
-				console.log("totalPrice : " + totalPrice);
 				$("#totalPrice").text(totalPrice);
 		    } else if(type=='m'){
 				var tmp2 = tmp.text();
@@ -119,7 +143,6 @@
 				var totalPrice = $("#totalPrice").text();
 				totalPrice *= 1;
 				totalPrice = totalPrice - (tmp3 * crtP) + (tmp2 * crtP);
-				console.log("totalPrice : " + totalPrice);
 				$("#totalPrice").text(totalPrice);
 			}
 	}
@@ -151,7 +174,7 @@
 			type:"GET",
 	           url:"${hContext}/cart/doCartList.do",
 	           dataType:"json",
-	           async: true,
+	           async: false,
 	           data:{
 	           		
 	           },
@@ -172,6 +195,7 @@
 							var tmpPrice = value.price*1;
 							var tmpQty = value.qty*1;
 							html += "<td><span name='totalPriceSpan'>"+ (tmpPrice * tmpQty) + "</span></td>";
+							html += "<td><input type='button' value='X' onclick=\"doDeleteCart(this);\"<td>";
 							html += "<input type='hidden' name='cartList["+i+"].productName' value='"+value.productName+"' readonly>";
 							html += "<input type='hidden' name='cartList["+i+"].sizes' value='"+value.sizes+"' readonly>";
 							html += "<input type='hidden' name='cartList["+i+"].color' value='"+value.color+"' readonly>";
@@ -184,9 +208,10 @@
 							html += "</tr>";
 							var totalPrice = tmpPrice * tmpQty;
 							totalPriceBox += (totalPrice*1);
-							html2 = "<tfoot class='text-right'><tr><td></td><td></td><td></td><td></td><td></td><td> Total Price : <span id='totalPrice'>"+totalPriceBox+"</span> 원</td><td></td></tr></tfoot>";
+							html2 = "<tfoot class='text-right' id='cartTableFooter'><tr><td></td><td></td><td></td><td></td><td></td><td> Total Price : <span id='totalPrice'>"+totalPriceBox+"</span> 원</td><td></td><td></td></tr></tfoot>";
 						});
 					$("#cartTableBody").append(html);
+					$("#cartTableFooter").detach();
 					$("#cartTable").append(html2);
 	               }
 			});

@@ -22,6 +22,19 @@ public class CartController {
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired CartService cartService;
 	
+	// 장바구니 삭제하기
+	@RequestMapping(value = "cart/doDeleteCart.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doDeleteCart(CartVO cartVO) {
+		
+		LOG.debug("Current controller : cart/doDeleteCart.do");
+		
+		cartService.doDelete(cartVO);
+		
+		return null;
+		
+	}
+	
 	// 주문하기
 	@RequestMapping(value = "cart/doOrder.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -33,8 +46,6 @@ public class CartController {
 			LOG.debug("vo : " + vo);
 			cartService.doUpdate(vo);
 		}
-		
-		
 		
 		return null;
 	}
