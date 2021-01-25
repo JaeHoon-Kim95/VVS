@@ -49,7 +49,7 @@
       			<thead class="bg-primary">  
 					<th style="background-color: #eeeeee; text-align: center;">상품정보</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
-					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
+					<th style="background-color: #eeeeee; text-align: center;">주문번호/송장번호</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문금액</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문수량</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문상태</th>
@@ -58,11 +58,18 @@
       			<!-- 문자: 왼쪽, 숫자: 오른쪽, 같은면: 가운데 -->
 			        <c:choose>
 			        	<c:when test="${orderList.size()>0 }">
-			        		<c:forEach var="OrdersVO" items="${orderList}">  
+			        		<c:forEach var="OrdersVO" items="${orderList}" >  
 						    	<tr>
 						    		<td class="text-center">${OrdersVO.productName}</td>
 						    		<td class="text-center">${OrdersVO.orderDt}</td>
-						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}</td>
+						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}
+						    		<c:forEach var="ShipVO" items="${shipList}">
+						    			<c:if test="${OrdersVO.orderNum == ShipVO.orderNum}">
+   						 						/<c:out value="${ShipVO.shipNum}" />
+						    			</c:if>	
+						    		</c:forEach>
+						    			
+						    		</td>
 						    		<td class="text-center">${OrdersVO.price}원</td>
 						    		<td class="text-center">${OrdersVO.qty}개</td>
 						    		<td class="text-center">
@@ -126,12 +133,8 @@
 	$("a[name=orderDelete_btn]").on("click",function(event){
 
 		 var orderNum = event.target.childNodes.item(1).textContent;
-		  //var test5 = JSON.stringify(orderNum);
+		  
 		  console.log("orderNum:"+orderNum);
-		  //console.log("test5:"+test5);	
-		  //document.getElementById('orders').value=orderNum;
-		  //var orderDelete = $("#orders").val();
-		  //console.log("orderDelete:"+orderDelete);
 		  var result = confirm("주문을 취소하시겠습니까?");
 
 		  if(!result){

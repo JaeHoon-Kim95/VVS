@@ -48,6 +48,10 @@ public class OrdersController {
 		LOG.debug("orderList===" + orderList);		
 		session.setAttribute("orderList", orderList);
 		
+		List<ShipVO> shipList = shipService.doSelectList2(search);
+		session.setAttribute("shipList", shipList);
+		LOG.debug("shipList===" + shipList);	
+		
 		//현재시간 Date
 		Date curDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -74,9 +78,10 @@ public class OrdersController {
 			 }
 		}
 		 //배송시간
-
+		
 		mav.setViewName("mypage/mypage");
 		mav.addObject("orderList", orderList);
+		mav.addObject("shipList", shipList);
 		return mav;
 	}
 
@@ -93,8 +98,6 @@ public class OrdersController {
 		
 		if(flag == 1) {
 			session.setAttribute("OrdersVO", ordersVO);
-			LOG.debug("ordersVO==="+session.getAttribute("OrdersVO"));
-			LOG.debug("ordersVO123ordersVO==="+ordersVO);
 		}
 		
 		ShipVO shipVO = new ShipVO();
