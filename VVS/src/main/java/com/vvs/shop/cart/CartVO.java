@@ -15,38 +15,12 @@ public class CartVO {
 	private String color;
 	private String sizes;
 	private int price;
+	private String productName;
 
 	List<CartVO> cartList;
 
 	public CartVO() {
 		super();
-	}
-
-	public CartVO(int seq, String memberId, int productNum, int qty, int optionSeq, String color, String sizes) {
-		super();
-		this.seq = seq;
-		this.memberId = memberId;
-		this.productNum = productNum;
-		this.qty = qty;
-		this.optionSeq = optionSeq;
-		this.color = color;
-		this.sizes = sizes;
-	}
-
-	public List<CartVO> getCartList() {
-		return cartList;
-	}
-
-	public void setCartList(List<CartVO> cartList) {
-		this.cartList = cartList;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 	public int getSeq() {
@@ -105,11 +79,35 @@ public class CartVO {
 		this.sizes = sizes;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public List<CartVO> getCartList() {
+		return cartList;
+	}
+
+	public void setCartList(List<CartVO> cartList) {
+		this.cartList = cartList;
+	}
+
 	@Override
 	public String toString() {
 		return "CartVO [seq=" + seq + ", memberId=" + memberId + ", productNum=" + productNum + ", qty=" + qty
 				+ ", optionSeq=" + optionSeq + ", color=" + color + ", sizes=" + sizes + ", price=" + price
-				+ ", cartList=" + cartList + "]";
+				+ ", productName=" + productName + ", cartList=" + cartList + "]";
 	}
 
 }

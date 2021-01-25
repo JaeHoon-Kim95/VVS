@@ -45,7 +45,7 @@
 	</select>
 	
 	<select id="doSelectList" parameterType="CartVO" resultType="CartVO">
-	Select c.*, o.*, p.price
+	Select c.*, o.*, p.price, p.product_name
 	from options o, cart c, product p
 	where o.seq = c.option_seq and
 	c.member_id = #{memberId} and
