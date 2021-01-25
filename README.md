@@ -30,4 +30,4 @@
 ## 5. 개발 기술
 ![image](https://user-images.githubusercontent.com/70499031/98215405-16e5b480-1f8b-11eb-96f5-f75c6f445c70.png)
 
-## 7. 개발 산출물
+## 6. 개발 산출물
