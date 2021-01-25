@@ -24,6 +24,16 @@
         seq = #{seq}
 	</delete>
 	
+	<update id="doUpdateList" parameterType="CartVO">
+		<foreach item="item" index="index" collection="cartList" separator=";" close="" open="">
+			UPDATE cart
+			SET
+				qty = #{item.qty}
+			WHERE
+				seq = #{item.seq}
+		</foreach>
+	</update>
+	
 	<update id="doUpdate" parameterType="CartVO">
 	UPDATE cart
 	SET

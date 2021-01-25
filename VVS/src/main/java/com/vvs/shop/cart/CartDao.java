@@ -48,6 +48,20 @@ public class CartDao {
 		return flag;
 	}
 
+	public int doUpdateList(CartVO cartVO) {
+		
+		LOG.debug("CartDao - doUpdateList");
+		
+		
+		
+		String statement = NAMESPACE + "doUpdateList";
+		
+		int flag = sqlSessionTemplate.update(statement, cartVO);
+		
+		return flag;
+		
+	}
+	
 	public int doUpdate(CartVO cartVO) {
 
 		LOG.debug("CartDao - doUpdate");

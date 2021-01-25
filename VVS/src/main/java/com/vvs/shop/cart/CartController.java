@@ -31,7 +31,10 @@ public class CartController {
 		
 		for(CartVO vo : cartVO.cartList) {
 			LOG.debug("vo : " + vo);
+			cartService.doUpdate(vo);
 		}
+		
+		
 		
 		return null;
 	}
