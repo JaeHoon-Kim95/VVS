@@ -59,7 +59,7 @@ public class TestOrdersController {
 
 	@Before
 	public void setUp() throws Exception {
-		orders = Arrays.asList(new OrdersVO(2, "jung123", 2, 1, "",""), new OrdersVO(5, "jhs1", 3, 1, "",""));
+		orders = Arrays.asList(new OrdersVO(0, "jung123", 2, 1, "",""), new OrdersVO(5, "jhs1", 3, 1, "",""));
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		LOG.debug("=mockMvc=" + mockMvc);
 		assertThat(mockMvc, is(notNullValue()));

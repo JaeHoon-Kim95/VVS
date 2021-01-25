@@ -97,11 +97,10 @@ public class OrdersController {
 			LOG.debug("ordersVO123ordersVO==="+ordersVO);
 		}
 		
-		//ShipVO shipVO = new ShipVO();
-		//shipVO.setMemberId(ordersVO.getMemberId());
-		//shipVO.setOrderNum(ordersVO.getOrderNum());
-		//shipVO.setProductNum(ordersVO.getProductNum());
-		//shipService.doInsert(shipVO);
+		ShipVO shipVO = new ShipVO();
+		shipVO.setMemberId(ordersVO.getMemberId());
+		shipVO.setProductNum(ordersVO.getProductNum());
+		shipService.doInsert(shipVO);
 		
 		Message message = new Message();
 		message.setRegId(flag + "");
