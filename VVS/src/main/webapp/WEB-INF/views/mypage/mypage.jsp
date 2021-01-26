@@ -83,12 +83,12 @@
 						    			<c:if test="${OrdersVO.orderSt=='배송중'}">
 						    				<a class="btn btn-dark" href="${hContext}/ship/shipView.do" target="_blank">배송조회</a>
 						    			</c:if>	
-						    			<%-- <c:if test="${OrdersVO.orderSt=='배송완료'}">
+						    			<c:if test="${OrdersVO.orderSt=='배송완료'}">
 						    				<a class="btn btn-dark" type="button" name="orderDel_btn" >
    						 						<c:out value="교환" />
    						 						<div id="ordersSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
    						 					</a>  
-						    			</c:if> --%>
+						    			</c:if>
 						    			<c:if test="${OrdersVO.orderSt=='배송완료'}">
 						    				<a class="btn btn-dark" type="button" name="orderDel_btn" >
    						 						<c:out value="환불요청" />
