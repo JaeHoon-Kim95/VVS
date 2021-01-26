@@ -33,6 +33,21 @@ public class OrdersController {
 	@Autowired
 	ShipServiceImpl shipService; 
 
+	
+	@RequestMapping(value="orders/checkout.do", method = RequestMethod.GET)
+	public ModelAndView checkoutView(HttpServletRequest req) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		SearchVO search = new SearchVO();
+		search.setSearchWord("jhs");
+		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
+		
+		mav.setViewName("mypage/check_out");
+		//mav.addObject("orderList", orderList);
+		return mav;
+	}
+	
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
 	public ModelAndView orderView(HttpServletRequest req) throws ParseException {
 

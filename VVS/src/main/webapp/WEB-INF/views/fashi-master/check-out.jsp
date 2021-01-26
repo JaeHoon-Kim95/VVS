@@ -1,32 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<c:set var="hContext" value="${pageContext.request.contextPath }" ></c:set> 
-<%@page import="com.vvs.shop.orders.OrdersVO" %>
-<%@page import="java.util.List"%>
 <!DOCTYPE html>
-<html>
+<html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">	
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="UTF-8">
+    <meta name="description" content="Fashi Template">
+    <meta name="keywords" content="Fashi, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fashi | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="${hContext}/resources/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/font-awesome.min.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/themify-icons.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/elegant-icons.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/owl.carousel.min.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/nice-select.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/jquery-ui.min.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/slicknav.min.css" >
-    <link rel="stylesheet" href="${hContext}/resources/css/style.css" >
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
 <body>
@@ -53,9 +48,9 @@
                     <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                            <option value='yt' data-image="${hContext}/resources/img/flag-1.jpg" data-imagecss="flag yt"
+                            <option value='yt' data-image="img/flag-1.jpg" data-imagecss="flag yt"
                                 data-title="English">English</option>
-                            <option value='yu' data-image="${hContext}/resources/img/flag-2.jpg" data-imagecss="flag yu"
+                            <option value='yu' data-image="img/flag-2.jpg" data-imagecss="flag yu"
                                 data-title="Bangladesh">German </option>
                         </select>
                     </div>
@@ -318,27 +313,27 @@
             <div class="logo-carousel owl-carousel">
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="${hContext}/resources/img/logo-carousel/logo-1.png" alt="">
+                        <img src="img/logo-carousel/logo-1.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="${hContext}/resources/img/logo-carousel/logo-2.png" alt="">
+                        <img src="img/logo-carousel/logo-2.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="${hContext}/resources/img/logo-carousel/logo-3.png" alt="">
+                        <img src="img/logo-carousel/logo-3.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="${hContext}/resources/img/logo-carousel/logo-4.png" alt="">
+                        <img src="img/logo-carousel/logo-4.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="${hContext}/resources/img/logo-carousel/logo-5.png" alt="">
+                        <img src="img/logo-carousel/logo-5.png" alt="">
                     </div>
                 </div>
             </div>
@@ -353,7 +348,7 @@
                 <div class="col-lg-3">
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <a href="#"><img src="${hContext}/resources/img/footer-logo.png" alt=""></a>
+                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -412,7 +407,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">
-                            <img src="${hContext}/resources/img/payment-method.png" alt="">
+                            <img src="img/payment-method.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -422,16 +417,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="${hContext}/resources/js/jquery-3.3.1.min.js"></script>
-    <script src="${hContext}/resources/js/bootstrap.min.js"></script>
-    <script src="${hContext}/resources/js/jquery-ui.min.js"></script>
-    <script src="${hContext}/resources/js/jquery.countdown.min.js"></script>
-    <script src="${hContext}/resources/js/jquery.nice-select.min.js"></script>
-    <script src="${hContext}/resources/js/jquery.zoom.min.js"></script>
-    <script src="${hContext}/resources/js/jquery.dd.min.js"></script>
-    <script src="${hContext}/resources/js/jquery.slicknav.js"></script>
-    <script src="${hContext}/resources/js/owl.carousel.min.js"></script>
-    <script src="${hContext}/resources/js/main.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
+    <script src="js/jquery.dd.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
