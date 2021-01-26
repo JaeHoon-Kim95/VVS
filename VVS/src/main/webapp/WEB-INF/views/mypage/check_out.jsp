@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         
-                        <h4>Biiling Details</h4>
+                        <h4>수령자 정보</h4>
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="fir">이름<span>*</span></label>
@@ -116,15 +116,23 @@
                     <div class="col-lg-6">
                         
                         <div class="place-order">
-                            <h4>Your Order</h4>
+                            <h4>상품정보</h4>
                             <div class="order-total">
                                 <ul class="order-table">
-                                    <li>Product <span>Total</span></li>
-                                    <li class="fw-normal">Combination x 1 <span>$60.00</span></li>
-                                    <li class="fw-normal">Combination x 1 <span>$60.00</span></li>
-                                    <li class="fw-normal">Combination x 1 <span>$120.00</span></li>
-                                    <li class="fw-normal">Subtotal <span>$240.00</span></li>
-                                    <li class="total-price">Total <span>$240.00</span></li>
+                                    <li>상품정보 <span>가격</span></li>
+                                     <c:choose>
+							        	<c:when test="${orderList.size()>0 }">
+							        		<c:forEach var="OrdersVO" items="${orderList}" >  
+										    	<li class="fw-normal">${OrdersVO.productName} x ${OrdersVO.qty} <span id="price">$60.00</span></li> 		        			
+							        		</c:forEach>
+							        	</c:when>
+							        	<c:otherwise>
+							        		<tr>
+										    		<td class="text-center" colspan="99">주문현황이 없습니다.</td>
+										    </tr>  		
+							        	</c:otherwise>
+							        </c:choose>
+                                    <li class="total-price">총가격 <span>$240.00</span></li>
                                 </ul>
                                 <div class="payment-check">
                                     <div class="pc-item">
@@ -143,7 +151,7 @@
                                     </div>
                                 </div>
                                 <div class="order-btn">
-                                    <button type="submit" class="site-btn place-btn">Place Order</button>
+                                    <button type="submit" class="site-btn place-btn">주문하기</button>
                                 </div>
                             </div>
                         </div>
