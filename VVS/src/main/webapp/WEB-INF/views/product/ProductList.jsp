@@ -22,9 +22,6 @@
 	href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${hContext}/resources/css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -72,8 +69,8 @@
 	<!-- container end -->
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="/resources/vendor/jquery/jquery.min.js"></script>
-	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${hContext}/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${hContext}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 		$("#moveToproductRegistPage").on("click",function(){

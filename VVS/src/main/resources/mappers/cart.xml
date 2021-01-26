@@ -24,6 +24,16 @@
         seq = #{seq}
 	</delete>
 	
+	<update id="doUpdateList" parameterType="CartVO">
+		<foreach item="item" index="index" collection="cartList" separator=";" close="" open="">
+			UPDATE cart
+			SET
+				qty = #{item.qty}
+			WHERE
+				seq = #{item.seq}
+		</foreach>
+	</update>
+	
 	<update id="doUpdate" parameterType="CartVO">
 	UPDATE cart
 	SET
@@ -45,7 +55,7 @@
 	</select>
 	
 	<select id="doSelectList" parameterType="CartVO" resultType="CartVO">
-	Select c.*, o.*, p.price
+	Select c.*, o.*, p.price, p.product_name
 	from options o, cart c, product p
 	where o.seq = c.option_seq and
 	c.member_id = #{memberId} and
