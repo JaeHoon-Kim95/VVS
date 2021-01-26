@@ -34,6 +34,12 @@
 	 <!-- Divider -->
      <hr class="sidebar-divider">
      
+	<li><a href="#"><font color="gray";>장바구니</font></a>
+	</li>
+	 
+	 <!-- Divider -->
+     <hr class="sidebar-divider">
+     
 	<li><a href="#"><font color="gray";>주문내역 조회</font></a>
 	</li>
 	
