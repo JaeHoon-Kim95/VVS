@@ -51,7 +51,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="${hContext}/main/index.do"><i class="fa fa-home"></i> 홈</a>
-                        <a href="./shop.html">장바구니</a>
+                        <a href="${hContext}/cart/moveToCart.do">장바구니</a>
                         <span>주문</span>
                     </div>
                 </div>
@@ -121,9 +121,12 @@
                                 <ul class="order-table">
                                     <li>상품정보 <span>가격</span></li>
                                      <c:choose>
-							        	<c:when test="${orderList.size()>0 }">
-							        		<c:forEach var="OrdersVO" items="${orderList}" >  
-										    	<li class="fw-normal">${OrdersVO.productName} x ${OrdersVO.qty} <span id="price">$60.00</span></li> 		        			
+							        	<c:when test="${outList.size()>0 }">
+							        		<c:forEach var="outVO" items="${outList}" >  
+							        		<c:set var="totalsum" value="${outVO.price * outVO.qty}" />
+										    	<li class="fw-normal">${outVO.productName} x ${outVO.qty}
+										    	<br/> color : ${outVO.color}, size : ${outVO.sizes} 
+										    	<span id="price"> <c:out value="${totalsum}"/>  </span></li> 		        			
 							        		</c:forEach>
 							        	</c:when>
 							        	<c:otherwise>
@@ -164,7 +167,7 @@
 
     
 
-    <%@ include file="/WEB-INF/views/main/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/main/footer.jsp" %> 
 
     <!-- Js Plugins -->
     <script src="${hContext}/resources/js/jquery-3.3.1.min.js"></script>

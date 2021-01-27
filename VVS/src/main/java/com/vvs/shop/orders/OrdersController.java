@@ -38,7 +38,7 @@ public class OrdersController {
 	@Autowired 
 	CartService cartService;
 	
-	@RequestMapping(value="orders/checkout.do", method = RequestMethod.GET)
+	@RequestMapping(value="cart/doOrder.do", method = {RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public ModelAndView checkoutView(CartVO cartVO, HttpServletRequest req) {
 		
@@ -51,16 +51,11 @@ public class OrdersController {
 			cartService.doUpdate(vo);
 		}
 		
+		
 		ModelAndView mav = new ModelAndView();
-		MemberVO memberVO = new MemberVO();
-		memberVO =  (MemberVO) session.getAttribute("MemberVO");		
-
-		SearchVO search = new SearchVO();
-		search.setSearchWord(memberVO.getMemberId());
-		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		
 		mav.setViewName("mypage/check_out");
-		//mav.addObject("orderList", orderList);
+		mav.addObject("outList", cartVO.getCartList());
 		return mav;
 	}
 	
