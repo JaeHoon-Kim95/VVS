@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.vvs.shop.cart.CartService;
+import com.vvs.shop.cart.CartVO;
 import com.vvs.shop.cmn.Message;
 import com.vvs.shop.cmn.SearchVO;
 import com.vvs.shop.member.MemberVO;
@@ -33,14 +35,28 @@ public class OrdersController {
 	@Autowired
 	ShipServiceImpl shipService; 
 
+	@Autowired 
+	CartService cartService;
 	
 	@RequestMapping(value="orders/checkout.do", method = RequestMethod.GET)
-	public ModelAndView checkoutView(HttpServletRequest req) {
+	@ResponseBody
+	public ModelAndView checkoutView(CartVO cartVO, HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		
+		LOG.debug("Current controller : cart/doOrder.do");
+		
+		for(CartVO vo : cartVO.getCartList()) {
+			LOG.debug("vo : " + vo);
+			cartService.doUpdate(vo);
+		}
 		
 		ModelAndView mav = new ModelAndView();
-		
+		MemberVO memberVO = new MemberVO();
+		memberVO =  (MemberVO) session.getAttribute("MemberVO");		
+
 		SearchVO search = new SearchVO();
-		search.setSearchWord("jhs");
+		search.setSearchWord(memberVO.getMemberId());
 		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		
 		mav.setViewName("mypage/check_out");

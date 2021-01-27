@@ -34,20 +34,6 @@ public class CartController {
 		
 	}
 	
-	// 주문하기
-	@RequestMapping(value = "cart/doOrder.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String doOrder(CartVO cartVO) {
-		
-		LOG.debug("Current controller : cart/doOrder.do");
-		
-		for(CartVO vo : cartVO.cartList) {
-			LOG.debug("vo : " + vo);
-			cartService.doUpdate(vo);
-		}
-		
-		return null;
-	}
 	
 	// 카트 리스트
 	@RequestMapping(value = "cart/doCartList.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
