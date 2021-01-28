@@ -46,7 +46,7 @@
 	<!-- Divider -->
      <hr class="sidebar-divider">
 	
-	<li><a href="${hContext}/member/registerPage.do"><font color="gray";>회원정보 수정</font></a>
+	<li><a href="${hContext}/member/editCheck.do"><font color="gray";>회원정보 수정</font></a>
 	</li>
 	
 	<!-- Divider -->
