@@ -122,11 +122,15 @@
                                     <li>상품정보 <span>가격</span></li>
                                      <c:choose>
 							        	<c:when test="${outList.size()>0 }">
-							        		<c:forEach var="outVO" items="${outList}" >  
+							        		<c:set var="TotalSum" value="0" />
+							        		<c:forEach var="outVO" items="${outList}" varStatus="status">  
 							        		<c:set var="totalsum" value="${outVO.price * outVO.qty}" />
+							        		<a id="qty" name="price" style="display: none"><c:out value="${outVO.qty}" /></a>
+							        		<a id="qty" name="price" style="display: none"><c:out value="${outVO.productName}" /></a>							        		
 										    	<li class="fw-normal">${outVO.productName} x ${outVO.qty}
 										    	<br/> color : ${outVO.color}, size : ${outVO.sizes} 
-										    	<span id="price"> <c:out value="${totalsum}"/>  </span></li> 		        			
+										    	<span id="price"> <c:out value="${totalsum}원"/>  </span></li>
+										    <c:set var="TotalSum" value="${TotalSum+totalsum }" /> 		        			
 							        		</c:forEach>
 							        	</c:when>
 							        	<c:otherwise>
@@ -135,26 +139,10 @@
 										    </tr>  		
 							        	</c:otherwise>
 							        </c:choose>
-                                    <li class="total-price">총가격 <span>$240.00</span></li>
+                                    <li class="total-price">총가격 <span><c:out value="${TotalSum}원"/></span></li>
                                 </ul>
-                                <div class="payment-check">
-                                    <div class="pc-item">
-                                        <label for="pc-check">
-                                            Cheque Payment
-                                            <input type="checkbox" id="pc-check">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <div class="pc-item">
-                                        <label for="pc-paypal">
-                                            Paypal
-                                            <input type="checkbox" id="pc-paypal">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
                                 <div class="order-btn">
-                                    <button type="submit" class="site-btn place-btn">주문하기</button>
+                                    <button type="button" class="site-btn place-btn" id="order_btn">주문하기</button>
                                 </div>
                             </div>
                         </div>
@@ -168,6 +156,8 @@
     
 
     <%@ include file="/WEB-INF/views/main/footer.jsp" %> 
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <!-- Js Plugins -->
     <script src="${hContext}/resources/js/jquery-3.3.1.min.js"></script>
@@ -180,6 +170,51 @@
     <script src="${hContext}/resources/js/jquery.slicknav.js"></script>
     <script src="${hContext}/resources/js/owl.carousel.min.js"></script>
     <script src="${hContext}/resources/js/main.js"></script>
+    <script type="text/javascript"> 
+
+  	//주문 이벤트
+	$("#order_btn").on("click",function(){
+		alert("성공");
+
+		var paramArray= [];
+		$("a[name=price]").each(function(i){
+
+			paramArray.push($(this).val());
+		});			
+		console.log("paramArray:"+paramArray);
+		var objParams = {
+                "memberId"  : "${sessionScope.MemberVO.memberId }", //유저 저장
+                "priceList" : paramArray        //가격배열 저장
+            };
+		console.log("objParams:"+objParams);
+		jQuery.ajaxSettings.traditional = true;
+			/* $.ajax({
+			    type:"POST",
+			    url:"${hContext}/orders/doInsert.do",
+			    dataType:"html", 
+			    data:{objParams
+			    },
+			    success:function(data){ //성공
+			    	alert("주문을 완료했습니다.");
+			    	 //json 분리해서 변수
+				       var jsonObj = JSON.parse(data);
+				    
+				       if(null !=jsonObj && jsonObj.regId=="1"){
+				    	   location.reload();
+				       }
+			    },		       
+			    error:function(xhr,status,error){
+			     alert("error:"+error);
+			    },
+			    complete:function(data){
+			    
+			    }   
+			  
+		});//--ajax  */		
+
+	});
+    
+    </script>
 </body>
 
 </html>

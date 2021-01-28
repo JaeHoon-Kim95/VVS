@@ -6,12 +6,12 @@
 	<!-- com.vvs.shop.orders.doInsert -->
 	<insert id="doInsert" parameterType="OrdersVO">
 		INSERT INTO orders (
-		    order_num,
-		    member_id,
-		    product_num,
+		    order_num AS orderNum,
+		    member_id AS memberId,
+		    product_num AS productNum,
 		    qty,
-		    order_dt,
-		    order_st
+		    order_dt AS orderDt,
+		    order_st AS orderSt
 		) VALUES (
 		    orderSeq.nextVal,
 		    #{memberId},

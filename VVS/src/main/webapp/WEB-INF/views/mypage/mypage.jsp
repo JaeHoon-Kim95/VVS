@@ -129,7 +129,7 @@
     <script src="${hContext}/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript"> 
 
-  	//주문완료시 이벤트
+  	//주문취소 이벤트
 	$("a[name=orderDelete_btn]").on("click",function(event){
 
 		 var orderNum = event.target.childNodes.item(1).textContent;
