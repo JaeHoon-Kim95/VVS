@@ -10,8 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -113,36 +115,57 @@ public class OrdersController {
 
 	@RequestMapping(value = "orders/doInsert.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String doInsert(OrdersVO ordersVO, HttpServletRequest req) {
+	public String doInsert(Model model, OrdersVO ordersVO, HttpServletRequest req) throws Exception {
+		LOG.debug("ordersVO param:" + ordersVO);
 		
-		ordersVO.setOrderSt("주문완료");
-		LOG.debug("orders doInsert param:" + ordersVO);
-		int flag = ordersService.doInsert(ordersVO);
-		LOG.debug("orders doInsert flag:" + flag);
-		
-		HttpSession session = req.getSession();	
-		
-		if(flag == 1) {
-			session.setAttribute("OrdersVO", ordersVO);
-		}
-		
-		ShipVO shipVO = new ShipVO();
-		shipVO.setMemberId(ordersVO.getMemberId());
-		shipVO.setProductNum(ordersVO.getProductNum());
-		shipService.doInsert(shipVO);
 		
 		Message message = new Message();
-		message.setRegId(flag + "");
-		if (flag == 1) {
-			message.setMsgContents("주문 완료");
-		} else {
-			message.setMsgContents("주문 실패");
-		}
-
+		
 		Gson gson = new Gson();
 		String json = gson.toJson(message);
-		LOG.debug("=orders doInsert json=" + json);
-		return json;
+		
+		ShipVO shipVO = new ShipVO();
+		
+		String productNum[]=req.getParameterValues("productNum");
+		String qty[]=req.getParameterValues("qty");
+		
+		LOG.debug("ordersVO qty:" +qty);
+		LOG.debug("ordersVO productNum:"+productNum );
+		LOG.debug("ordersVO productNum:"+ordersVO.getMemberId() );
+		
+		for(int i=0; i<productNum.length; i++) {
+			ordersVO.setMemberId(ordersVO.getMemberId());
+			ordersVO.setOrderSt("주문완료");
+			ordersVO.setProductNum(Integer.parseInt(productNum[i]));
+			ordersVO.setQty(Integer.parseInt(qty[i]));
+			LOG.debug("ordersVO param123123:"+ordersVO );
+			int flag = ordersService.doInsert(ordersVO);
+			LOG.debug("orders doInsert flag:" + flag);
+			message.setRegId(flag + "");
+			
+			if (flag == 1) {
+				message.setMsgContents("주문 완료");
+			} else {
+				message.setMsgContents("주문 실패");
+			}
+			
+			shipVO.setMemberId(ordersVO.getMemberId());
+			shipVO.setProductNum(ordersVO.getProductNum());
+			shipService.doInsert(shipVO);
+			
+			json = gson.toJson(message);
+			LOG.debug("=orders doInsert json=" + json);
+			
+		}
+		
+		
+		HttpSession session = req.getSession();
+		return json;	
+		
+		//if(flag == 1) {
+		//	session.setAttribute("OrdersVO", ordersVO);
+		//}
+		
 	}
 
 	@RequestMapping(value = "orders/doDelete.do", method = RequestMethod.POST)

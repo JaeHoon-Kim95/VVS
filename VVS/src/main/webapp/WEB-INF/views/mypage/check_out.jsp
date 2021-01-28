@@ -118,9 +118,9 @@
 							        	<c:when test="${outList.size()>0 }">
 							        		<c:set var="TotalSum" value="0" />
 							        		<c:forEach var="outVO" items="${outList}" varStatus="status">  
-							        		<c:set var="totalsum" value="${outVO.price * outVO.qty}" />
-							        		<a id="qty" name="price" style="display: none"><c:out value="${outVO.qty}" /></a>
-							        		<a id="qty" name="price" style="display: none"><c:out value="${outVO.productName}" /></a>							        		
+							        		<c:set var="totalsum" value="${outVO.price * outVO.qty}" />							        		
+							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${outVO.productNum}" /></a>
+							        		<a id="qty" name="qty" style="display: none"><c:out value="${outVO.qty}" /></a>							        		
 										    	<li class="fw-normal">${outVO.productName} x ${outVO.qty}
 										    	<br/> color : ${outVO.color}, size : ${outVO.sizes} 
 										    	<span id="price"> <c:out value="${totalsum}원"/>  </span></li>
@@ -244,33 +244,45 @@
 	//주문 이벤트
 	$("#order_btn").on("click",function(){
 		alert("성공");
-
-		var paramArray= [];
-		$("a[name=price]").each(function(i){
-
-			paramArray.push($(this).val());
-		});			
-		console.log("paramArray:"+paramArray);
+		
+		var productArray= [];
+		var qtyArray= [];
+		
+		$("a[name=qty]").each(function(i){
+			qtyArray.push($(this).text());
+			console.log("qtyArray:"+qtyArray);
+		});	
+		$("a[name=productNum]").each(function(i){
+			productArray.push($(this).text());
+			console.log("productArray:"+productArray);
+		});		
+		console.log("qtyArray12:"+qtyArray);
+		console.log("productArray12:"+productArray);
 		var objParams = {
-                "memberId"  : "${sessionScope.MemberVO.memberId }", //유저 저장
-                "priceList" : paramArray        //가격배열 저장
+                "productNum" : productArray,
+                "qty"     :   qtyArray
             };
+		console.log("productArray:"+productArray);
+		console.log("qtyArray:"+qtyArray);
+		console.log("memberId:"+"${sessionScope.MemberVO.memberId }");
 		console.log("objParams:"+objParams);
-		jQuery.ajaxSettings.traditional = true;
-			/* $.ajax({
+			 $.ajax({
 			    type:"POST",
 			    url:"${hContext}/orders/doInsert.do",
-			    dataType:"html", 
-			    data:{objParams
+			    dataType:"html",
+			    traditional:true, 
+			    data:{
+			    	"memberId"  : "${sessionScope.MemberVO.memberId }",
+			    	"productNum" : productArray,
+	                "qty"     :   qtyArray
 			    },
 			    success:function(data){ //성공
 			    	alert("주문을 완료했습니다.");
 			    	 //json 분리해서 변수
-				       var jsonObj = JSON.parse(data);
-				    
-				       if(null !=jsonObj && jsonObj.regId=="1"){
-				    	   location.reload();
-				       }
+				      // var jsonObj = JSON.parse(data);
+
+				       window.location.href="${hContext}/main/index.do";
+					      
 			    },		       
 			    error:function(xhr,status,error){
 			     alert("error:"+error);
@@ -279,7 +291,7 @@
 			    
 			    }   
 			  
-		});//--ajax  */		
+		});//--ajax 	
 
 	});
 
