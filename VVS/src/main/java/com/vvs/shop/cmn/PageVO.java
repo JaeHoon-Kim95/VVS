@@ -49,8 +49,7 @@ public class PageVO {
 		this.next = next;
 	}
 	
-	public PageVO() {
-		
+	public PageVO() {		
 	}
 
 	public int getNum() {

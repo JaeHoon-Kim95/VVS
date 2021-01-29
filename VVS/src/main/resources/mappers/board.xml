@@ -37,14 +37,14 @@
 	</insert>
 	
 	<select id="doSelectList" parameterType="hashMap" resultType="BoardVO">
-		SELECT SEQ,
-			   TITLE,
-			   REG_ID,
-			   REG_DT,
-		FROM   BOARD
-		WHERE  ORDER BY SEQ DESC
-				limit #{displayPost}, #{postNum}
-				
+		select seq, title, reg_id, reg_dt
+        from (
+          	 	select seq, title, reg_id, reg_dt,
+                	   row_number() over(order by seq desc) as rNum
+          		from Board
+   		 	 ) b
+  		  where rNum between #{displayPost} and #{postNum}
+       	  order by seq desc
 	</select>
 	
 	<select id="totalCnt" resultType="int">

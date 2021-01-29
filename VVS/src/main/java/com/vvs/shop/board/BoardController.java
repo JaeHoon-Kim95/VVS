@@ -9,11 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.vvs.shop.board.BoardVO;
+import com.vvs.shop.cmn.PageVO;
 import com.vvs.shop.cmn.SearchVO;
 
 
@@ -25,7 +29,12 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardServiceImpl;
-		
+	
+	@RequestMapping(value="board/moveBoardList.do", method = RequestMethod.GET)
+	public String moveBoardList(HttpServletRequest req, HttpServletResponse res) {
+		return "board/boardList";
+	}
+	
 	@RequestMapping(value="board/doInsert.do", method = RequestMethod.POST)
 	public int doInsert(BoardVO boardVO) {
 		LOG.debug("===================");
@@ -39,15 +48,25 @@ public class BoardController {
 	}
 	
 	
-	
 	@RequestMapping(value="board/doSelectList.do", method = RequestMethod.POST)
-	@ResponseBody
-	public  void doSelectList(SearchVO searchVO) {
+	public ModelAndView doSelectList(@RequestParam("num") int num) {
+		PageVO pageVO = new PageVO();
+		
+		pageVO.setNum(num);
+		LOG.debug(""+num);
+		pageVO.setCount(boardServiceImpl.totalCnt());
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<BoardVO> outVO = this.boardServiceImpl.doSelectList(pageVO.getDisplayPost(), pageVO.getPostNum());
+		
+		mav.addObject("outVO", outVO);
+		mav.addObject("pageVO", pageVO);
+		mav.addObject("select",num);
+		mav.setViewName("board/boardList");
 		
 		
-		/* List<BoardVO> outVO = this.boardServiceImpl.doSelectList(searchVO); */
-		
-		
+		return mav;
 	}
 	
 	

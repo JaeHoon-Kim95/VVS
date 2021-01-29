@@ -46,12 +46,12 @@ public class BoardDao {
 		 data.put("displayPost", displayPost);
 		 data.put("postNum", postNum);
 
-		String statement = NAMESPACE + "doSelectList";
+		 String statement = NAMESPACE + "doSelectList";
 		      
-		      List<BoardVO> outVO = sqlSessionTemplate.selectList(statement,data);
+		 List<BoardVO> outVO = sqlSessionTemplate.selectList(statement,data);
 
-		LOG.debug("==outVO==" + outVO);
-		        LOG.debug("==================================================");
+		 LOG.debug("==outVO==" + outVO);
+		 LOG.debug("==================================================");
 
 		return outVO;
 	}
