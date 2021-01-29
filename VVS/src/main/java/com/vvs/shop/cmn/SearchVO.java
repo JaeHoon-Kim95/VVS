@@ -12,6 +12,20 @@ public class SearchVO {
 	private int minPrice;
 	private int maxPrice;
 
+	public SearchVO(String searchWord) {
+		super();
+		this.pageNum = 10;
+		this.pageSize = 1;
+		this.searchWord = searchWord;
+	}
+
+	public SearchVO(int pageNum, int pageSize, String searchWord) {
+		super();
+		this.pageNum = pageNum;
+		this.pageSize = pageSize;
+		this.searchWord = searchWord;
+	}
+
 	public int getPageNum() {
 		return pageNum;
 	}

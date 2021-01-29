@@ -73,18 +73,27 @@
 	<!-- 목록조회 -->
 	<!-- com.vvs.shop.orders.doSelectList -->
 	<select id="doSelectList" parameterType="OrdersVO" resultType="OrdersProductVO">
-		SELECT
-		    p.product_name AS productName,
-		    o.order_dt AS orderDt,
-		    o.order_num AS orderNum,
-		    p.price,
-		    o.qty,
-		    o.order_st AS orderSt
-		FROM product p JOIN
-            (SELECT *
-            FROM orders
-            WHERE member_id = #{memberId}) o
-        on o.product_num = p.product_num
+		SELECT B.*
+		FROM
+			(SELECT rownum as rnum, A.*
+	 		FROM (
+					SELECT
+						p.product_name AS productName,
+						o.order_dt AS orderDt,
+						o.order_num AS orderNum,
+						p.price,
+						o.qty,
+						o.order_st AS orderSt
+					FROM product p JOIN
+						(SELECT *
+						FROM orders
+						WHERE member_id = #{memberId}) o
+					on o.product_num = p.product_num
+					ORDER BY order_dt DESC
+			) A
+		)B
+    	WHERE rnum <![CDATA[ >= ]]> ( #{pageSize} * ( #{pageNum} - 1 ) + 1 )
+   		ORDER BY rnum DESC
 	</select>
 	
 </mapper>
