@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.vvs.shop.cmn.SearchVO;
+
 @Service
 public interface BoardService {
 	int doInsert(BoardVO boardVO);
 	
-	List<BoardVO> doSelectList(BoardVO boardVO);
+	List<BoardVO> doSelectList(int displayPost, int postNum);
 	
 	BoardVO doSelectOne(BoardVO boardVO);
 	
@@ -16,5 +18,6 @@ public interface BoardService {
 	
 	int doDelete(BoardVO boardVO);
 	
+	int totalCnt();
 
 }

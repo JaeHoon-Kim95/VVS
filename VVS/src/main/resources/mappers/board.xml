@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.vvs.shop">
+<mapper namespace="com.vvs.shop.board"> 
 
 	<insert id="doTestInsert" parameterType="TestVO">
 		INSERT INTO div (
@@ -36,19 +36,22 @@
 		)	
 	</insert>
 	
-	<select id="doSelectList" parameterType="BoardVO" resultType="BoardVO">
+	<select id="doSelectList" parameterType="hashMap" resultType="BoardVO">
 		SELECT SEQ,
 			   TITLE,
-			   CONTENTS,
 			   REG_ID,
 			   REG_DT,
-			   MOD_ID,
-			   MOD_DT,
-			   CHILD_REP
 		FROM   BOARD
-		WHERE  REG_ID = #{regId}
+		WHERE  ORDER BY SEQ DESC
+				limit #{displayPost}, #{postNum}
+				
 	</select>
 	
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(SEQ)
+		FROM BOARD
+		
+	</select>
 	<select id="doSelectOne" parameterType="BoardVO" resultType="BoardVO">
 		SELECT SEQ,
 			   TITLE,
