@@ -3,6 +3,9 @@ package com.vvs.shop.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.vvs.shop.cmn.SearchVO;
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +19,7 @@ public class BoardDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	final String NAMESPACE = "com.vvs.shop.Board.";
+	final String NAMESPACE = "com.vvs.shop.board.";
 	
 	public BoardDao() {
 		//디폴트 생성자
@@ -37,10 +40,30 @@ public class BoardDao {
 		return flag;
 	}
 	
-	public List<BoardVO> doSelectList(BoardVO boardVO){
-		
-		return null;
+	public List<BoardVO> doSelectList(int displayPost, int postNum){
+		HashMap data = new HashMap();
+
+		 data.put("displayPost", displayPost);
+		 data.put("postNum", postNum);
+
+		String statement = NAMESPACE + "doSelectList";
+		      
+		      List<BoardVO> outVO = sqlSessionTemplate.selectList(statement,data);
+
+		LOG.debug("==outVO==" + outVO);
+		        LOG.debug("==================================================");
+
+		return outVO;
 	}
+	
+	public int totalCnt() {
+		
+		String statement = NAMESPACE + "totalCnt";
+		int flag = sqlSessionTemplate.selectOne(statement);
+		
+		return flag;
+	}
+	
 	
 	public BoardVO doSelectOne(BoardVO boardVO) {
 		LOG.debug("====================");
@@ -63,7 +86,17 @@ public class BoardDao {
 	}
 	
 	public int doDelete(BoardVO boardVO) {	
-		int flag = 0;
+		LOG.debug("====================");
+		 LOG.debug("==doDelete==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doDelete";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==boardVO=="+boardVO);
+		 
+		 int flag = sqlSessionTemplate.insert(statement, boardVO);
+		 LOG.debug("flag"+flag);
 	
 		return flag;
 	}
