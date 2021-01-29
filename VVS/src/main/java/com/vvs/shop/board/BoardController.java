@@ -2,6 +2,9 @@ package com.vvs.shop.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vvs.shop.board.BoardVO;
+import com.vvs.shop.cmn.SearchVO;
 
-import jdk.internal.org.jline.utils.Log;
+
 
 @Controller
 public class BoardController {
@@ -34,12 +38,16 @@ public class BoardController {
 		return flag;
 	}
 	
+	
+	
 	@RequestMapping(value="board/doSelectList.do", method = RequestMethod.POST)
 	@ResponseBody
-	public List<BoardVO> doSelectList(BoardVO boardVO) {
-		List<BoardVO> outVO = this.boardServiceImpl.doSelectList(boardVO);
-			
-		return outVO;
+	public  void doSelectList(SearchVO searchVO) {
+		
+		
+		/* List<BoardVO> outVO = this.boardServiceImpl.doSelectList(searchVO); */
+		
+		
 	}
 	
 	
@@ -59,11 +67,28 @@ public class BoardController {
 		return flag;
 	}
 	
-	@RequestMapping(value="board/doDelete.do", method = RequestMethod.GET)
+	//boardServiceImpl에있는 doDelete(boardVO인자)를 flag에 담겠다
+	@RequestMapping(value="board/doDelete.do", method = RequestMethod.POST) 
 	@ResponseBody
 	public int doDelete(BoardVO boardVO) {
-		int flag = 0;
+		LOG.debug("===================");
+		LOG.debug("==doDelete.do==");
+		LOG.debug("===================");
+		
+		boardVO.setRegId("HOONS");
+		LOG.debug("boardVO");
+		
+		//컨트롤러 다음이 서비스 boardServiceImpl에 있는 doDelete 메서드의 결과를 flag에 담아서 view에 리턴
+		//boardVO에는 view(.jsp)의 ajax에서 data로 넘겨준 regId가 BoardVO에 regId 변수에 들어감
+		//그래서 BoardVO에 있는 변수명(=boardVO)하고 아직스에서 data에 써주는 넘겨주는 값(boardVO)이랑 이름이 같아야 함.
+		int flag = boardServiceImpl.doDelete(boardVO);
+		
+		LOG.debug("flag"+flag);
 		
 		return flag;
+	}
+	@RequestMapping(value="board/moveDelete.do",method=RequestMethod.GET)
+	public String moveDelete(HttpServletRequest req, HttpServletResponse res){
+	return "board/testView";
 	}
 }
