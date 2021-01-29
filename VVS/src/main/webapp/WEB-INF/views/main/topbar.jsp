@@ -11,32 +11,48 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
+<<<<<<< HEAD
             <a class="nav-link" id="moveBoard">게시판</a>
+=======
+            <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
+              <span class="sr-only">(current)</span>
+            </a>
+>>>>>>> refs/remotes/origin/JHS_workspace
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">로그인</a>
+            <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">회원가입</a>
+           <li class="nav-item">
+            <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
           </li>
           <li class="nav-item">
           <c:url value="/orders/ordersView.do" var="orderViewUrl">
-		  </c:url>
-		  
+		  </c:url>		  
 		  <c:choose>
-		  	<c:when test='${null != sessionScope.memberId}'>
+		  	<c:when test='${null != sessionScope.MemberVO}'>
 		    	<li class="nav-item">
-		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link">
-		        		<span class="btn btn-secondary">마이페이지</span>
-		        	</a>
+		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link" type="button">
+		        		MyPage
+		        	</a>	        	
 		        </li>
+		        <li class="nav-item">
+		        	<a href="${hContext}/member/logout.do" class="nav-link">logout</a>
+		        </li>
+		        <p style="font-size:16px;color:white">${sessionScope.MemberVO.getName()}님 환영합니다.</p>
+		        		        
 		    </c:when>
 		    <c:otherwise>
-		  	<a class="nav-link" type="button" id="loginView">마이페이지</a>
+		  	<li class="nav-item">
+		  		<a class="nav-link" type="button" id="loginView">MyPage</a>
+		  	</li>			  	
+            <li class="nav-item">
+            	<a class="nav-link" href="${hContext}/member/loginPage.do">login</a>
+            </li>	
+         	
 		   </c:otherwise>				      
 		   </c:choose> 
           
-          </li>
+          </li>                
         </ul>
       </div>
     </div>

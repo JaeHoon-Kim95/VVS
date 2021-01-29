@@ -26,7 +26,7 @@
 
 <body>
 
-  <!-- Navigation -->
+ <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">Start Bootstrap</a>
@@ -53,7 +53,6 @@
       </div>
     </div>
   </nav>
-
   <!-- Page Content -->
   <div class="container">
 

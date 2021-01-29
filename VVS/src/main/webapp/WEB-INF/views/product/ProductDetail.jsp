@@ -28,6 +28,7 @@
 </head>
 
 <body>
+<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
 <br><br><br><br>
@@ -57,7 +58,24 @@
 				${outVO.semiInfo }
 			</div>
 		
-		
+			<hr>
+			<label>옵션 리스트</label>
+			<div id="optionList">
+			
+			</div>
+			<hr>
+			<form>
+				<label>상품 번호 :</label>
+				<input type="text" value="${outVO.productNum }" id="productNum"><br>
+				<label>옵션 번호 : </label>
+				<input type="text" id="optionSeq" name="optionSeq" value="">
+				<label>갯수 : </label>
+				<input type="text" id="qty" name="qty" value="1"><br>
+				<input type="button" id="orderBtn" name="orderBtn" value="바로 주문">
+				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
+			</form>
+			<br><br><br><br><br>
+			
 	</div>
 	<!-- container end -->
 
@@ -67,8 +85,73 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
+	// Load Options List
+	window.onload = function(){
+		doSelectListOptions();
+	}
+
+	function doSelectListOptions(){
+		$.ajax({
+			type:"GET",
+	           url:"${hContext}/product/doOptionsList.do",
+	           dataType:"json",
+	           async: true,
+	           data:{
+	           		"productNum":$("#productNum").val()
+	           },
+	           success: function(data){
+	                console.log("success!");
+					$("#optionList").empty();
+					var html = "";
+					$.each(data, function(i, value) {
+							html += "<p>options seq : "+value.seq+"</p>";
+							html += "<p>options color : "+value.color+"</p>";
+							html += "<p>options sizes : "+value.sizes+"</p>";
+							html += "<p>options qty : "+value.qty+"</p>";
+							html += "<p>options productNum : " + value.productNum + "</p>";
+							html += "<br>"
+						});
+					$("#optionList").append(html);
+	               }
+			});
+
+		}
+
+	// --Load Options List
 	
+	//order(주문하기)
+	$("#orderBtn").on("click",function(){
+		alert("성공");
+		var id = "jung123";
+		$.ajax({
+		    type:"POST",
+		    url:"${hContext}/orders/doInsert.do",
+		    dataType:"html", 
+		    data:{
+			    "memberId" : "${sessionScope.MemberVO.memberId }",
+			    "productNum" : $("#productNum").val(),
+			    "qty" : $("#qty").val()
+		    },
+		    success:function(data){ //성공
+		    	alert("주문을 완료했습니다.");
+		    	 //json 분리해서 변수
+			       var jsonObj = JSON.parse(data);
+			    
+			       if(null !=jsonObj && jsonObj.regId=="1"){
+			    	   location.reload();
+			       }
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+		});//--ajax 
+	});	
 		
+	//order(주문하기)	
 	</script>
 </body>
 

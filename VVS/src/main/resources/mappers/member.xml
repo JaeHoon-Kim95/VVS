@@ -64,7 +64,7 @@
 	<update id="doUpdate" parameterType="MemberVO">
 		UPDATE MEMBER SET MEMBER_PW = #{memberPw},
 						  NAME = #{name},
-						  EAMIL = #{email},
+						  EMAIL = #{email},
 						  PHONE = #{phone},
 						  ADDR_NUM = #{addrNum},
 						  ADDR_ROAD = #{addrRoad},

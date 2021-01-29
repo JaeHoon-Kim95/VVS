@@ -59,7 +59,7 @@ public class TestOrdersController {
 
 	@Before
 	public void setUp() throws Exception {
-		orders = Arrays.asList(new OrdersVO(4, "jhs", 2, 1, "",""), new OrdersVO(5, "jhs1", 3, 1, "",""));
+		orders = Arrays.asList(new OrdersVO(0, "jung123", 2, 1, "",""), new OrdersVO(5, "jhs1", 3, 1, "",""));
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		LOG.debug("=mockMvc=" + mockMvc);
 		assertThat(mockMvc, is(notNullValue()));
@@ -136,6 +136,7 @@ public class TestOrdersController {
 	}
 
 	@Test // 성공
+	@Ignore
 	public void doSelectList2() throws Exception {
 		OrdersVO ordersVO = orders.get(0);
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/orders/doSelectList2.do")

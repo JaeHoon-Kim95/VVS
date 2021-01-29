@@ -1,5 +1,8 @@
 package com.vvs.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vvs.shop.cart.CartDao;
-import com.vvs.shop.cmn.SearchVO;
+import com.vvs.shop.cart.CartVO;
 import com.vvs.shop.product.ProductDao;
 
 @Transactional
@@ -28,15 +31,32 @@ public class CartProductTest {
 	@Test
 	public void Test() {
 		
-		SearchVO searchVO = new SearchVO();
-		searchVO.setPageNum(1);
-		searchVO.setPageSize(3);
-		searchVO.setSearchWord("테스트임");
-		searchVO.setMinPrice(1);
-		searchVO.setMaxPrice(1250);
+		List<CartVO> inList = new ArrayList<CartVO>();
 		
-		productDao.doSelectListWithPaging(searchVO);
+		CartVO cartVO1 = new CartVO();
+		CartVO cartVO2 = new CartVO();
+		CartVO cartVO3 = new CartVO();
+		CartVO cartIn = new CartVO();
+		
+		cartVO1.setSeq(1);
+		cartVO1.setQty(112);
+		
+		cartVO2.setSeq(2);
+		cartVO2.setQty(145);
+		
+		cartVO3.setSeq(3);
+		cartVO3.setQty(123);
+		
+		inList.add(cartVO1);
+		inList.add(cartVO2);
+		inList.add(cartVO3);
+		
+		cartIn.setCartList(inList);
+		
+		cartDao.doUpdateList(cartIn);
 		
 	}
+	
+	
 	
 }

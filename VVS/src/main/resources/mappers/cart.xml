@@ -3,6 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.vvs.shop.cart">
+
 	<insert id="doInsert" parameterType="CartVO">
 	INSERT INTO cart (
 	    seq,
@@ -22,6 +23,16 @@
 	WHERE
         seq = #{seq}
 	</delete>
+	
+	<update id="doUpdateList" parameterType="CartVO">
+		<foreach item="item" index="index" collection="cartList" separator=";" close="" open="">
+			UPDATE cart
+			SET
+				qty = #{item.qty}
+			WHERE
+				seq = #{item.seq}
+		</foreach>
+	</update>
 	
 	<update id="doUpdate" parameterType="CartVO">
 	UPDATE cart
@@ -44,12 +55,10 @@
 	</select>
 	
 	<select id="doSelectList" parameterType="CartVO" resultType="CartVO">
-	SELECT
-	    seq,
-	    member_id,
-	    product_num,
-	    qty
-	FROM
-	    cart
+	Select c.*, o.*, p.price, p.product_name
+	from options o, cart c, product p
+	where o.seq = c.option_seq and
+	c.member_id = #{memberId} and
+	c.product_num = p.product_num
 	</select>
 </mapper>
