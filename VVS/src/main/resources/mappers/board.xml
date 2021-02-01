@@ -14,7 +14,7 @@
 		)
 	</insert>
 
-	<insert id="doInsert" parameterType="BoardVO"> 
+	<insert id="doInsert" parameterType="BoardVO">
 		INSERT INTO BOARD (
 			SEQ,
 			TITLE,
@@ -65,7 +65,7 @@
 		WHERE  REG_ID = #{regId}
 	</select>
 	
-	<update id="doUpdate" parameterType="BoardVO">
+	<update id="doUpdate" parameterType="BoardVO"> 
 		UPDATE BOARD SET CONTENTS = #{contents},
 						 MOD_ID = #{modId},
 						 MOD_DT = #{modDt},
