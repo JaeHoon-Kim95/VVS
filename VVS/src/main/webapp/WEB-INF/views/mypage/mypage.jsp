@@ -84,7 +84,7 @@
 						    				<a class="btn btn-dark" href="${hContext}/ship/shipView.do" target="_blank">배송조회</a>
 						    			</c:if>	
 						    			<c:if test="${OrdersVO.orderSt=='배송완료'}">
-						    				<a class="btn btn-dark" type="button" name="orderDel_btn" >
+						    				<a class="btn btn-dark" type="button" name="orderCh_btn" >
    						 						<c:out value="교환" />
    						 						<div id="ordersSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
    						 					</a>  
@@ -169,7 +169,7 @@
 
 	});
 
-	//주문완료시 이벤트
+	//배송완료시 환불 이벤트
 	$("a[name=orderDel_btn]").on("click",function(event){
 
 		 var orderNum = event.target.childNodes.item(1).textContent;
@@ -208,7 +208,46 @@
 		
 
 	});
-	
+
+	//배송완료시 교환 이벤트
+	$("a[name=orderCh_btn]").on("click",function(event){
+
+		 var orderNum = event.target.childNodes.item(1).textContent;
+		  console.log("orderNum:"+orderNum);
+		  var result = confirm("제품을 교환하시겠습니까?");
+
+		  if(!result){
+		  return;
+			 
+		  }
+				
+		$.ajax({
+		    type:"POST",
+		    url:"${hContext}/orders/doDelete.do",
+		    dataType:"html", 
+		    data:{"orderNum" :orderNum
+		    },
+		    success:function(data){ //성공
+		    	alert("제품을 교환요청이 되었습니다.");
+		    	alert("제품에 기재된 주소로 보내주시기 바랍니다.");
+		    	 //json 분리해서 변수
+			       var jsonObj = JSON.parse(data);
+			    
+			       if(null !=jsonObj && jsonObj.regId=="1"){
+			    	   location.reload();
+			       }
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+	});//--ajax 
+		
+
+	});
     </script>   
 </body>
 </html>
