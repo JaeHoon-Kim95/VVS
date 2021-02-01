@@ -40,13 +40,13 @@ public class BoardDao {
 		return flag;
 	}
 	
-	public List<BoardVO> doSelectList(int displayPost, int postNum){
+	public List<BoardVO> doSelectList(int num, int postNum){
 		HashMap data = new HashMap();
 
-		 data.put("displayPost", displayPost);
+		 data.put("num", num);
 		 data.put("postNum", postNum);
 
-		 String statement = NAMESPACE + "doSelectList";
+		 String statement = NAMESPACE + "doSelectListP";
 		      
 		 List<BoardVO> outVO = sqlSessionTemplate.selectList(statement,data);
 

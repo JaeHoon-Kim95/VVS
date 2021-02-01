@@ -19,6 +19,7 @@
 		<typeAlias type="com.vvs.shop.cmn.SearchVO" alias="SearchVO"/>
 		<typeAlias type="com.vvs.shop.product.ProductDetailVO" alias="ProductDetailVO"/>
 		<typeAlias type="com.vvs.shop.product.OptionsVO" alias="OptionsVO"/>
+		<typeAlias type="com.vvs.shop.board.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 
 </configuration>

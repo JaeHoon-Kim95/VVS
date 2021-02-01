@@ -48,7 +48,7 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping(value="board/doSelectList.do", method = RequestMethod.POST)
+	@RequestMapping(value="board/doSelectList.do", method = RequestMethod.GET)
 	public ModelAndView doSelectList(@RequestParam("num") int num) {
 		PageVO pageVO = new PageVO();
 		
@@ -58,7 +58,9 @@ public class BoardController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<BoardVO> outVO = this.boardServiceImpl.doSelectList(pageVO.getDisplayPost(), pageVO.getPostNum());
+		List<BoardVO> outVO = this.boardServiceImpl.doSelectList(pageVO.getNum(), pageVO.getPostNum());
+		
+		LOG.debug("outVO"+outVO);
 		
 		mav.addObject("outVO", outVO);
 		mav.addObject("pageVO", pageVO);
