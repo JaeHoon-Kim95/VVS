@@ -70,12 +70,16 @@
 		WHERE member_id = #{memberId}
 	</select>
 	
+	<!-- 총개수  -->
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(ORDER_NUM)
+		FROM orders		
+	</select>
+	
 	<!-- 목록조회 -->
 	<!-- com.vvs.shop.orders.doSelectList -->
-	<select id="doSelectList" parameterType="OrdersVO" resultType="OrdersProductVO">
-		SELECT B.*
-		FROM
-			(SELECT rownum as rnum, A.*
+	<select id="doSelectList" parameterType="hashMap" resultType="OrdersProductVO">
+		SELECT *
 	 		FROM (
 					SELECT
 						p.product_name AS productName,
@@ -83,17 +87,17 @@
 						o.order_num AS orderNum,
 						p.price,
 						o.qty,
-						o.order_st AS orderSt
+						o.order_st AS orderSt,
+						row_number() over(order by order_num desc) as rNum
 					FROM product p JOIN
 						(SELECT *
 						FROM orders
 						WHERE member_id = #{memberId}) o
 					on o.product_num = p.product_num
-					ORDER BY order_dt DESC
-			) A
-		)B
-    	WHERE rnum <![CDATA[ >= ]]> ( #{pageSize} * ( #{pageNum} - 1 ) + 1 )
-   		ORDER BY rnum DESC
+			) b
+			where rNum between #{displayPost} and #{postNum}
+       	    order by rNum desc
+		
 	</select>
 	
 </mapper>

@@ -4,6 +4,7 @@ import java.text.*;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 import com.vvs.shop.cart.CartService;
 import com.vvs.shop.cart.CartVO;
 import com.vvs.shop.cmn.Message;
+import com.vvs.shop.cmn.PageVO;
 import com.vvs.shop.cmn.SearchVO;
 import com.vvs.shop.member.MemberVO;
 import com.vvs.shop.ship.ShipServiceImpl;
@@ -61,10 +63,20 @@ public class OrdersController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
-	public ModelAndView orderView(HttpServletRequest req) throws ParseException {
-
+	@RequestMapping(value = "orders/ordersMove.do", method = RequestMethod.GET)
+	public String orderMove(HttpServletRequest req, HttpServletResponse res) {
+		return "mypage/mypage";
+	}
+	
+	@RequestMapping(value = "orders/ordersView.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView orderView(HttpServletRequest req, @RequestParam("num") int num) throws ParseException {
+		
 		HttpSession session = req.getSession();
+		
+		PageVO pageVO = new PageVO();
+		num=1;
+		pageVO.setNum(num);
+		pageVO.setCount(ordersService.totalCnt());
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
@@ -72,7 +84,7 @@ public class OrdersController {
 
 		SearchVO search = new SearchVO();
 		search.setSearchWord(memberVO.getMemberId());
-		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
+		List<OrdersProductVO> orderList = ordersService.doSelectList(pageVO.getDisplayPost(),pageVO.getPostNum(), search);
 		LOG.debug("orderList===" + orderList);		
 		session.setAttribute("orderList", orderList);
 		
@@ -106,10 +118,13 @@ public class OrdersController {
 			 }
 		}
 		 //배송시간
-		
-		mav.setViewName("mypage/mypage");
+				
 		mav.addObject("orderList", orderList);
 		mav.addObject("shipList", shipList);
+		mav.addObject("pageVO", pageVO);
+		mav.addObject("select", num);
+		mav.setViewName("mypage/mypage");
+		
 		return mav;
 	}
 

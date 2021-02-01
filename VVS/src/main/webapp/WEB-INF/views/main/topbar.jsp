@@ -11,8 +11,12 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" id="moveBoard">게시판</a>
             <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" id="moveBoard">게시판</a>
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -23,12 +27,10 @@
             <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
           </li>
           <li class="nav-item">
-          <c:url value="/orders/ordersView.do" var="orderViewUrl">
-		  </c:url>		  
 		  <c:choose>
 		  	<c:when test='${null != sessionScope.MemberVO}'>
 		    	<li class="nav-item">
-		        	<a href="<c:out value='${orderViewUrl}' />"   class="nav-link" type="button">
+		        	<a id="ordersMove"  class="nav-link" type="button">
 		        		MyPage
 		        	</a>	        	
 		        </li>
@@ -63,13 +65,31 @@
   <script type="text/javascript">
   $("#loginView").on("click",function(){
 	  alert("로그인이 필요합니다.");
-	  window.location.href="${hContext}/member/loginPage.do";
+	  window.location.href="${hContext}/member/loginPage.do"
   });
+
   $("#moveBoard").on("click",function(){
 	  window.location.href="${hContext}/board/moveBoardList.do";	  
 	  $.ajax({
 			type:"POST",
 			url :"${hContext}/board/doSelectList.do",
+			datatype : "html",
+			data : {	"num" : 1
+				},
+				success:function(data){
+					
+					},
+					 error:function(xhr,status,error){
+					     alert("error:"+error);
+					  }
+		  });
+	  });
+
+  $("#ordersMove").on("click",function(){	  
+	  window.location.href="${hContext}/orders/ordersMove.do";
+	  $.ajax({
+			type:"POST",
+			url :"${hContext}/orders/ordersView.do",
 			datatype : "html",
 			data : {	"num" : 1
 				},
