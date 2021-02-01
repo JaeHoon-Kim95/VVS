@@ -11,9 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            <a class="nav-link" id="moveBoard">게시판</a>
+=======
+>>>>>>> refs/remotes/origin/ANN
             <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
               <span class="sr-only">(current)</span>
             </a>
+>>>>>>> refs/remotes/origin/JHS_workspace
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
@@ -62,6 +69,22 @@
   <script type="text/javascript">
   $("#loginView").on("click",function(){
 	  alert("로그인이 필요합니다.");
-	  window.location.href="${hContext}/member/loginPage.do"
+	  window.location.href="${hContext}/member/loginPage.do";
   });
+  $("#moveBoard").on("click",function(){
+	  window.location.href="${hContext}/board/moveBoardList.do";	  
+	  $.ajax({
+			type:"POST",
+			url :"${hContext}/board/doSelectList.do",
+			datatype : "html",
+			data : {	"num" : 1
+				},
+				success:function(data){
+					
+					},
+					 error:function(xhr,status,error){
+					     alert("error:"+error);
+					  }
+		  });
+	  });
   </script>

@@ -81,7 +81,7 @@ public class SearchVO {
 	@Override
 	public String toString() {
 		return "SearchVO [pageNum=" + pageNum + ", pageSize=" + pageSize + ", searchWord=" + searchWord + ", div=" + div
-				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
+				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", toString()=" + super.toString() + "]";
 	}
-
+	
 }
