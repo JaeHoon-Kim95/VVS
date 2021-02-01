@@ -11,16 +11,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
             <a class="nav-link" id="moveBoard">게시판</a>
-=======
->>>>>>> refs/remotes/origin/ANN
             <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
               <span class="sr-only">(current)</span>
             </a>
->>>>>>> refs/remotes/origin/JHS_workspace
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
