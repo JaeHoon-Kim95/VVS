@@ -35,28 +35,36 @@
 
 
 		<div class="row">
-			<form:form name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post">
+			<form:form class="form-group" name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post">
 				<label><strong>- 상품명*</strong></label><br>
-				<input type="text" value="" placeholder="상품명을 입력해주세요." id="productName" name="productName"><br>
+				<input class="form-control" type="text" value="" placeholder="상품명을 입력해주세요." id="productName" name="productName"><br>
 				<label><strong>- 판매 가격*</strong></label><br>
-				<input type="text" value="" placeholder="가격을 입력해주세요." id="price" name="price"><br>
-				<label><strong>- 상품 카테고리*</strong></label><br>
-				<!-- TODO -->
-				<p>enum 쓰는 것보다 나중에 편의성을 위해 db 쓰는게 나은거 같기도 하고</p>
-				<!-- TODO -->
+				<input class="form-control" type="text" value="" placeholder="가격을 입력해주세요." id="price" name="price"><br>
+				<label for="inlineFormCustomSelect">- 카테고리*</label>
+				<div class="form-group">
+				    <div>
+				      <select class="custom-select" id="inlineFormCustomSelect" onchange="changeOption();">
+				        <option selected value="0">카테고리를 선택하세요</option>
+				        <c:forEach var="list" items="${categoryList }" varStatus="vs">
+				        	<option value="${vs.index+1}">${categoryList[vs.index] }</option>
+				        </c:forEach>
+				      </select>
+				    </div>
+				</div>
 				
-				<input type="text" value="1" name="categoryNum" id="categoryNum" readonly><br>
+				<input type="text" value="0" name="categoryNum" id="categoryNum" readonly><br>
 				<label><strong>- 할인 유무</strong></label><br>
-				<input type="text" value="0" name="discountRate" id="discountRate" readonly="readonly"><br>
+				<input class="form-control" type="text" value="0" name="discountRate" id="discountRate" readonly="readonly"><br>
 				<label><strong>- 할인률</strong></label><br>
-				<input type="text" value="0" name="discount" id="discount" readonly="readonly"><br>
+				<input class="form-control" type="text" value="0" name="discount" id="discount" readonly="readonly"><br>
 				<label><strong>- 한 줄 설명</strong></label><br>
-				<input type="text" value="" name="semiInfo" id="semiInfo" placeholder="한 줄 설명을 입력해주세요."><br>
-				<label><strong>- 상세 설명</strong></label><p>나중에 게시판거 베껴서 글쓰기 형식 가져오자.</p><br>
-				<textarea rows="10" id="mainInfo" name="mainInfo" cols="80" placeholder="상세 설명을 입력해주세요!"></textarea><br>
+				<input class="form-control" type="text" value="" name="semiInfo" id="semiInfo" placeholder="한 줄 설명을 입력해주세요."><br>
+				<label><strong>- 상세 설명</strong></label><p>나중에 게시판거 베껴서 글쓰기 형식 가져오자.</p>
+				<textarea class="form-control" rows="10" id="mainInfo" name="mainInfo" cols="80" placeholder="상세 설명을 입력해주세요!"></textarea><br>
 				
 				<div id="optionsTable">
 					<div id="1">
+						
 						<label><strong>옵션(적어도 하나는 입력해 주세요!)</strong></label>
 						<input id="plusBtn" type="button" value="+"><input id="minusBtn" type="button" value="-"><br>
 						<label>색상:</label><input type="text" id="color" name="optionsList[0].color">
@@ -83,6 +91,12 @@
 	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
+
+		function changeOption(){
+				var changeValue = $("#inlineFormCustomSelect").val();
+				$("#categoryNum").val(changeValue);
+
+			}
 	
 		$(document).on("click","#plusBtn" ,function(){
 				var optionsNum = $("#optionsNum").val();

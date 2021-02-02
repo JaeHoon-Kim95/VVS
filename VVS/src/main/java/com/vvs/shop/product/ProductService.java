@@ -47,4 +47,17 @@ public class ProductService {
 	public List<ProductVO> doSelectList(ProductVO productVO){
 		return productDao.doSelectList(productVO);
 	}
+	
+	public String getCategoryName(int categoryNum) {
+		
+		for(Category ca : Category.values()) {
+			if(categoryNum == ca.getCategoryNum()) {
+				return ca.getName();
+			}
+		}
+		
+		return "null";
+		
+	}
+	
 }

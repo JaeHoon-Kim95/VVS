@@ -71,7 +71,7 @@
 			<!-- product detail -->
 			<div class="col">
 				<h4>
-				<small class="text-muted">카테고리><c:out value="${outVO.categoryNum }"/></small>
+				<small class="text-muted">카테고리><c:out value="${categoryName }"/></small>
 				</h4>
 				<h2><strong><c:out value="${outVO.productName }"/></strong></h2>
 				<br>

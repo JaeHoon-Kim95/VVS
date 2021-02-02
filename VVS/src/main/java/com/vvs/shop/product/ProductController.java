@@ -1,5 +1,6 @@
 package com.vvs.shop.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -76,10 +77,12 @@ public class ProductController {
 		
 		ProductVO outVO = new ProductVO();
 		outVO = productService.doSelectOne(productVO);
-				
+		String categoryName = productService.getCategoryName(outVO.getCategoryNum());		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductDetail");
 		mav.addObject("outVO", outVO);
+		mav.addObject("categoryName", categoryName);
 		
 		return mav;
 	}
@@ -154,10 +157,22 @@ public class ProductController {
 	
 	// 상품 등록 페이지로 이동
 	@RequestMapping(value = "product/moveToproductRegistPage.do", method = RequestMethod.GET)
-	public String moveToproductRegistPage() {
+	public ModelAndView moveToproductRegistPage() {
 		LOG.debug("Current controller : product/moveToproductRegistPage.do");
 		
-		return "product/ProductRegist";
+		List<String> categoryList = new ArrayList<String>();
+		
+		for(Category ca : Category.values()) {
+			categoryList.add(ca.getName());
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("listSize", categoryList.size());
+		mav.setViewName("product/ProductRegist");
+		
+		
+		return mav;
 	}
 	
 	// 시작
