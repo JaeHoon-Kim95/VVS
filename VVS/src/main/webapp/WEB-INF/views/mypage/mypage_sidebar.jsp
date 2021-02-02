@@ -41,10 +41,10 @@
      <hr class="sidebar-divider">
      
 	<li>
-		<form name="ordersMove" action="/shop/orders/ordersView.do">
+		<form name="orderMove" action="${hContext}/orders/ordersView.do">
 			<input type="hidden" value="1" name="num">
 		</form>
-		<a id="ordersMove" type="button"><font color="gray";>주문내역 조회</font></a>
+		<a id="orderMove" type="button"><font color="gray";>주문내역 조회</font></a>
 	</li>
 	
 	<!-- Divider -->
@@ -74,11 +74,11 @@
 	  window.location.href="${hContext}/member/loginPage.do"
   });
 
-  $("#ordersMove").on("click",function(){	  
+  $("#orderMove").on("click",function(){	  
 	  doSelectListOrders();
 	  });
   function doSelectListOrders(){
-  	var frm = document.ordersMove;
+  	var frm = document.orderMove;
   	frm.submit();
   }
   

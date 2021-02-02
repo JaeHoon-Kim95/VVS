@@ -31,12 +31,10 @@
 		  <c:choose>
 		  	<c:when test='${null != sessionScope.MemberVO}'>
 		    	<li class="nav-item">
-		    		<form name="ordersMove" action="/shop/orders/ordersView.do">
+		    		<form name="ordersMove" action="${hContext}/orders/ordersView.do">
 						<input type="hidden" value="1" name="num">
 					</form>
-		        	<a id="ordersMove"  class="nav-link" type="button">
-		        		MyPage
-		        	</a>	        	
+		        	<a id="ordersMove"  class="nav-link" type="button">MyPage</a>	        	
 		        </li>
 		        <li class="nav-item">
 		        	<a href="${hContext}/member/logout.do" class="nav-link">logout</a>

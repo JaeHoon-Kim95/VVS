@@ -68,7 +68,7 @@ public class OrdersController {
 		return "mypage/mypage";
 	}
 	
-	@RequestMapping(value = "orders/ordersView.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
 	public ModelAndView orderView(HttpServletRequest req, @RequestParam("num") int num) throws ParseException {
 		
 		HttpSession session = req.getSession();
