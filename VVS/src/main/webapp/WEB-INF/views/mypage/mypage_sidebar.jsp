@@ -34,13 +34,17 @@
 	 <!-- Divider -->
      <hr class="sidebar-divider">
      
-	<li><a href="#"><font color="gray";>장바구니</font></a>
+	<li><a href="${hContext}/cart/moveToCart.do"><font color="gray";>장바구니</font></a>
 	</li>
 	 
 	 <!-- Divider -->
      <hr class="sidebar-divider">
      
-	<li><a href="#"><font color="gray";>주문내역 조회</font></a>
+	<li>
+		<form name="ordersMove" action="/shop/orders/ordersView.do">
+			<input type="hidden" value="1" name="num">
+		</form>
+		<a id="ordersMove" type="button"><font color="gray";>주문내역 조회</font></a>
 	</li>
 	
 	<!-- Divider -->
@@ -69,4 +73,13 @@
 	  alert("로그인이 필요합니다.");
 	  window.location.href="${hContext}/member/loginPage.do"
   });
+
+  $("#ordersMove").on("click",function(){	  
+	  doSelectListOrders();
+	  });
+  function doSelectListOrders(){
+  	var frm = document.ordersMove;
+  	frm.submit();
+  }
+  
   </script>
