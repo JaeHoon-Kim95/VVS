@@ -56,7 +56,7 @@
 	<!-- Divider -->
      <hr class="sidebar-divider">
 	
-	<li><a href="#"><font color="gray";>배송 주소록 관리</a>
+	<li><a href="${hContext}/ship/address.do"><font color="gray";>배송 주소록 관리</a>
 
 	</li>
 </ul>
