@@ -22,7 +22,8 @@
   	<!-- Custom styles for this template -->
   	<link href="${hContext}/resources/css" rel="stylesheet">
 	<style>
-	body{ padding-top:70px;}
+	body{ padding-top:70px;
+		padding-left:100px;}
 	</style>
 </head>
 
