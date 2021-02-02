@@ -108,9 +108,37 @@
       				
       			</tbody>
       		</table>
+      		<nav aria-label="Page navigation example">
+  				<ul class="pagination">
+    				<li class="page-item">
+      					<c:if test="${pageVO.prev}">
+      						<a class="page-link" href="${pageVO.startPageNum-1}" aria-label="Previous">
+      							<span aria-hidden="true">&laquo;</span>
+      							<span class="sr-only">Previous</span>
+      						</a>
+      					</c:if>
+      					</li>
+      		
+      				<c:forEach var="num2" begin="${pageVO.startPageNum}" end="${pageVO.endPageNum}">
+      					<li class="page-item ${pageVO.num == num2 ? "active":""}">
+      						<a class="page-link" href="${num2}">${num2}</a>
+      					</li>
+      				</c:forEach>
+			
+					<li class="page-item">
+						<a class="page-link" href="${pageVO.endPageNum+1}" aria-label="Next">
+        					<span aria-hidden="true">&raquo;</span>
+       						<span class="sr-only">Next</span>
+      					</a>    		
+      				</li>
+  				</ul>
+			</nav>
       	</div>      
       </div>
-      
+      <form id="numToBoard" action="${hContext}/orders/ordersView.do">
+				<input type="hidden" name="num" value = "${pageVO.num}">
+				<%-- <input type="hidden" name="postNum" value = "${pageVO.postNum}"> --%>
+			</form>
       </div>
     <!-- //.row -->
 
@@ -248,6 +276,14 @@
 		
 
 	});
+
+	$(".page-link").on("click",function(e){
+		console.log("click");
+		e.preventDefault();
+		
+		$("#numToBoard").find("input[name='num']").val($(this).attr("href"));
+		$("#numToBoard").submit();
+		});
     </script>   
 </body>
 </html>

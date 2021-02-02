@@ -11,24 +11,15 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-<<<<<<< HEAD
             <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" id="moveBoard">게시판</a>
-              <span class="sr-only">(current)</span>
-            </a>
-=======
-			
+		  <li class="nav-item active">	
 			<form name="moveBoard" action="/shop/board/doSelectList.do">
 				<input type="hidden" value="1" name="num">
 			</form>
-			
             <a class="nav-link" id="moveBoard">게시판</a>
-
->>>>>>> refs/remotes/origin/ANN
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
@@ -40,6 +31,9 @@
 		  <c:choose>
 		  	<c:when test='${null != sessionScope.MemberVO}'>
 		    	<li class="nav-item">
+		    		<form name="ordersMove" action="/shop/orders/ordersView.do">
+						<input type="hidden" value="1" name="num">
+					</form>
 		        	<a id="ordersMove"  class="nav-link" type="button">
 		        		MyPage
 		        	</a>	        	
@@ -81,30 +75,17 @@
   $("#moveBoard").on("click",function(){
 	  doSelectListBoard();
 	  });
-
-<<<<<<< HEAD
-  $("#ordersMove").on("click",function(){	  
-	  window.location.href="${hContext}/orders/ordersMove.do";
-	  $.ajax({
-			type:"POST",
-			url :"${hContext}/orders/ordersView.do",
-			datatype : "html",
-			data : {	"num" : 1
-				},
-				success:function(data){
-					
-					},
-					 error:function(xhr,status,error){
-					     alert("error:"+error);
-					  }
-		  });
-	  });
-=======
   function doSelectListBoard(){
 	  var frm = document.moveBoard;
 	  frm.submit();
 	  }
+  
+  $("#ordersMove").on("click",function(){	  
+	  doSelectListOrders();
+	  });
+  function doSelectListOrders(){
+  	var frm = document.ordersMove;
+  	frm.submit();
+  }
 
-	
->>>>>>> refs/remotes/origin/ANN
   </script>
