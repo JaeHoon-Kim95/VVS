@@ -47,7 +47,7 @@
        	  order by seq desc
 	</select>
 	
-	<select id="doSelectListP" parameterType="hashMap" resultType="BoardVO">
+	<select id="doSelectListP" parameterType="PageVO" resultType="BoardVO">
 		select
 			seq, title, reg_id, reg_dt
 		from(
@@ -55,8 +55,21 @@
 				rownum rn, seq, title, reg_id, reg_dt
 			from
 			board
-			where				
-			
+			where	
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection='typeArr'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='R'.toString()">
+							reg_id like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>			
 	<![CDATA[
 			rownum<= #{num} * #{postNum} 
 			order by seq desc
@@ -82,19 +95,20 @@
 			   MOD_DT,
 			   CHILD_REP
 		FROM   BOARD
-		WHERE  REG_ID = #{regId}
+		WHERE  SEQ = #{seq}
 	</select>
 	
 	<update id="doUpdate" parameterType="BoardVO">
 		UPDATE BOARD SET CONTENTS = #{contents},
-						 MOD_ID = #{modId},
-						 MOD_DT = #{modDt},
-						 CHILD_REP = #{childRep}
-		WHERE REG_ID = #{regId}
+						 TITLE = #{title},
+						 MOD_ID = #{regId},
+						 MOD_DT = SYSDATE,
+						 REG_DT = SYSDATE
+		WHERE SEQ = #{seq}
 	</update>
 	
 	<delete id="doDelete" parameterType="BoardVO">
-		DELETE FROM BOARD WHERE REG_ID = #{regId}
+		DELETE FROM BOARD WHERE SEQ = #{seq}
 	</delete>
 	
 </mapper>

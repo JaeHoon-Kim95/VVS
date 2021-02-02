@@ -3,6 +3,7 @@ package com.vvs.shop.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.vvs.shop.cmn.PageVO;
 import com.vvs.shop.cmn.SearchVO;
 
 import java.util.HashMap;
@@ -18,6 +19,9 @@ public class BoardDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+	
+	@Autowired
+	PageVO pageVO;
 	
 	final String NAMESPACE = "com.vvs.shop.board.";
 	
@@ -40,21 +44,19 @@ public class BoardDao {
 		return flag;
 	}
 	
-	public List<BoardVO> doSelectList(int num, int postNum){
-		HashMap data = new HashMap();
-
-		 data.put("num", num);
-		 data.put("postNum", postNum);
+	public List<BoardVO> doSelectList(PageVO pageVO){
+		
 
 		 String statement = NAMESPACE + "doSelectListP";
 		      
-		 List<BoardVO> outVO = sqlSessionTemplate.selectList(statement,data);
+		 List<BoardVO> outVO = sqlSessionTemplate.selectList(statement,pageVO);
 
 		 LOG.debug("==outVO==" + outVO);
 		 LOG.debug("==================================================");
 
 		return outVO;
 	}
+	
 	
 	public int totalCnt() {
 		
@@ -80,9 +82,18 @@ public class BoardDao {
 	}
 	
 	public int doUpdate(BoardVO boardVO) {
-		int flag = 0;
-		
-		return flag;		
+		 LOG.debug("====================");
+		 LOG.debug("==doUpdate==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doUpdate";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==boardVO=="+boardVO);
+		 
+		 int flag = sqlSessionTemplate.update(statement, boardVO);
+		 LOG.debug("flag"+flag);
+		return flag;	
 	}
 	
 	public int doDelete(BoardVO boardVO) {	

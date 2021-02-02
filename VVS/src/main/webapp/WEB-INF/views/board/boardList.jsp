@@ -34,7 +34,7 @@
 
 <div class="container">
       <h2>커뮤니티</h2>
-      	<div class="row">
+      	<div class="row" >
       		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd" id="boardListTable">
       			<thead class="bg-primary">  
 					<th style="background-color: #eeeeee; text-align: center;">순번</th>
@@ -49,9 +49,15 @@
 			        	
 			        		<c:forEach var="boardList" items="${outVO}">  
 						    	<tr>
-						    		<td class="text-center">${boardList.seq}</td>
-						    		<td class="text-center">${boardList.title}</td>
-						    		<td class="text-center">${boardList.regId}</td>
+						    		<td class="text-center">
+						    		<a class="boardDetailFrm" href='<c:out value="${boardList.seq}"/>'>
+						    		<c:out value="${boardList.seq}"/></a>
+						    		</td>
+						    		<td class="text-center">
+						    		<a class="boardDetailFrm" href='<c:out value="${boardList.seq}"/>'>
+						    		<c:out value="${boardList.title}"/></a>
+						    		</td>
+						    		<td class="text-center">${boardList.regId}</td></br>
 						    		<td class="text-center">${boardList.regDt}</td>				    	
 						    	</tr>			        			
 			        		</c:forEach>
@@ -91,15 +97,39 @@
       				</li>
   				</ul>
 			</nav>
-      	</div>      
-      </div>
+      	      
+      
       		<form id="numToBoard" action="${hContext}/board/doSelectList.do">
 				<input type="hidden" name="num" value = "${pageVO.num}">
+				<input type="hidden" name="keyword" value="<c:out value='${pageVO.keyword}'/>" />
+				<input type="hidden" name="type" value="<c:out value='${pageVO.type}'/>" />
 				<%-- <input type="hidden" name="postNum" value = "${pageVO.postNum}"> --%>
-			</form>	
-      
-    
-
+			</form>
+	<div class="row">
+		<div class="col-lg-12"> 		
+      		<form id="searchForm" action="${hContext}/board/doSelectList.do">
+      			<select name="type">
+      				
+      				
+      				<option value="T"
+      					<c:out value="${pageVO.type eq 'T'?'selected':''}"/>>제목
+      				</option>
+      				
+      				<option value="R"
+      					<c:out value="${pageVO.type eq 'R'?'selected':''}"/>>작성자
+      				</option>
+      			</select>
+      			<input type="text" name="keyword" value='<c:out value="${pageVO.keyword}"/>' />
+      			<input type="hidden" name="num" value='<c:out value="${pageVO.num}"/>' />
+      			<input type="hidden" name="postNum" value='<c:out value="${pageVO.postNum}"/>' />
+      			
+      			<button class="btn btn-default" id="searchBtn">검색</button>
+     		</form>
+    	</div>
+	</div>
+	</div>
+</div>
+  
 
   
   <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
@@ -107,16 +137,40 @@
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="${hContext}/resources/js/bootstrap.min.js"></script>
   	<script type="text/javascript">
+  		$(document).ready(function(){
+  	  		
+  	  		});
+  		var numToBoard = $("#numToBoard");
   		
-  
 		$(".page-link").on("click",function(e){
 			console.log("click");
 			e.preventDefault();
 			
-			$("#numToBoard").find("input[name='num']").val($(this).attr("href"));
-			$("#numToBoard").submit();
+			numToBoard.find("input[name='num']").val($(this).attr("href"));
+			numToBoard.submit();
 			});
-  	
+
+		
+  		$("#searchForm button").on("click",function(e){
+  			var searchForm = $("#searchForm");
+  			
+  	  		
+  	  		if(!searchForm.find("input[name='keyword']").val()){
+				alert("검색어를 입력하세요");
+				return false;
+	  	  		}
+  	  		searchForm.find("input[name='num']").val(1);
+  	  		e.preventDefault(); 
+  	  		searchForm.submit();  	  			
+  	  		});
+	  	$(".boardDetailFrm").on("click",function(e){
+		  		e.preventDefault();
+		  		numToBoard.append("<input type='hidden' name='seq' value='"+$(this).attr("href")+"'>");
+		  		numToBoard.attr("action","${hContext}/board/doSelectOne.do");
+		  		numToBoard.submit();
+
+		  		
+		  	});
   	</script>
   
       

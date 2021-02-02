@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vvs.shop.board.BoardVO;
 import com.vvs.shop.cmn.PageVO;
@@ -29,6 +30,15 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardServiceImpl;
+	
+	@RequestMapping(value="board/preSelectList.do", method = RequestMethod.POST)  //목록으로
+	public String preSelectList(PageVO pageVO,BoardVO boardVO,RedirectAttributes rttr) {
+		
+		rttr.addAttribute("num", pageVO.getNum());
+		rttr.addAttribute("postNum", pageVO.getPostNum());
+		
+		return "redirect:/board/doSelectList.do";
+	}
 	
 	@RequestMapping(value="board/moveBoardList.do", method = RequestMethod.GET)
 	public String moveBoardList(HttpServletRequest req, HttpServletResponse res) {
@@ -49,16 +59,18 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="board/doSelectList.do", method = RequestMethod.GET)
-	public ModelAndView doSelectList(@RequestParam("num") int num) {
-		PageVO pageVO = new PageVO();
+	public ModelAndView doSelectList(@RequestParam("num") int num,PageVO pageVO) {
+		
 		
 		pageVO.setNum(num);
 		LOG.debug(""+num);
+	
+		
 		pageVO.setCount(boardServiceImpl.totalCnt());
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<BoardVO> outVO = this.boardServiceImpl.doSelectList(pageVO.getNum(), pageVO.getPostNum());
+		List<BoardVO> outVO = this.boardServiceImpl.doSelectList(pageVO);
 		
 		LOG.debug("outVO"+outVO);
 		
@@ -71,20 +83,47 @@ public class BoardController {
 		return mav;
 	}
 	
+
 	
-	@RequestMapping(value="board/doSelectOne.do", method = RequestMethod.POST)
-	@ResponseBody
-	public BoardVO doSelectOne(BoardVO boardVO) {
-		BoardVO outVO = this.boardServiceImpl.doSelectOne(boardVO);
+	@RequestMapping(value="board/doSelectOne.do", method = RequestMethod.GET)
+	public ModelAndView doSelectOne(@RequestParam("seq") int seq,BoardVO boardVO) {
 		
-		return outVO;
+		boardVO.setSeq(seq);
+		BoardVO outVO = this.boardServiceImpl.doSelectOne(boardVO);
+		LOG.debug("outVO"+outVO);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("outVO", outVO);
+		mav.setViewName("board/boardDetail");
+		
+		return mav;
 	}
 	
-	@RequestMapping(value="board/doUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value="board/doUpdatePage.do", method = RequestMethod.POST)
+	public ModelAndView doUpdatePage(@RequestParam("seq") int seq,BoardVO boardVO) {
+		
+		boardVO.setSeq(seq);
+		BoardVO outVO = this.boardServiceImpl.doSelectOne(boardVO);
+		LOG.debug("outVO"+outVO);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("outVO", outVO);
+		mav.setViewName("board/boardMng");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="board/doUpdate.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int doUpdate(BoardVO boardVO) {
-		int flag = 0;
-				
+		LOG.debug("===============");
+		LOG.debug("==doUpdate.do==");
+		LOG.debug("===============");
+		
+		int flag = boardServiceImpl.doUpdate(boardVO);
+		LOG.debug("flag"+flag);	
 		return flag;
 	}
 	

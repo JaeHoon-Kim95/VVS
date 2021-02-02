@@ -3,7 +3,6 @@ package com.vvs.shop.cmn;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class PageVO {
 	// 현재 페이지 번호
 	private int num;
@@ -136,6 +135,22 @@ public class PageVO {
 		this.next = next;
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	private void dataCalc() {
 		// 마지막 번호
 		 endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
@@ -156,7 +171,7 @@ public class PageVO {
 		 displayPost = (num - 1) * postNum;
 	}
 	
-	public String[] getTypeArr(){
+	public String[] getTypeArr(){  // 검색 조건이 각 극자로 구성되어 있으므로 검색 조건을 배열로 만들어서 한 번에 처리하기 위함
     	return type == null ? new String[] {}:type.split("");
     }
 }

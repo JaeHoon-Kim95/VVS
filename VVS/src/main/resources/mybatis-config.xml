@@ -20,6 +20,7 @@
 		<typeAlias type="com.vvs.shop.product.ProductDetailVO" alias="ProductDetailVO"/>
 		<typeAlias type="com.vvs.shop.product.OptionsVO" alias="OptionsVO"/>
 		<typeAlias type="com.vvs.shop.board.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.vvs.shop.cmn.PageVO" alias="PageVO"/>
 	</typeAliases>
 
 </configuration>
