@@ -51,8 +51,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="${hContext}/main/index.do"><i class="fa fa-home"></i> 홈</a>
-                        <a href="${hContext}/cart/moveToCart.do">장바구니</a>
-                        <span>주문</span>
+		        		<a href="${hContext}/orders/ordersView.do?num=1" > 마이페이지</a>
+                        <span>배송 주소록 관리</span>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,15 @@
             }
         }).open();
     }
-	
+
+	$("#moveOrder").on("click",function(){	  
+		  doSelectListOrder();
+		  });
+	  function doSelectListOrder(){
+	  	var frm = document.moveOrder;
+	  	frm.submit();
+	  }
+		
 	</script>
 </body>
 

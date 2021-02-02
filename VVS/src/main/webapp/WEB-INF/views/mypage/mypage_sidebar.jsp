@@ -75,9 +75,9 @@
   });
 
   $("#orderMove").on("click",function(){	  
-	  doSelectListOrders();
+	  doSelectListorder();
 	  });
-  function doSelectListOrders(){
+  function doSelectListorder(){
   	var frm = document.orderMove;
   	frm.submit();
   }
