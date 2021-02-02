@@ -19,19 +19,91 @@
 
 <!-- Bootstrap core CSS -->
 <link
-	href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="${hContext}/resources/css" rel="stylesheet">
-
+	href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
-<br><br><br><br>
+	<br><br><br><br>
+		<div class="row">
+			<!-- img box -->
+			<div id="carouselImgBox" class="col">
+				<div id="carouselControls" class="carousel slide" data-ride="carousel">
+				  <ol class="carousel-indicators">
+				    <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
+				    <li data-target="#carouselControls" data-slide-to="1"></li>
+				    <li data-target="#carouselControls" data-slide-to="2"></li>
+				  </ol>
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				    	<img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg.png">
+				    </div>
+				    <div class="carousel-item">
+				      <img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg2.png">
+				    </div>
+				    <div class="carousel-item">
+				      <img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg3.png">
+				    </div>
+				  </div>
+				  <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+			<!-- img box -->
+			
+			
+			<div class="col-sm-1"></div>
+			
+			<!-- product detail -->
+			<div class="col">
+				<h4>
+				<small class="text-muted">카테고리><c:out value="${outVO.categoryNum }"/></small>
+				</h4>
+				<h2><strong><c:out value="${outVO.productName }"/></strong></h2>
+				<br>
+				<h4 id="priceTag"><c:out value="${outVO.price }"/></h4>
+				<hr>
+				
+				<div id="semiInfoBox">
+					<span><c:out value="${outVO.semiInfo }"/></span>
+				</div>
+				<hr>
+				
+				<!-- jquery로 class active를 찾아서 -->
+				<div class="list-group" id="list-tab" role="tablist">
+			      <a class="list-group-item list-group-item-light list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">BLACK / S</a>
+			      <a class="list-group-item list-group-item-light list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">BLACK / M</a>
+			      <a class="list-group-item list-group-item-light list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">BLACK / L</a>
+			      <a class="list-group-item list-group-item-light list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">WHITE / S</a>
+			    </div>
+				<hr>
+				
+				<div><h4>결제 금액 : 옵션 클릭하면 가격이 바뀌게</h4></div>
+				
+			</div>
+			<!-- product detail -->
+		</div>
+		
+		<!-- mainInfo -->
+		<div>
+		<br><br><br>
+				<h1><c:out value="${outVO.mainInfo }"/></h1>
+		</div>
+		
+		<br><br><br>
+		
+		
+		
+		
+		<!-- 
 		
 			<div>
 			<label>categoryNum : </label>
@@ -75,21 +147,28 @@
 				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
 			</form>
 			<br><br><br><br><br>
-			
+			 -->
 	</div>
 	<!-- container end -->
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="/resources/vendor/jquery/jquery.min.js"></script>
-	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${hContext}/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${hContext}/resources/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
 	// Load Options List
 	window.onload = function(){
 		doSelectListOptions();
-	}
+		
+		var priceTag = $("#priceTag").text();
+		var price = priceTag.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+		$("#priceTag").empty();
+		$("#priceTag").text(price+" 원");
+		
+	}
+	
 	function doSelectListOptions(){
 		$.ajax({
 			type:"GET",
@@ -103,6 +182,7 @@
 	                console.log("success!");
 					$("#optionList").empty();
 					var html = "";
+					var html2 = "";
 					$.each(data, function(i, value) {
 							html += "<p>options seq : "+value.seq+"</p>";
 							html += "<p>options color : "+value.color+"</p>";

@@ -24,6 +24,20 @@ public class ProductDao {
 
 	private final String NAMESPACE = "com.vvs.shop.product.";
 
+	public int doInsertOptions(OptionsVO optionsVO) {
+		
+		LOG.debug("ProductDao - doInsertOptions");
+		LOG.debug("param - optionsVO : " + optionsVO);
+		
+		String statement = NAMESPACE + "doInsertOptions";
+		int flag = sqlSessionTemplate.insert(statement, optionsVO);
+		
+		LOG.debug("result - flag : " + flag);
+		
+		return flag;
+		
+	}
+	
 	public int doInsertDetail(ProductDetailVO productDetailVO) {
 		
 		LOG.debug("ProductDao - doInsertDetail");

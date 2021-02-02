@@ -12,6 +12,10 @@ public class ProductService {
 
 	@Autowired ProductDao productDao;
 	
+	public int doInsertOptions(OptionsVO optionsVO) {
+		return productDao.doInsertOptions(optionsVO);
+	}
+	
 	public List<OptionsVO> doSelectListOptions(OptionsVO optionsVO){
 		return productDao.doSelectListOptions(optionsVO);
 	}

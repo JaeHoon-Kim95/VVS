@@ -1,9 +1,11 @@
 package com.vvs.shop.product;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductVO{
+public class ProductVO {
 
 	private int productNum;
 	private int categoryNum;
@@ -18,6 +20,16 @@ public class ProductVO{
 	private String color;
 	private String sizes;
 	private int qty;
+
+	List<OptionsVO> optionsList;
+
+	public List<OptionsVO> getOptionsList() {
+		return optionsList;
+	}
+
+	public void setOptionsList(List<OptionsVO> optionsList) {
+		this.optionsList = optionsList;
+	}
 
 	public ProductVO() {
 		super();

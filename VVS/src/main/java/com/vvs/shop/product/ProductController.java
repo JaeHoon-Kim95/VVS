@@ -84,6 +84,36 @@ public class ProductController {
 		return mav;
 	}
 	
+	// 상품 등록2
+	@RequestMapping(value = "product/doRegistTest.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String doRegistTest(ProductVO productVO) {
+		
+		LOG.debug("into vo : " + productVO);
+		
+		
+		
+		productService.doInsert(productVO);
+		
+		ProductDetailVO productDetailVO = new ProductDetailVO();
+		productDetailVO.setMainInfo(productVO.getMainInfo());
+		productDetailVO.setSemiInfo(productVO.getSemiInfo());
+		productDetailVO.setProductNum(productVO.getProductNum());
+		
+		productService.doInsertDetail(productDetailVO);
+		
+		for(OptionsVO vo : productVO.optionsList) {
+			vo.setProductNum(productVO.getProductNum());
+			productService.doInsertOptions(vo);
+		}
+		
+		
+		
+		return null;
+	}
+	
+	
+	
 	// 상품 등록
 	@RequestMapping(value = "product/doRegist.do", method = RequestMethod.POST)
 	public ModelAndView doRegist(@RequestParam("categoryNum") int categoryNum,

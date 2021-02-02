@@ -35,31 +35,7 @@
 
 
 		<div class="row">
-		<!-- 
-			<form name="registData" id="registData" action="/shop/product/doRegist.do" method="post">
-				<label>카테고리 구분</label>
-				<input type="text" name="categoryNum" id="categoryNum">
-
-				<label>상품 이름</label>
-				<input type="text" name="productName" id="productName">
-
-				<label>가격</label>
-				<input type="text" name="price" id="price">
-
-				<label>할인율</label>
-				<input type="text" name="discountRate" id="discountRate">
-
-				<label>할인 유무</label>
-				<input type="text" name="discount" id="discount">
-				
-				<label>간단 설명</label>
-				<input type="text" name="semiInfo" id="semiInfo">
-				
-				<label>상세 설명</label>
-				<input type="text" name="mainInfo" id="mainInfo">
-			</form>
-		-->
-			<form name="registData" id="registData" action="/shop/product/doRegist.do" method="post">
+			<form:form name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post">
 				<label><strong>- 상품명*</strong></label><br>
 				<input type="text" value="" placeholder="상품명을 입력해주세요." id="productName" name="productName"><br>
 				<label><strong>- 판매 가격*</strong></label><br>
@@ -76,27 +52,26 @@
 				<label><strong>- 상세 설명</strong></label><br>
 				<textarea rows="10" id="mainInfo" name="mainInfo" cols="80" placeholder="상세 설명을 입력해주세요!"></textarea><br>
 				
-			</form>
-			<div id="">
-				<label><strong>옵션(적어도 하나는 입력해 주세요!)</strong></label><br>
-				<label>색상:</label><input type="text" id="color" name="optionsList[0].color">
-				<label>사이즈:</label><input type="text" id="sizes" name="optionsList[0].sizes">
-				<label>재고:</label><input type="text" id="qty" name="optionsList[0].qty">
-				<input type="button" value="+">
-				<p>+를 누르면 한칸씩 추가가 되도록. input 값 추가하고 javascript로 넣을 때 name에 input값으로 index를 바꾸면 되지 않을까</p>
+				<div id="optionsTable">
+					<div id="1">
+						<label><strong>옵션(적어도 하나는 입력해 주세요!)</strong></label>
+						<input id="plusBtn" type="button" value="+"><input id="minusBtn" type="button" value="-"><br>
+						<label>색상:</label><input type="text" id="color" name="optionsList[0].color">
+						<label>사이즈:</label><input type="text" id="sizes" name="optionsList[0].sizes">
+						<label>재고:</label><input type="text" id="qty" name="optionsList[0].qty">
+					</div>
+				</div>
 				
-			</div>
+				<input type='submit' value='바로 등록'>
+				<br><br><br>
+			</form:form>
+			
 			<div>
-				<label>option 갯수 : </label>
-				<input type="text" id="optionsNum" name="optionsNum" value="1">
+				<input type="hidden" id="optionsNum" name="optionsNum" value="1">
 			</div>
 			
 		</div>
 		<!-- row end -->
-		<div>
-			<input type="button" value="상품 등록" id="doRegist">
-			<br><br><br><br>
-		</div>
 	</div>
 	<!-- container end -->
 
@@ -105,6 +80,34 @@
 	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
+	
+		$(document).on("click","#plusBtn" ,function(){
+				var optionsNum = $("#optionsNum").val();
+				optionsNum *= 1;
+				var html = "";
+				html += "<div id="+(optionsNum + 1)+">";
+				html += "<label>색상:</label><input type='text' name='optionsList["+optionsNum+"].color'>";
+				html += "<label>사이즈:</label><input type='text' name='optionsList["+optionsNum+"].sizes'>";
+				html += "<label>재고:</label><input type='text' name='optionsList["+optionsNum+"].qty'>";
+				html += "</div>";
+				$("#optionsTable").append(html);				
+				
+				$("#optionsNum").val(optionsNum + 1);
+			});
+
+		$(document).on("click","#minusBtn", function(){
+				var optionsNum = $("#optionsNum").val();
+				if(optionsNum == "1"){
+						alert("적어도 하나의 옵션이 필요합니다!");
+						return;
+					}
+
+				$("#"+optionsNum).detach();
+				
+				optionsNum *= 1;
+				$("#optionsNum").val(optionsNum - 1);
+			});
+		
 		$("#doRegist").on("click", function(){
 				var frm = document.registData;
 				frm.submit();
