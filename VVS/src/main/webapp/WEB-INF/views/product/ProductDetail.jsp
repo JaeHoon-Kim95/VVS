@@ -24,6 +24,12 @@
 </head>
 
 <body>
+	<form name="toCartForm" action="/shop/cart/doInsertCart.do" method="get">
+		<input type="hidden" value="${outVO.productNum }" id="productNum" name="productNum">
+		<input type="hidden" value="0" id="optionSeq" name="optionSeq">
+		<input type="hidden" value="1" id="qty" name="qty">
+	</form>
+	
 	<!-- Page Content -->
 	<div class="container">
 	<br><br><br><br>
@@ -76,78 +82,33 @@
 					<span><c:out value="${outVO.semiInfo }"/></span>
 				</div>
 				<hr>
-				
-				<!-- jquery로 class active를 찾아서 -->
-				<div class="list-group" id="list-tab" role="tablist">
-			      <a class="list-group-item list-group-item-light list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">BLACK / S</a>
-			      <a class="list-group-item list-group-item-light list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">BLACK / M</a>
-			      <a class="list-group-item list-group-item-light list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">BLACK / L</a>
-			      <a class="list-group-item list-group-item-light list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">WHITE / S</a>
-			    </div>
+			    
+			    <label for="inlineFormCustomSelect">색상 및 사이즈</label>
+			    <div class="form-group">
+				    <div>
+				      <select class="custom-select" id="inlineFormCustomSelect" onchange="changeOption();">
+				        <option selected>색상 및 사이즈를 선택하세요</option>
+				      </select>
+				    </div>
+				</div>
 				<hr>
 				
-				<div><h4>결제 금액 : 옵션 클릭하면 가격이 바뀌게</h4></div>
-				
+				<button id="doInsertCart" type="button" class="btn btn-block btn-lg btn-outline-info">장바구니 담기</button>
+				<button type="button" class="btn btn-block btn-lg btn-outline-info">바로 구매</button>
 			</div>
 			<!-- product detail -->
 		</div>
 		
 		<!-- mainInfo -->
-		<div>
+		<div class="text-center">
 		<br><br><br>
-				<h1><c:out value="${outVO.mainInfo }"/></h1>
+		<hr>
+				<h2>상품 정보</h2>
+				<br>
+				<h3><c:out value="${outVO.mainInfo }"/></h3>
 		</div>
 		
 		<br><br><br>
-		
-		
-		
-		
-		<!-- 
-		
-			<div>
-			<label>categoryNum : </label>
-				${outVO.categoryNum }
-			</div>
-			<div>
-			<label>productName : </label>
-				${outVO.productName }
-			</div>
-			<div>
-			<label>price : </label>
-				${outVO.price }
-			</div>
-			<div>
-			<label>discountPrice : </label>
-				${outVO.discountPrice }
-			</div>
-			<div>
-			<label>mainInfo : </label>
-				${outVO.mainInfo }
-			</div>
-			<div>
-			<label>semiInfo : </label>
-				${outVO.semiInfo }
-			</div>
-		
-			<hr>
-			<label>옵션 리스트</label>
-			<div id="optionList">
-			
-			</div>
-			<hr>
-			<form>
-				<label>상품 번호 :</label>
-				<input type="text" value="${outVO.productNum }" id="productNum"><br>
-				<label>옵션 번호 : </label>
-				<input type="text" id="optionSeq" name="optionSeq" value="">
-				<label>갯수 : </label>
-				<input type="text" id="qty" name="qty" value="1"><br>
-				<input type="button" id="orderBtn" name="orderBtn" value="바로 주문">
-				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
-			</form>
-			<br><br><br><br><br>
-			 -->
 	</div>
 	<!-- container end -->
 
@@ -157,6 +118,59 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
+	
+	
+	// Insert Cart
+	$("#doInsertCart").on("click", function(){
+			doInsertCart();
+		});
+
+	function doInsertCart(){
+			// memberId(controller - session), productNum, qty, optionSeq
+			var frm = document.toCartForm;
+
+			var chkOption = $("#optionSeq").val();
+
+			var cfm = confirm("장바구니에 담으시겠습니까?");
+
+			if(!cfm){
+					return;
+				}
+			
+			if(chkOption == "0"){
+					alert("색상 및 사이즈를 선택하세요!");
+					return;
+				}
+
+			$.ajax({
+			   type:"GET",
+	           url:"${hContext}/cart/doInsertCart.do",
+	           dataType:"html",
+	           async: false,
+	           data:{
+	           		"productNum":$("#productNum").val(),
+	           		"qty":$("#qty").val(),
+	           		"optionSeq":$("#optionSeq").val()
+	           },
+	           success: function(data){
+		           		alert("장바구니에 담겼어요!");
+		           		var cfm2 = confirm("장바구니로 이동하시겠습니까?");
+		           		if(cfm2){
+								window.location.href = '/shop/cart/moveToCart.do';
+			           		}
+	               }
+				});
+
+			
+
+		}
+	
+	function changeOption(){
+		var value = $("#inlineFormCustomSelect").val();
+		$("#optionSeq").val(value);
+	}
+	// -- Insert Cart
+	
 	// Load Options List
 	window.onload = function(){
 		doSelectListOptions();
@@ -180,18 +194,13 @@
 	           },
 	           success: function(data){
 	                console.log("success!");
-					$("#optionList").empty();
 					var html = "";
-					var html2 = "";
 					$.each(data, function(i, value) {
-							html += "<p>options seq : "+value.seq+"</p>";
-							html += "<p>options color : "+value.color+"</p>";
-							html += "<p>options sizes : "+value.sizes+"</p>";
-							html += "<p>options qty : "+value.qty+"</p>";
-							html += "<p>options productNum : " + value.productNum + "</p>";
-							html += "<br>"
+
+							html += "<option value='"+value.seq+"'>"+value.color+" / "+value.sizes+"</option>";
+							
 						});
-					$("#optionList").append(html);
+					$("#inlineFormCustomSelect").append(html);
 	               }
 			});
 

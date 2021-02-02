@@ -41,7 +41,10 @@
 				<label><strong>- 판매 가격*</strong></label><br>
 				<input type="text" value="" placeholder="가격을 입력해주세요." id="price" name="price"><br>
 				<label><strong>- 상품 카테고리*</strong></label><br>
-				<p>대분류 / 중분류 / 소분류 고를 때 마다 하위 항목 나오게 만들기</p>
+				<!-- TODO -->
+				<p>enum 쓰는 것보다 나중에 편의성을 위해 db 쓰는게 나은거 같기도 하고</p>
+				<!-- TODO -->
+				
 				<input type="text" value="1" name="categoryNum" id="categoryNum" readonly><br>
 				<label><strong>- 할인 유무</strong></label><br>
 				<input type="text" value="0" name="discountRate" id="discountRate" readonly="readonly"><br>
@@ -49,7 +52,7 @@
 				<input type="text" value="0" name="discount" id="discount" readonly="readonly"><br>
 				<label><strong>- 한 줄 설명</strong></label><br>
 				<input type="text" value="" name="semiInfo" id="semiInfo" placeholder="한 줄 설명을 입력해주세요."><br>
-				<label><strong>- 상세 설명</strong></label><br>
+				<label><strong>- 상세 설명</strong></label><p>나중에 게시판거 베껴서 글쓰기 형식 가져오자.</p><br>
 				<textarea rows="10" id="mainInfo" name="mainInfo" cols="80" placeholder="상세 설명을 입력해주세요!"></textarea><br>
 				
 				<div id="optionsTable">
