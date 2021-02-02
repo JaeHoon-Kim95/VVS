@@ -11,6 +11,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
+<<<<<<< HEAD
             <a class="nav-link" href="${hContext}/member/homeBack.do">홈페이지
               <span class="sr-only">(current)</span>
             </a>
@@ -19,6 +20,15 @@
             <a class="nav-link" id="moveBoard">게시판</a>
               <span class="sr-only">(current)</span>
             </a>
+=======
+			
+			<form name="moveBoard" action="/shop/board/doSelectList.do">
+				<input type="hidden" value="1" name="num">
+			</form>
+			
+            <a class="nav-link" id="moveBoard">게시판</a>
+
+>>>>>>> refs/remotes/origin/ANN
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
@@ -69,22 +79,10 @@
   });
 
   $("#moveBoard").on("click",function(){
-	  window.location.href="${hContext}/board/moveBoardList.do";	  
-	  $.ajax({
-			type:"POST",
-			url :"${hContext}/board/doSelectList.do",
-			datatype : "html",
-			data : {	"num" : 1
-				},
-				success:function(data){
-					
-					},
-					 error:function(xhr,status,error){
-					     alert("error:"+error);
-					  }
-		  });
+	  doSelectListBoard();
 	  });
 
+<<<<<<< HEAD
   $("#ordersMove").on("click",function(){	  
 	  window.location.href="${hContext}/orders/ordersMove.do";
 	  $.ajax({
@@ -101,4 +99,12 @@
 					  }
 		  });
 	  });
+=======
+  function doSelectListBoard(){
+	  var frm = document.moveBoard;
+	  frm.submit();
+	  }
+
+	
+>>>>>>> refs/remotes/origin/ANN
   </script>

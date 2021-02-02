@@ -47,6 +47,26 @@
        	  order by seq desc
 	</select>
 	
+	<select id="doSelectListP" parameterType="hashMap" resultType="BoardVO">
+		select
+			seq, title, reg_id, reg_dt
+		from(
+			select
+				rownum rn, seq, title, reg_id, reg_dt
+			from
+			board
+			where				
+			
+	<![CDATA[
+			rownum<= #{num} * #{postNum} 
+			order by seq desc
+		)
+		where rn>(#{num}-1)*#{postNum}
+		
+	]]>
+	</select>
+	
+	
 	<select id="totalCnt" resultType="int">
 		SELECT COUNT(SEQ)
 		FROM BOARD

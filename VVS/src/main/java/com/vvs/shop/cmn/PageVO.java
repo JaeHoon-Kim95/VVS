@@ -28,6 +28,9 @@ public class PageVO {
 
 	// 표시되는 페이지 번호 중 첫번째 번호
 	private int startPageNum;
+	
+	private String type;   //제목, 제목+작성자
+	private String keyword;// 내용
 
 	// 다음/이전 표시 여부
 	private boolean prev;
@@ -152,4 +155,8 @@ public class PageVO {
 		 
 		 displayPost = (num - 1) * postNum;
 	}
+	
+	public String[] getTypeArr(){
+    	return type == null ? new String[] {}:type.split("");
+    }
 }

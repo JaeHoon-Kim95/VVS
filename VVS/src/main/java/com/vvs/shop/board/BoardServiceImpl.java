@@ -20,9 +20,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> doSelectList(int displayPost, int postNum) {
+	public List<BoardVO> doSelectList(int num, int postNum) {
 		
-		return boardDao.doSelectList(displayPost, postNum);
+		return boardDao.doSelectList(num, postNum);
 	}
 
 	@Override

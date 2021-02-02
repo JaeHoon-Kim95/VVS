@@ -10,7 +10,7 @@ import com.vvs.shop.cmn.SearchVO;
 public interface BoardService {
 	int doInsert(BoardVO boardVO);
 	
-	List<BoardVO> doSelectList(int displayPost, int postNum);
+	List<BoardVO> doSelectList(int num, int postNum);
 	
 	BoardVO doSelectOne(BoardVO boardVO);
 	

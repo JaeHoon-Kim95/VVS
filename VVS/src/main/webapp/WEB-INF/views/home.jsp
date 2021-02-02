@@ -27,6 +27,7 @@
 <body>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 =======
  <!-- Navigation -->
@@ -57,21 +58,14 @@
     </div>
   </nav>
 >>>>>>> refs/remotes/origin/ANN
+=======
+ <%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+>>>>>>> refs/remotes/origin/ANN
   <!-- Page Content -->
   <div class="container">
 
     <div class="row">
-
-      <div class="col-lg-3">
-
-        <h1 class="my-4">Shop Name</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
-        </div>
-
-      </div>
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
