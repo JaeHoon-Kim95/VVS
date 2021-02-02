@@ -36,9 +36,9 @@ public class ShipController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		SearchVO search = new SearchVO();
-		search.setSearchWord("jhs");
-		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
+		//SearchVO search = new SearchVO();
+		//search.setSearchWord("jhs");
+		//List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		
 		mav.setViewName("ship/sweetTrackerAPI");
 		//mav.addObject("orderList", orderList);
