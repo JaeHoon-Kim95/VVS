@@ -68,8 +68,8 @@
                     <div class="col-lg-6">
                         
                         <h4>수령자 정보</h4>
-                        <input type="radio" style="width:20px;height:20px;border:1px;" id="address_btn2" value="기본 수령지">기본 수령자 정보
-                        <input type="radio" style="width:20px;height:20px;border:1px;" id="address_btn" value="수령지 변경">새로운 수령자 정보 입력하기
+                        <input type="radio" style="width:20px;height:20px;border:1px;" name="chk_info" id="address_btn2" value="기본 수령지">기본 수령자 정보
+                        <input type="radio" style="width:20px;height:20px;border:1px;" name="chk_info" id="address_btn" value="수령지 변경">새로운 수령자 정보 입력하기
                        
                         <div class="row">
                             <div class="col-lg-6">
