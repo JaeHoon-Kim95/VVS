@@ -99,15 +99,7 @@
 								<input class="form-control" value="${sessionScope.MemberVO.getAddrDetail()}" name="inputAddrDetail" id="inputAddrDetail" type="text"/> 
 							</div>
                         
-                            <div class="col-lg-12">
-                                <div class="create-item">
-                                    <label for="acc-create">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-create">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-6">
