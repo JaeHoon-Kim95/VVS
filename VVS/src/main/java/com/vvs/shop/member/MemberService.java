@@ -14,6 +14,8 @@ public interface MemberService {
 	
 	int doUpdate(MemberVO memberVO);
 	
+	public int doUpdateAddress(MemberVO memberVO);
+	
 	int doDelete(MemberVO memberVO);
 	
 	int doMemberIdChk(MemberVO memberVO);

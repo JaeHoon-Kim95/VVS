@@ -86,6 +86,21 @@ public class MemberDao {
 		return flag;	
 	}
 	
+	public int doUpdateAddress(MemberVO memberVO) {
+		 LOG.debug("====================");
+		 LOG.debug("==doUpdate==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doUpdateAddress";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==memberVO=="+memberVO);
+		 
+		 int flag = sqlSessionTemplate.update(statement, memberVO);
+		 LOG.debug("flag"+flag);
+		return flag;	
+	}
+	
 	public int doDelete(MemberVO memberVO) {	
 		LOG.debug("====================");
 		 LOG.debug("==doDelete==");

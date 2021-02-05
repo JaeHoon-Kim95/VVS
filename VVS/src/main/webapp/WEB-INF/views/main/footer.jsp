@@ -5,7 +5,7 @@
 <c:set var="hContext" value="${pageContext.request.contextPath }"></c:set> 
 <style>
 	.footer{ 
-   		  padding: 15px 0;
+   		  padding: 30px 0;
    		  background:black;
    		  color:dark;}
 </style>

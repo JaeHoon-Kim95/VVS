@@ -170,6 +170,26 @@ public class MemberController {
 		return flag;
 	}
 	
+	@RequestMapping(value="member/doUpdateAddress.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int doUpdateAddress(MemberVO memberVO,  HttpServletRequest req) {
+		LOG.debug("===================");
+		LOG.debug("==doUpdateAddress.do==");
+		LOG.debug("===================");
+		
+		HttpSession httpSession = req.getSession();
+		
+		int flag = memberServiceImpl.doUpdateAddress(memberVO);
+		
+		if(flag==1) {
+			httpSession.setAttribute("MemberVO", memberVO);
+		}else if(flag==0) {
+			LOG.debug("flag"+flag);
+		}
+		LOG.debug("flag"+flag);
+		return flag;
+	}
+	
 	@RequestMapping(value="member/doDelete.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int doDelete(MemberVO memberVO, HttpServletRequest req) {
