@@ -68,6 +68,9 @@
                     <div class="col-lg-6">
                         
                         <h4>수령자 정보</h4>
+                        <input type="radio" style="width:20px;height:20px;border:1px;" id="address_btn2" value="기본 수령지">기본 수령자 정보
+                        <input type="radio" style="width:20px;height:20px;border:1px;" id="address_btn" value="수령지 변경">새로운 수령자 정보 입력하기
+                       
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="fir">이름<span>*</span></label>
@@ -174,6 +177,29 @@
 	// 주소 공백 체크 위해서
 	var address = $("#inputDetail");
 
+	//수령자 초기화 이벤트
+	$("#address_btn").on("click",function(){
+		$('#inputName').val('');
+		$('#inputEmail').val('');
+		$('#inputPhone').val('');
+		$('#inputAddr1').val('');
+		$('#inputAddr2').val('');
+		$('#inputAddrDetail').val('');
+
+	});
+
+
+	//기본 수령자 이벤트
+	$("#address_btn2").on("click",function(){
+		$('#inputName').val('${sessionScope.MemberVO.getName()}');
+		$('#inputEmail').val('${sessionScope.MemberVO.getEmail()}');
+		$('#inputPhone').val('${sessionScope.MemberVO.getPhone()}');
+		$('#inputAddr1').val('${sessionScope.MemberVO.getAddrNum()}');
+		$('#inputAddr2').val('${sessionScope.MemberVO.getAddrRoad()}');
+		$('#inputAddrDetail').val('${sessionScope.MemberVO.getAddrDetail()}');
+
+	});
+	
 	//이름에 특수문자 들어가지 않도록 설정 
 	$("#inputName").blur(function() { 
 		if (nameJ.test($(this).val())) { 
