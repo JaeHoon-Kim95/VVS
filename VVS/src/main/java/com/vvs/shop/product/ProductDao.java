@@ -24,6 +24,20 @@ public class ProductDao {
 
 	private final String NAMESPACE = "com.vvs.shop.product.";
 
+	public int doSelectListWithPagingCount(SearchVO searchVO) {
+		
+		LOG.debug("ProductDao - doSelectListWithPagingCount");
+		LOG.debug("param - SearchVO : " + searchVO);
+		
+		String statement = NAMESPACE + "doSelectListWithPagingCount";
+		int count = sqlSessionTemplate.selectOne(statement, searchVO);
+		
+		LOG.debug("result - count : " + count);
+		
+		return count;
+		
+	}
+	
 	public int doInsertOptions(OptionsVO optionsVO) {
 		
 		LOG.debug("ProductDao - doInsertOptions");

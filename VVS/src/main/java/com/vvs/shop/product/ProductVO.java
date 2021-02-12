@@ -20,6 +20,17 @@ public class ProductVO {
 	private String color;
 	private String sizes;
 	private int qty;
+	private String categoryName;
+
+	
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
 	List<OptionsVO> optionsList;
 

@@ -24,6 +24,8 @@
 </head>
 
 <body>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+
 	<form name="toCartForm" action="/shop/cart/doInsertCart.do" method="get">
 		<input type="hidden" value="${outVO.productNum }" id="productNum" name="productNum">
 		<input type="hidden" value="0" id="optionSeq" name="optionSeq">

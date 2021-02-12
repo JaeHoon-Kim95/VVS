@@ -23,6 +23,44 @@ public class ProductController {
 	@Autowired ProductService productService;
 	@Autowired SearchVO searchVO;
 	
+	// 메인 페이지 부르기
+	@RequestMapping(value = "product/moveToMainPage.do", method = RequestMethod.GET)
+	public ModelAndView moveToMainPage() {
+		LOG.debug("Current controller : product/moveToMainPage.do");
+		
+		SearchVO searchVO = new SearchVO();
+		searchVO.setPageSize(6);
+		searchVO.setPageNum(1);
+		searchVO.setMinPrice(0);
+		searchVO.setMaxPrice(0);
+		searchVO.setSearchWord("");
+		
+		LOG.debug("param - searchVO : " + searchVO);
+		
+		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
+		int totalNum = productService.doSelectListWithPagingCount(searchVO);
+		
+		double a = (double) totalNum / (double) searchVO.getPageSize();
+		
+		double maxPage = Math.ceil(a);
+		maxPage /= 1;
+		
+		for(ProductVO pvo : outList) {
+			String categoryName = productService.getCategoryName(pvo.getCategoryNum());
+			pvo.setCategoryName(categoryName);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductList");
+		mav.addObject("productList", outList);
+		mav.addObject("currentPageNum", searchVO.getPageNum());
+		mav.addObject("startPageNum", 1);
+		mav.addObject("endPageNum", maxPage);
+		mav.addObject("searchWord", searchVO.getSearchWord());
+		
+		return mav;
+	}
+	
 	
 	// 옵션 리스트
 	@RequestMapping(value = "product/doOptionsList.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
@@ -42,15 +80,14 @@ public class ProductController {
 	
 	// 검색
 	@RequestMapping(value = "product/doSearch.do", method = RequestMethod.GET)
-	public ModelAndView doSearch(@RequestParam("pageSize") int pageSize,
-								 @RequestParam("pageNum") int pageNum,
+	public ModelAndView doSearch(@RequestParam("pageNum") int pageNum,
 								 @RequestParam("searchWord") String searchWord,
 								 @RequestParam("minPrice") int minPrice,
 								 @RequestParam("maxPrice") int maxPrice) {
 		LOG.debug("Current controller : product/doSearch.do");
 		
 		SearchVO searchVO = new SearchVO();
-		searchVO.setPageSize(pageSize);
+		searchVO.setPageSize(6);
 		searchVO.setPageNum(pageNum);
 		searchVO.setMinPrice(minPrice);
 		searchVO.setMaxPrice(maxPrice);
@@ -59,10 +96,25 @@ public class ProductController {
 		LOG.debug("param - searchVO : " + searchVO);
 		
 		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
+		int totalNum = productService.doSelectListWithPagingCount(searchVO);
+		
+		double a = (double) totalNum / (double) searchVO.getPageSize();
+		
+		double maxPage = Math.ceil(a);
+		maxPage /= 1;
+		
+		for(ProductVO pvo : outList) {
+			String categoryName = productService.getCategoryName(pvo.getCategoryNum());
+			pvo.setCategoryName(categoryName);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductList");
 		mav.addObject("productList", outList);
+		mav.addObject("currentPageNum", searchVO.getPageNum());
+		mav.addObject("startPageNum", 1);
+		mav.addObject("endPageNum", maxPage);
+		mav.addObject("searchWord", searchVO.getSearchWord());
 		
 		return mav;
 	}

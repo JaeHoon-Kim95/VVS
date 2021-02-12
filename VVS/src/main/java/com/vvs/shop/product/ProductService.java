@@ -12,6 +12,10 @@ public class ProductService {
 
 	@Autowired ProductDao productDao;
 	
+	public int doSelectListWithPagingCount(SearchVO searchVO) {
+		return productDao.doSelectListWithPagingCount(searchVO);
+	}
+	
 	public int doInsertOptions(OptionsVO optionsVO) {
 		return productDao.doInsertOptions(optionsVO);
 	}

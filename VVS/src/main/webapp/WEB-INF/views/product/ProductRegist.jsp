@@ -28,9 +28,12 @@
 </head>
 
 <body>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
-	<h1>Regist Page</h1>
+	<br><br><br><br>
+	<h1>상품 등록</h1>
+	<hr>
 
 
 
@@ -64,17 +67,29 @@
 				
 				<div id="optionsTable">
 					<div id="1">
-						
 						<label><strong>옵션(적어도 하나는 입력해 주세요!)</strong></label>
-						<input id="plusBtn" type="button" value="+"><input id="minusBtn" type="button" value="-"><br>
-						<label>색상:</label><input type="text" id="color" name="optionsList[0].color">
-						<label>사이즈:</label><input type="text" id="sizes" name="optionsList[0].sizes">
-						<label>재고:</label><input type="text" id="qty" name="optionsList[0].qty">
+						<input class="btn btn-info" id="plusBtn" type="button" value="+"><span>&nbsp;&nbsp;</span><input class="btn btn-info" id="minusBtn" type="button" value="-"><br>
+						<hr>
+						<div class="row">
+							<div class="col">
+								<label>색상</label>
+								<input class="form-control" type="text" id="color" name="optionsList[0].color">
+							</div>
+							<div class="col">
+								<label>사이즈</label>
+								<input class="form-control" type="text" id="sizes" name="optionsList[0].sizes">
+							</div>
+							<div class="col">
+								<label>수량</label>
+								<input class="form-control" type="text" id="qty" name="optionsList[0].qty">
+							</div>
+						</div>
 					</div>
 				</div>
 				
-				<input type='submit' value='바로 등록'>
-				<br><br><br>
+				<hr>
+				<input class="btn btn-info" type='submit' value='바로 등록'>
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			</form:form>
 			
 			<div>
@@ -97,16 +112,28 @@
 				$("#categoryNum").val(changeValue);
 
 			}
-	
+		
 		$(document).on("click","#plusBtn" ,function(){
 				var optionsNum = $("#optionsNum").val();
 				optionsNum *= 1;
 				var html = "";
 				html += "<div id="+(optionsNum + 1)+">";
-				html += "<label>색상:</label><input type='text' name='optionsList["+optionsNum+"].color'>";
-				html += "<label>사이즈:</label><input type='text' name='optionsList["+optionsNum+"].sizes'>";
-				html += "<label>재고:</label><input type='text' name='optionsList["+optionsNum+"].qty'>";
+				html += "<div class='row'>";
+				html += "<div class='col'>";
+				html += "<label>색상</label>";
+				html += "<input class='form-control' type='text' name='optionsList["+optionsNum+"].color'>";
 				html += "</div>";
+				html += "<div class='col'>";
+				html += "<label>색상</label>";
+				html += "<input class='form-control' type='text' name='optionsList["+optionsNum+"].sizes'>";
+				html += "</div>";
+				html += "<div class='col'>";
+				html += "<label>색상</label>";
+				html += "<input class='form-control' type='text' name='optionsList["+optionsNum+"].qty'>";
+				html += "</div>";
+				html += "</div>";
+				html += "</div>";
+				
 				$("#optionsTable").append(html);				
 				
 				$("#optionsNum").val(optionsNum + 1);

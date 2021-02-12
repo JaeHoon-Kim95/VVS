@@ -104,6 +104,26 @@
 	    product
 	</select>
 	
+	<select id="doSelectListWithPagingCount" parameterType="SearchVO" resultType="int">
+		Select COUNT(*)
+		From product p , product_detail d
+		Where p.product_num = d.product_num(+)
+		<trim prefix="And (" suffix=")" prefixOverrides="And">
+			<trim prefix="And">
+				<if test="searchWord != null">
+						product_name like '%' || #{searchWord} || '%'
+				</if>
+				<if test="minPrice != 0">
+						And p.price >= #{minPrice}
+				</if>
+				<if test="maxPrice != 0">
+						And p.price <![CDATA[<=]]> #{maxPrice}
+				</if>
+			</trim>
+		</trim>
+		Order By reg_dt
+	</select>
+	
 	<select id="doSelectListWithPaging" parameterType="SearchVO" resultType="ProductVO">
 	Select B.*
 	From
