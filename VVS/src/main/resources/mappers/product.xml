@@ -21,6 +21,15 @@
 		
 	</insert>
 
+	<update id="doUpdateDetail" parameterType="ProductVO">
+		UPDATE product_detail
+		SET
+		    semi_info = #{semiInfo},
+		    main_info = #{mainInfo}
+		WHERE
+        product_num = #{productNum}
+	</update>
+
 	<insert id="doInsertDetail" parameterType="ProductDetailVO">
 		insert into product_detail (
 			product_num,
@@ -73,12 +82,8 @@
 	<update id="doUpdate" parameterType="ProductVO">
 	UPDATE product
 	SET
-		category_num = #{categoryNum},
 	    product_name = #{productName},
-	    discount_rate = #{discountRate},
-	    discount = #{discount},
-	    price = #{price},
-	    discount_price = #{discountPrice}	    
+	    price = #{price} 
 	WHERE
         product_num = #{productNum}
 	</update>

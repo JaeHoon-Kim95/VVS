@@ -31,6 +31,9 @@
 		<input type="hidden" value="0" id="optionSeq" name="optionSeq">
 		<input type="hidden" value="1" id="qty" name="qty">
 	</form>
+	<form name="moveToUpdatePageForm" action="/shop/product/moveToUpdatePage.do" method="get">
+		<input type="hidden" value="${outVO.productNum }" name="productNum">
+	</form>
 	
 	<!-- Page Content -->
 	<div class="container">
@@ -97,6 +100,7 @@
 				
 				<button id="doInsertCart" type="button" class="btn btn-block btn-lg btn-outline-info">장바구니 담기</button>
 				<button type="button" class="btn btn-block btn-lg btn-outline-info">바로 구매</button>
+				<button id="moveToUpdate" type="button" class="btn btn-block btn-lg btn-outline-info">수정</button>
 			</div>
 			<!-- product detail -->
 		</div>
@@ -120,7 +124,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
+	$("#moveToUpdate").on("click", function(){
+			moveToUpdatePage();
+
+		})
 	
+	function moveToUpdatePage(){
+			
+			var frm = document.moveToUpdatePageForm;
+			frm.submit();
+		}
 	
 	// Insert Cart
 	$("#doInsertCart").on("click", function(){

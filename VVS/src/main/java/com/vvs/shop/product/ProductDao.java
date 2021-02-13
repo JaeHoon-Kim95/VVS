@@ -24,6 +24,19 @@ public class ProductDao {
 
 	private final String NAMESPACE = "com.vvs.shop.product.";
 
+	public int doUpdateDetail(ProductVO productVO) {
+		LOG.debug("ProductDao - doUpdateDetail");
+		LOG.debug("param - ProductVO : " + productVO);
+		
+		String statement = NAMESPACE + "doUpdateDetail";
+		int flag = sqlSessionTemplate.update(statement, productVO);
+		
+		LOG.debug("result - flag : " + flag);
+		
+		return flag;
+		
+	}
+	
 	public int doSelectListWithPagingCount(SearchVO searchVO) {
 		
 		LOG.debug("ProductDao - doSelectListWithPagingCount");

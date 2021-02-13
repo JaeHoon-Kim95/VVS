@@ -23,6 +23,83 @@ public class ProductController {
 	@Autowired ProductService productService;
 	@Autowired SearchVO searchVO;
 	
+	// 상품 수정
+	@RequestMapping(value = "product/doUpdate.do", method = RequestMethod.POST)
+	public ModelAndView doUpdate(@RequestParam("productName") String productName,
+								 @RequestParam("price") int price,
+								 @RequestParam("semiInfo") String semiInfo,
+								 @RequestParam("mainInfo") String mainInfo,
+								 @RequestParam("productNum") int productNum) {
+		
+		LOG.debug("Current controller : product/doUpdate.do");
+		
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
+		productVO.setProductName(productName);
+		productVO.setPrice(price);
+		productVO.setSemiInfo(semiInfo);
+		productVO.setMainInfo(mainInfo);
+		
+		productService.doUpdate(productVO);
+		productService.doUpdateDetail(productVO);
+		
+		SearchVO searchVO = new SearchVO();
+		searchVO.setPageSize(6);
+		searchVO.setPageNum(1);
+		searchVO.setMinPrice(0);
+		searchVO.setMaxPrice(0);
+		searchVO.setSearchWord("");
+		
+		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
+		int totalNum = productService.doSelectListWithPagingCount(searchVO);
+		
+		double a = (double) totalNum / (double) searchVO.getPageSize();
+		
+		double maxPage = Math.ceil(a);
+		maxPage /= 1;
+		
+		for(ProductVO pvo : outList) {
+			String categoryName = productService.getCategoryName(pvo.getCategoryNum());
+			pvo.setCategoryName(categoryName);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductList");
+		mav.addObject("productList", outList);
+		mav.addObject("currentPageNum", searchVO.getPageNum());
+		mav.addObject("startPageNum", 1);
+		mav.addObject("endPageNum", maxPage);
+		mav.addObject("searchWord", searchVO.getSearchWord());
+		
+		return mav;
+	}
+	
+	
+	// 수정 페이지 이동
+	@RequestMapping(value = "product/moveToUpdatePage.do", method = RequestMethod.GET)
+	public ModelAndView moveToUpdatePage(@RequestParam("productNum") int productNum) {
+		
+		LOG.debug("Current controller : product/moveToUpdatePage.do");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductUpdate");
+		
+		ProductVO productVO = new ProductVO();
+		OptionsVO optionsVO = new OptionsVO();
+		productVO.setProductNum(productNum);
+		optionsVO.setProductNum(productNum);
+		
+		List<OptionsVO> optionsList = productService.doSelectListOptions(optionsVO);
+		productVO = productService.doSelectOne(productVO);
+		String categoryName = productService.getCategoryName(productVO.getCategoryNum());
+		
+		mav.addObject("optionsList", optionsList);
+		mav.addObject("productVO", productVO);
+		mav.addObject("categoryName", categoryName);
+		
+		return mav;
+	}
+	
 	// 메인 페이지 부르기
 	@RequestMapping(value = "product/moveToMainPage.do", method = RequestMethod.GET)
 	public ModelAndView moveToMainPage() {
