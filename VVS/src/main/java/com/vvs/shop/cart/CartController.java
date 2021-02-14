@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -20,6 +21,24 @@ public class CartController {
 
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired CartService cartService;
+	
+	// 카트에 넣기
+	@RequestMapping(value = "cart/doInsertCart.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String doInsertCart(CartVO cartVO, HttpServletRequest req) {
+		
+		// for Test -----------------------
+		// 세션으로 값 찾아 넣을 것.
+		HttpSession session = req.getSession();
+		session.setAttribute("memId", "cartTest");
+		String memberId = (String) session.getAttribute("memId");
+		cartVO.setMemberId(memberId);		
+		// for Test -----------------------
+		
+		cartService.doInsert(cartVO);
+		
+		return null;
+	}
 	
 	// 장바구니 삭제하기
 	@RequestMapping(value = "cart/doDeleteCart.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")

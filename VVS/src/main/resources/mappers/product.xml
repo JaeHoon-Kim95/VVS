@@ -3,6 +3,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.vvs.shop.product">
+
+	<insert id="doInsertOptions" parameterType="OptionsVO">
+		insert into OPTIONS (
+			color,
+			sizes,
+			product_num,
+			seq,
+			qty
+		) values (
+			#{color},
+			#{sizes},
+			#{productNum},
+			OPTIONS_SEQ.nextVal,
+			#{qty}
+		)
+		
+	</insert>
+
+	<update id="doUpdateDetail" parameterType="ProductVO">
+		UPDATE product_detail
+		SET
+		    semi_info = #{semiInfo},
+		    main_info = #{mainInfo}
+		WHERE
+        product_num = #{productNum}
+	</update>
+
 	<insert id="doInsertDetail" parameterType="ProductDetailVO">
 		insert into product_detail (
 			product_num,
@@ -55,12 +82,8 @@
 	<update id="doUpdate" parameterType="ProductVO">
 	UPDATE product
 	SET
-		category_num = #{categoryNum},
 	    product_name = #{productName},
-	    discount_rate = #{discountRate},
-	    discount = #{discount},
-	    price = #{price},
-	    discount_price = #{discountPrice}	    
+	    price = #{price} 
 	WHERE
         product_num = #{productNum}
 	</update>
@@ -84,6 +107,26 @@
 	    discount_price
 	FROM
 	    product
+	</select>
+	
+	<select id="doSelectListWithPagingCount" parameterType="SearchVO" resultType="int">
+		Select COUNT(*)
+		From product p , product_detail d
+		Where p.product_num = d.product_num(+)
+		<trim prefix="And (" suffix=")" prefixOverrides="And">
+			<trim prefix="And">
+				<if test="searchWord != null">
+						product_name like '%' || #{searchWord} || '%'
+				</if>
+				<if test="minPrice != 0">
+						And p.price >= #{minPrice}
+				</if>
+				<if test="maxPrice != 0">
+						And p.price <![CDATA[<=]]> #{maxPrice}
+				</if>
+			</trim>
+		</trim>
+		Order By reg_dt
 	</select>
 	
 	<select id="doSelectListWithPaging" parameterType="SearchVO" resultType="ProductVO">

@@ -25,16 +25,17 @@
 </head>
 
 <body>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
 <br><br><br><br>
-		<form name="searchData" id="searchData" action="/shop/product/doSearch.do" method="get">
-			<label>pageSize : </label><input type="text" id="pageSize" name="pageSize" value="3">
-			<label>pageNum : </label><input type="text" id="pageNum" name="pageNum" value="1">
-			<label>searchWord : </label><input type="text" id="searchWord" name="searchWord">
-			<label>minPrice : </label><input type="text" id="minPrice" name="minPrice" value="0">
-			<label>maxPrice : </label><input type="text" id="maxPrice" name="maxPrice" value="0">
-			<label>검색 버튼</label><input type="button" id="searchBtn" name="searchBtn" value="검색">
+		<form class="form-inline" name="searchData" id="searchData" action="/shop/product/doSearch.do" method="get">
+			<input type="hidden" id="pageSize" name="pageSize" value="10">
+			<input type="hidden" id="pageNum" name="pageNum" value="1">
+			<input type="hidden" id="minPrice" name="minPrice" value="0">
+			<input type="hidden" id="maxPrice" name="maxPrice" value="0">
+			<input class="form-control mr-sm-2" id="searchWord" name="searchWord" type="search" placeholder="Search" aria-label="Search" value="${searchWord }">
+    		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 
 		<hr>
@@ -43,28 +44,47 @@
 			<c:forEach var="list" items="${productList }">
 				<div class="col-lg-4 col-md-6 mb-4">
 					<div class="card h-100">
-						<a href="#"><img class="card-img-top"
-							src="http://placehold.it/700x400" alt=""></a>
+						<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><img class="card-img-top" height="400"
+							src="${hContext }/resources/img/insta-1.jpg" alt=""></a>
 						<div class="card-body">
 							<h4 class="card-title">
 								<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
 							</h4>
-							<h5><c:out value="${list.price }"/></h5>
-							<p class="card-text"><c:out value="${list.categoryNum }"/></p>
+							<h5><c:out value="${list.price }"/> 원</h5>
+							<p class="card-text"><c:out value="${list.categoryName }"/></p>
 						</div>
 						<div class="card-footer">
-							<small class="text-muted">&#9733; &#9733; &#9733; &#9733;
-								&#9734;</small>
+							<small class="text-muted"></small>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-
+			
+			
+			
+			
 		</div>
 		<!-- row end -->
+		<div class="row">
+			<div class="mx-auto">
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }" step="1">
+							<c:choose>
+								<c:when test="${i eq currentPageNum }"><li class="page-item disabled"><a class="page-link" href="#">${i }</a></li></c:when>
+								<c:otherwise><li class="page-item"><a class="page-link" href="javascript:goPage(${i})">${i }</a></li></c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		
 		<div>
 			<input type="button" value="상품 등록" id="moveToproductRegistPage">
 		</div>
+		
 	</div>
 	<!-- container end -->
 
@@ -73,6 +93,16 @@
 	<script src="${hContext}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
+	
+
+		window.onload = function(){
+			if (self.name != 'reload') {
+		        self.name = 'reload';
+		        self.location.reload(true);
+		    }
+		    else self.name = ''; 
+		}
+		
 		$("#moveToproductRegistPage").on("click",function(){
 				var goUrl = "/shop/product/moveToproductRegistPage.do";
 				window.location.href = goUrl;
@@ -81,6 +111,12 @@
 				var frm = document.searchData;
 				frm.submit();
 			})
+			
+		function goPage(pageNum){
+				$("#pageNum").val(pageNum);
+				var frm = document.searchData;
+				frm.submit();
+			}
 	</script>
 </body>
 

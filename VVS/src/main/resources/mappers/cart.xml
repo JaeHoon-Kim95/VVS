@@ -9,12 +9,14 @@
 	    seq,
 	    member_id,
 	    product_num,
-	    qty
+	    qty,
+	    option_seq
 	) VALUES (
-	    #{seq},
+	    cart_seq.nextVal,
 	    #{memberId},
 	    #{productNum},
-	    #{qty}
+	    #{qty},
+	    #{optionSeq}
 	)
 	</insert>
 	

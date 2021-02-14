@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vvs.shop.cart.CartDao;
 import com.vvs.shop.cart.CartVO;
+import com.vvs.shop.product.Category;
 import com.vvs.shop.product.ProductDao;
 
 @Transactional
@@ -29,6 +31,24 @@ public class CartProductTest {
 	@Autowired ProductDao productDao;
 	
 	@Test
+	public void Test2() {
+		System.out.println(Category.아우터.getName());
+		System.out.println(Category.아우터.getCategoryNum());
+		System.out.println(Category.패딩.getName());
+		System.out.println(Category.패딩.getCategoryNum());
+		
+		Category.values();
+		
+		System.out.println("향상된 for문");
+		for(Category ca : Category.values()) {
+			System.out.println(ca.getCategoryNum());
+			System.out.println(ca.name());
+		}
+		
+	}
+	
+	@Test
+	@Ignore
 	public void Test() {
 		
 		List<CartVO> inList = new ArrayList<CartVO>();

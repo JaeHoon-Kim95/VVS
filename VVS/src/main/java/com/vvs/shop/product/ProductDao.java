@@ -24,6 +24,47 @@ public class ProductDao {
 
 	private final String NAMESPACE = "com.vvs.shop.product.";
 
+	public int doUpdateDetail(ProductVO productVO) {
+		LOG.debug("ProductDao - doUpdateDetail");
+		LOG.debug("param - ProductVO : " + productVO);
+		
+		String statement = NAMESPACE + "doUpdateDetail";
+		int flag = sqlSessionTemplate.update(statement, productVO);
+		
+		LOG.debug("result - flag : " + flag);
+		
+		return flag;
+		
+	}
+	
+	public int doSelectListWithPagingCount(SearchVO searchVO) {
+		
+		LOG.debug("ProductDao - doSelectListWithPagingCount");
+		LOG.debug("param - SearchVO : " + searchVO);
+		
+		String statement = NAMESPACE + "doSelectListWithPagingCount";
+		int count = sqlSessionTemplate.selectOne(statement, searchVO);
+		
+		LOG.debug("result - count : " + count);
+		
+		return count;
+		
+	}
+	
+	public int doInsertOptions(OptionsVO optionsVO) {
+		
+		LOG.debug("ProductDao - doInsertOptions");
+		LOG.debug("param - optionsVO : " + optionsVO);
+		
+		String statement = NAMESPACE + "doInsertOptions";
+		int flag = sqlSessionTemplate.insert(statement, optionsVO);
+		
+		LOG.debug("result - flag : " + flag);
+		
+		return flag;
+		
+	}
+	
 	public int doInsertDetail(ProductDetailVO productDetailVO) {
 		
 		LOG.debug("ProductDao - doInsertDetail");
