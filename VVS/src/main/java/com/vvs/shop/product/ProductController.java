@@ -219,7 +219,7 @@ public class ProductController {
 	// 상품 등록2
 	@RequestMapping(value = "product/doRegistTest.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String doRegistTest(ProductVO productVO) {
+	public ModelAndView doRegistTest(ProductVO productVO) {
 		
 		LOG.debug("into vo : " + productVO);
 		
@@ -239,9 +239,14 @@ public class ProductController {
 			productService.doInsertOptions(vo);
 		}
 		
+		String categoryName = productService.getCategoryName(productVO.getCategoryNum());
 		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("product/ProductDetail");
+		mav.addObject("outVO", productVO);
+		mav.addObject("categoryName", categoryName);
 		
-		return null;
+		return mav;
 	}
 	
 	

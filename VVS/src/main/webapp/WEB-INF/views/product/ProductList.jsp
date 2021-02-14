@@ -82,7 +82,8 @@
 		
 		
 		<div>
-			<input type="button" value="상품 등록" id="moveToproductRegistPage">
+			<input class="btn btn-info" type="button" value="상품 등록" id="moveToproductRegistPage">
+			<br><br><br><br><br>
 		</div>
 		
 	</div>

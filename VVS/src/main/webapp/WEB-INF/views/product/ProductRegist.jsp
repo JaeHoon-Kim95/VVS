@@ -55,7 +55,7 @@
 				    </div>
 				</div>
 				
-				<input type="text" value="0" name="categoryNum" id="categoryNum" readonly><br>
+				<input type="hidden" value="0" name="categoryNum" id="categoryNum" readonly><br>
 				<label><strong>- 할인 유무</strong></label><br>
 				<input class="form-control" type="text" value="0" name="discountRate" id="discountRate" readonly="readonly"><br>
 				<label><strong>- 할인률</strong></label><br>
@@ -124,11 +124,11 @@
 				html += "<input class='form-control' type='text' name='optionsList["+optionsNum+"].color'>";
 				html += "</div>";
 				html += "<div class='col'>";
-				html += "<label>색상</label>";
+				html += "<label>사이즈</label>";
 				html += "<input class='form-control' type='text' name='optionsList["+optionsNum+"].sizes'>";
 				html += "</div>";
 				html += "<div class='col'>";
-				html += "<label>색상</label>";
+				html += "<label>수량</label>";
 				html += "<input class='form-control' type='text' name='optionsList["+optionsNum+"].qty'>";
 				html += "</div>";
 				html += "</div>";
