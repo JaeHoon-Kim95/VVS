@@ -15,6 +15,11 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="${hContext}/main/fileUp.do">testFile
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
           </li>
