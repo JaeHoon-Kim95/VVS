@@ -13,14 +13,14 @@ public class UploadFileUtils {
  static final int THUMB_WIDTH = 300;
  static final int THUMB_HEIGHT = 300;
  
- public static String fileUpload(String uploadPath,
+ public static String fileUpload(String path2,
          String fileName,
          byte[] fileData, String ymdPath) throws Exception {
 
   UUID uid = UUID.randomUUID();
   
   String newFileName = uid + "_" + fileName;
-  String imgPath = uploadPath + ymdPath;
+  String imgPath = path2 + ymdPath;
 
   File target = new File(imgPath, newFileName);
   FileCopyUtils.copy(fileData, target);
@@ -37,24 +37,24 @@ public class UploadFileUtils {
   return newFileName;
  }
 
- public static String calcPath(String uploadPath) {
+ public static String calcPath(String path2) {
   Calendar cal = Calendar.getInstance();
   String yearPath = File.separator + cal.get(Calendar.YEAR);
   String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
   String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 
-  makeDir(uploadPath, yearPath, monthPath, datePath);
-  makeDir(uploadPath, yearPath, monthPath, datePath + "\\s");
+  makeDir(path2, yearPath, monthPath, datePath);
+  makeDir(path2, yearPath, monthPath, datePath + "\\s");
 
   return datePath;
  }
 
- private static void makeDir(String uploadPath, String... paths) {
+ private static void makeDir(String path2, String... paths) {
 
   if (new File(paths[paths.length - 1]).exists()) { return; }
 
   for (String path : paths) {
-   File dirPath = new File(uploadPath + path);
+   File dirPath = new File(path2 + path);
 
    if (!dirPath.exists()) {
     dirPath.mkdir();
