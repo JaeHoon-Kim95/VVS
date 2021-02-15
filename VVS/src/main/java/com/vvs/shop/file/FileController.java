@@ -28,15 +28,16 @@ public class FileController {
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
-
+		
 		if(file != null) {
 		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 		} else {
 		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
 
-		fileVO.setVvsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		fileVO.setVvsThunImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		fileVO.setThunImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		fileVO.setProductNum(43);
 		LOG.debug("fileVO"+fileVO);
 		fileServiceImpl.doUpload(fileVO);
 		

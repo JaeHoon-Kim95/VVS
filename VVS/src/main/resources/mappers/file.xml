@@ -5,14 +5,20 @@
 <mapper namespace="com.vvs.shop.file">
 	<insert id="doUpload" parameterType="FileVO">
 		INSERT INTO files (
-			seq,
+			PRODUCT_NUM,		
 		    IMG,
 		    THUNIMG
-		) VALUES (
-			#{seq},
-		    #{vvsImg},
-		    #{vvsThunImg}
+		) VALUES (		
+			#{productNum},	
+		    #{img},
+		    #{thunImg}
 		)
 	</insert>
+	
+	<select id="doSelectList" parameterType="FileVO" resultType="FileVO">
+		SELECT *
+			   FROM FILES
+			  
+	</select>
 
 </mapper>

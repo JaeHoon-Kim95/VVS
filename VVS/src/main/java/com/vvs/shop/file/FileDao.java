@@ -1,5 +1,7 @@
 package com.vvs.shop.file;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,5 +36,12 @@ final Logger LOG = LoggerFactory.getLogger(MemberDao.class);
 		 LOG.debug("flag"+flag);
 		 
 		 return flag;
+	}
+	
+	public List<FileVO> doSelectList(FileVO fileVO){
+		String statement = NAMESPACE +"doSelectList";
+		
+		List<FileVO> outVO = sqlSessionTemplate.selectList(statement,fileVO);
+		return outVO;
 	}
 }

@@ -87,6 +87,27 @@
 					</div>
 				</div>
 				
+				<div class="inputArea">
+				<label for="vvsImg">이미지</label>
+				<input type="file" id="vvsImg" name="file" />
+				<div class="select_img"><img src="" /></div>
+				
+				<script>
+					$("#vvsImg").change(function(){
+						if(this.files && this.files[0]) {
+							var reader = new FileReader;
+							reader.onload = function(data) {
+								$(".select_img img").attr("src", data.target.result).width(500);								
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					});
+				</script>
+				
+				<%=request.getRealPath("/") %>
+				
+			</div>
+				
 				<hr>
 				<input class="btn btn-info" type='submit' value='바로 등록'>
 				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
