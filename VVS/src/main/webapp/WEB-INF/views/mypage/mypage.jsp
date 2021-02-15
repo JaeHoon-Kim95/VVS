@@ -71,7 +71,7 @@
 						    		</c:forEach>
 						    			
 						    		</td>
-						    		<td class="text-center">${OrdersVO.price}원</td>
+						    		<td class="text-center">${OrdersVO.price*OrdersVO.qty}원</td>
 						    		<td class="text-center">${OrdersVO.qty}개</td>
 						    		<td class="text-center">
 						    		${OrdersVO.orderSt}						    		
