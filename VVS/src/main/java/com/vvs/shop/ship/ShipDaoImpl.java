@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.vvs.shop.cmn.SearchVO;
+
 
 
 
@@ -46,7 +48,7 @@ public class ShipDaoImpl {
 	 */
 	public int doInsert(ShipVO shipVO) {
 		LOG.debug("=ShipVO doInsert=");
-		//µî·Ï : namespace+id = com.vvs.shop.orders.doInsert
+		//ï¿½ï¿½ï¿½ : namespace+id = com.vvs.shop.orders.doInsert
 		String statement = NAMESPACE +".doInsert";
 		LOG.debug("=ShipVO statement="+statement);
 		LOG.debug("=ShipVO param ==="+shipVO);
@@ -58,13 +60,13 @@ public class ShipDaoImpl {
 	}
 	
 	/**
-	 * »èÁ¦
+	 * ï¿½ï¿½ï¿½ï¿½
 	 * @param ordersVO
 	 * @return
 	 */
 	public int doDelete(ShipVO shipVO) {
 		LOG.debug("=ShipVO doDelete=");
-		//»èÁ¦ : namespace+id = com.vvs.shop.orders.doDelete
+		//ï¿½ï¿½ï¿½ï¿½ : namespace+id = com.vvs.shop.orders.doDelete
 		String statement = NAMESPACE +".doDelete";
 		LOG.debug("=ShipVO statement="+statement);
 		LOG.debug("=ShipVO param=="+shipVO);
@@ -75,7 +77,7 @@ public class ShipDaoImpl {
 	}
 	
 	/**
-	 *  ¼öÁ¤
+	 *  ï¿½ï¿½ï¿½ï¿½
 	 * @param ordersVO
 	 * @return
 	 */
@@ -93,14 +95,14 @@ public class ShipDaoImpl {
 	}
 	
 	/**
-	 * ¹è¼Û ´Ü°ÇÁ¶È¸
+	 * ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½È¸
 	 * @param orderNum
 	 * @return
 	 */
 	public ShipVO doSelectOne(ShipVO shipVO) {
 		LOG.debug("=ShipVO doSelectOne=");
 		
-		//´Ü°ÇÁ¶È¸ : namespace+id = com.vvs.shop.orders.doSelectOne		
+		//ï¿½Ü°ï¿½ï¿½ï¿½È¸ : namespace+id = com.vvs.shop.orders.doSelectOne		
 		String statement = NAMESPACE +".doSelectOne";
 		LOG.debug("=ShipVO statement="+statement);
 		LOG.debug("=ShipVO param=="+shipVO);
@@ -113,18 +115,38 @@ public class ShipDaoImpl {
 	}
 	
 	/**
-	 * ¹è¼Û ÀüÃ¼Á¶È¸
+	 * ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½È¸
 	 * @param orderNum
 	 * @return
 	 */
 	public List<ShipVO> doSelectList(ShipVO shipVO) {
 		LOG.debug("=ShipVO doSelectList=");
-		//µî·Ï : namespace+id = com.vvs.shop.orders.doSelectList
+		//ï¿½ï¿½ï¿½ : namespace+id = com.vvs.shop.orders.doSelectList
 		String statement = NAMESPACE +".doSelectList";		
 		LOG.debug("=ShipVO statement="+statement);
 		LOG.debug("-ShipVO param-\n" + shipVO);
 		
 		List<ShipVO> list = sqlSessionTemplate.selectList(statement,shipVO);
+		
+		for(ShipVO vo : list) {
+			LOG.debug("=ShipVO doSelectList vo="+vo);
+		}
+		return list;
+	}
+	
+	public List<ShipVO> doSelectList2(SearchVO search) {
+		LOG.debug("=ShipVO doSelectList=");
+		
+		ShipVO ship = new ShipVO();
+		
+		ship.setMemberId(search.getSearchWord());
+		
+		//ï¿½ï¿½ï¿½ : namespace+id = com.vvs.shop.orders.doSelectList
+		String statement = NAMESPACE +".doSelectList";		
+		LOG.debug("=ShipVO statement="+statement);
+		LOG.debug("-ShipVO param-\n" + ship);
+		
+		List<ShipVO> list = sqlSessionTemplate.selectList(statement,ship);
 		
 		for(ShipVO vo : list) {
 			LOG.debug("=ShipVO doSelectList vo="+vo);

@@ -2,6 +2,8 @@ package com.vvs.shop.ship;
 
 import java.util.List;
 
+import com.vvs.shop.cmn.SearchVO;
+
 public interface ShipService {
 	
 	/**
@@ -10,19 +12,21 @@ public interface ShipService {
 	public int doInsert(ShipVO shipVO);
 	
 	/**
-	 * ¹è¼ÛÃë¼Ò
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int doDelete(ShipVO shipVO);
 	
 	public int doUpdate(ShipVO shipVO);
 	
 	/**
-	 * ¹è¼Û ´Ü°ÇÁ¶È¸
+	 * ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½È¸
 	 */
 	public ShipVO doSelectOne(ShipVO shipVO);
 	
 	/**
-	 * ¹è¼Û ÀüÃ¼Á¶È¸
+	 * ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½È¸
 	 */
 	public List<ShipVO> doSelectList(ShipVO shipVO);
+	
+	public List<ShipVO> doSelectList2(SearchVO search);
 }

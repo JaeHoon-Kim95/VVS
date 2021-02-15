@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vvs.shop.cmn.SearchVO;
+
 @Service("ShipServiceImpl")
 public class ShipServiceImpl implements ShipService {
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
@@ -44,4 +46,9 @@ public class ShipServiceImpl implements ShipService {
 		return shipDao.doSelectList(shipVO);
 	}
 
+	@Override
+	public List<ShipVO> doSelectList2(SearchVO search) {
+		// TODO Auto-generated method stub
+		return shipDao.doSelectList2(search);
+	}
 }

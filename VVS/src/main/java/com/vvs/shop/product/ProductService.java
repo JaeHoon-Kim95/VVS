@@ -12,6 +12,10 @@ public class ProductService {
 
 	@Autowired ProductDao productDao;
 	
+	public List<OptionsVO> doSelectListOptions(OptionsVO optionsVO){
+		return productDao.doSelectListOptions(optionsVO);
+	}
+	
 	public List<ProductVO> doSelectListWithPaging(SearchVO searchVO){
 		return productDao.doSelectListWithPaging(searchVO);
 	}

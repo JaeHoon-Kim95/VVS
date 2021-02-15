@@ -39,14 +39,14 @@
 					<input style="width:150px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="REGISTER" id="registerBtn">
 					<input style="width:150px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="SIGN IN" id="loginBtn">				
 				</form>
+			</div>
 		</div>
 	</div>
-	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
-	function moveToRegister(){
+	$("#registerBtn").on("click",function(){
 		window.location.href = "${hContext}/member/registerPage.do";
-	}
+	});
 
 	$("#loginBtn").on("click",function(){
 		if($("#inputId").val()==''){

@@ -64,9 +64,16 @@
 	<update id="doUpdate" parameterType="MemberVO">
 		UPDATE MEMBER SET MEMBER_PW = #{memberPw},
 						  NAME = #{name},
-						  EAMIL = #{email},
+						  EMAIL = #{email},
 						  PHONE = #{phone},
 						  ADDR_NUM = #{addrNum},
+						  ADDR_ROAD = #{addrRoad},
+						  ADDR_DETAIL = #{addrDetail}
+			   WHERE MEMBER_ID = #{memberId}		  
+	</update>
+	
+	<update id="doUpdateAddress" parameterType="MemberVO">
+		UPDATE MEMBER SET ADDR_NUM = #{addrNum},
 						  ADDR_ROAD = #{addrRoad},
 						  ADDR_DETAIL = #{addrDetail}
 			   WHERE MEMBER_ID = #{memberId}		  

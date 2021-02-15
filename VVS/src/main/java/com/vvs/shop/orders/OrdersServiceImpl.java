@@ -37,14 +37,19 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<OrdersProductVO> doSelectList(SearchVO search) {
-		return ordersDao.doSelectList(search);
+	public List<OrdersProductVO> doSelectList(int displayPost, int postNum,SearchVO search) {
+		return ordersDao.doSelectList(displayPost, postNum, search);
 	}
 
 	@Override
 	public List<OrdersVO> doSelectList2(OrdersVO ordersVO) {
 		
 		return ordersDao.doSelectList2(ordersVO);
+	}
+
+	@Override
+	public int totalCnt() {
+		return ordersDao.totalCnt();
 	}
 
 }

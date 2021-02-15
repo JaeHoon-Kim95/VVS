@@ -29,7 +29,9 @@ public interface OrdersService {
 	/**
 	 * �ֹ� ��ü��ȸ
 	 */
-	public List<OrdersProductVO> doSelectList(SearchVO search);
+	public List<OrdersProductVO> doSelectList(int displayPost, int postNum,SearchVO search);
+	
+	public int totalCnt();
 	
 	public List<OrdersVO> doSelectList2(OrdersVO ordersVO);
 	

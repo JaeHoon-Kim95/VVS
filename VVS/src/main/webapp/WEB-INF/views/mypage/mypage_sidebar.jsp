@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<c:set var="hContext" value="${pageContext.request.contextPath }" ></c:set> 
 <style>
 * {padding:0;margin:0;}
 	
@@ -34,21 +34,52 @@
 	 <!-- Divider -->
      <hr class="sidebar-divider">
      
-	<li><a href="#"><font color="gray";>주문내역 조회</font></a>
+	<li><a href="${hContext}/cart/moveToCart.do"><font color="gray";>장바구니</font></a>
+	</li>
+	 
+	 <!-- Divider -->
+     <hr class="sidebar-divider">
+     
+	<li>
+		<form name="orderMove" action="${hContext}/orders/ordersView.do">
+			<input type="hidden" value="1" name="num">
+		</form>
+		<a id="orderMove" type="button"><font color="gray";>주문내역 조회</font></a>
 	</li>
 	
 	<!-- Divider -->
      <hr class="sidebar-divider">
 	
-	<li><a href="#"><font color="gray";>회원정보</font></a>
+	<li><a href="${hContext}/member/editCheck.do"><font color="gray";>회원정보 수정</font></a>
 	</li>
 	
 	<!-- Divider -->
      <hr class="sidebar-divider">
 	
-	<li><a href="#"><font color="gray";>배송 주소록 관리</a>
+	<li><a href="${hContext}/ship/address.do"><font color="gray";>배송 주소록 관리</a>
 
 	</li>
 </ul>
 </aside>
 </div>
+<!-- commit test -->
+	 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+    <script src="${hContext}/resources/js/bootstrap.min.js"></script>
+	
+  <script type="text/javascript">
+  $("#loginView").on("click",function(){
+	  alert("로그인이 필요합니다.");
+	  window.location.href="${hContext}/member/loginPage.do"
+  });
+
+  $("#orderMove").on("click",function(){	  
+	  doSelectListorder();
+	  });
+  function doSelectListorder(){
+  	var frm = document.orderMove;
+  	frm.submit();
+  }
+  
+  </script>

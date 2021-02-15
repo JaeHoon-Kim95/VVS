@@ -31,16 +31,25 @@ public class ShipController {
 	OrdersServiceImpl ordersService;
 	
 	
+	@RequestMapping(value="ship/address.do", method = RequestMethod.GET)
+	public ModelAndView shipAddress(HttpServletRequest req) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("ship/shipaddress");
+		return mav;
+	}
+	
 	@RequestMapping(value="ship/shipView.do", method = RequestMethod.GET)
 	public ModelAndView shipView(HttpServletRequest req) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		SearchVO search = new SearchVO();
-		search.setSearchWord("jhs");
-		List<OrdersProductVO> orderList = ordersService.doSelectList(search);
+		//SearchVO search = new SearchVO();
+		//search.setSearchWord("jhs");
+		//List<OrdersProductVO> orderList = ordersService.doSelectList(search);
 		
-		mav.setViewName("main/main");
+		mav.setViewName("ship/sweetTrackerAPI");
 		//mav.addObject("orderList", orderList);
 		return mav;
 	}

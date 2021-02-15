@@ -15,29 +15,16 @@ public class ProductVO{
 	private int discountPrice;
 	private String semiInfo;
 	private String mainInfo;
+	private String color;
+	private String sizes;
+	private int qty;
 
 	public ProductVO() {
 		super();
 	}
 
-	public String getSemiInfo() {
-		return semiInfo;
-	}
-
-	public void setSemiInfo(String semiInfo) {
-		this.semiInfo = semiInfo;
-	}
-
-	public String getMainInfo() {
-		return mainInfo;
-	}
-
-	public void setMainInfo(String mainInfo) {
-		this.mainInfo = mainInfo;
-	}
-
 	public ProductVO(int productNum, int categoryNum, String productName, int discountRate, int discount, String regDt,
-			int price, int discountPrice) {
+			int price, int discountPrice, String semiInfo, String mainInfo, String color, String sizes, int qty) {
 		super();
 		this.productNum = productNum;
 		this.categoryNum = categoryNum;
@@ -47,6 +34,11 @@ public class ProductVO{
 		this.regDt = regDt;
 		this.price = price;
 		this.discountPrice = discountPrice;
+		this.semiInfo = semiInfo;
+		this.mainInfo = mainInfo;
+		this.color = color;
+		this.sizes = sizes;
+		this.qty = qty;
 	}
 
 	public int getProductNum() {
@@ -113,11 +105,52 @@ public class ProductVO{
 		this.discountPrice = discountPrice;
 	}
 
+	public String getSemiInfo() {
+		return semiInfo;
+	}
+
+	public void setSemiInfo(String semiInfo) {
+		this.semiInfo = semiInfo;
+	}
+
+	public String getMainInfo() {
+		return mainInfo;
+	}
+
+	public void setMainInfo(String mainInfo) {
+		this.mainInfo = mainInfo;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getSizes() {
+		return sizes;
+	}
+
+	public void setSizes(String sizes) {
+		this.sizes = sizes;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVO [productNum=" + productNum + ", categoryNum=" + categoryNum + ", productName=" + productName
 				+ ", discountRate=" + discountRate + ", discount=" + discount + ", regDt=" + regDt + ", price=" + price
-				+ ", discountPrice=" + discountPrice + "]";
+				+ ", discountPrice=" + discountPrice + ", semiInfo=" + semiInfo + ", mainInfo=" + mainInfo + ", color="
+				+ color + ", sizes=" + sizes + ", qty=" + qty + "]";
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -25,7 +26,7 @@ public class MemberController {
 	
 	@RequestMapping(value="member/homeBack.do", method = RequestMethod.GET)
 	public String homeBack(HttpServletRequest req, HttpServletResponse res) {
-		return "home";
+		return "main/main";
 	}
 	
 	@RequestMapping(value="member/loginPage.do", method = RequestMethod.GET)	
@@ -33,6 +34,26 @@ public class MemberController {
 		
 		
 		return "member/login";
+	}
+	@RequestMapping(value="member/memberEdit.do", method = RequestMethod.GET)
+	public String memberEdit(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "member/memberEdit";
+	}
+	@RequestMapping(value="member/editCheck.do", method = RequestMethod.GET)
+	public String editCheck(HttpServletRequest req, HttpServletResponse res) {
+		return "member/editCheck";
+	}
+	
+	
+	
+	@RequestMapping(value="member/logout.do", method = RequestMethod.GET)	
+	public ModelAndView logout(HttpSession session) {
+		session.invalidate();
+		ModelAndView mv = new ModelAndView("redirect:/");
+		
+		return mv;
 	}
 	
 	@RequestMapping(value="member/registerPage.do", method = RequestMethod.GET)	
@@ -66,7 +87,7 @@ public class MemberController {
 			flag = 2;		
 		}else{
 			LOG.debug("로그인 성공");
-			httpSession.setAttribute("memberId", outVO.getMemberId());
+			httpSession.setAttribute("MemberVO", outVO);
 			flag = 1;
 		}
 		}catch(NullPointerException e) {
@@ -79,14 +100,21 @@ public class MemberController {
 	
 	@RequestMapping(value="member/doInsert.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int doInsert(MemberVO memberVO) {
+	public int doInsert(MemberVO memberVO, HttpServletRequest req) {
 		LOG.debug("===================");
 		LOG.debug("==doInsert.do==");
 		LOG.debug("===================");
 		
 		memberVO.setAuth(1);
 		
+		HttpSession httpSession = req.getSession();			
 		int flag = memberServiceImpl.doInsert(memberVO);
+		
+		if(flag == 1) {
+		httpSession.setAttribute("MemberVO", memberVO);
+		}else {
+			LOG.debug("MemberVO"+memberVO);
+		}
 		LOG.debug("flag"+flag);
 		
 		return flag;
@@ -122,21 +150,61 @@ public class MemberController {
 		return outVO;
 	}
 	
-	@RequestMapping(value="member/doUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value="member/doUpdate.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int doUpdate(MemberVO memberVO) {
-		int flag = 0;
+	public int doUpdate(MemberVO memberVO,  HttpServletRequest req) {
+		LOG.debug("===================");
+		LOG.debug("==doUpdate.do==");
+		LOG.debug("===================");
 		
+		HttpSession httpSession = req.getSession();
 		
+		int flag = memberServiceImpl.doUpdate(memberVO);
+		
+		if(flag==1) {
+			httpSession.setAttribute("MemberVO", memberVO);
+		}else if(flag==0) {
+			LOG.debug("flag"+flag);
+		}
+		LOG.debug("flag"+flag);
 		return flag;
 	}
 	
-	@RequestMapping(value="member/doDelete.do", method = RequestMethod.GET)
+	@RequestMapping(value="member/doUpdateAddress.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int doDelete(MemberVO memberVO) {
-		int flag = 0;
+	public int doUpdateAddress(MemberVO memberVO,  HttpServletRequest req) {
+		LOG.debug("===================");
+		LOG.debug("==doUpdateAddress.do==");
+		LOG.debug("===================");
 		
+		HttpSession httpSession = req.getSession();
 		
+		int flag = memberServiceImpl.doUpdateAddress(memberVO);
+		
+		if(flag==1) {
+			httpSession.setAttribute("MemberVO", memberVO);
+		}else if(flag==0) {
+			LOG.debug("flag"+flag);
+		}
+		LOG.debug("flag"+flag);
+		return flag;
+	}
+	
+	@RequestMapping(value="member/doDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int doDelete(MemberVO memberVO, HttpServletRequest req) {
+		LOG.debug("===================");
+		LOG.debug("==doDelete.do==");
+		LOG.debug("===================");
+		
+		HttpSession httpSession = req.getSession();
+		memberVO = (MemberVO) httpSession.getAttribute("MemberVO");
+		LOG.debug("memberVO"+memberVO);
+		
+		int flag = memberServiceImpl.doDelete(memberVO);
+		LOG.debug("flag"+flag);
+		
+		httpSession.invalidate();
 		return flag;
 	}
 }

@@ -51,4 +51,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.doMemberIdChk(memberVO);
 	}
 
+	@Override
+	public int doUpdateAddress(MemberVO memberVO) {
+		return memberDao.doUpdateAddress(memberVO);
+	}
+
 }

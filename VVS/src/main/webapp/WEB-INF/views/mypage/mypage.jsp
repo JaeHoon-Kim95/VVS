@@ -22,7 +22,8 @@
   	<!-- Custom styles for this template -->
   	<link href="${hContext}/resources/css" rel="stylesheet">
 	<style>
-	body{ padding-top:70px;}
+	body{ padding-top:70px;
+		padding-left:100px;}
 	</style>
 </head>
 
@@ -49,7 +50,7 @@
       			<thead class="bg-primary">  
 					<th style="background-color: #eeeeee; text-align: center;">상품정보</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문일자</th>
-					<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
+					<th style="background-color: #eeeeee; text-align: center;">주문번호/송장번호</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문금액</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문수량</th>
 					<th style="background-color: #eeeeee; text-align: center;">주문상태</th>
@@ -58,11 +59,18 @@
       			<!-- 문자: 왼쪽, 숫자: 오른쪽, 같은면: 가운데 -->
 			        <c:choose>
 			        	<c:when test="${orderList.size()>0 }">
-			        		<c:forEach var="OrdersVO" items="${orderList}">  
+			        		<c:forEach var="OrdersVO" items="${orderList}" >  
 						    	<tr>
 						    		<td class="text-center">${OrdersVO.productName}</td>
 						    		<td class="text-center">${OrdersVO.orderDt}</td>
-						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}</td>
+						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}
+						    		<c:forEach var="ShipVO" items="${shipList}">
+						    			<c:if test="${OrdersVO.orderNum == ShipVO.orderNum}">
+   						 						/<c:out value="${ShipVO.shipNum}" />
+						    			</c:if>	
+						    		</c:forEach>
+						    			
+						    		</td>
 						    		<td class="text-center">${OrdersVO.price}원</td>
 						    		<td class="text-center">${OrdersVO.qty}개</td>
 						    		<td class="text-center">
@@ -71,9 +79,23 @@
 						    				<a class="btn btn-dark" type="button" name="orderDelete_btn" >
    						 						<c:out value="주문취소" />
    						 						<div id="orderSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
-   						 					</a>   						 					
-						    			<!-- <input type="button" value="주문취소" id="orderDelete_btn" class="btn btn-dark" /> -->
-						    			</c:if>						    			
+   						 					</a>
+						    			</c:if>	
+						    			<c:if test="${OrdersVO.orderSt=='배송중'}">
+						    				<a class="btn btn-dark" href="${hContext}/ship/shipView.do" target="_blank">배송조회</a>
+						    			</c:if>	
+						    			<c:if test="${OrdersVO.orderSt=='배송완료'}">
+						    				<a class="btn btn-dark" type="button" name="orderCh_btn" >
+   						 						<c:out value="교환" />
+   						 						<div id="ordersSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
+   						 					</a>  
+						    			</c:if>
+						    			<c:if test="${OrdersVO.orderSt=='배송완료'}">
+						    				<a class="btn btn-dark" type="button" name="orderDel_btn" >
+   						 						<c:out value="환불요청" />
+   						 						<div id="ordersSt" style="display: none"><c:out value="${OrdersVO.orderNum}" /></div>
+   						 					</a> 
+						    			</c:if>					    			
 						    		</td>
 						    	</tr>			        			
 			        		</c:forEach>
@@ -87,9 +109,37 @@
       				
       			</tbody>
       		</table>
+      		<nav aria-label="Page navigation example">
+  				<ul class="pagination">
+    				<li class="page-item">
+      					<c:if test="${pageVO.prev}">
+      						<a class="page-link" href="${pageVO.startPageNum-1}" aria-label="Previous">
+      							<span aria-hidden="true">&laquo;</span>
+      							<span class="sr-only">Previous</span>
+      						</a>
+      					</c:if>
+      					</li>
+      		
+      				<c:forEach var="num2" begin="${pageVO.startPageNum}" end="${pageVO.endPageNum}">
+      					<li class="page-item ${pageVO.num == num2 ? "active":""}">
+      						<a class="page-link" href="${num2}">${num2}</a>
+      					</li>
+      				</c:forEach>
+			
+					<li class="page-item">
+						<a class="page-link" href="${pageVO.endPageNum+1}" aria-label="Next">
+        					<span aria-hidden="true">&raquo;</span>
+       						<span class="sr-only">Next</span>
+      					</a>    		
+      				</li>
+  				</ul>
+			</nav>
       	</div>      
       </div>
-      
+      <form id="numToBoard" action="${hContext}/orders/ordersView.do">
+				<input type="hidden" name="num" value = "${pageVO.num}">
+				<%-- <input type="hidden" name="postNum" value = "${pageVO.postNum}"> --%>
+			</form>
       </div>
     <!-- //.row -->
 
@@ -108,16 +158,12 @@
     <script src="${hContext}/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript"> 
 
-  	//완료시 이벤트
+  	//주문취소 이벤트
 	$("a[name=orderDelete_btn]").on("click",function(event){
 
 		 var orderNum = event.target.childNodes.item(1).textContent;
-		  //var test5 = JSON.stringify(orderNum);
+		  
 		  console.log("orderNum:"+orderNum);
-		  //console.log("test5:"+test5);	
-		  //document.getElementById('orders').value=orderNum;
-		  //var orderDelete = $("#orders").val();
-		  //console.log("orderDelete:"+orderDelete);
 		  var result = confirm("주문을 취소하시겠습니까?");
 
 		  if(!result){
@@ -151,6 +197,94 @@
 		
 
 	});
+
+	//배송완료시 환불 이벤트
+	$("a[name=orderDel_btn]").on("click",function(event){
+
+		 var orderNum = event.target.childNodes.item(1).textContent;
+		  console.log("orderNum:"+orderNum);
+		  var result = confirm("제품을 환불하시겠습니까?");
+
+		  if(!result){
+		  return;
+			 
+		  }
+				
+		$.ajax({
+		    type:"POST",
+		    url:"${hContext}/orders/doDelete.do",
+		    dataType:"html", 
+		    data:{"orderNum" :orderNum
+		    },
+		    success:function(data){ //성공
+		    	alert("제품을 환불요청이 되었습니다.");
+		    	alert("제품에 기재된 주소로 보내주시기 바랍니다.");
+		    	 //json 분리해서 변수
+			       var jsonObj = JSON.parse(data);
+			    
+			       if(null !=jsonObj && jsonObj.regId=="1"){
+			    	   location.reload();
+			       }
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+	});//--ajax 
+		
+
+	});
+
+	//배송완료시 교환 이벤트
+	$("a[name=orderCh_btn]").on("click",function(event){
+
+		 var orderNum = event.target.childNodes.item(1).textContent;
+		  console.log("orderNum:"+orderNum);
+		  var result = confirm("제품을 교환하시겠습니까?");
+
+		  if(!result){
+		  return;
+			 
+		  }
+				
+		$.ajax({
+		    type:"POST",
+		    url:"${hContext}/orders/doDelete.do",
+		    dataType:"html", 
+		    data:{"orderNum" :orderNum
+		    },
+		    success:function(data){ //성공
+		    	alert("제품을 교환요청이 되었습니다.");
+		    	alert("제품에 기재된 주소로 보내주시기 바랍니다.");
+		    	 //json 분리해서 변수
+			       var jsonObj = JSON.parse(data);
+			    
+			       if(null !=jsonObj && jsonObj.regId=="1"){
+			    	   location.reload();
+			       }
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+	});//--ajax 
+		
+
+	});
+
+	$(".page-link").on("click",function(e){
+		console.log("click");
+		e.preventDefault();
+		
+		$("#numToBoard").find("input[name='num']").val($(this).attr("href"));
+		$("#numToBoard").submit();
+		});
     </script>   
 </body>
 </html>

@@ -13,9 +13,9 @@
 		    product_num,
 		    member_id
 		) VALUES (
-		    #{orderNum},
-		    #{shipCost},
-		    #{shipNum},
+		    orderSeq.currVal,
+		    2500,
+		    (select ceil(dbms_random.value(10000000, 99999999)) from dual),
 		    SYSDATE,
 		    #{productNum},
 		    #{memberId}

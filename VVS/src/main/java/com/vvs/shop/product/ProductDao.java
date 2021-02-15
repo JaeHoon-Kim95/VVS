@@ -94,6 +94,21 @@ public class ProductDao {
 		return outVO;
 	}
 
+	public List<OptionsVO> doSelectListOptions(OptionsVO optionsVO){
+		LOG.debug("ProductDao - doSelectListOptions");
+		LOG.debug("param - optionsVO : " + optionsVO);
+		
+		String statement = NAMESPACE + "doSelectListOptions";
+		
+		List<OptionsVO> outList = sqlSessionTemplate.selectList(statement, optionsVO);
+		
+		for(OptionsVO vo : outList) {
+			LOG.debug("result - outVO : " + vo);
+		}
+		
+		return outList;
+	}
+	
 	// need to change SearchVO
 	public List<ProductVO> doSelectList(ProductVO productVO){
 		

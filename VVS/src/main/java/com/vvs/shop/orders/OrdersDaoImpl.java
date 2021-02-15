@@ -2,6 +2,7 @@ package com.vvs.shop.orders;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -114,23 +115,40 @@ public class OrdersDaoImpl {
 	}
 	
 	/**
+	 * 리스트 총 개수
+	 * @return
+	 */
+	public int totalCnt() {
+		
+		String statement = NAMESPACE + ".totalCnt";
+		int flag = sqlSessionTemplate.selectOne(statement);
+		
+		return flag;
+	}
+	
+	/**
 	 * 주문 리스트
 	 * @param orderNum
 	 * @return
 	 */
-	public List<OrdersProductVO> doSelectList(SearchVO search) {
+	public List<OrdersProductVO> doSelectList(int displayPost, int postNum,SearchVO search) {
 		LOG.debug("=OrdersVO doSelectList=");
+		HashMap data = new HashMap();
+
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
 		
 		OrdersVO orders = new OrdersVO();
 		
 		orders.setMemberId(search.getSearchWord());
+		data.put("memberId", orders.getMemberId());
 		//orders = ordersDao.doSelectOne(orders.getMemberId());
 		//��� : namespace+id = com.vvs.shop.orders.doSelectList
 		String statement = NAMESPACE +".doSelectList";		
 		LOG.debug("=Orders statement="+statement);
 		LOG.debug("-Orders param-\n" + orders);
 		
-		List<OrdersProductVO> list = sqlSessionTemplate.selectList(statement,orders);
+		List<OrdersProductVO> list = sqlSessionTemplate.selectList(statement,data);
 		LOG.debug("-1234566list" +list );
 		/*
 		 * for(OrdersVO vo : list) { LOG.debug("=Orders doSelectList vo="+list); }
