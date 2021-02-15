@@ -1,5 +1,7 @@
 package com.vvs.shop.product;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,6 +12,8 @@ public class OptionsVO {
 	private int productNum;
 	private int seq;
 	private int qty;
+
+	List<OptionsVO> optionsList;
 
 	public OptionsVO() {
 		super();
@@ -22,6 +26,14 @@ public class OptionsVO {
 		this.productNum = productNum;
 		this.seq = seq;
 		this.qty = qty;
+	}
+
+	public List<OptionsVO> getOptionsList() {
+		return optionsList;
+	}
+
+	public void setOptionsList(List<OptionsVO> optionsList) {
+		this.optionsList = optionsList;
 	}
 
 	public String getColor() {
@@ -67,7 +79,7 @@ public class OptionsVO {
 	@Override
 	public String toString() {
 		return "OptionsVO [color=" + color + ", sizes=" + sizes + ", productNum=" + productNum + ", seq=" + seq
-				+ ", qty=" + qty + "]";
+				+ ", qty=" + qty + ", optionsList=" + optionsList + "]";
 	}
 
 }

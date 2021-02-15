@@ -11,6 +11,7 @@
 		<!-- type별칭 VO이름을 간략히 사용 -->
 		<typeAlias type="com.vvs.shop.board.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.vvs.shop.TestVO" alias="TestVO" />
+		<typeAlias type="com.vvs.shop.file.FileVO" alias="FileVO" />
 		<typeAlias type="com.vvs.shop.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.vvs.shop.product.ProductVO" alias="ProductVO" />
 		<typeAlias type="com.vvs.shop.cart.CartVO" alias="CartVO" />

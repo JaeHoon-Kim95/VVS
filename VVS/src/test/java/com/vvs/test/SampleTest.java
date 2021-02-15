@@ -10,26 +10,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vvs.shop.TestDao;
-import com.vvs.shop.TestVO;
+
 
 @Transactional
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class) // ½ºÇÁ¸µ Å×½ºÆ® ÄÁÅØ½ºÆ® ÇÁ·¹ÀÓ¿öÅ©ÀÇ JUnit±â´É È®Àå
+@RunWith(SpringJUnit4ClassRunner.class) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½Å©ï¿½ï¿½ JUnitï¿½ï¿½ï¿½ È®ï¿½ï¿½
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 public class SampleTest {
 
-	@Autowired TestDao testDao;
 	
 	@Test
 	public void Test() {
-		TestVO testVO = new TestVO();
-		testVO.setDivName("asd");
-		testVO.setDivNum(1);
 		
-		testDao.doInsertTest(testVO);
 		
 	}
 }

@@ -22,4 +22,13 @@ public class MainController {
 		mav.setViewName("main/main");
 		return mav;
 	}
+	
+	@RequestMapping(value = "main/fileUp.do", method = RequestMethod.GET)
+	public ModelAndView fileUp(HttpServletRequest req) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("file/fileUpload");
+		return mav;
+	}
 }

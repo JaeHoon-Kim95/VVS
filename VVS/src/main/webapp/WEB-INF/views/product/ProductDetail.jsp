@@ -19,77 +19,185 @@
 
 <!-- Bootstrap core CSS -->
 <link
-	href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="${hContext}/resources/css" rel="stylesheet">
-
+	href="${hContext}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+
+	<form name="toCartForm" action="/shop/cart/doInsertCart.do" method="get">
+		<input type="hidden" value="${outVO.productNum }" id="productNum" name="productNum">
+		<input type="hidden" value="0" id="optionSeq" name="optionSeq">
+		<input type="hidden" value="1" id="qty" name="qty">
+	</form>
+	<form name="moveToUpdatePageForm" action="/shop/product/moveToUpdatePage.do" method="get">
+		<input type="hidden" value="${outVO.productNum }" name="productNum">
+	</form>
+	
 	<!-- Page Content -->
 	<div class="container">
-<br><br><br><br>
-		
-			<div>
-			<label>categoryNum : </label>
-				${outVO.categoryNum }
+	<br><br><br><br>
+		<div class="row">
+			<!-- img box -->
+			<div id="carouselImgBox" class="col">
+				<div id="carouselControls" class="carousel slide" data-ride="carousel">
+				  <ol class="carousel-indicators">
+				    <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
+				    <li data-target="#carouselControls" data-slide-to="1"></li>
+				    <li data-target="#carouselControls" data-slide-to="2"></li>
+				  </ol>
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				    	<img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg.png">
+				    </div>
+				    <div class="carousel-item">
+				      <img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg2.png">
+				    </div>
+				    <div class="carousel-item">
+				      <img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg3.png">
+				    </div>
+				  </div>
+				  <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
 			</div>
-			<div>
-			<label>productName : </label>
-				${outVO.productName }
-			</div>
-			<div>
-			<label>price : </label>
-				${outVO.price }
-			</div>
-			<div>
-			<label>discountPrice : </label>
-				${outVO.discountPrice }
-			</div>
-			<div>
-			<label>mainInfo : </label>
-				${outVO.mainInfo }
-			</div>
-			<div>
-			<label>semiInfo : </label>
-				${outVO.semiInfo }
-			</div>
-		
-			<hr>
-			<label>옵션 리스트</label>
-			<div id="optionList">
+			<!-- img box -->
 			
-			</div>
-			<hr>
-			<form>
-				<label>상품 번호 :</label>
-				<input type="text" value="${outVO.productNum }" id="productNum"><br>
-				<label>옵션 번호 : </label>
-				<input type="text" id="optionSeq" name="optionSeq" value="">
-				<label>갯수 : </label>
-				<input type="text" id="qty" name="qty" value="1"><br>
-				<input type="button" id="orderBtn" name="orderBtn" value="바로 주문">
-				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
-			</form>
-			<br><br><br><br><br>
 			
+			<div class="col-sm-1"></div>
+			
+			<!-- product detail -->
+			<div class="col">
+				<h4>
+				<small class="text-muted">카테고리><c:out value="${categoryName }"/></small>
+				</h4>
+				<h2><strong><c:out value="${outVO.productName }"/></strong></h2>
+				<br>
+				<h4 id="priceTag"><c:out value="${outVO.price }"/></h4>
+				<hr>
+				
+				<div id="semiInfoBox">
+					<span><c:out value="${outVO.semiInfo }"/></span>
+				</div>
+				<hr>
+			    
+			    <label for="inlineFormCustomSelect">색상 및 사이즈</label>
+			    <div class="form-group">
+				    <div>
+				      <select class="custom-select" id="inlineFormCustomSelect" onchange="changeOption();">
+				        <option selected>색상 및 사이즈를 선택하세요</option>
+				      </select>
+				    </div>
+				</div>
+				<hr>
+				
+				<button id="doInsertCart" type="button" class="btn btn-block btn-lg btn-outline-info">장바구니 담기</button>
+				<button type="button" class="btn btn-block btn-lg btn-outline-info">바로 구매</button>
+				<button id="moveToUpdate" type="button" class="btn btn-block btn-lg btn-outline-info">수정</button>
+			</div>
+			<!-- product detail -->
+		</div>
+		
+		<!-- mainInfo -->
+		<div class="text-center">
+		<br><br><br>
+		<hr>
+				<h2>상품 정보</h2>
+				<br>
+				<h3><c:out value="${outVO.mainInfo }"/></h3>
+		</div>
+		
+		<br><br><br>
 	</div>
 	<!-- container end -->
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="/resources/vendor/jquery/jquery.min.js"></script>
-	<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${hContext}/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${hContext}/resources/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
+	$("#moveToUpdate").on("click", function(){
+			moveToUpdatePage();
+
+		})
+	
+	function moveToUpdatePage(){
+			
+			var frm = document.moveToUpdatePageForm;
+			frm.submit();
+		}
+	
+	// Insert Cart
+	$("#doInsertCart").on("click", function(){
+			doInsertCart();
+		});
+
+	function doInsertCart(){
+			// memberId(controller - session), productNum, qty, optionSeq
+			var frm = document.toCartForm;
+
+			var chkOption = $("#optionSeq").val();
+
+			var cfm = confirm("장바구니에 담으시겠습니까?");
+
+			if(!cfm){
+					return;
+				}
+			
+			if(chkOption == "0"){
+					alert("색상 및 사이즈를 선택하세요!");
+					return;
+				}
+
+			$.ajax({
+			   type:"GET",
+	           url:"${hContext}/cart/doInsertCart.do",
+	           dataType:"html",
+	           async: false,
+	           data:{
+	           		"productNum":$("#productNum").val(),
+	           		"qty":$("#qty").val(),
+	           		"optionSeq":$("#optionSeq").val()
+	           },
+	           success: function(data){
+		           		alert("장바구니에 담겼어요!");
+		           		var cfm2 = confirm("장바구니로 이동하시겠습니까?");
+		           		if(cfm2){
+								window.location.href = '/shop/cart/moveToCart.do';
+			           		}
+	               }
+				});
+
+			
+
+		}
+	
+	function changeOption(){
+		var value = $("#inlineFormCustomSelect").val();
+		$("#optionSeq").val(value);
+	}
+	// -- Insert Cart
+	
 	// Load Options List
 	window.onload = function(){
 		doSelectListOptions();
-	}
+		
+		var priceTag = $("#priceTag").text();
+		var price = priceTag.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+		$("#priceTag").empty();
+		$("#priceTag").text(price+" 원");
+		
+	}
+	
 	function doSelectListOptions(){
 		$.ajax({
 			type:"GET",
@@ -101,17 +209,13 @@
 	           },
 	           success: function(data){
 	                console.log("success!");
-					$("#optionList").empty();
 					var html = "";
 					$.each(data, function(i, value) {
-							html += "<p>options seq : "+value.seq+"</p>";
-							html += "<p>options color : "+value.color+"</p>";
-							html += "<p>options sizes : "+value.sizes+"</p>";
-							html += "<p>options qty : "+value.qty+"</p>";
-							html += "<p>options productNum : " + value.productNum + "</p>";
-							html += "<br>"
+
+							html += "<option value='"+value.seq+"'>"+value.color+" / "+value.sizes+"</option>";
+							
 						});
-					$("#optionList").append(html);
+					$("#inlineFormCustomSelect").append(html);
 	               }
 			});
 

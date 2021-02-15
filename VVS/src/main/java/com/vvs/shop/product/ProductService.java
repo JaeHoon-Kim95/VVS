@@ -12,6 +12,18 @@ public class ProductService {
 
 	@Autowired ProductDao productDao;
 	
+	public int doUpdateDetail(ProductVO productVO) {
+		return productDao.doUpdateDetail(productVO);
+	}
+	
+	public int doSelectListWithPagingCount(SearchVO searchVO) {
+		return productDao.doSelectListWithPagingCount(searchVO);
+	}
+	
+	public int doInsertOptions(OptionsVO optionsVO) {
+		return productDao.doInsertOptions(optionsVO);
+	}
+	
 	public List<OptionsVO> doSelectListOptions(OptionsVO optionsVO){
 		return productDao.doSelectListOptions(optionsVO);
 	}
@@ -43,4 +55,17 @@ public class ProductService {
 	public List<ProductVO> doSelectList(ProductVO productVO){
 		return productDao.doSelectList(productVO);
 	}
+	
+	public String getCategoryName(int categoryNum) {
+		
+		for(Category ca : Category.values()) {
+			if(categoryNum == ca.getCategoryNum()) {
+				return ca.getName();
+			}
+		}
+		
+		return "null";
+		
+	}
+	
 }
