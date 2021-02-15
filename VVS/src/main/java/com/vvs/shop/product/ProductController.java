@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,9 @@ public class ProductController {
 	@Autowired SearchVO searchVO;
 	@Autowired FileServiceImpl fileServiceImpl;
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
+	/*
+	 * @Resource(name="uploadPath") private String uploadPath;
+	 */
 	
 	// 상품 수정
 	@RequestMapping(value = "product/doUpdate.do", method = RequestMethod.POST)
@@ -277,8 +279,8 @@ public class ProductController {
 							   @RequestParam("discount") int discount,
 							   @RequestParam("semiInfo") String semiInfo,
 							   @RequestParam("mainInfo") String mainInfo,
-							   MultipartFile file) throws Exception{
-		
+							   MultipartFile file,
+							   HttpServletRequest req) throws Exception{
 		ProductVO productVO = new ProductVO();
 		productVO.setCategoryNum(categoryNum);
 		productVO.setDiscount(discount);
@@ -302,15 +304,16 @@ public class ProductController {
 		
 		//파일 업로드 부분
 		FileVO fileVO = new FileVO();
+		String path2 = System.getProperty("user.home") + "\\git\\VVS\\VVS\\src\\main\\webapp\\resources";
 		
-		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String imgUploadPath = path2 + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
 		
 		if(file != null) {
 		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 		} else {
-		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		 fileName = path2 + File.separator + "images" + File.separator + "none.png";
 		}
 
 		fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
