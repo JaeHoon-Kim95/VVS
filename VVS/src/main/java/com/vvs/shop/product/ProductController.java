@@ -132,7 +132,9 @@ public class ProductController {
 		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
 		
 		List<FileVO> imgList = fileServiceImpl.doSelectList(fileVO);
-		LOG.debug("imgList"+imgList);
+		for(FileVO fvo : imgList) {
+			LOG.debug("fvo:"+ fvo);
+		}
 		int totalNum = productService.doSelectListWithPagingCount(searchVO);
 		
 		double a = (double) totalNum / (double) searchVO.getPageSize();
@@ -217,7 +219,8 @@ public class ProductController {
 	
 	// 상품 상세 페이지로 이동
 	@RequestMapping(value = "product/moveToProductDetail.do", method = RequestMethod.GET)
-	public ModelAndView moveToProductDetail(@RequestParam("productNum") int productNum) {
+	public ModelAndView moveToProductDetail(@RequestParam("productNum") int productNum,
+											@RequestParam("thunImg") String thunImg) {
 		LOG.debug("Current controller : product/moveToProductDetail.do");
 		
 		ProductVO productVO = new ProductVO();
@@ -227,11 +230,14 @@ public class ProductController {
 		outVO = productService.doSelectOne(productVO);
 		String categoryName = productService.getCategoryName(outVO.getCategoryNum());		
 		
+		FileVO fileVO = new FileVO();
+		fileVO.setThunImg(thunImg);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductDetail");
 		mav.addObject("outVO", outVO);
 		mav.addObject("categoryName", categoryName);
-		
+		mav.addObject("fileVO", fileVO);
 		return mav;
 	}
 	
@@ -366,6 +372,7 @@ public class ProductController {
 		for(ProductVO vo : outList) {
 			LOG.debug("vo : " + vo);
 		}
+		
 		
 		ModelAndView mav = new ModelAndView();
 		

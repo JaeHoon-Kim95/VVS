@@ -54,7 +54,10 @@
 										
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
+								<form name="moveDetailForm" action="/shop/product/moveToProductDetail.do" method="get">
+									<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
+									<input type="hidden" value="${imgListThun}" name="thunImg">
+								</form>
 							</h4>
 							<h5><c:out value="${list.price }"/> 원</h5>
 							<p class="card-text"><c:out value="${list.categoryName }"/></p>

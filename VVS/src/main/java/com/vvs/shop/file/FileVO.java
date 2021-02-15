@@ -36,4 +36,11 @@ public class FileVO {
 	public void setThunImg(String thunImg) {
 		this.thunImg = thunImg;
 	}
+
+	@Override
+	public String toString() {
+		return "FileVO [img=" + img + ", thunImg=" + thunImg + ", productNum=" + productNum + ", toString()="
+				+ super.toString() + "]";
+	}
+	
 }
