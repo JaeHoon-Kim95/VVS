@@ -3,6 +3,7 @@ package com.vvs.shop.file;
 import java.io.File;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,22 +18,28 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileController {
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
+	/*
+	 * @Resource(name="uploadPath") private String uploadPath;
+	 */
+	
 	
 	@Autowired
 	FileServiceImpl fileServiceImpl;
 	
 	@RequestMapping(value = "file/doUpload.do", method = RequestMethod.POST)
-	public String doUpload(FileVO fileVO, MultipartFile file) throws Exception {
-		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	public String doUpload(FileVO fileVO, MultipartFile file, HttpServletRequest req) throws Exception {
+		String path2 = System.getProperty("user.home") + "\\git\\VVS\\VVS\\src\\main\\webapp\\resources";	
+		//String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String imgUploadPath = path2 + File.separator + "imgUpload";
+		LOG.debug("imgUploadPath"+imgUploadPath);
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
+		
 		
 		if(file != null) {
 		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 		} else {
-		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		 fileName = path2 + File.separator + "images" + File.separator + "none.png";
 		}
 
 		fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
