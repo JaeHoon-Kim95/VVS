@@ -115,6 +115,9 @@ public class OrdersController {
 				 if(hour>=48) {
 					orderList.get(i).setOrderSt("배송완료");
 				 }
+				 if(hour>=168) {
+					 orderList.get(i).setOrderSt("구매확정");
+				 }
 			 }
 		}
 		 //배송시간
