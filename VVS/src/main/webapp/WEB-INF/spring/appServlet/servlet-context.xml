@@ -26,7 +26,7 @@
 	 <beans:constructor-arg value="C:\Users\isc84\git\VVS\VVS\src\main\webapp\resources" />
 	</beans:bean>
 	
-	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
+	<resources mapping="/resources/imgUpload/**" location="/resources/imgUpload/" />
 	
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
 	 <beans:property name="maxUploadSize" value="10485760"/>
