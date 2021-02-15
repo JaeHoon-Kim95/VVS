@@ -40,15 +40,18 @@
 
 		<hr>
 		<div class="row">
-			<c:forEach var="list" items="${productList }">
-				<c:forEach var="imgList" items="${imgList }">
+			<c:forEach var="list" items="${productList }" varStatus="status">
+				<c:set var="imgListThun" value="${imgList[status.index].thunImg}"/>
 				<c:set var="productNumL" value="${list.productNum}"/>
-				<c:set var="productNumI" value="${imgList.productNum}"/>	
-				<c:if test="${productNumL eq productNumI}">
-				<div class="col-lg-4 col-md-6 mb-4">				
-					<div class="card h-100">					
+				<c:set var="productNumI" value="${imgList[status.index].productNum}"/>	
+				
+				<div class="col-lg-4 col-md-6 mb-4">
+								
+					<div class="card h-100">	
+								
 						<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><img class="card-img-top" height="400"
-							src="${hContext}/${imgList.thunImg}" alt=""></a>						
+							src="${hContext}/${imgListThun}" alt=""></a>
+										
 						<div class="card-body">
 							<h4 class="card-title">
 								<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
@@ -61,8 +64,8 @@
 						</div>
 					</div>				
 				</div>
-				</c:if>
-				</c:forEach>
+				
+				
 			</c:forEach>
 			
 			
