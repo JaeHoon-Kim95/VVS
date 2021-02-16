@@ -7,7 +7,7 @@ public class OrdersProductVO extends DTO{
 	private String productName;
 	
 	/** 제품 번호 */
-	private String productNum;
+	private int productNum;
 	
 	/** 주문 번호 */
 	private int orderNum;
@@ -28,7 +28,7 @@ public class OrdersProductVO extends DTO{
 		
 	}
 
-	public OrdersProductVO(String productName, String productNum, int orderNum, int price, String orderDt, int qty,
+	public OrdersProductVO(String productName, int productNum, int orderNum, int price, String orderDt, int qty,
 			String orderSt) {
 		super();
 		this.productName = productName;
@@ -48,11 +48,11 @@ public class OrdersProductVO extends DTO{
 		this.productName = productName;
 	}
 
-	public String getProductNum() {
+	public int getProductNum() {
 		return productNum;
 	}
 
-	public void setProductNum(String productNum) {
+	public void setProductNum(int productNum) {
 		this.productNum = productNum;
 	}
 
@@ -102,5 +102,6 @@ public class OrdersProductVO extends DTO{
 				+ ", price=" + price + ", orderDt=" + orderDt + ", qty=" + qty + ", orderSt=" + orderSt
 				+ ", toString()=" + super.toString() + "]";
 	}
+
 
 }

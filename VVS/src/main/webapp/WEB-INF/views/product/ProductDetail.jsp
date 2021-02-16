@@ -100,7 +100,7 @@
 				<hr>
 				
 				<button id="doInsertCart" type="button" class="btn btn-block btn-lg btn-outline-info">장바구니 담기</button>
-				<button type="button" class="btn btn-block btn-lg btn-outline-info">바로 구매</button>
+				<button id="orderBtn" type="button" class="btn btn-block btn-lg btn-outline-info">바로 구매</button>
 				<button id="moveToUpdate" type="button" class="btn btn-block btn-lg btn-outline-info">수정</button>
 			</div>
 			<!-- product detail -->
@@ -227,8 +227,8 @@
 	//order(주문하기)
 	$("#orderBtn").on("click",function(){
 		alert("성공");
-		var id = "jung123";
-		$.ajax({
+		window.location.href="${hContext}/cart/doOrder.do"
+		/* $.ajax({
 		    type:"POST",
 		    url:"${hContext}/orders/doInsert.do",
 		    dataType:"html", 
@@ -253,7 +253,7 @@
 		    
 		    }   
 		  
-		});//--ajax 
+		});//--ajax  */
 	});	
 		
 	//order(주문하기)	

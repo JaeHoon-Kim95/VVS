@@ -65,7 +65,9 @@
 						    		<td class="text-center">
 						    		<c:forEach var="FileVO" items="${fileLi}">
 						    			<c:if test="${FileVO.productNum == OrdersVO.productNum}">
-   						 						<c:out value="${FileVO.img}" />
+						    				<a href="/shop/product/moveToProductDetail.do?productNum=${OrdersVO.productNum }">
+						    				<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${FileVO.thunImg}">
+						    				</a>
 						    			</c:if>	
 						    		</c:forEach>
 						    		<br/> ${OrdersVO.productName}

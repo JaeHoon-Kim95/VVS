@@ -117,11 +117,11 @@
 							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${outVO.productNum}" /></a>
 							        		<a id="qty" name="qty" style="display: none"><c:out value="${outVO.qty}" /></a>							        		
 										    	<li class="fw-normal">
-										    	<c:forEach var="FileVO" items="${fileList}">
+										    	<%-- <c:forEach var="FileVO" items="${fileList}">
 						    						<c:if test="${FileVO.productNum == outVO.productNum}">
-   						 								<c:out value="${FileVO.img}" />
+   						 								<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${FileVO.thunImg}">
 						    						</c:if>	
-						    					</c:forEach>
+						    					</c:forEach> --%>
 						    					<br/> ${outVO.productName} x ${outVO.qty}
 										    	<br/> color : ${outVO.color}, size : ${outVO.sizes} 
 										    	<span id="price"> <c:out value="${totalsum}원"/>  </span></li>

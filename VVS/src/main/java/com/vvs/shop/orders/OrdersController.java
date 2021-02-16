@@ -60,14 +60,19 @@ public class OrdersController {
 			cartService.doUpdate(vo);
 		}
 		
+		//파일에서 상품번호 지정
+		for(int i=0; i<cartVO.getCartList().size(); i++) {
+			fileVO.setProductNum(cartVO.getCartList().get(i).getProductNum());
+		}
+		
 		//파일리스트에서 이미지 뽑아오기
 		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("mypage/check_out");
 		mav.addObject("outList", cartVO.getCartList());
 		mav.addObject("fileList", fileList);
+		mav.setViewName("mypage/check_out");
 		return mav;
 	}
 	
@@ -86,9 +91,6 @@ public class OrdersController {
 		pageVO.setNum(num);
 		pageVO.setCount(ordersService.totalCnt());
 		
-		//파일리스트에서 이미지 뽑아오기
-		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
-		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
 		memberVO =  (MemberVO) session.getAttribute("MemberVO");		
@@ -102,6 +104,14 @@ public class OrdersController {
 		List<ShipVO> shipList = shipService.doSelectList2(search);
 		session.setAttribute("shipList", shipList);
 		LOG.debug("shipList===" + shipList);	
+		
+		//파일에서 상품번호 지정
+		for(int i=0; i<orderList.size(); i++) {
+			fileVO.setProductNum(orderList.get(i).getProductNum());
+		}
+		
+		//파일리스트에서 이미지 뽑아오기
+		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
 		
 		//현재시간 Date
 		Date curDate = new Date();
