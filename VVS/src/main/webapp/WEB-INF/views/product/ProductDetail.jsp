@@ -226,36 +226,42 @@
 	
 	//order(주문하기)
 	$("#orderBtn").on("click",function(){
-		alert("성공");
-		window.location.href="${hContext}/cart/doOrder.do"
-		/* $.ajax({
-		    type:"POST",
-		    url:"${hContext}/orders/doInsert.do",
-		    dataType:"html", 
-		    data:{
-			    "memberId" : "${sessionScope.MemberVO.memberId }",
-			    "productNum" : $("#productNum").val(),
-			    "qty" : $("#qty").val()
-		    },
-		    success:function(data){ //성공
-		    	alert("주문을 완료했습니다.");
-		    	 //json 분리해서 변수
-			       var jsonObj = JSON.parse(data);
-			    
-			       if(null !=jsonObj && jsonObj.regId=="1"){
-			    	   location.reload();
-			       }
-		    },		       
-		    error:function(xhr,status,error){
-		     alert("error:"+error);
-		    },
-		    complete:function(data){
-		    
-		    }   
-		  
-		});//--ajax  */
+		doInsertOrder();
 	});	
+
+	function doInsertOrder(){
+		// memberId(controller - session), productNum, qty, optionSeq
+		var frm = document.toCartForm;
+	
+		var chkOptions = $("#optionSeq").val();
+
+		var cfms = confirm("주문 하시겠습니까?");
+
+		if(!cfms){
+				return;
+			}
 		
+		if(chkOptions == "0"){
+				alert("색상 및 사이즈를 선택하세요!");
+				return;
+			}
+
+		$.ajax({
+		   type:"GET",
+           url:"${hContext}/cart/doInsertCart.do",
+           dataType:"html",
+           async: false,
+           data:{
+           		"productNum":$("#productNum").val(),
+           		"qty":$("#qty").val(),
+           		"optionSeq":$("#optionSeq").val()
+           },
+           success: function(data){
+	           		window.location.href = "${hContext}/cart/doOrder.do";
+               }
+			});
+	}
+	
 	//order(주문하기)	
 	</script>
 </body>

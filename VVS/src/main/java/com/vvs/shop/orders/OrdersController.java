@@ -47,6 +47,35 @@ public class OrdersController {
 	@Autowired
 	FileServiceImpl fileServiceImpl;
 	
+	//상품에서 주문
+	@RequestMapping(value="cart/doOrders.do", method = {RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ModelAndView checkoutView2(CartVO cartVO, FileVO fileVO, HttpServletRequest req) {
+			
+		HttpSession session = req.getSession();
+		
+		LOG.debug("Current controller : cart/doOrder.do");
+		LOG.debug("cartVO111 : " + cartVO);
+		cartVO = (CartVO) session.getAttribute("MemberVO");
+		cartService.doSelectOne(cartVO);
+		
+		//파일에서 상품번호 지정
+		for(int i=0; i<cartVO.getCartList().size(); i++) {
+			fileVO.setProductNum(cartVO.getCartList().get(i).getProductNum());
+		}
+			
+		//파일리스트에서 이미지 뽑아오기
+		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
+			
+		ModelAndView mav = new ModelAndView();
+			
+		mav.addObject("outList", cartVO.getCartList());
+		mav.addObject("fileList", fileList);
+		mav.setViewName("mypage/check_out");
+		return mav;
+	}
+	
+	//장바구니에서 주문
 	@RequestMapping(value="cart/doOrder.do", method = {RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public ModelAndView checkoutView(CartVO cartVO, FileVO fileVO, HttpServletRequest req) {
@@ -54,7 +83,8 @@ public class OrdersController {
 		HttpSession session = req.getSession();
 		
 		LOG.debug("Current controller : cart/doOrder.do");
-		
+		LOG.debug("cartVO111 : " + cartVO);
+		LOG.debug("cartVO11123 : " + cartVO.getCartList());
 		for(CartVO vo : cartVO.getCartList()) {
 			LOG.debug("vo : " + vo);
 			cartService.doUpdate(vo);
