@@ -15,19 +15,14 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-
-		  <li class="nav-item active">	
-			<form name="moveBoard" action="/shop/board/doSelectList.do">
+			
+		  <li class="nav-item active">						
+			 <a class="nav-link" id="moveToBoard" type="button">게시판</a> 			 
+			 <form name="moveBoard" action="${hContext}/board/doSelectList.do">
 				<input type="hidden" value="1" name="num">
-			</form>
-            <a class="nav-link" id="moveBoard">게시판</a>
-
-          <li class="nav-item active">
-            <a class="nav-link" href="${hContext}/main/fileUp.do">testFile
-              <span class="sr-only">(current)</span>
-            </a>
-
-          </li>
+			 </form>					 
+	      </li>
+	      
           <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
           </li>
@@ -79,9 +74,11 @@
 	  window.location.href="${hContext}/member/loginPage.do"
   });
 
-  $("#moveBoard").on("click",function(){
+     $("#moveToBoard").on("click",function(){
 	  doSelectListBoard();
-	  });
+	  
+	  }); 
+  
   function doSelectListBoard(){
 	  var frm = document.moveBoard;
 	  frm.submit();

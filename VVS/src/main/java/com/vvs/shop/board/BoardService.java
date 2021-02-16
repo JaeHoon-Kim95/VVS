@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.vvs.shop.cmn.PageVO;
 import com.vvs.shop.cmn.SearchVO;
 
 @Service
 public interface BoardService {
 	int doInsert(BoardVO boardVO);
 	
-	List<BoardVO> doSelectList(int num, int postNum);
+	List<BoardVO> doSelectList(PageVO pageVO);
 	
 	BoardVO doSelectOne(BoardVO boardVO);
 	

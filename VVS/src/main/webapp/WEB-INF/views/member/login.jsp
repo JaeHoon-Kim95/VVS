@@ -41,7 +41,7 @@
 				</form>
 			</div>
 		</div>
-		 <a class="nav-link" href="${hContext}/cmn/moveFile.do">파일 등록</a>
+		 
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
