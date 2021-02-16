@@ -67,7 +67,7 @@
 						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}
 						    		<c:forEach var="ShipVO" items="${shipList}">
 						    			<c:if test="${OrdersVO.orderNum == ShipVO.orderNum}">
-   						 						/<c:out value="${ShipVO.shipNum}" />
+   						 						<c:out value="${ShipVO.shipNum}" />
 						    			</c:if>	
 						    		</c:forEach>
 						    			

@@ -24,6 +24,8 @@ import com.vvs.shop.cart.CartVO;
 import com.vvs.shop.cmn.Message;
 import com.vvs.shop.cmn.PageVO;
 import com.vvs.shop.cmn.SearchVO;
+import com.vvs.shop.file.FileServiceImpl;
+import com.vvs.shop.file.FileVO;
 import com.vvs.shop.member.MemberVO;
 import com.vvs.shop.ship.ShipServiceImpl;
 import com.vvs.shop.ship.ShipVO;
@@ -42,9 +44,12 @@ public class OrdersController {
 	@Autowired 
 	CartService cartService;
 	
+	@Autowired
+	FileServiceImpl fileServiceImpl;
+	
 	@RequestMapping(value="cart/doOrder.do", method = {RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView checkoutView(CartVO cartVO, HttpServletRequest req) {
+	public ModelAndView checkoutView(CartVO cartVO, FileVO fileVO, HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
 		
@@ -55,11 +60,14 @@ public class OrdersController {
 			cartService.doUpdate(vo);
 		}
 		
+		//파일리스트에서 이미지 뽑아오기
+		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("mypage/check_out");
 		mav.addObject("outList", cartVO.getCartList());
+		mav.addObject("fileList", fileList);
 		return mav;
 	}
 	
