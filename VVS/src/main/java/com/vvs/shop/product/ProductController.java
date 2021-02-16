@@ -219,8 +219,7 @@ public class ProductController {
 	
 	// 상품 상세 페이지로 이동
 	@RequestMapping(value = "product/moveToProductDetail.do", method = RequestMethod.GET)
-	public ModelAndView moveToProductDetail(@RequestParam("productNum") int productNum,
-											@RequestParam("thunImg") String thunImg) {
+	public ModelAndView moveToProductDetail(@RequestParam("productNum") int productNum) {
 		LOG.debug("Current controller : product/moveToProductDetail.do");
 		
 		ProductVO productVO = new ProductVO();
@@ -231,13 +230,18 @@ public class ProductController {
 		String categoryName = productService.getCategoryName(outVO.getCategoryNum());		
 		
 		FileVO fileVO = new FileVO();
-		fileVO.setThunImg(thunImg);
+		fileVO.setProductNum(productNum);
+		
+		FileVO imgDetail = new FileVO();
+		imgDetail = fileServiceImpl.doSelectOne(fileVO);
+		
+		LOG.debug("imgDetail"+imgDetail);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductDetail");
 		mav.addObject("outVO", outVO);
 		mav.addObject("categoryName", categoryName);
-		mav.addObject("fileVO", fileVO);
+		mav.addObject("imgDetail", imgDetail);
 		return mav;
 	}
 	

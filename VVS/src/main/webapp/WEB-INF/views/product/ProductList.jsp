@@ -37,7 +37,9 @@
 			<input class="form-control mr-sm-2" id="searchWord" name="searchWord" type="search" placeholder="Search" aria-label="Search" value="${searchWord }">
     		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
-
+		
+		
+		
 		<hr>
 		<div class="row">
 			<c:forEach var="list" items="${productList }" varStatus="status">
@@ -51,13 +53,10 @@
 								
 						<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><img class="card-img-top" height="400"
 							src="${hContext}/${imgListThun}" alt=""></a>
-										
+							<input type="hidden" value="${imgListThun}" name="thunImg" id="thunImg">				
 						<div class="card-body">
-							<h4 class="card-title">
-								<form name="moveDetailForm" action="/shop/product/moveToProductDetail.do" method="get">
-									<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
-									<input type="hidden" value="${imgListThun}" name="thunImg">
-								</form>
+							<h4 class="card-title">								
+									<a class="moveDetail" href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>																
 							</h4>
 							<h5><c:out value="${list.price }"/> 원</h5>
 							<p class="card-text"><c:out value="${list.categoryName }"/></p>
@@ -70,11 +69,9 @@
 				
 				
 			</c:forEach>
-			
-			
-			
-			
+	
 		</div>
+		</form>
 		<!-- row end -->
 		<div class="row">
 			<div class="mx-auto">
@@ -129,6 +126,9 @@
 				var frm = document.searchData;
 				frm.submit();
 			}
+	
+		
+		
 	</script>
 </body>
 

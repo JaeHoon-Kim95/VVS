@@ -25,4 +25,10 @@ public class FileServiceImpl implements FileService {
 		return fileDao.doSelectList(fileVO);
 	}
 
+	@Override
+	public FileVO doSelectOne(FileVO fileVO) {
+		// TODO Auto-generated method stub
+		return fileDao.doSelectOne(fileVO);
+	}
+
 }

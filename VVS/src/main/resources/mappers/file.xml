@@ -20,5 +20,12 @@
 			   FROM FILES
 			  
 	</select>
+	
+	<select id="doSelectOne" parameterType="FileVO" resultType="FileVO">
+		SELECT THUNIMG
+			   FROM FILES
+			   WHERE PRODUCT_NUM = #{productNum}
+	</select>
+	
 
 </mapper>
