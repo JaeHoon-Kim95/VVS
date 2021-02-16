@@ -65,10 +65,10 @@
 						    		<td class="text-center">
 						    		<c:forEach var="FileVO" items="${fileLi}">
 						    			<c:if test="${FileVO.productNum == OrdersVO.productNum}">
-   						 						<c:out value="${ShipVO.shipNum}" />
+   						 						<c:out value="${FileVO.img}" />
 						    			</c:if>	
 						    		</c:forEach>
-						    		${OrdersVO.productName}
+						    		<br/> ${OrdersVO.productName}
 						    		</td>
 						    		<td class="text-center">${OrdersVO.orderDt}</td>
 						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}
