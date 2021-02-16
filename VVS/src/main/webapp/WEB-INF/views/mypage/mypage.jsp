@@ -60,9 +60,16 @@
       			<!-- 문자: 왼쪽, 숫자: 오른쪽, 같은면: 가운데 -->
 			        <c:choose>
 			        	<c:when test="${orderList.size()>0 }">
-			        		<c:forEach var="OrdersVO" items="${orderList}" >  
+			        		<c:forEach var="OrdersVO" items="${orderList}" >
 						    	<tr>
-						    		<td class="text-center">${OrdersVO.productName}</td>
+						    		<td class="text-center">
+						    		<c:forEach var="FileVO" items="${fileLi}">
+						    			<c:if test="${FileVO.productNum == OrdersVO.productNum}">
+   						 						<c:out value="${ShipVO.shipNum}" />
+						    			</c:if>	
+						    		</c:forEach>
+						    		${OrdersVO.productName}
+						    		</td>
 						    		<td class="text-center">${OrdersVO.orderDt}</td>
 						    		<td class="text-center" id = "orderNum">${OrdersVO.orderNum}
 						    		<c:forEach var="ShipVO" items="${shipList}">

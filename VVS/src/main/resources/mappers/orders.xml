@@ -83,6 +83,7 @@
 	 		FROM (
 					SELECT
 						p.product_name AS productName,
+						p.product_num AS productNum,
 						o.order_dt AS orderDt,
 						o.order_num AS orderNum,
 						p.price,

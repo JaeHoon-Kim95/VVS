@@ -77,7 +77,7 @@ public class OrdersController {
 	}
 	
 	@RequestMapping(value = "orders/ordersView.do", method = RequestMethod.GET)
-	public ModelAndView orderView(HttpServletRequest req, @RequestParam("num") int num) throws ParseException {
+	public ModelAndView orderView(FileVO fileVO, HttpServletRequest req, @RequestParam("num") int num) throws ParseException {
 		
 		HttpSession session = req.getSession();
 		
@@ -85,6 +85,9 @@ public class OrdersController {
 		num=1;
 		pageVO.setNum(num);
 		pageVO.setCount(ordersService.totalCnt());
+		
+		//파일리스트에서 이미지 뽑아오기
+		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
 		
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
@@ -134,6 +137,7 @@ public class OrdersController {
 		mav.addObject("shipList", shipList);
 		mav.addObject("pageVO", pageVO);
 		mav.addObject("select", num);
+		mav.addObject("fileLi", fileList);
 		mav.setViewName("mypage/mypage");
 		
 		return mav;

@@ -5,7 +5,10 @@ import com.vvs.shop.cmn.DTO;
 public class OrdersProductVO extends DTO{
 	/** 제품이름 */
 	private String productName;
-
+	
+	/** 제품 번호 */
+	private String productNum;
+	
 	/** 주문 번호 */
 	private int orderNum;
 
@@ -25,9 +28,11 @@ public class OrdersProductVO extends DTO{
 		
 	}
 
-	public OrdersProductVO(String productName, int orderNum, int price, String orderDt, int qty, String orderSt) {
+	public OrdersProductVO(String productName, String productNum, int orderNum, int price, String orderDt, int qty,
+			String orderSt) {
 		super();
 		this.productName = productName;
+		this.productNum = productNum;
 		this.orderNum = orderNum;
 		this.price = price;
 		this.orderDt = orderDt;
@@ -41,6 +46,14 @@ public class OrdersProductVO extends DTO{
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public String getProductNum() {
+		return productNum;
+	}
+
+	public void setProductNum(String productNum) {
+		this.productNum = productNum;
 	}
 
 	public int getOrderNum() {
@@ -85,9 +98,9 @@ public class OrdersProductVO extends DTO{
 
 	@Override
 	public String toString() {
-		return "OrdersProductVO [productName=" + productName + ", orderNum=" + orderNum + ", price=" + price
-				+ ", orderDt=" + orderDt + ", qty=" + qty + ", orderSt=" + orderSt + ", toString()=" + super.toString()
-				+ "]";
+		return "OrdersProductVO [productName=" + productName + ", productNum=" + productNum + ", orderNum=" + orderNum
+				+ ", price=" + price + ", orderDt=" + orderDt + ", qty=" + qty + ", orderSt=" + orderSt
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
