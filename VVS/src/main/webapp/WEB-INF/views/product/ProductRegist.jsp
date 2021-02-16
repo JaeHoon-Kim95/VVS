@@ -38,7 +38,7 @@
 
 
 		<div class="row">
-			<form:form class="form-group" name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post">
+			<form:form class="form-group" name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post" autocomplete="off" enctype="multipart/form-data">
 				<label><strong>- 상품명*</strong></label><br>
 				<input class="form-control" type="text" value="" placeholder="상품명을 입력해주세요." id="productName" name="productName"><br>
 				<label><strong>- 판매 가격*</strong></label><br>

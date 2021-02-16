@@ -33,6 +33,7 @@
 	</form>
 	<form name="moveToUpdatePageForm" action="/shop/product/moveToUpdatePage.do" method="get">
 		<input type="hidden" value="${outVO.productNum }" name="productNum">
+		<input type="hidden" value="${imgDetail.thunImg }" name="thunImg">
 	</form>
 	
 	<!-- Page Content -->
@@ -49,7 +50,7 @@
 				  </ol>
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				    	<img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg.png">
+				    	<img alt="" class="rounded float-left" width="500" height="600" src="${hContext}/${imgDetail.thunImg}">
 				    </div>
 				    <div class="carousel-item">
 				      <img alt="" class="rounded float-left" width="500" height="600" src="${hContext }/resources/img/randomImg2.png">

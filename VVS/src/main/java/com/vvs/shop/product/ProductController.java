@@ -132,7 +132,9 @@ public class ProductController {
 		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
 		
 		List<FileVO> imgList = fileServiceImpl.doSelectList(fileVO);
-		LOG.debug("imgList"+imgList);
+		for(FileVO fvo : imgList) {
+			LOG.debug("fvo:"+ fvo);
+		}
 		int totalNum = productService.doSelectListWithPagingCount(searchVO);
 		
 		double a = (double) totalNum / (double) searchVO.getPageSize();
@@ -227,18 +229,27 @@ public class ProductController {
 		outVO = productService.doSelectOne(productVO);
 		String categoryName = productService.getCategoryName(outVO.getCategoryNum());		
 		
+		FileVO fileVO = new FileVO();
+		fileVO.setProductNum(productNum);
+		
+		FileVO imgDetail = new FileVO();
+		imgDetail = fileServiceImpl.doSelectOne(fileVO);
+		
+		LOG.debug("imgDetail"+imgDetail);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductDetail");
 		mav.addObject("outVO", outVO);
 		mav.addObject("categoryName", categoryName);
-		
+		mav.addObject("imgDetail", imgDetail);
 		return mav;
 	}
 	
 	// 상품 등록2
 	@RequestMapping(value = "product/doRegistTest.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView doRegistTest(ProductVO productVO) {
+	public ModelAndView doRegistTest(ProductVO productVO,MultipartFile file,
+									 HttpServletRequest req) throws Exception {
 		
 		LOG.debug("into vo : " + productVO);
 		
@@ -260,10 +271,32 @@ public class ProductController {
 		
 		String categoryName = productService.getCategoryName(productVO.getCategoryNum());
 		
+		//파일 업로드 부분
+				FileVO fileVO = new FileVO();
+				String path2 = System.getProperty("user.home") + "\\git\\VVS\\VVS\\src\\main\\webapp\\resources";
+				
+				String imgUploadPath = path2 + File.separator + "imgUpload";
+				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+				String fileName = null;
+				
+				if(file != null) {
+				 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+				} else {
+				 fileName = path2 + File.separator + "images" + File.separator + "none.png";
+				}
+
+				fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+				fileVO.setThunImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				fileVO.setProductNum(productVO.getProductNum());
+						
+				fileServiceImpl.doUpload(fileVO);
+				//파일 업로드 부분 끝
+				LOG.debug("fileVO"+fileVO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductDetail");
 		mav.addObject("outVO", productVO);
 		mav.addObject("categoryName", categoryName);
+		mav.addObject("imgDetail", fileVO);
 		
 		return mav;
 	}
@@ -302,28 +335,7 @@ public class ProductController {
 		
 		productService.doInsertDetail(productDetailVO);
 		
-		//파일 업로드 부분
-		FileVO fileVO = new FileVO();
-		String path2 = System.getProperty("user.home") + "\\git\\VVS\\VVS\\src\\main\\webapp\\resources";
-		
-		String imgUploadPath = path2 + File.separator + "imgUpload";
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-		String fileName = null;
-		
-		if(file != null) {
-		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
-		} else {
-		 fileName = path2 + File.separator + "images" + File.separator + "none.png";
-		}
 
-		fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		fileVO.setThunImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-		fileVO.setProductNum(productVO.getProductNum());
-				
-		fileServiceImpl.doUpload(fileVO);
-		//파일 업로드 부분 끝
-		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductDetail");
 		mav.addObject("outVO", productVO);
@@ -364,6 +376,7 @@ public class ProductController {
 		for(ProductVO vo : outList) {
 			LOG.debug("vo : " + vo);
 		}
+		
 		
 		ModelAndView mav = new ModelAndView();
 		

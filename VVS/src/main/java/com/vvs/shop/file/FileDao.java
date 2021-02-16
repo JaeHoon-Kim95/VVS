@@ -44,4 +44,11 @@ final Logger LOG = LoggerFactory.getLogger(MemberDao.class);
 		List<FileVO> outVO = sqlSessionTemplate.selectList(statement,fileVO);
 		return outVO;
 	}
+	
+	public FileVO doSelectOne(FileVO fileVO){
+		String statement = NAMESPACE +"doSelectOne";
+		
+		FileVO outVO = sqlSessionTemplate.selectOne(statement,fileVO);
+		return outVO;
+	}
 }
