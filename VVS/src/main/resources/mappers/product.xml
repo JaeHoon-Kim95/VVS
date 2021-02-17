@@ -124,6 +124,9 @@
 				<if test="maxPrice != 0">
 						And p.price <![CDATA[<=]]> #{maxPrice}
 				</if>
+				<if test="div != 0">
+						And p.category_num = #{div}
+				</if>
 			</trim>
 		</trim>
 		Order By reg_dt
@@ -147,6 +150,9 @@
 					</if>
 					<if test="maxPrice != 0">
 							And p.price <![CDATA[<=]]> #{maxPrice}
+					</if>
+					<if test="div != 0">
+							And p.category_num = #{div}
 					</if>
 				</trim>
 			</trim>

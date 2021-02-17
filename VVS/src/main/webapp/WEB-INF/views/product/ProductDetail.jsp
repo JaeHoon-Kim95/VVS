@@ -101,7 +101,13 @@
 				
 				<button id="doInsertCart" type="button" class="btn btn-block btn-lg btn-outline-info">장바구니 담기</button>
 				<button id="orderBtn" type="button" class="btn btn-block btn-lg btn-outline-info">바로 구매</button>
-				<button id="moveToUpdate" type="button" class="btn btn-block btn-lg btn-outline-info">수정</button>
+				
+				<c:choose>
+					<c:when test="${sessionScope.MemberVO.auth eq 0 }">
+						<button id="moveToUpdate" type="button" class="btn btn-block btn-lg btn-outline-info">수정</button>
+					</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>
 			</div>
 			<!-- product detail -->
 		</div>

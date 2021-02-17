@@ -127,6 +127,7 @@ public class ProductController {
 		searchVO.setMinPrice(0);
 		searchVO.setMaxPrice(0);
 		searchVO.setSearchWord("");
+		searchVO.setDiv(0);
 		
 		LOG.debug("param - searchVO : " + searchVO);
 		
@@ -182,7 +183,8 @@ public class ProductController {
 	public ModelAndView doSearch(@RequestParam("pageNum") int pageNum,
 								 @RequestParam("searchWord") String searchWord,
 								 @RequestParam("minPrice") int minPrice,
-								 @RequestParam("maxPrice") int maxPrice) {
+								 @RequestParam("maxPrice") int maxPrice,
+								 @RequestParam("categoryNum") int categoryNum) {
 		LOG.debug("Current controller : product/doSearch.do");
 		
 		SearchVO searchVO = new SearchVO();
@@ -191,6 +193,7 @@ public class ProductController {
 		searchVO.setMinPrice(minPrice);
 		searchVO.setMaxPrice(maxPrice);
 		searchVO.setSearchWord(searchWord);
+		searchVO.setDiv(categoryNum);
 		
 		LOG.debug("param - searchVO : " + searchVO);
 		

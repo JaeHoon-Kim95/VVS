@@ -26,6 +26,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+	<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
 <br><br><br><br>
@@ -34,6 +35,7 @@
 			<input type="hidden" id="pageNum" name="pageNum" value="1">
 			<input type="hidden" id="minPrice" name="minPrice" value="0">
 			<input type="hidden" id="maxPrice" name="maxPrice" value="0">
+			<input type="hidden" name="categoryNum" value="0">
 			<input class="form-control mr-sm-2" id="searchWord" name="searchWord" type="search" placeholder="Search" aria-label="Search" value="${searchWord }">
     		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
@@ -88,11 +90,15 @@
 			</div>
 		</div>
 		
-		
-		<div>
-			<input class="btn btn-info" type="button" value="상품 등록" id="moveToproductRegistPage">
-			<br><br><br><br><br>
-		</div>
+		<c:choose>
+			<c:when test="${sessionScope.MemberVO.auth eq 0 }">
+				<div>
+				<input class="btn btn-info" type="button" value="상품 등록" id="moveToproductRegistPage">
+				<br><br><br><br><br>
+				</div>
+			</c:when>
+			<c:otherwise></c:otherwise>
+		</c:choose>
 		
 	</div>
 	<!-- container end -->

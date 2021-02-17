@@ -80,61 +80,49 @@
 <div class="sidebar">
 <aside>
 <ul class="sidebar-ul">
-	<li class="nav-item active"><a href="#">아우터</a>
+	 
+     
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=1&searchWord=">아우터</a>
 		
 	</li>
 	 
 	 <!-- Divider -->
      <hr class="sidebar-divider">
      
-	<li><a href="#">상의</a>
-		<ul>
-			<li><a href="#">02-01</a></li>
-			<li><a href="#">02-02</a></li>
-			<li><a href="#">02-03</a></li>
-			<li><a href="#">02-04</a></li>
-			<li><a href="#">02-05</a></li>
-		</ul>
-	</li>
-	 
-	 <!-- Divider -->
-     <hr class="sidebar-divider">
-     
-	<li><a href="#">하의</a>
-		<ul>
-			<li><a href="#">03-01</a></li>
-			<li><a href="#">03-02</a></li>
-			<li><a href="#">03-03</a></li>
-			<li><a href="#">03-04</a></li>
-			<li><a href="#">03-05</a></li>
-		</ul>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=2&searchWord=">상의</a>
 	</li>
 	
 	<!-- Divider -->
      <hr class="sidebar-divider">
 	
-	<li><a href="#">악세서리</a>
-		<ul>
-			<li><a href="#">04-01</a></li>
-			<li><a href="#">04-02</a></li>
-			<li><a href="#">04-03</a></li>
-			<li><a href="#">04-04</a></li>
-			<li><a href="#">04-05</a></li>
-		</ul>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=3&searchWord=">셔츠</a>
 	</li>
-	
 	<!-- Divider -->
      <hr class="sidebar-divider">
 	
-	<li><a href="#">신발</a>
-		<ul>
-			<li><a href="#">05-01</a></li>
-			<li><a href="#">05-02</a></li>
-			<li><a href="#">05-03</a></li>
-			<li><a href="#">05-04</a></li>
-			<li><a href="#">05-05</a></li>
-		</ul>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=4&searchWord=">블라우스</a>
 	</li>
+	<!-- Divider -->
+     <hr class="sidebar-divider">
+	
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=5&searchWord=">트레이닝</a>
+	</li>
+	<!-- Divider -->
+     <hr class="sidebar-divider">
+	
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=6&searchWord=">하의</a>
+	</li>
+	<!-- Divider -->
+     <hr class="sidebar-divider">
+	
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=7&searchWord=">후드</a>
+	</li>
+	<!-- Divider -->
+     <hr class="sidebar-divider">
+	
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=8&searchWord=">니트</a>
+	</li>
+	
 </ul>
 </aside>
 </div>
