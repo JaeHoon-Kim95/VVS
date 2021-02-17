@@ -9,4 +9,6 @@ public interface FileService {
 	int doUpload(FileVO fileVO);
 	
 	public List<FileVO> doSelectList(FileVO fileVO);
+	
+	public FileVO doSelectOne(FileVO fileVO);
 }

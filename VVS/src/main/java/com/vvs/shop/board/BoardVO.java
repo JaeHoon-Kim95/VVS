@@ -9,15 +9,14 @@ public class BoardVO {
 	private String regDt; //등록일
 	private String modId; //수정자
 	private String modDt; //수정일
-	private String childRep; //댓글
+	
 	
 	
 	public BoardVO() {
 	}
 	
 
-	public BoardVO(int seq, String title, String contents, String regId, String regDt, String modId, String modDt,
-			String childRep) {
+	public BoardVO(int seq, String title, String contents, String regId, String regDt, String modId, String modDt) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -26,7 +25,7 @@ public class BoardVO {
 		this.regDt = regDt;
 		this.modId = modId;
 		this.modDt = modDt;
-		this.childRep = childRep;
+		
 	}
 	
 	
@@ -87,19 +86,11 @@ public class BoardVO {
 		this.modDt = modDt;
 	}
 
-	public String getChildRep() {
-		return childRep;
-	}
-
-	public void setChildRep(String childRep) {
-		this.childRep = childRep;
-	}
-
 
 	@Override
 	public String toString() {
 		return "BoardVO [seq=" + seq + ", title=" + title + ", contents=" + contents + ", regId=" + regId + ", regDt="
-				+ regDt + ", modId=" + modId + ", modDt=" + modDt + ", childRep=" + childRep + ", toString()="
+				+ regDt + ", modId=" + modId + ", modDt=" + modDt + ", toString()="
 				+ super.toString() + "]";
 	}
 	

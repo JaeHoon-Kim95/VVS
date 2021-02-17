@@ -37,21 +37,26 @@
 			<input class="form-control mr-sm-2" id="searchWord" name="searchWord" type="search" placeholder="Search" aria-label="Search" value="${searchWord }">
     		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
-
+		
+		
+		
 		<hr>
 		<div class="row">
-			<c:forEach var="list" items="${productList }">
-				<c:forEach var="imgList" items="${imgList }">
+			<c:forEach var="list" items="${productList }" varStatus="status">
+				<c:set var="imgListThun" value="${imgList[status.index].thunImg}"/>
 				<c:set var="productNumL" value="${list.productNum}"/>
-				<c:set var="productNumI" value="${imgList.productNum}"/>	
-				<c:if test="${productNumL eq productNumI}">
-				<div class="col-lg-4 col-md-6 mb-4">				
-					<div class="card h-100">					
+				<c:set var="productNumI" value="${imgList[status.index].productNum}"/>	
+				
+				<div class="col-lg-4 col-md-6 mb-4">
+								
+					<div class="card h-100">	
+								
 						<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><img class="card-img-top" height="400"
-							src="${hContext}/${imgList.thunImg}" alt=""></a>						
+							src="${hContext}/${imgListThun}" alt=""></a>
+							<input type="hidden" value="${imgListThun}" name="thunImg" id="thunImg">				
 						<div class="card-body">
-							<h4 class="card-title">
-								<a href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>
+							<h4 class="card-title">								
+									<a class="moveDetail" href="/shop/product/moveToProductDetail.do?productNum=${list.productNum }"><c:out value="${list.productName }"/></a>																
 							</h4>
 							<h5><c:out value="${list.price }"/> 원</h5>
 							<p class="card-text"><c:out value="${list.categoryName }"/></p>
@@ -61,14 +66,12 @@
 						</div>
 					</div>				
 				</div>
-				</c:if>
-				</c:forEach>
+				
+				
 			</c:forEach>
-			
-			
-			
-			
+	
 		</div>
+		</form>
 		<!-- row end -->
 		<div class="row">
 			<div class="mx-auto">
@@ -123,6 +126,9 @@
 				var frm = document.searchData;
 				frm.submit();
 			}
+	
+		
+		
 	</script>
 </body>
 

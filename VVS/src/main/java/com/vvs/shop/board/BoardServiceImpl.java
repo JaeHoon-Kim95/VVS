@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vvs.shop.cmn.PageVO;
 import com.vvs.shop.cmn.SearchVO;
 
 @Service
@@ -13,6 +14,8 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
 	
+	
+	
 	@Override
 	public int doInsert(BoardVO boardVO) {
 		
@@ -20,10 +23,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> doSelectList(int num, int postNum) {
+	public List<BoardVO> doSelectList(PageVO pageVO) {
 		
-		return boardDao.doSelectList(num, postNum);
+		return boardDao.doSelectList(pageVO);
 	}
+	
 
 	@Override
 	public BoardVO doSelectOne(BoardVO boardVO) {

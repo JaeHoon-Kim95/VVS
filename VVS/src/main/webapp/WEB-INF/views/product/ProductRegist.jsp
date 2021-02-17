@@ -38,7 +38,7 @@
 
 
 		<div class="row">
-			<form:form class="form-group" name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post">
+			<form:form class="form-group" name="registData" id="registData" commandName="productVO" action="/shop/product/doRegistTest.do" method="post" autocomplete="off" enctype="multipart/form-data">
 				<label><strong>- 상품명*</strong></label><br>
 				<input class="form-control" type="text" value="" placeholder="상품명을 입력해주세요." id="productName" name="productName"><br>
 				<label><strong>- 판매 가격*</strong></label><br>
@@ -60,10 +60,10 @@
 				<input class="form-control" type="text" value="0" name="discountRate" id="discountRate" readonly="readonly"><br>
 				<label><strong>- 할인률</strong></label><br>
 				<input class="form-control" type="text" value="0" name="discount" id="discount" readonly="readonly"><br>
-				<label><strong>- 한 줄 설명</strong></label><br>
+				<label><strong>- 한 줄 설명</strong></label><br>		
 				<input class="form-control" type="text" value="" name="semiInfo" id="semiInfo" placeholder="한 줄 설명을 입력해주세요."><br>
 				<label><strong>- 상세 설명</strong></label><p>나중에 게시판거 베껴서 글쓰기 형식 가져오자.</p>
-				<textarea class="form-control" rows="10" id="mainInfo" name="mainInfo" cols="80" placeholder="상세 설명을 입력해주세요!"></textarea><br>
+				
 				
 				<div id="optionsTable">
 					<div id="1">
@@ -88,7 +88,7 @@
 				</div>
 				
 				<div class="inputArea">
-				<label for="vvsImg">이미지</label>
+				<label for="vvsImg">대표이미지</label>
 				<input type="file" id="vvsImg" name="file" />
 				<div class="select_img"><img src="" /></div>
 				

@@ -19,20 +19,14 @@
 			SEQ,
 			TITLE,
 			CONTENTS,
-			REG_ID,
-			REG_DT,
-			MOD_ID,
-			MOD_DT,
-			CHILD_REP
+			REG_ID			
+									
 		) VALUES (
-			#{BODSEQ.NEXTVAL},
+			BODSEQ.NEXTVAL,
 			#{title},
 			#{contents},
-			#{regId},
-			#{regDt},
-			#{modId},
-			#{modDt},
-			#{childRep}
+			#{regId}
+						
 		)	
 	</insert>
 	
@@ -77,24 +71,21 @@
 			   TITLE,
 			   CONTENTS,
 			   REG_ID,
-			   REG_DT,
-			   MOD_ID,
-			   MOD_DT,
-			   CHILD_REP
+			   REG_DT
 		FROM   BOARD
-		WHERE  REG_ID = #{regId}
+		WHERE  SEQ = #{seq}
 	</select>
 	
 	<update id="doUpdate" parameterType="BoardVO"> 
-		UPDATE BOARD SET CONTENTS = #{contents},
-						 MOD_ID = #{modId},
-						 MOD_DT = #{modDt},
-						 CHILD_REP = #{childRep}
-		WHERE REG_ID = #{regId}
+		UPDATE BOARD SET title = #{title},
+						 CONTENTS = #{contents},
+						 MOD_ID = #{regId},
+						 MOD_DT = SYSDATE						 
+		WHERE seq = #{seq}
 	</update>
 	
 	<delete id="doDelete" parameterType="BoardVO">
-		DELETE FROM BOARD WHERE REG_ID = #{regId}
+		DELETE FROM BOARD WHERE SEQ = #{seq}
 	</delete>
 	
 </mapper>
