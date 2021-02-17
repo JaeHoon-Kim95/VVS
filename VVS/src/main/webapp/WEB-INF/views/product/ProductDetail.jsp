@@ -257,7 +257,7 @@
            		"optionSeq":$("#optionSeq").val()
            },
            success: function(data){
-	           		window.location.href = "${hContext}/cart/doOrder.do";
+	           		window.location.href = "${hContext}/cart/doOrders.do";
                }
 			});
 	}
