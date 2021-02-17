@@ -367,7 +367,7 @@ public class ProductController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("product/ProductList");
+		mav.setViewName("product/SideBarTest");
 		mav.addObject("productList", outList);
 		
 		return mav;
