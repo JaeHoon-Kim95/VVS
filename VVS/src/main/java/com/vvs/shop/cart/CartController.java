@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.vvs.shop.member.MemberVO;
 
 @Controller
 public class CartController {
@@ -30,9 +31,11 @@ public class CartController {
 		// for Test -----------------------
 		// 세션으로 값 찾아 넣을 것.
 		HttpSession session = req.getSession();
-		session.setAttribute("memId", "cartTest");
-		String memberId = (String) session.getAttribute("memId");
+		MemberVO memberVO = (MemberVO) session.getAttribute("MemberVO");
+		String memberId = memberVO.getMemberId();
+		LOG.debug("memberId : " + memberId);
 		cartVO.setMemberId(memberId);		
+		LOG.debug("cartVO : " + cartVO);
 		// for Test -----------------------
 		
 		cartService.doInsert(cartVO);
