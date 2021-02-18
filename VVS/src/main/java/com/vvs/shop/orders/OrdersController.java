@@ -61,7 +61,7 @@ public class OrdersController {
 		cartVO.setMemberId(memberVO.getMemberId());
 		//cartVO.setSeq(165);
 		cartVO = cartService.doSelectOne(cartVO);
-		LOG.debug("cartService.doSelectOne(cartVO) : " + cartService.doSelectOne(cartVO));
+		LOG.debug("cartService.doSelectOne(cartVO) : " + cartVO);
 		//파일에서 상품번호 지정
 		fileVO.setProductNum(cartVO.getProductNum());
 			

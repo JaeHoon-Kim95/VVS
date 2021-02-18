@@ -46,14 +46,14 @@
 	
 	<select id="doSelectOne" parameterType="CartVO" resultType="CartVO">
 	SELECT
-	    seq,
+	    cart_seq.currVal,
 	    member_id,
 	    product_num,
 	    qty
 	FROM
 	    cart
 	WHERE
-		seq = #{seq}
+		member_id = #{memberId}
 	</select>
 	
 	<select id="doSelectList" parameterType="CartVO" resultType="CartVO">

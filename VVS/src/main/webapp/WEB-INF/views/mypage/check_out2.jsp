@@ -112,18 +112,18 @@
                                      <c:choose>
 							        	<c:when test="${outList.size()>0 }">
 							        		<c:set var="TotalSum" value="0" />
-							        		<c:forEach var="outVO" items="${outList}" varStatus="status">  
-							        		<c:set var="totalsum" value="${outVO.price * outVO.qty}" />							        		
-							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${outVO.productNum}" /></a>
-							        		<a id="qty" name="qty" style="display: none"><c:out value="${outVO.qty}" /></a>							        		
+							        		<c:forEach var="cartout" items="${cartOut}" varStatus="status">  
+							        		<c:set var="totalsum" value="${cartout.price * cartout.qty}" />							        		
+							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${cartout.productNum}" /></a>
+							        		<a id="qty" name="qty" style="display: none"><c:out value="${cartout.qty}" /></a>							        		
 										    	<li class="fw-normal">
-										    	<c:forEach var="FileVO" items="${fileList}">
-						    						<c:if test="${FileVO.productNum == outVO.productNum}">
+										    	<c:forEach var="fileout" items="${fileOut}">
+						    						<c:if test="${fileout.productNum == cartout.productNum}">
    						 								<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${FileVO.thunImg}">
 						    						</c:if>	
 						    					</c:forEach>
-						    					<br/> ${outVO.productName} x ${outVO.qty}
-										    	<br/> color : ${outVO.color}, size : ${outVO.sizes} 
+						    					<br/> ${cartout.productName} x ${cartout.qty}
+										    	<br/> color : ${cartout.color}, size : ${cartout.sizes} 
 										    	<span id="price"> <c:out value="${totalsum}원"/>  </span></li>
 										    <c:set var="TotalSum" value="${TotalSum+totalsum }" /> 		        			
 							        		</c:forEach>
