@@ -57,6 +57,14 @@
 		WHERE member_id = #{memberId}
 	</select>
 	
+	<!-- 단건조회 -->
+	<!-- com.vvs.shop.orders.doSelectOneOptions -->
+	<select id="doSelectOneOptions" parameterType="OptionsVO" resultType="OptionsVO">
+		SELECT *
+		FROM options
+		WHERE seq = #{seq}
+	</select>
+	
 	<!-- 목록조회 -->
 	<!-- com.vvs.shop.orders.doSelectList -->
 	<select id="doSelectList2" parameterType="OrdersVO" resultType="OrdersVO">

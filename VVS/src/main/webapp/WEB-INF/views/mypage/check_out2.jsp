@@ -68,35 +68,35 @@
                     <div class="col-lg-6">
                         
                         <h4>수령자 정보</h4>
-                        <input type="radio" style="width:20px;height:20px;border:1px;" name="chk_info" id="address_btn2" value="기본 수령지">기본 수령자 정보
-                        <input type="radio" style="width:20px;height:20px;border:1px;" name="chk_info" id="address_btn" value="수령지 변경">새로운 수령자 정보 입력하기
+                        <input type="radio" style="width:20px;height:20px;border:1px;" name="chk_info" id="address_btns2" value="기본 수령지">기본 수령자 정보
+                        <input type="radio" style="width:20px;height:20px;border:1px;" name="chk_info" id="address_btns" value="수령지 변경">새로운 수령자 정보 입력하기
                        
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="fir">이름<span>*</span></label>
-                                <input type="text" id="inputName" value="${sessionScope.MemberVO.getName()}">
+                                <input type="text" id="inputNames" value="${sessionScope.MemberVO.getName()}">
                             </div>
                             
                             <div class="col-lg-6">
                                 <label for="email">이메일주소<span>*</span></label>
-                                <input type="text" id="inputEmail" value="${sessionScope.MemberVO.getEmail()}">
+                                <input type="text" id="inputEmails" value="${sessionScope.MemberVO.getEmail()}">
                             </div>
                             
                             <div class="col-lg-6">
                                 <label for="phone">핸드폰번호<span>*</span></label>
-                                <input type="text" id="inputPhone" value="${sessionScope.MemberVO.getPhone()}">
+                                <input type="text" id="inputPhones" value="${sessionScope.MemberVO.getPhone()}">
                             </div>
                             
                             <!-- 우편번호, 도로명, 상세주소 --> 
                             <div class="form-group"> 
-								<input class="form-control" style="width: 40%; display: inline;" value="${sessionScope.MemberVO.getAddrNum()}" name="inputAddr1" id="inputAddr1" type="text" readonly="readonly"/> 
+								<input class="form-control" style="width: 40%; display: inline;" value="${sessionScope.MemberVO.getAddrNum()}" name="inputAddrs1" id="inputAddrs1" type="text" readonly="readonly"/> 
 								<button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button> 
 							</div> 
 							<div class="form-group"> 
-								<input class="form-control" style="top: 5px;" value="${sessionScope.MemberVO.getAddrRoad()}" name="inputAddr2" id="inputAddr2" type="text" readonly="readonly" /> 
+								<input class="form-control" style="top: 5px;" value="${sessionScope.MemberVO.getAddrRoad()}" name="inputAddrs2" id="inputAddrs2" type="text" readonly="readonly" /> 
 							</div> 
 							<div class="form-group"> 
-								<input class="form-control" value="${sessionScope.MemberVO.getAddrDetail()}" name="inputAddrDetail" id="inputAddrDetail" type="text"/> 
+								<input class="form-control" value="${sessionScope.MemberVO.getAddrDetail()}" name="inputAddrDetails" id="inputAddrDetails" type="text"/> 
 							</div>
                         
                             
@@ -109,35 +109,23 @@
                             <div class="order-total">
                                 <ul class="order-table">
                                     <li>상품정보 <span>가격</span></li>
-                                     <c:choose>
-							        	<c:when test="${outList.size()>0 }">
 							        		<c:set var="TotalSum" value="0" />
-							        		<c:forEach var="cartout" items="${cartOut}" varStatus="status">  
-							        		<c:set var="totalsum" value="${cartout.price * cartout.qty}" />							        		
-							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${cartout.productNum}" /></a>
-							        		<a id="qty" name="qty" style="display: none"><c:out value="${cartout.qty}" /></a>							        		
+							        		<c:set var="totalsum" value="${cartOut.price * cartOut.qty}" />		
+							        		<a id="seq" name="seq" style="display: none"><c:out value="${cartOut.seq}" /></a>					        		
+							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${cartOut.productNum}" /></a>
+							        		<a id="qty" name="qty" style="display: none"><c:out value="${cartOut.qty}" /></a>							        		
 										    	<li class="fw-normal">
-										    	<c:forEach var="fileout" items="${fileOut}">
-						    						<c:if test="${fileout.productNum == cartout.productNum}">
-   						 								<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${FileVO.thunImg}">
-						    						</c:if>	
-						    					</c:forEach>
-						    					<br/> ${cartout.productName} x ${cartout.qty}
-										    	<br/> color : ${cartout.color}, size : ${cartout.sizes} 
+										    	<c:if test="${fileOut.productNum == cartOut.productNum}">
+   						 								<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${fileOut.thunImg}">						    					
+						    					</c:if>
+						    					<br/> <c:out value="${cartOut.productName} x ${cartOut.qty}"/>
+										    	<br/> <c:out value="color : ${cartOut.color}, size : ${cartOut.sizes}"/> 
 										    	<span id="price"> <c:out value="${totalsum}원"/>  </span></li>
-										    <c:set var="TotalSum" value="${TotalSum+totalsum }" /> 		        			
-							        		</c:forEach>
-							        	</c:when>
-							        	<c:otherwise>
-							        		<tr>
-										    		<td class="text-center" colspan="99">주문현황이 없습니다.</td>
-										    </tr>  		
-							        	</c:otherwise>
-							        </c:choose>
+										    <c:set var="TotalSum" value="${TotalSum+totalsum }" /> 
                                     <li class="total-price">총가격 <span><c:out value="${TotalSum}원"/></span></li>
                                 </ul>
                                 <div class="order-btn">
-                                    <button type="button" class="site-btn place-btn" id="order_btn">주문하기</button>
+                                    <button type="button" class="site-btn place-btn" id="orders_btn">주문하기</button>
                                 </div>
                             </div>
                         </div>
@@ -177,29 +165,29 @@
 
 	//수령자 초기화 이벤트
 	$("#address_btn").on("click",function(){
-		$('#inputName').val('');
-		$('#inputEmail').val('');
-		$('#inputPhone').val('');
-		$('#inputAddr1').val('');
-		$('#inputAddr2').val('');
-		$('#inputAddrDetail').val('');
+		$('#inputNames').val('');
+		$('#inputEmails').val('');
+		$('#inputPhones').val('');
+		$('#inputAddrs1').val('');
+		$('#inputAddrs2').val('');
+		$('#inputAddrDetails').val('');
 
 	});
 
 
 	//기본 수령자 이벤트
 	$("#address_btn2").on("click",function(){
-		$('#inputName').val('${sessionScope.MemberVO.getName()}');
-		$('#inputEmail').val('${sessionScope.MemberVO.getEmail()}');
-		$('#inputPhone').val('${sessionScope.MemberVO.getPhone()}');
-		$('#inputAddr1').val('${sessionScope.MemberVO.getAddrNum()}');
-		$('#inputAddr2').val('${sessionScope.MemberVO.getAddrRoad()}');
-		$('#inputAddrDetail').val('${sessionScope.MemberVO.getAddrDetail()}');
+		$('#inputNames').val('${sessionScope.MemberVO.getName()}');
+		$('#inputEmails').val('${sessionScope.MemberVO.getEmail()}');
+		$('#inputPhones').val('${sessionScope.MemberVO.getPhone()}');
+		$('#inputAddrs1').val('${sessionScope.MemberVO.getAddrNum()}');
+		$('#inputAddrs2').val('${sessionScope.MemberVO.getAddrRoad()}');
+		$('#inputAddrDetails').val('${sessionScope.MemberVO.getAddrDetail()}');
 
 	});
 	
 	//이름에 특수문자 들어가지 않도록 설정 
-	$("#inputName").blur(function() { 
+	$("#inputNames").blur(function() { 
 		if (nameJ.test($(this).val())) { 
 			console.log(nameJ.test($(this).val())); 
 			$("#name_check").text(''); 
@@ -209,7 +197,7 @@
 			} 
 		});
 	//이메일 양식 확인
-	 $("#inputEmail").blur(function() { 
+	 $("#inputEmails").blur(function() { 
 		 if (mailJ.test($(this).val())) { 
 			 $("#email_check").text("사용할 수 있는 이메일 입니다.");
 			 $("#email_check").css("color", "blue"); 
@@ -218,7 +206,7 @@
 		 	 } 
 	 	 });
  	 //휴대전화
- 	 $("#inputPhone").blur(function(){ 
+ 	 $("#inputPhones").blur(function(){ 
 	 	 if(phoneJ.test($(this).val())){ 
 		 	 console.log(nameJ.test($(this).val())); 
 		 	 $("#phone_check").text(''); 
@@ -258,54 +246,29 @@
                // 우편번호와 주소 정보를 해당 필드에 넣는다.
                console.log(data.zonecode);
                console.log(fullRoadAddr);
-               $("[name=inputAddr1]").val(data.zonecode);
-               $("[name=inputAddr2]").val(fullRoadAddr);
+               $("[name=inputAddrs1]").val(data.zonecode);
+               $("[name=inputAddrs2]").val(fullRoadAddr);
                
             }
         }).open();
     }
 
 	//주문 이벤트
-	$("#order_btn").on("click",function(){
-		alert("성공");
-		
-		var productArray= [];
-		var qtyArray= [];
-		
-		$("a[name=qty]").each(function(i){
-			qtyArray.push($(this).text());
-			console.log("qtyArray:"+qtyArray);
-		});	
-		$("a[name=productNum]").each(function(i){
-			productArray.push($(this).text());
-			console.log("productArray:"+productArray);
-		});		
-		console.log("qtyArray12:"+qtyArray);
-		console.log("productArray12:"+productArray);
-		var objParams = {
-                "productNum" : productArray,
-                "qty"     :   qtyArray
-            };
-		console.log("productArray:"+productArray);
-		console.log("qtyArray:"+qtyArray);
-		console.log("memberId:"+"${sessionScope.MemberVO.memberId }");
-		console.log("objParams:"+objParams);
-			 $.ajax({
+	$("#orders_btn").on("click",function(){
+		alert("성공");		
+		console.log("성공");
+			 /* $.ajax({
 			    type:"POST",
 			    url:"${hContext}/orders/doInsert.do",
-			    dataType:"html",
-			    traditional:true, 
+			    dataType:"html", 
 			    data:{
 			    	"memberId"  : "${sessionScope.MemberVO.memberId }",
-			    	"productNum" : productArray,
-	                "qty"     :   qtyArray
+			    	"productNum" : $("#productNum").val(),
+	                "qty"     :   $("#productNum").val()
 			    },
 			    success:function(data){ //성공
 			    	alert("주문을 완료했습니다.");
-			    	 //json 분리해서 변수
-				      // var jsonObj = JSON.parse(data);
-
-				       window.location.href="${hContext}/main/index.do";
+					   cartDelete();
 					      
 			    },		       
 			    error:function(xhr,status,error){
@@ -315,10 +278,30 @@
 			    
 			    }   
 			  
-		});//--ajax 	
+		});//--ajax  */	
 
 	});
 
+	function cartDelete(){
+		$.ajax({
+		    type:"POST",
+		    url:"${hContext}/cart/doDeleteCart.do",
+		    dataType:"html" 
+		    data:{
+                "seq"     :   $("#seq").val()
+		    },
+		    success:function(data){ //성공
+		    	window.location.href="${hContext}/main/index.do";
+		    },		       
+		    error:function(xhr,status,error){
+		     alert("error:"+error);
+		    },
+		    complete:function(data){
+		    
+		    }   
+		  
+	});//--ajax 
+	}
 	
 	</script>
 </body>

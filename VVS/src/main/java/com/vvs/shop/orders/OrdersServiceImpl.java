@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vvs.shop.cmn.SearchVO;
+import com.vvs.shop.product.OptionsVO;
 
 @Service("OrdersServiceImpl")
 public class OrdersServiceImpl implements OrdersService {
@@ -50,6 +51,11 @@ public class OrdersServiceImpl implements OrdersService {
 	@Override
 	public int totalCnt() {
 		return ordersDao.totalCnt();
+	}
+
+	@Override
+	public OptionsVO doSelectOneOptions(OptionsVO optionsVO) {
+		return ordersDao.doSelectOneOptions(optionsVO);
 	}
 
 }

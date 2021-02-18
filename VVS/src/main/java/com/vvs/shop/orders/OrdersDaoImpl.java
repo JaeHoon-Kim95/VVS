@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.vvs.shop.cmn.SearchVO;
+import com.vvs.shop.product.OptionsVO;
 
 
 @Repository("OrdersDaoImpl")
@@ -108,6 +109,26 @@ public class OrdersDaoImpl {
 		LOG.debug("=Orders param=="+ordersVO);
 		
 		OrdersVO outVO = sqlSessionTemplate.selectOne(statement,ordersVO);
+		
+		LOG.debug("Orders doSelectOne outVO = "+outVO);
+		
+		return outVO;
+	}
+	
+	/**
+	 * 주문 조회
+	 * @param orderNum
+	 * @return
+	 */
+	public OptionsVO doSelectOneOptions(OptionsVO optionsVO) {
+		LOG.debug("=Orders doSelectOne=");
+		
+		//단건조회 : namespace+id = com.vvs.shop.orders.doSelectOne		
+		String statement = NAMESPACE +".doSelectOneOptions";
+		LOG.debug("=Orders statement="+statement);
+		LOG.debug("=Orders param=="+optionsVO);
+		
+		OptionsVO outVO = sqlSessionTemplate.selectOne(statement,optionsVO);
 		
 		LOG.debug("Orders doSelectOne outVO = "+outVO);
 		

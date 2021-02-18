@@ -27,6 +27,9 @@ import com.vvs.shop.cmn.SearchVO;
 import com.vvs.shop.file.FileServiceImpl;
 import com.vvs.shop.file.FileVO;
 import com.vvs.shop.member.MemberVO;
+import com.vvs.shop.product.OptionsVO;
+import com.vvs.shop.product.ProductService;
+import com.vvs.shop.product.ProductVO;
 import com.vvs.shop.ship.ShipServiceImpl;
 import com.vvs.shop.ship.ShipVO;
 
@@ -47,10 +50,13 @@ public class OrdersController {
 	@Autowired
 	FileServiceImpl fileServiceImpl;
 	
+	@Autowired
+	ProductService productService;
+	
 	//상품에서 주문
 	@RequestMapping(value="cart/doOrders.do", method = {RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView checkoutView2(CartVO cartVO, FileVO fileVO, HttpServletRequest req) {
+	public ModelAndView checkoutView2(OptionsVO optionsVO, CartVO cartVO,ProductVO productVO, FileVO fileVO, HttpServletRequest req) {
 			
 		HttpSession session = req.getSession();
 		
@@ -62,12 +68,26 @@ public class OrdersController {
 		//cartVO.setSeq(165);
 		cartVO = cartService.doSelectOne(cartVO);
 		LOG.debug("cartService.doSelectOne(cartVO) : " + cartVO);
+
+		productVO.setProductNum(cartVO.getProductNum());
+		productVO = productService.doSelectOne(productVO);
+
+		optionsVO.setSeq(cartVO.getOptionSeq());
+		optionsVO = ordersService.doSelectOneOptions(optionsVO);
+		LOG.debug("ordersService.doSelectOneOptions(optionsVO) : " + optionsVO);
+		
+		cartVO.setColor(optionsVO.getColor());
+		cartVO.setSizes(optionsVO.getSizes());
+		cartVO.setPrice(productVO.getPrice());
+		cartVO.setProductName(productVO.getProductName());
+		
+		LOG.debug("cartService.doSelectOne(cartVO) : " + cartVO);
 		//파일에서 상품번호 지정
 		fileVO.setProductNum(cartVO.getProductNum());
 			
 		//파일에서 이미지 뽑아오기
 		fileVO = fileServiceImpl.doSelectOne(fileVO);
-			
+		LOG.debug("fileVO.doSelectOne(cartVO) : " + fileVO);	
 		ModelAndView mav = new ModelAndView();
 			
 		mav.addObject("cartOut", cartVO);
