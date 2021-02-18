@@ -56,22 +56,23 @@ public class OrdersController {
 		
 		LOG.debug("Current controller : cart/doOrder.do");
 		LOG.debug("cartVO111 : " + cartVO);
-		cartVO = (CartVO) session.getAttribute("MemberVO");
-		cartService.doSelectOne(cartVO);
-		
+		MemberVO memberVO = (MemberVO) session.getAttribute("MemberVO");
+		LOG.debug("memberVO12 : " + memberVO);
+		cartVO.setMemberId(memberVO.getMemberId());
+		//cartVO.setSeq(165);
+		cartVO = cartService.doSelectOne(cartVO);
+		LOG.debug("cartService.doSelectOne(cartVO) : " + cartVO);
 		//파일에서 상품번호 지정
-		for(int i=0; i<cartVO.getCartList().size(); i++) {
-			fileVO.setProductNum(cartVO.getCartList().get(i).getProductNum());
-		}
+		fileVO.setProductNum(cartVO.getProductNum());
 			
-		//파일리스트에서 이미지 뽑아오기
-		List<FileVO> fileList = fileServiceImpl.doSelectList(fileVO);
+		//파일에서 이미지 뽑아오기
+		fileVO = fileServiceImpl.doSelectOne(fileVO);
 			
 		ModelAndView mav = new ModelAndView();
 			
-		mav.addObject("outList", cartVO.getCartList());
-		mav.addObject("fileList", fileList);
-		mav.setViewName("mypage/check_out");
+		mav.addObject("cartOut", cartVO);
+		mav.addObject("fileOut", fileVO);
+		mav.setViewName("mypage/check_out2");
 		return mav;
 	}
 	
