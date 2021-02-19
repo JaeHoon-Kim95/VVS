@@ -46,7 +46,7 @@
 	
 	<select id="doSelectOne" parameterType="CartVO" resultType="CartVO">
 	SELECT
-	    cart_seq.currVal,
+	    seq,
 	    member_id,
 	    product_num,
 	    qty,

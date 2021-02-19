@@ -51,7 +51,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="${hContext}/main/index.do"><i class="fa fa-home"></i> 홈</a>
-                        <a href="${hContext}/cart/moveToCart.do">장바구니</a>
+                        <a href="${hContext}/product/moveToProductDetail.do?productNum=${cartOut.productNum }">상품정보</a>
                         <span>주문</span>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                             <!-- 우편번호, 도로명, 상세주소 --> 
                             <div class="form-group"> 
 								<input class="form-control" style="width: 40%; display: inline;" value="${sessionScope.MemberVO.getAddrNum()}" name="inputAddrs1" id="inputAddrs1" type="text" readonly="readonly"/> 
-								<button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button> 
+								<button type="button" class="btn btn-default" onclick="execPostCodes();"><i class="fa fa-search"></i> 우편번호 찾기</button> 
 							</div> 
 							<div class="form-group"> 
 								<input class="form-control" style="top: 5px;" value="${sessionScope.MemberVO.getAddrRoad()}" name="inputAddrs2" id="inputAddrs2" type="text" readonly="readonly" /> 
@@ -151,6 +151,7 @@
     <script src="${hContext}/resources/js/jquery.slicknav.js"></script>
     <script src="${hContext}/resources/js/owl.carousel.min.js"></script>
     <script src="${hContext}/resources/js/main.js"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	var empJ = /\s/g;  
@@ -164,7 +165,7 @@
 	var address = $("#inputDetail");
 
 	//수령자 초기화 이벤트
-	$("#address_btn").on("click",function(){
+	$("#address_btns").on("click",function(){
 		$('#inputNames').val('');
 		$('#inputEmails').val('');
 		$('#inputPhones').val('');
@@ -176,7 +177,7 @@
 
 
 	//기본 수령자 이벤트
-	$("#address_btn2").on("click",function(){
+	$("#address_btns2").on("click",function(){
 		$('#inputNames').val('${sessionScope.MemberVO.getName()}');
 		$('#inputEmails').val('${sessionScope.MemberVO.getEmail()}');
 		$('#inputPhones').val('${sessionScope.MemberVO.getPhone()}');
@@ -215,7 +216,7 @@
 		 	 } 
 	 	 });
 	
-	function execPostCode() {
+	function execPostCodes() {
         new daum.Postcode({
             oncomplete: function(data) {
                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -255,20 +256,37 @@
 
 	//주문 이벤트
 	$("#orders_btn").on("click",function(){
-		alert("성공");		
-		console.log("성공");
-			 /* $.ajax({
+		var productArray= [];
+		var qtyArray= [];
+		
+		$("a[name=qty]").each(function(i){
+			qtyArray.push($(this).text());
+			console.log("qtyArray:"+qtyArray);
+		});	
+		$("a[name=productNum]").each(function(i){
+			productArray.push($(this).text());
+			console.log("productArray:"+productArray);
+		});		
+		console.log("qtyArray12:"+qtyArray);
+		console.log("productArray12:"+productArray);
+		var objParams = {
+                "productNum" : productArray,
+                "qty"     :   qtyArray
+            };
+			$.ajax({
 			    type:"POST",
 			    url:"${hContext}/orders/doInsert.do",
 			    dataType:"html", 
+			    traditional:true, 
 			    data:{
 			    	"memberId"  : "${sessionScope.MemberVO.memberId }",
-			    	"productNum" : $("#productNum").val(),
-	                "qty"     :   $("#productNum").val()
+			    	"productNum" : productArray,
+	                "qty"     :   qtyArray
 			    },
 			    success:function(data){ //성공
 			    	alert("주문을 완료했습니다.");
-					   cartDelete();
+			    	cartDelete();
+			    	window.location.href="${hContext}/main/index.do";
 					      
 			    },		       
 			    error:function(xhr,status,error){
@@ -278,20 +296,22 @@
 			    
 			    }   
 			  
-		});//--ajax  */	
+		});//--ajax
 
 	});
 
 	function cartDelete(){
+		var seq = $('#seq').text();
+		console.log("seq : " + seq);
 		$.ajax({
-		    type:"POST",
+		    type:"GET",
 		    url:"${hContext}/cart/doDeleteCart.do",
-		    dataType:"html" 
-		    data:{
-                "seq"     :   $("#seq").val()
+		    dataType:"html",
+		    async: false, 
+		    data:{"seq" : $('#seq').text()
 		    },
 		    success:function(data){ //성공
-		    	window.location.href="${hContext}/main/index.do";
+		    	
 		    },		       
 		    error:function(xhr,status,error){
 		     alert("error:"+error);
@@ -300,7 +320,7 @@
 		    
 		    }   
 		  
-	});//--ajax 
+	});//--ajax
 	}
 	
 	</script>

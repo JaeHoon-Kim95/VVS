@@ -163,6 +163,7 @@
     <script src="${hContext}/resources/js/jquery.slicknav.js"></script>
     <script src="${hContext}/resources/js/owl.carousel.min.js"></script>
     <script src="${hContext}/resources/js/main.js"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	var empJ = /\s/g;  
