@@ -61,8 +61,8 @@
 		left: -200px;
 		z-index: 1;
 		transition:all .35s;
-		background-color: white;
-		padding-top: 70px;
+		background-color: #424242;
+		padding-top: 150px;
 	}
 	input[id="menuicon"]:checked + label + div {
 		left:0;
@@ -81,47 +81,52 @@
 <aside>
 <ul class="sidebar-ul">
 	 
+	 <!-- Divider -->
+     <hr class="sidebar-divider" color="white">
      
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=1&searchWord=">아우터</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=1&searchWord="><font color="white";>아우터</font></a>
 		
 	</li>
 	 
 	 <!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
      
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=2&searchWord=">상의</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=2&searchWord="><font color="white";>상의</font></a>
 	</li>
 	
 	<!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
 	
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=3&searchWord=">셔츠</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=3&searchWord="><font color="white";>셔츠</font></a>
 	</li>
 	<!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
 	
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=4&searchWord=">블라우스</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=4&searchWord="><font color="white";>블라우스</font></a>
 	</li>
 	<!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
 	
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=5&searchWord=">트레이닝</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=5&searchWord="><font color="white";>트레이닝</font></a>
 	</li>
 	<!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
 	
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=6&searchWord=">하의</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=6&searchWord="><font color="white";>하의</font></a>
 	</li>
 	<!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
 	
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=7&searchWord=">후드</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=7&searchWord="><font color="white";>후드</font></a>
 	</li>
 	<!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider" color="white">
 	
-	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=8&searchWord=">니트</a>
+	<li><a href="/shop/product/doSearch.do?pageSize=10&pageNum=1&minPrice=0&maxPrice=0&categoryNum=8&searchWord="><font color="white";>니트</font></a>
 	</li>
+	
+	<!-- Divider -->
+     <hr class="sidebar-divider" color="white">
 	
 </ul>
 </aside>
