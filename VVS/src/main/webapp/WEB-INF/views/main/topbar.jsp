@@ -4,7 +4,7 @@
 	<!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">HOON</a>
+      <a class="navbar-brand" href="${hContext}/member/homeBack.do">HOON</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,7 +24,7 @@
 	      </li>
 	      
           <li class="nav-item">
-            <a class="nav-link" href="${hContext}/member/registerPage.do">Register</a>
+            <a class="nav-link" href="${hContext}/member/registerPage.do">회원가입</a>
           </li>
            <li class="nav-item">
             <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
@@ -37,18 +37,22 @@
 						<input type="hidden" value="1" name="num">
 					</form>
 		        	<a id="ordersMove"  class="nav-link" type="button">
-		        		MyPage
+		        		마이페이지
 		        	</a>	        	
 		        </li>
+		      
 		        <li class="nav-item">
-		        	<a href="${hContext}/member/logout.do" class="nav-link">logout</a>
+		        	<a class="nav-link" style="font-size:16px;color:white">${sessionScope.MemberVO.getName()}님 환영합니다.</a>
 		        </li>
-		        <p style="font-size:16px;color:white">${sessionScope.MemberVO.getName()}님 환영합니다.</p>
+		        
+		        <li class="nav-item">
+		        	<a href="${hContext}/member/logout.do" class="nav-link">로그아웃</a>
+		        </li>
 		        		        
 		    </c:when>
 		    <c:otherwise>
 		  	<li class="nav-item">
-		  		<a class="nav-link" type="button" id="loginView">MyPage</a>
+		  		<a class="nav-link" type="button" id="loginView">마이페이지</a>
 		  	</li>			  	
             <li class="nav-item">
             	<a class="nav-link" href="${hContext}/member/loginPage.do">login</a>
