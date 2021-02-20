@@ -38,6 +38,22 @@ final Logger LOG = LoggerFactory.getLogger(MemberDao.class);
 		 return flag;
 	}
 	
+	public int doUploadTitle(FileVO fileVO) {
+		 LOG.debug("====================");
+		 LOG.debug("==doUploadTitle==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doUploadTitle";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==fileVO=="+fileVO);
+		 
+		 int flag = sqlSessionTemplate.insert(statement, fileVO);
+		 LOG.debug("flag"+flag);
+		 
+		 return flag;
+	}
+	
 	public List<FileVO> doSelectList(FileVO fileVO){
 		String statement = NAMESPACE +"doSelectList";
 		

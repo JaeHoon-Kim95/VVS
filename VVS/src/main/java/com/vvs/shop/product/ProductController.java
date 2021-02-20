@@ -304,7 +304,36 @@ public class ProductController {
 		
 		return mav;
 	}
-	
+	@RequestMapping(value="product/titleRegist.do", method = RequestMethod.POST)
+	public ModelAndView titleRegist(FileVO fileVO,MultipartFile file2,
+								    HttpServletRequest req) throws Exception {
+		
+		String path2 = System.getProperty("user.home") + "\\git\\VVS\\VVS\\src\\main\\webapp\\resources";
+		
+		String imgUploadPath = path2 + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		
+		if(file2 != null) {
+		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file2.getOriginalFilename(), file2.getBytes(), ymdPath); 
+		} else {
+		 fileName = path2 + File.separator + "images" + File.separator + "none.png";
+		}
+
+		fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		fileVO.setThunImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
+		LOG.debug("FileVO"+fileVO);
+		int flag = fileServiceImpl.doUploadTitle(fileVO);
+		//파일 업로드 부분 끝
+		LOG.debug("flag"+flag);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/product/moveToMainPage.do");
+			
+				
+		return mav;
+	}
 	
 	
 	// 상품 등록
@@ -366,6 +395,13 @@ public class ProductController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "product/moveToTitleRegist.do", method = RequestMethod.GET)
+	public String moveToTitleRegist() {	
+				
+		return "product/TitleRegist";
+	}
+	
 	
 	// 시작
 	@RequestMapping(value = "product/doDev.do", method = RequestMethod.GET)

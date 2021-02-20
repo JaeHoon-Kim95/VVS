@@ -62,8 +62,8 @@
 				<input class="form-control" type="text" value="0" name="discount" id="discount" readonly="readonly"><br>
 				<label><strong>- 한 줄 설명</strong></label><br>		
 				<input class="form-control" type="text" value="" name="semiInfo" id="semiInfo" placeholder="한 줄 설명을 입력해주세요."><br>
-				<label><strong>- 상세 설명</strong></label><p>나중에 게시판거 베껴서 글쓰기 형식 가져오자.</p>
-				
+				<label><strong>- 상세 설명</strong></label>
+				<input class="form-control" type="textarea" value="" name="mainInfo" id="mainInfo" placeholder="상세 설명을 입력해주세요.">
 				
 				<div id="optionsTable">
 					<div id="1">
@@ -102,9 +102,7 @@
 							reader.readAsDataURL(this.files[0]);
 						}
 					});
-				</script>
-				
-				<%=request.getRealPath("/") %>
+				</script>								
 				
 			</div>
 				

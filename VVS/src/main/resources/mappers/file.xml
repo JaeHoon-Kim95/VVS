@@ -14,12 +14,25 @@
 		    #{thunImg}
 		)
 	</insert>
+		
+	<insert id="doUploadTitle" parameterType="FileVO">
+		INSERT INTO files (
+			TITLE_IMG,		
+		    IMG,
+		    THUNIMG
+		) VALUES (		
+			title_img.NEXTVAL,	
+		    #{img},
+		    #{thunImg}
+		)
+	</insert>
 	
 	<select id="doSelectList" parameterType="FileVO" resultType="FileVO">
 		SELECT *
 			   FROM FILES
 			  
 	</select>
+	
 	
 	<select id="doSelectOne" parameterType="FileVO" resultType="FileVO">
 		SELECT THUNIMG

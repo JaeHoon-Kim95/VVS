@@ -24,6 +24,7 @@ public class FileServiceImpl implements FileService {
 		
 		return fileDao.doSelectList(fileVO);
 	}
+	
 
 	@Override
 	public FileVO doSelectOne(FileVO fileVO) {
@@ -31,4 +32,10 @@ public class FileServiceImpl implements FileService {
 		return fileDao.doSelectOne(fileVO);
 	}
 
+	@Override
+	public int doUploadTitle(FileVO fileVO) {
+		// TODO Auto-generated method stub
+		return fileDao.doUploadTitle(fileVO);
+	}
+	
 }
