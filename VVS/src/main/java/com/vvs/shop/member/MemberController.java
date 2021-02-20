@@ -26,7 +26,7 @@ public class MemberController {
 	
 	@RequestMapping(value="member/homeBack.do", method = RequestMethod.GET)
 	public String homeBack(HttpServletRequest req, HttpServletResponse res) {
-		return "main/main";
+		return "redirect:/product/moveToMainPage.do";
 	}
 	
 	@RequestMapping(value="member/loginPage.do", method = RequestMethod.GET)	

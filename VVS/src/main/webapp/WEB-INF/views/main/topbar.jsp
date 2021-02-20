@@ -16,14 +16,9 @@
 			 <form name="moveBoard" action="${hContext}/board/doSelectList.do">
 				<input type="hidden" value="1" name="num">
 			 </form>					 
-	      </li>
-	      
-          <li class="nav-item">
-            <a class="nav-link" href="${hContext}/member/registerPage.do">회원가입</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
-          </li>
+	      </li>	      
+          
+           
           <li class="nav-item">
 		  <c:choose>
 		  	<c:when test='${null != sessionScope.MemberVO}'>
@@ -35,11 +30,15 @@
 		        		마이페이지
 		        	</a>	        	
 		        </li>
-		      
+		      		        
 		        <li class="nav-item">
+           			 <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
+         		 </li>
+         		 
+         		 <li class="nav-item">
 		        	<a class="nav-link" style="font-size:16px;color:white">${sessionScope.MemberVO.getName()}님 환영합니다.</a>
 		        </li>
-		        
+         		 
 		        <li class="nav-item">
 		        	<a href="${hContext}/member/logout.do" class="nav-link">로그아웃</a>
 		        </li>
@@ -47,11 +46,12 @@
 		    </c:when>
 		    <c:otherwise>
 		  	<li class="nav-item">
-		  		<a class="nav-link" type="button" id="loginView">마이페이지</a>
-		  	</li>			  	
+            	<a class="nav-link" href="${hContext}/member/registerPage.do">회원가입</a>
+            </li>		  	
             <li class="nav-item">
             	<a class="nav-link" href="${hContext}/member/loginPage.do">login</a>
             </li>	
+         	
          	
 		   </c:otherwise>				      
 		   </c:choose> 

@@ -17,6 +17,12 @@
 
   <!-- Custom styles for this template -->
   <link href="${hContext}/resources/css" rel="stylesheet">
+  
+   <style>
+	body{ padding-top:100px;
+		}
+	</style>
+  
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
@@ -24,22 +30,22 @@
 	<div style="text-align: center;" class="container">
 		<h1>SIGN IN</h1>
 		<hr>
-		<div class="contents text-center">
-			<div class="col-sm-6 col-md-offset-10" >
+		<div>
+			<div style="display:inline-block">
 				<form method="post" action="${hContext }/member/doLogin.do" class="" name="loginForm" id="loginForm">
 					<div class="form-group">
 						<label for="inputId">아이디</label> 
-						<input type="text" class="form-control" id="inputId" name="inputId" placeholder="ID">
+						<input type="text" class="form-control" id="inputId" name="inputId" placeholder="ID" style="width:300px;">
 					</div>
 					
 					<div class="form-group"> 
 						<label for="inputPw">비밀번호</label> 
-						<input type="password" class="form-control" id="inputPw" name="inputPw" placeholder="PASSWORD"> 			
+						<input type="password" class="form-control" id="inputPw" name="inputPw" placeholder="PASSWORD" style="width:300px"> 			
 				</div>
 					<input style="width:150px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="REGISTER" id="registerBtn">
 					<input style="width:150px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="SIGN IN" id="loginBtn">				
-				</form>
-			</div>
+				</form>	
+			</div>	
 		</div>
 		 
 	</div>

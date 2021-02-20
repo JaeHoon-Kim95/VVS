@@ -25,6 +25,8 @@
 </head>
 
 <body>
+	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+	<%@ include file="/WEB-INF/views/mypage/mypage_sidebar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
 <br><br><br><br>
@@ -221,6 +223,8 @@
 	// --Load cart List
 		
 	</script>
+	<%@ include file="/WEB-INF/views/main/footer.jsp" %>
+	
 </body>
 
 </html> 

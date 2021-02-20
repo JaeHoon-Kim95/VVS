@@ -17,6 +17,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
 <div id="wrap">
 <%--    <%@include  file="/cmn/inc/header.jsp" %> --%>
    <section>

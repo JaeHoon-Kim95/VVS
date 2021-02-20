@@ -23,7 +23,7 @@
   	<!-- Custom styles for this template -->
   	<link href="${hContext}/resources/css" rel="stylesheet">
 	<style>
-	body{ padding-top:70px;}
+	body{ padding-top:130px;}
 	</style>
 </head>
 </head>

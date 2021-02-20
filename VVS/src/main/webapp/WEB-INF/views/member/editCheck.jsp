@@ -17,27 +17,37 @@
 
   <!-- Custom styles for this template -->
   <link href="${hContext}/resources/css" rel="stylesheet">
+  <style>
+	body{ padding-top:100px;
+		padding-left:100px;
+		
+		}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
 <%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
-	<div style="text-align: center;" class="container">
-		<h1>SIGN IN</h1>
-		<hr>
+<div id="wrap">
+<%--    <%@include  file="/cmn/inc/header.jsp" %> --%>
+   <section>
+      <!-- container -->
+      <div class="container">
+	
 		<input type="hidden" value="${sessionScope.MemberVO.getMemberId()}" id="deleteMemberId"/>
 		<input type="hidden" value="${sessionScope.MemberVO.getMemberPw()}" id="checkMemberPw"/>
 		<c:choose>
 		  	<c:when test='${null != sessionScope.MemberVO}'>
 				<div class="contents text-center">
-					<div class="col-sm-6 col-md-offset-10" >
-						<div> 
+					<div class="col-sm-6 col-md-offset-10" style="display:inline-block">
+						<div > 
 							<label for="inputPw">비밀번호</label> 
 							<input type="password" class="form-control" id="inputPw" name="inputPw" placeholder="PASSWORD"> 			
 						</div>
 							<input style="width:150px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="뒤로가기" id="backBtn">
 							<input style="width:150px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="수정하기" id="editBtn">				
-					</div>
+					
 							<input style="width:300px; background-color:black; margin:5px;" class="btn btn-primary btn-lg" type="button" value="탈퇴하기" id="deleteBtn">
+					</div>		
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -48,7 +58,9 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
+	</section>
+	</div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	var sessionPw = $("#checkMemberPw");
