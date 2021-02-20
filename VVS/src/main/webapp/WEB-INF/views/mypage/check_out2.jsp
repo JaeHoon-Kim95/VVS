@@ -115,9 +115,7 @@
 							        		<a id="productNum" name="productNum" style="display: none"><c:out value="${cartOut.productNum}" /></a>
 							        		<a id="qty" name="qty" style="display: none"><c:out value="${cartOut.qty}" /></a>							        		
 										    	<li class="fw-normal">
-										    	<c:if test="${fileOut.productNum == cartOut.productNum}">
-   						 								<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${fileOut.thunImg}">						    					
-						    					</c:if>
+   						 								<img alt="" class="rounded float-left" width="100" height="100" src="${hContext}/${fileOut.thunImg}">						    					
 						    					<br/> <c:out value="${cartOut.productName} x ${cartOut.qty}"/>
 										    	<br/> <c:out value="color : ${cartOut.color}, size : ${cartOut.sizes}"/> 
 										    	<span id="price"> <c:out value="${totalsum}원"/>  </span></li>
