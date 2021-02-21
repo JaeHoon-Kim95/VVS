@@ -5,9 +5,17 @@
 <c:set var="hContext" value="${pageContext.request.contextPath }"></c:set> 
 <style>
 	.footer{ 
-   		  padding: 30px 0;
+		  position: fixed;
+   		   left: 0px;
+  		   right: 0px;
+  	      bottom: 0px;
+  	      width:100%;
    		  background:black;
    		  color:dark;}
+
+}
+
+
 </style>
 <!-- Footer -->
   <footer class="footer">
