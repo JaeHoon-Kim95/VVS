@@ -155,8 +155,12 @@
 
   </div>
   <!-- //.container -->
-      
-      
+  <br>
+  <br>
+  <br>    
+   <br>
+   <br>
+   <br>   
 <%@ include file="/WEB-INF/views/main/footer.jsp" %>
   <!-- Bootstrap core JavaScript -->
   <script src="/resources/vendor/jquery/jquery.min.js"></script>
