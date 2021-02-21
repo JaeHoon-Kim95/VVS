@@ -119,7 +119,7 @@
 										    	<li class="fw-normal">
 										    	<c:forEach var="FileVO" items="${fileList}">
 						    						<c:if test="${FileVO.productNum == outVO.productNum}">
-   						 								<img alt="" class="rounded float-left" width="50" height="50" src="${hContext}/${FileVO.thunImg}">
+   						 								<img alt="" class="rounded float-left" width="100" height="100" src="${hContext}/${FileVO.thunImg}">
 						    						</c:if>	
 						    					</c:forEach>
 						    					<br/> ${outVO.productName} x ${outVO.qty}
