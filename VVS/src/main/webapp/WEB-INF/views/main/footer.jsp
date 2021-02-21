@@ -6,7 +6,7 @@
 <style>
 	.footer{ 
 		  padding:30px 0;
-		  position: fixed;
+		  position: fixed;		
    		   left: 0px;
   		   right: 0px;
   	      bottom: 0px;
@@ -21,7 +21,7 @@
 <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p class="m-0 text-center text-white">111Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">111Copyright &copy; VVS SHOP</p>
     </div>
     <!-- /.container -->
   </footer>

@@ -21,9 +21,18 @@ public class ProductVO {
 	private String sizes;
 	private int qty;
 	private String categoryName;
+	private String equalImg;
 
 	
 	
+	public String getEqualImg() {
+		return equalImg;
+	}
+
+	public String setEqualImg(String equalImg) {
+		return this.equalImg = equalImg;
+	}
+
 	public String getCategoryName() {
 		return categoryName;
 	}

@@ -154,14 +154,8 @@
     <!-- //.row -->
 
   </div>
-  <!-- //.container -->
-  <br>
-  <br>
-  <br>    
-   <br>
-   <br>
-   <br>   
-<%@ include file="/WEB-INF/views/main/footer.jsp" %>
+  <!-- //.container -->  
+
   <!-- Bootstrap core JavaScript -->
   <script src="/resources/vendor/jquery/jquery.min.js"></script>
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -300,6 +294,7 @@
 		$("#numToBoard").submit();
 		});
     </script>   
+    <%@ include file="/WEB-INF/views/main/footer.jsp" %>
 </body>
 </html>
 

@@ -271,5 +271,6 @@
 	         }).open();
 	     }
 		</script>
+		<%@ include file="/WEB-INF/views/main/footer.jsp" %>
 </body>
 </html>

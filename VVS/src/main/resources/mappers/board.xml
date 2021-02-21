@@ -19,14 +19,14 @@
 			SEQ,
 			TITLE,
 			CONTENTS,
-			REG_ID			
-									
+			REG_ID,			
+			REG_DT						
 		) VALUES (
 			BODSEQ.NEXTVAL,
 			#{title},
 			#{contents},
-			#{regId}
-						
+			#{regId},
+			SYSDATE		
 		)	
 	</insert>
 	

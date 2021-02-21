@@ -27,6 +27,15 @@
 		)
 	</insert>
 	
+	<update id="doUpdateTitle" parameterType="FileVO">
+		UPDATE FILES SET
+					IMG = #{img},
+					THUNIMG = #{thunImg}
+			   WHERE TITLE_IMG = #{titleImg}
+	</update>
+	
+	
+	
 	<select id="doSelectList" parameterType="FileVO" resultType="FileVO">
 		SELECT *
 			   FROM FILES

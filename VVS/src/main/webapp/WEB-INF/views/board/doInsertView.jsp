@@ -14,6 +14,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="${hContext}/resources/img/favicon.ico" > 
     <!-- 부트스트랩 -->
     <link href="${hContext}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+	body{ padding-top:100px;
+		  padding-left:200px;}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
@@ -115,11 +119,11 @@
 			    },   
 			    success:function(data){ //성공
 			       if(data==1){
-				       alere("등록되었습니다.");
-			    	   moveToListView();
-			       }
+				       alert("등록되었습니다.");
+				       moveToListView();
+			       }			       
 			    },
-			    error:function(xhr,status,error){
+			    error:function(data){
 			     alert("error:"+error);
 			    },
 			    complete:function(data){

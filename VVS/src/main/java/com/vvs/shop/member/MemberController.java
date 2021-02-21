@@ -49,11 +49,11 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="member/logout.do", method = RequestMethod.GET)	
-	public ModelAndView logout(HttpSession session) {
+	public String logout(HttpSession session) {
 		session.invalidate();
-		ModelAndView mv = new ModelAndView("redirect:/");
 		
-		return mv;
+		
+		return "redirect:/product/moveToMainPage.do";
 	}
 	
 	@RequestMapping(value="member/registerPage.do", method = RequestMethod.GET)	

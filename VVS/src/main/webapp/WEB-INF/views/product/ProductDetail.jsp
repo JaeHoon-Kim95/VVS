@@ -270,6 +270,7 @@
 	
 	//order(주문하기)	
 	</script>
+	<%@ include file="/WEB-INF/views/main/footer.jsp" %>
 </body>
 
 </html> 

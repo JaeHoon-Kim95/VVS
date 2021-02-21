@@ -51,6 +51,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/doInsert.do", method = RequestMethod.POST)
+	@ResponseBody
 	public int doInsert(BoardVO boardVO) {
 		LOG.debug("===================");
 		LOG.debug("==doInsert.do==");

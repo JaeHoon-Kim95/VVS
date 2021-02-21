@@ -35,10 +35,10 @@
 	<br><br><br><br>
 	<h1>타이틀 등록</h1>
 	<hr>
-		<form name="titleRegist" id="titleRegist" action="${hContext}/product/titleRegist.do" method="post" autocomplete="off" enctype="multipart/form-data">
+		<form name="titleRegist" id="titleRegist" action="${hContext}/product/titleUpdate.do" method="post" autocomplete="off" enctype="multipart/form-data">
 				<div class="inputArea">
 				<label for="vvsImg">대표이미지</label>
-				<input type="file" id="vvsImg" name="file2" />
+				<input type="file" id="vvsImg" name="file3" />
 				<div class="select_img"><img src="" /></div>
 				
 				<script>
@@ -52,10 +52,15 @@
 						}
 					});
 				</script>								
-			</div>
-			
+				</div>
+					<label for="titleImg">변경을 원하는 순번</label>
+					<select id="titleImg" name="titleImg" size="1">						
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select>
 				<hr>
-				<input class="btn btn-info" type='submit'value='바로 등록'>	
+				<input class="btn btn-info" type='submit'value='수정 완료'>	
 		</form>								
 		</div>
 		<!-- row end -->

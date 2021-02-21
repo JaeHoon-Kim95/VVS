@@ -81,6 +81,10 @@
 <aside>
 <ul class="sidebar-ul">
 	 
+	 <li><a href="${hContext}/member/homeBack.do"><font color="white";>전체</font></a>
+		
+	</li>
+	 
 	 <!-- Divider -->
      <hr class="sidebar-divider" color="white">
      

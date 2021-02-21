@@ -134,9 +134,17 @@ public class ProductController {
 		List<ProductVO> outList = productService.doSelectListWithPaging(searchVO);
 		
 		List<FileVO> imgList = fileServiceImpl.doSelectList(fileVO);
-		for(FileVO fvo : imgList) {
-			LOG.debug("fvo:"+ fvo);
-		}
+		
+		for(int i=0;i<outList.size();i++) {
+			int pOut = outList.get(i).getProductNum();
+				for(int j=0;j<imgList.size();j++) {
+					int iOut = imgList.get(j).getProductNum();
+					if(pOut == iOut) {
+						String iOutImg = imgList.get(j).getThunImg();
+						outList.get(i).setEqualImg(iOutImg);
+					}
+				}				
+			}
 		int totalNum = productService.doSelectListWithPagingCount(searchVO);
 		
 		double a = (double) totalNum / (double) searchVO.getPageSize();
@@ -148,6 +156,8 @@ public class ProductController {
 			String categoryName = productService.getCategoryName(pvo.getCategoryNum());
 			pvo.setCategoryName(categoryName);
 		}
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductList");
@@ -186,7 +196,7 @@ public class ProductController {
 								 @RequestParam("maxPrice") int maxPrice,
 								 @RequestParam("categoryNum") int categoryNum) {
 		LOG.debug("Current controller : product/doSearch.do");
-		
+		FileVO fileVO = new FileVO();
 		SearchVO searchVO = new SearchVO();
 		searchVO.setPageSize(6);
 		searchVO.setPageNum(pageNum);
@@ -210,6 +220,22 @@ public class ProductController {
 			pvo.setCategoryName(categoryName);
 		}
 		
+		List<FileVO> imgList = fileServiceImpl.doSelectList(fileVO);
+		for(FileVO fvo : imgList) {
+			LOG.debug("fvo:"+ fvo);
+		}
+		
+		for(int i=0;i<outList.size();i++) {
+			int pOut = outList.get(i).getProductNum();
+				for(int j=0;j<imgList.size();j++) {
+					int iOut = imgList.get(j).getProductNum();
+					if(pOut == iOut) {
+						String iOutImg = imgList.get(j).getThunImg();
+						outList.get(i).setEqualImg(iOutImg);
+					}
+				}				
+			}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("product/ProductList");
 		mav.addObject("productList", outList);
@@ -217,7 +243,8 @@ public class ProductController {
 		mav.addObject("startPageNum", 1);
 		mav.addObject("endPageNum", maxPage);
 		mav.addObject("searchWord", searchVO.getSearchWord());
-		
+		mav.addObject("imgList", imgList);
+		mav.addObject("needTitle", 1);
 		return mav;
 	}
 	
@@ -335,6 +362,41 @@ public class ProductController {
 		return mav;
 	}
 	
+	@RequestMapping(value="product/titleUpdate.do", method = RequestMethod.POST)
+	public ModelAndView titleUpdate(FileVO fileVO,MultipartFile file3,
+								    HttpServletRequest req, @RequestParam("titleImg") int titleImg) throws Exception {
+		
+		String path2 = System.getProperty("user.home") + "\\git\\VVS\\VVS\\src\\main\\webapp\\resources";
+		
+		String imgUploadPath = path2 + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		
+		if(file3 != null) {
+		 fileName = UploadFileUtils.fileUpload(imgUploadPath, file3.getOriginalFilename(), file3.getBytes(), ymdPath); 
+		} else {
+		 fileName = path2 + File.separator + "images" + File.separator + "none.png";
+		}
+
+		fileVO.setImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		fileVO.setThunImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);	
+		fileVO.setTitleImg(titleImg);
+		
+		
+		LOG.debug("FileVO"+fileVO);
+		int flag = fileServiceImpl.doUpdateTitle(fileVO);
+		
+		LOG.debug("----------doUpdateTile----------");
+		LOG.debug("flag"+flag);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/product/moveToMainPage.do");
+		mav.addObject("FileVO",fileVO);	
+				
+		return mav;
+	}
+	
+	
 	
 	// 상품 등록
 	@RequestMapping(value = "product/doRegist.do", method = RequestMethod.POST)
@@ -394,6 +456,11 @@ public class ProductController {
 		
 		
 		return mav;
+	}
+	@RequestMapping(value = "product/moveToTitleUpdate.do", method = RequestMethod.GET)
+	public String moveToTitleUpdate() {	
+		
+		return "product/TitleUpdate";
 	}
 	
 	@RequestMapping(value = "product/moveToTitleRegist.do", method = RequestMethod.GET)

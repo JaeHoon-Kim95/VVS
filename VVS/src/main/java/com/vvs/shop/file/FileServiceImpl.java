@@ -37,5 +37,11 @@ public class FileServiceImpl implements FileService {
 		// TODO Auto-generated method stub
 		return fileDao.doUploadTitle(fileVO);
 	}
+
+	@Override
+	public int doUpdateTitle(FileVO fileVO) {
+		// TODO Auto-generated method stub
+		return fileDao.doUpdateTitle(fileVO);
+	}
 	
 }

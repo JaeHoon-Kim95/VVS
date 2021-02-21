@@ -13,4 +13,6 @@ public interface FileService {
 	public List<FileVO> doSelectList(FileVO fileVO);
 	
 	public FileVO doSelectOne(FileVO fileVO);
+	
+	int doUpdateTitle(FileVO fileVO);
 }

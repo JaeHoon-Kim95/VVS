@@ -54,6 +54,22 @@ final Logger LOG = LoggerFactory.getLogger(MemberDao.class);
 		 return flag;
 	}
 	
+	public int doUpdateTitle(FileVO fileVO) {
+		 LOG.debug("====================");
+		 LOG.debug("==doUploadUpdate==");
+		 LOG.debug("====================");
+		 
+		 String statement = NAMESPACE + "doUpdateTitle";
+		 
+		 LOG.debug("==statement==" + statement);
+		 LOG.debug("==fileVO=="+fileVO);
+		 
+		 int flag = sqlSessionTemplate.insert(statement, fileVO);
+		 LOG.debug("flag"+flag);
+		 
+		 return flag;
+	}
+	
 	public List<FileVO> doSelectList(FileVO fileVO){
 		String statement = NAMESPACE +"doSelectList";
 		

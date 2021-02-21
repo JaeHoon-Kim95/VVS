@@ -23,7 +23,7 @@
   	<!-- Custom styles for this template -->
   	<link href="${hContext}/resources/css" rel="stylesheet">
 	<style>
-	body{ padding-top:70px;}
+	body{ padding-top:100px;}
 	</style>
 </head>
 </head>
@@ -41,11 +41,11 @@
 			<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></label>
 			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">		
 				<c:choose>
-		  		<c:when test='${null != sessionScope.MemberVO}'>		    
-					<input  type="button" class="btn btn-secondary btn-sm" value="수정" id="updateBtn" />
-					<c:if test= "${sessionScope.MemberVO.getMemberId()} eq ${outVO.regId}">
+		  		<c:when test='${sessionScope.MemberVO.getMemberId() eq outVO.regId}'>	
+		  			  
+					<input  type="button" class="btn btn-secondary btn-sm" value="수정" id="updateBtn" />					
 					<input  type="button" class="btn btn-secondary btn-sm" value="삭제" id="deleteBtn" />
-					</c:if>
+					
 				</c:when>
 				</c:choose>	 				
 				<input  type="button" class="btn btn-secondary btn-sm" value="목록" id="moveList"  />
@@ -53,8 +53,8 @@
 		</div>
 			
      	<form  class="form-horizontal" id="mngForm" action="${hContext}/board/doUpdatePage.do" method="post">	
-     	<input type="hidden" name="seq" value='<c:out value="${outVO.seq}"/>'>   	
-     	<input type="hidden" id="num" value=${pageVO.num}>
+     	<input type="hidden" id = "seq" name="seq" value='<c:out value="${outVO.seq}"/>'>   	
+     	<input type="hidden" id="num" value="${pageVO.num}">
       	<div class="form-group">
 			<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">제목</label>
 			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -77,11 +77,12 @@
 		<div class="form-group">
 			<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">내용</label>
 			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-				<textarea rows="5" cols="40" name="contents" id="contents" class="form-control" readonly="">${outVO.contents}</textarea>
+				<textarea rows="5" cols="40" name="contents" id="contents" class="form-control" readonly="readonly">${outVO.contents}</textarea>
 			</div>
-		</div>		
+		</div>	
+		</form>	
     </div>  		
-   </form>
+   
  <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
@@ -95,19 +96,22 @@
 		  	});	
 	  	$("#deleteBtn").on("click",function(){  		
 	  		$.ajax({
-		  		type="POST",
-		  		url : "${hContext}/board/doDelete.do"
+		  		type:"POST",
+		  		url : "${hContext}/board/doDelete.do",
 			    dataType : "html",
-			    	success:function(){
-						if(flag==1){
-							alert("탈퇴되었습니다.");
-						window.location.href="/shop/board/doSelectList.do?num=1";
+			    data : { 
+				    	"seq" : $("#seq").val() 
+				    	},
+			    	success:function(data){
+						if(data==1){
+							alert("삭제되었습니다.");
+							window.location.href="/shop/board/doSelectList.do?num=1";
 							}
 				    	},
 				    	error:function(){
 					    }
 		  		});
-		  	});
+		  	}); 
   	</script>
 </body>
 </html>

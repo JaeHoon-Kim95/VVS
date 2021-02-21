@@ -29,6 +29,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/main/topbar.jsp" %>
+	<%@ include file="/WEB-INF/views/main/sidebar.jsp" %>
 	<!-- Page Content -->
 	<div class="container">
 	<br><br><br><br>
@@ -177,6 +178,7 @@
 			})
 		
 	</script>
+	<%@ include file="/WEB-INF/views/main/footer.jsp" %>
 </body>
 
 </html> 
