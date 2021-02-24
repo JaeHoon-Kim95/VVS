@@ -16,8 +16,17 @@ public class CartVO {
 	private String sizes;
 	private int price;
 	private String productName;
+	private String img;
 
 	List<CartVO> cartList;
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 
 	public CartVO() {
 		super();
