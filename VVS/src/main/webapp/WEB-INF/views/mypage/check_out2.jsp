@@ -284,7 +284,7 @@
 			    success:function(data){ //성공
 			    	alert("주문을 완료했습니다.");
 			    	cartDelete();
-			    	window.location.href="${hContext}/main/index.do";
+			    	window.location.href="${hContext}/product/moveToMainPage.do";
 					      
 			    },		       
 			    error:function(xhr,status,error){
