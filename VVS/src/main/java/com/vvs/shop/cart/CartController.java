@@ -28,15 +28,12 @@ public class CartController {
 	@ResponseBody
 	public String doInsertCart(CartVO cartVO, HttpServletRequest req) {
 		
-		// for Test -----------------------
-		// 세션으로 값 찾아 넣을 것.
 		HttpSession session = req.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("MemberVO");
 		String memberId = memberVO.getMemberId();
 		LOG.debug("memberId : " + memberId);
 		cartVO.setMemberId(memberId);		
 		LOG.debug("cartVO : " + cartVO);
-		// for Test -----------------------
 		
 		cartService.doInsert(cartVO);
 		
@@ -64,13 +61,12 @@ public class CartController {
 		
 		LOG.debug("Current controller : product/doCartList.do");
 		
-		// for Test -----------------------
-		// 세션으로 값 찾아 넣을 것.
 		HttpSession session = req.getSession();
-		session.setAttribute("memId", "cartTest");
-		String memberId = (String) session.getAttribute("memId");
+		MemberVO memberVO = (MemberVO) session.getAttribute("MemberVO");
+		String memberId = memberVO.getMemberId();
+		LOG.debug("memberId : " + memberId);
 		cartVO.setMemberId(memberId);		
-		// for Test -----------------------
+		LOG.debug("cartVO : " + cartVO);
 		
 		List<CartVO> outList = cartService.doSelectList(cartVO);
 		
