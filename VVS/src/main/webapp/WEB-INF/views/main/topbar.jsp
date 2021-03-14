@@ -8,6 +8,8 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <input type="hidden" id="sessionMember" name="sessionMember" value="${sessionScope.MemberVO}"> 
+      
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
 			
@@ -18,6 +20,9 @@
 			 </form>					 
 	      </li>	      
           
+          <li class="nav-item">
+           			 <a id="editCheck" class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
+         		 </li>
            
           <li class="nav-item">
 		  <c:choose>
@@ -30,10 +35,7 @@
 		        		마이페이지
 		        	</a>	        	
 		        </li>
-		      		        
-		        <li class="nav-item">
-           			 <a class="nav-link" href="${hContext}/member/editCheck.do">정보수정</a>
-         		 </li>
+
          		 
          		 <li class="nav-item">
 		        	<a class="nav-link" style="font-size:16px;color:white">${sessionScope.MemberVO.getName()}님 환영합니다.</a>
@@ -68,11 +70,8 @@
     <script src="${hContext}/resources/js/bootstrap.min.js"></script>
 	
   <script type="text/javascript">
-  $("#loginView").on("click",function(){
-	  alert("로그인이 필요합니다.");
-	  window.location.href="${hContext}/member/loginPage.do"
-  });
-
+  	
+		
      $("#moveToBoard").on("click",function(){
 	  doSelectListBoard();
 	  

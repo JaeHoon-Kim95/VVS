@@ -127,6 +127,14 @@ public class OrdersController {
 		return mav;
 	}
 	
+	@RequestMapping(value="orders/loginPage.do", method = RequestMethod.GET)	
+	public String login(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "member/login";
+	}
+	
+	
 	@RequestMapping(value = "orders/ordersMove.do", method = RequestMethod.GET)
 	public String orderMove(HttpServletRequest req, HttpServletResponse res) {
 		return "mypage/mypage";

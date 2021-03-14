@@ -3,6 +3,7 @@ package com.vvs.shop.cart;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -22,6 +23,13 @@ public class CartController {
 
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired CartService cartService;
+	
+	@RequestMapping(value="cart/loginPage.do", method = RequestMethod.GET)	
+	public String login(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "member/login";
+	}
 	
 	// 카트에 넣기
 	@RequestMapping(value = "cart/doInsertCart.do", method = RequestMethod.GET)

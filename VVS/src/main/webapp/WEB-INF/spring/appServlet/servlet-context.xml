@@ -33,4 +33,12 @@
 	 <beans:property name="maxUploadSize" value="10485760"/>
 	</beans:bean>
 	
+	<beans:bean id="LoginInterceptor" class="com.vvs.shop.member.AuthLoginInterceptor"></beans:bean>
+    
+    <interceptors>
+        <interceptor>       	
+            <mapping path="/member/editCheck.do"/>           
+            <beans:ref bean="LoginInterceptor"/>
+        </interceptor>
+    </interceptors>
 </beans:beans>

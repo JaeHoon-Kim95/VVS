@@ -50,6 +50,11 @@ public class BoardController {
 		return "board/doInsertView";
 	}
 	
+	@RequestMapping(value="board/loginPage.do", method = RequestMethod.GET)
+	public String loginPage(HttpServletRequest req, HttpServletResponse res) {
+		return "member/loginPage.do";
+	}
+	
 	@RequestMapping(value="board/doInsert.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int doInsert(BoardVO boardVO) {

@@ -17,6 +17,9 @@
 
   <!-- Custom styles for this template -->
   <link href="${hContext}/resources/css" rel="stylesheet">
+  <style>
+	body{ padding-top:130px;}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
@@ -24,7 +27,7 @@
 	<article class="container"> 
 		<div class="page-header"> 
 			<div class="col-md-6 col-md-offset-3"> 
-				<h3>회원가입</h3> 
+				<h3>회원정보수정</h3> 
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-offset-3"> 
@@ -271,6 +274,6 @@
 	         }).open();
 	     }
 		</script>
-		<%@ include file="/WEB-INF/views/main/footer.jsp" %>
+		
 </body>
 </html>

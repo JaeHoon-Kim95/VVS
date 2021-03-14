@@ -17,6 +17,9 @@
 
   <!-- Custom styles for this template -->
   <link href="${hContext}/resources/css" rel="stylesheet">
+  <style>
+	body{ padding-top:130px;}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/main/topbar.jsp" %>
@@ -326,6 +329,6 @@
 	     }
 		
 		</script>
-		<%@ include file="/WEB-INF/views/main/footer.jsp" %>
+		
 </body>
 </html>
