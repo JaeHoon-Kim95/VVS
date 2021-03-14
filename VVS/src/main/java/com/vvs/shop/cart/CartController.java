@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.vvs.shop.file.FileServiceImpl;
+import com.vvs.shop.file.FileVO;
 import com.vvs.shop.member.MemberVO;
 
 @Controller
@@ -23,6 +24,7 @@ public class CartController {
 
 	final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired CartService cartService;
+	@Autowired FileServiceImpl fileService;
 	
 	@RequestMapping(value="cart/loginPage.do", method = RequestMethod.GET)	
 	public String login(HttpServletRequest req, HttpServletResponse res) {
@@ -36,15 +38,12 @@ public class CartController {
 	@ResponseBody
 	public String doInsertCart(CartVO cartVO, HttpServletRequest req) {
 		
-		// for Test -----------------------
-		// 세션으로 값 찾아 넣을 것.
 		HttpSession session = req.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("MemberVO");
 		String memberId = memberVO.getMemberId();
 		LOG.debug("memberId : " + memberId);
 		cartVO.setMemberId(memberId);		
 		LOG.debug("cartVO : " + cartVO);
-		// for Test -----------------------
 		
 		cartService.doInsert(cartVO);
 		
@@ -72,15 +71,26 @@ public class CartController {
 		
 		LOG.debug("Current controller : product/doCartList.do");
 		
-		// for Test -----------------------
-		// 세션으로 값 찾아 넣을 것.
 		HttpSession session = req.getSession();
-		session.setAttribute("memId", "cartTest");
-		String memberId = (String) session.getAttribute("memId");
+		MemberVO memberVO = (MemberVO) session.getAttribute("MemberVO");
+		String memberId = memberVO.getMemberId();
+		LOG.debug("memberId : " + memberId);
 		cartVO.setMemberId(memberId);		
-		// for Test -----------------------
+		LOG.debug("cartVO : " + cartVO);
+		
+		FileVO fileVO = new FileVO();
 		
 		List<CartVO> outList = cartService.doSelectList(cartVO);
+		List<FileVO> imgList = fileService.doSelectList(fileVO);
+		
+		for(int i = 0; i < outList.size(); i++) {
+			for(int j = 0; j < imgList.size(); j++) {
+				if(imgList.get(j).getProductNum() == outList.get(i).getProductNum()) {
+					outList.get(i).setImg(imgList.get(j).getThunImg());
+					break;
+				}
+			}
+		}
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(outList);

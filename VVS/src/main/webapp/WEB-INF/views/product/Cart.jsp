@@ -50,7 +50,6 @@
 				</tbody>
 			</table>
 			
-			<p>바로 주문 버튼을 누르면 컨트롤러로 CartVO List가 들어갑니다. CartController에 doOrder 쪽에 보시면 될 듯. CartVO 내부에 List(CartVO) cartList가 있어요.</p>
 			<input type='submit' value='바로 주문'>
 			</form:form>
 			<hr>
@@ -188,7 +187,7 @@
 					var totalPriceBox = 0;
 					$.each(data, function(i, value) {
 							html += "<tr>";
-							html += "<td>사진</td>";
+							html += "<td><img height='60' width='60' src='/shop/"+value.img+"' alt=''></td>";
 							html += "<td>"+value.productName+"</td>";
 							html += "<td>"+value.sizes+"</td>";
 							html += "<td>"+value.color+"</td>";
